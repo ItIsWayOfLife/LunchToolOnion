@@ -6,7 +6,6 @@ namespace Infrastructure.Identity
 {
     public class IdentityContext : IdentityDbContext<ApplicationUser>
     {
-        // ToDo add migration
         public IdentityContext(DbContextOptions<IdentityContext> options)
            : base(options)
         {

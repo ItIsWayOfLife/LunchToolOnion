@@ -5,7 +5,6 @@ namespace Infrastructure.Data
 {
     public class ApplicationContext : DbContext
     {
-        // ToDo add migration
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {

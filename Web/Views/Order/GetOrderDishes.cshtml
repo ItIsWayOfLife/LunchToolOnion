@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Web.Models.Order.OrderDishesViewModel>
+
+@{
+    ViewData["Title"] = "Блюда заказа";
+}
+
+<h1 class="text-center">Блюда заказа</h1>
+<br />
+
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>Блюдо</th>
+            <th>Название</th>
+            <th>Информация</th>
+            <th>Вес</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Общая цена</th>
+        </tr>
+
+        @foreach (var cartD in Model)
+        {
+            <tr>
+                <td> <img class="esh-basket-image" src="@cartD.Path" /></td>
+                <td>@cartD.Name</td>
+                <td>@cartD.Info</td>
+                <td>@cartD.Weight</td>
+                <td>@cartD.Price BYN</td>
+                <td>@cartD.Count</td>
+
+                <td>@Math.Round(cartD.Count * cartD.Price, 2).ToString("N2")</td>
+            </tr>
+        }
+    </table>
+    <br />
+
+    <div class="float-right">
+        <span> Полная стоимость: @ViewData["FullPrice"] BYN</span>
+    </div>
+    <br/>
+}
+else
+{
+    <h3 class="text-center" style="color:red;">Заказ пустой</h3>
+    <br />
+}

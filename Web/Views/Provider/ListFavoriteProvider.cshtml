@@ -1,0 +1,17 @@
+﻿@model Web.Models.Provider.ListProviderViewModel
+
+@{
+    ViewData["Title"] = "Популярные поставщики";
+}
+
+<h1 class="text-center">Популярные поставщики</h1>
+<br/>
+
+<div class="row mt-5 mb-2">
+    @{
+        foreach (Web.Models.Provider.ProviderViewModel provider in Model.Providers)
+        {
+            @await Html.PartialAsync("_ProvidersList", provider)
+        }
+    }
+</div>

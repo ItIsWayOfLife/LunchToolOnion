@@ -1,0 +1,31 @@
+﻿@model Web.Models.Menu.EditMenuViewModel
+
+@{
+    ViewData["Title"] = "Изменение меню";
+}
+
+<h1 class="text-center">Изменение меню @Model.Name</h1>
+<br/>
+
+<form method="post" asp-controller="Menu" asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ProviderId" />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="control-label">Название</label>
+        <input type="text" asp-for="Name" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Info" class="control-label">Информация</label>
+        <input type="text" asp-for="Info" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Date" class="control-label">Дата</label>
+        <input type="date" asp-for="Date" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Изменить" class="btn btn-outline-secondary" />
+    </div>
+</form>
+

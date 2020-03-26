@@ -1,0 +1,28 @@
+﻿@model Web.Models.Account.ProfileViewModel
+
+@{
+    ViewBag.Title = "Профиль";
+}
+<div class="text-center">
+
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h1 class="text-center">Профиль</h1>
+        <br />
+        <h1>Аккаунт</h1>
+        <p>Имя: @Model.Firstname</p>
+        <p>Фамилия: @Model.Lastname</p>
+        <p>Отвество: @Model.Patronymic</p>
+        <p>Емаил: @Model.Email</p>
+        <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="Edit">Изменить</a>
+        <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="ChangePassword">Сменить пароль</a>
+    }
+    else
+    {
+        <div class="text-black-50">
+            <h1>
+                Необходимо войти в аккаунт
+            </h1>
+        </div>
+    }
+</div>

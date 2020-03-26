@@ -1,0 +1,17 @@
+﻿@model Web.Models.Users.UserViewModel
+
+    <tr>
+        <td>@Model.Id</td>
+        <td>@Model.Email</td>
+        <td>@Model.FLP</td>
+        <td>
+            <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Изменить</a>
+                <a class="btn btn-sm btn-success" asp-controller="Users" asp-action="ChangePassword" asp-route-id="@Model.Id">Сменить пароль</a>
+                <a class="btn btn-sm btn-secondary" asp-controller="Roles" asp-action="Edit" asp-route-userid="@Model.Id">Права доступа</a>
+                <button type="submit" class="btn btn-sm btn-danger">
+                    Удалить
+                </button>
+            </form>
+        </td>
+    </tr>

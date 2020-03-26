@@ -1,0 +1,46 @@
+﻿@model Web.Models.Account.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+    <h1 class="text-center">Регистрация нового пользователя</h1>
+<br />
+<div class="text-center">
+    <form method="post" autocomplete="off" asp-controller="Account" asp-action="Register">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div>
+            <label asp-for="Firstname" style="font-size: 24px;"></label><br />
+            <input asp-for="Firstname" style="width:250px;"/>
+            <span asp-validation-for="Firstname"></span>
+        </div>
+        <div>
+            <label asp-for="Lastname" style="font-size: 24px;"></label><br />
+            <input asp-for="Lastname" style="width:250px;"/>
+            <span asp-validation-for="Lastname"></span>
+        </div>
+        <div>
+            <label asp-for="Patronymic" style="font-size: 24px;"></label><br />
+            <input asp-for="Patronymic" style="width:250px;"/>
+            <span asp-validation-for="Patronymic"></span>
+        </div>
+        <div>
+            <label asp-for="Email" style="font-size: 24px;"></label><br />
+            <input asp-for="Email" style="width:250px;"/>
+            <span asp-validation-for="Email"></span>
+        </div>
+        <div>
+            <label asp-for="Password" style="font-size: 24px;"></label><br />
+            <input asp-for="Password" style="width:250px;"/>
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div>
+            <label asp-for="PasswordConfirm" style="font-size: 24px;"></label><br />
+            <input asp-for="PasswordConfirm" style="width:250px;"/>
+            <span asp-validation-for="PasswordConfirm"></span>
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="Зарегистрироваться"  class="btn btn-outline-success"/>
+        </div>
+    </form>
+    </div>

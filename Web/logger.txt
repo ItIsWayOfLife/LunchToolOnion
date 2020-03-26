@@ -1,0 +1,67 @@
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+26.03.2020 1:49:20: Processing request Home/Index
+26.03.2020 1:49:20: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:49:22: User 0f0cb49a-f2b0-4007-a5d7-ba3029a083ae logout
+26.03.2020 1:49:22: Processing request Home/Index
+26.03.2020 1:49:22: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:49:23: Processing request Account/Login
+26.03.2020 1:49:32: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 login
+26.03.2020 1:49:32: Processing request Home/Index
+26.03.2020 1:49:32: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:49:35: Processing request Account/Profile
+26.03.2020 1:49:45: Processing request Roles/Index
+26.03.2020 1:49:50: Processing request Report/Index
+26.03.2020 1:50:08: Processing request Home/Index
+26.03.2020 1:50:08: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:50:15: Processing request Roles/Index
+26.03.2020 1:50:15: Processing request Report/Index
+26.03.2020 1:50:16: Processing request Roles/Index
+26.03.2020 1:50:17: Processing request Users/Index
+26.03.2020 1:50:24: Processing request Users/Edit
+26.03.2020 1:50:28: Processing request Users/Index
+26.03.2020 1:50:29: Processing request Users/ChangePassword
+26.03.2020 1:50:30: Processing request Users/Index
+26.03.2020 1:50:31: Processing request Roles/Edit
+26.03.2020 1:50:34: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 changed role for user 0f0cb49a-f2b0-4007-a5d7-ba3029a083ae
+26.03.2020 1:50:34: Processing request Roles/UsersListByRole
+26.03.2020 1:50:36: Processing request Roles/Edit
+26.03.2020 1:50:37: Processing request Users/Index
+26.03.2020 1:50:38: Processing request Account/Profile
+26.03.2020 1:50:39: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 logout
+26.03.2020 1:50:39: Processing request Home/Index
+26.03.2020 1:50:39: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:50:40: Processing request Account/Login
+26.03.2020 1:50:42: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 login
+26.03.2020 1:50:42: Processing request Home/Index
+26.03.2020 1:50:42: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:50:43: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 logout
+26.03.2020 1:50:43: Processing request Home/Index
+26.03.2020 1:50:43: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:50:44: Processing request Account/Login
+26.03.2020 1:50:47: User 0f0cb49a-f2b0-4007-a5d7-ba3029a083ae login
+26.03.2020 1:50:47: Processing request Home/Index
+26.03.2020 1:50:47: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:50:49: Processing request Account/Profile
+26.03.2020 1:50:50: User 0f0cb49a-f2b0-4007-a5d7-ba3029a083ae logout
+26.03.2020 1:50:50: Processing request Home/Index
+26.03.2020 1:50:50: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:50:51: Processing request Account/Register
+26.03.2020 1:51:03: New user 940cd02d-ddee-453d-9908-83fe44be7c16 (gunko99@bk.ru) registered
+26.03.2020 1:51:03: Processing request Home/Index
+26.03.2020 1:51:03: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:51:09: Processing request Order/Index
+26.03.2020 1:51:10: Processing request Cart/Index
+26.03.2020 1:51:11: Processing request Provider/Index
+26.03.2020 1:51:12: Processing request Cart/Index
+26.03.2020 1:51:14: Processing request Order/Index
+26.03.2020 1:51:16: Processing request Account/Profile
+26.03.2020 1:51:18: Processing request Provider/Index
+26.03.2020 1:51:22: Processing request Cart/Index
+26.03.2020 1:51:22: Processing request Provider/Index
+26.03.2020 1:51:23: Processing request Order/Index
+26.03.2020 1:51:25: User 940cd02d-ddee-453d-9908-83fe44be7c16 logout
+26.03.2020 1:51:25: Processing request Home/Index
+26.03.2020 1:51:25: Processing request Provider/ListFavoriteProvider
+26.03.2020 1:51:29: Processing request Provider/Index

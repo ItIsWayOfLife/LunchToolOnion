@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Web.Models.Cart.CartDishesViewModel>
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+<h1 class="text-center">Корзина</h1>
+<h6 class="text-center">Обновляйте количество каждого блюда</h6>
+<br />
+
+@if (Model.Any())
+{
+    <table class="table">
+        <tr>
+            <th>Блюдо</th>
+            <th>Название</th>
+            <th>Информация</th>
+            <th>Вес</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Общая цена</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var cartD in Model)
+        {
+            <tr>
+                <td> <img class="esh-basket-image" src="@cartD.Path" /></td>
+                <td>@cartD.Name</td>
+                <td>@cartD.Info</td>
+                <td>@cartD.Weight</td>
+                <td>@cartD.Price</td>
+                <td>
+                    <form method="post" asp-controller="Cart" asp-action="Update">
+                        <input type="hidden" name="dishCartId" value="@cartD.Id" />
+                        <input type="number" min="1" value="@cartD.Count" name="count" />
+                        <input type="submit" value="Обновить" class="btn btn-sm btn-success" style="margin-top: 5px; margin-left: 50px;" />
+                    </form>
+                </td>
+
+                <td>@Math.Round(cartD.Count * cartD.Price, 2).ToString("N2") BYN</td>
+                <td>
+                    <form method="post" asp-action="Delete" asp-route-cartDishId="@cartD.Id">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <button class="btn btn-sm btn-danger">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+                <td></td>
+            </tr>
+        }
+    </table>
+
+    <br class="col-10" />
+
+    <div>
+        <form method="post" asp-controller="Cart" asp-action="DeleteAll">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <a class="btn btn-sm btn-primary" asp-controller="Provider" asp-action="Index">К поставщикам</a>
+            <button class="btn btn-sm btn-danger">
+                Очистить корзину
+            </button>
+            <a class="btn btn-sm btn-primary" asp-controller="Order" asp-action="Create">Заказать</a>
+            <h3 class="float-right">Общая цена: @ViewData["FullPrice"].ToString() BYN</h3>
+        </form>
+    </div>
+}
+else
+{
+<h3 class="text-center" style="color:red;">Корзина пуста</h3>
+    <br />
+}
+
+

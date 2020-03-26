@@ -1,0 +1,97 @@
+﻿@{
+    ViewData["Title"] = "Отчёты";
+}
+
+<h1 class="text-center">Отчёты</h1>
+<br />
+
+<h3>Отчёты по поставщикам</h3>
+<div class="container">
+    <form method="post" asp-controller="Report" asp-action="GetReportProvider">
+        <h5>За всё время</h5>
+        <label>Укажите id поставщика</label>
+        <input type="number" name="providerId" />
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportProvider">
+        <h5>За день</h5>
+        <label>Укажите id поставщика</label>
+        <input type="number" name="providerId" />
+        <label>Укажите дату дня</label>
+        <input type="date" name="dateWith" />
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportProvider">
+        <h5>За определённое время (неделя, месяц, ...)</h5>
+        <label>Укажите id поставщика</label>
+        <input type="number" name="providerId" />
+        <label>Укажите дату с</label>
+        <input type="date" name="dateWith" />
+        <label>Укажите дату по</label>
+        <input type="date" name="dateTo" />
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportProviders">
+        <h5>По всем поставщикам за всё время</h5>
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportProviders">
+        <h5>По всем поставщикам за день</h5>
+        <label>Укажите дату дня</label>
+        <input type="date" name="dateWith" />
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportProviders">
+        <h5>По всем поставщикам за определённое время (неделя, месяц, ...)</h5>
+        <label>Укажите дату с</label>
+        <input type="date" name="dateWith" />
+        <label>Укажите дату по</label>
+        <input type="date" name="dateTo" />
+        <input type="submit" value="Составить" />
+    </form>
+    <h3>Отчёты по пользователям</h3>
+    <form method="post" asp-controller="Report" asp-action="GetReportUser">
+        <h4>За всё время</h4>
+        <label>Укажите id пользователя</label>
+        <input type="text" name="userId" />
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUser">
+        <h5>За день</h5>
+        <label>Укажите id пользователя</label>
+        <input type="text" name="userId" />
+        <label>Укажите дату дня</label>
+        <input type="date" name="dateWith" />
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUser">
+        <h5>За определённое время (неделя, месяц, ...)</h5>
+        <label>Укажите id пользователя</label>
+        <input type="text" name="userId" />
+        <label>Укажите дату с</label>
+        <input type="date" name="dateWith" />
+        <label>Укажите дату по</label>
+        <input type="date" name="dateTo" />
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUsers">
+        <h5>По всем пользователям за всё время</h5>
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUsers">
+        <h5>По всем пользователям за день</h5>
+        <label>Укажите дату дня</label>
+        <input type="date" name="dateWith" />
+        <input type="submit" value="Составить" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUsers">
+        <h5>По всем пользователям за определённое время (неделя, месяц, ...)</h5>
+        <label>Укажите дату с</label>
+        <input type="date" name="dateWith" />
+        <label>Укажите дату по</label>
+        <input type="date" name="dateTo" />
+        <input type="submit" value="Составить" />
+    </form>
+</div>
+
+

@@ -5,7 +5,7 @@ namespace Web.Models.Dish
 {
     public class ListDishViewModel
     {
-        public int MenuId { get; set; }
+        public int CatalogId { get; set; }
       public List<DishViewModel> Dishes { get; set; }
         public SelectList SearchSelection { get; set; }
         public string SeacrhString { get; set; }

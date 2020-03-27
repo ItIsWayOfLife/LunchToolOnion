@@ -10,34 +10,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
-using Web.Models.Menu;
+using Web.Models.Catalog;
 
 namespace Web.Controllers
 {
-    public class MenuController : Controller
+    public class CatalogController : Controller
     {
-        private readonly IMenuService _menuService;
+        private readonly IСatalogService _сatalogService;
         private readonly IProviderService _providerService;
-        private readonly ILogger<MenuController> _logger;
+        private readonly ILogger<CatalogController> _logger;
 
-        public MenuController(IMenuService menuService, IProviderService providerService,
-            ILogger<MenuController> logger)
+        public CatalogController(IСatalogService сatalogService, IProviderService providerService,
+            ILogger<CatalogController> logger)
         {
-            _menuService = menuService;
+            _сatalogService = сatalogService;
             _logger = logger;
             _providerService = providerService;
         }
 
         [HttpGet]
-        public IActionResult Index(int? providerId, string searchSelectionString, string name, SortState sortMenu = SortState.NameAsc)
+        public IActionResult Index(int? providerId, string searchSelectionString, string name, SortState sortCatalog = SortState.NameAsc)
         {
-            _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Menu/Index");
+            _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Catalog/Index");
 
             try
             {
-                IEnumerable<MenuDTO> menusDtos = _menuService.GetMenus(providerId);
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDTO, MenuViewModel>()).CreateMapper();
-                var menus = mapper.Map<IEnumerable<MenuDTO>, List<MenuViewModel>>(menusDtos);
+                IEnumerable<СatalogDTO> сatalogDTOs = _сatalogService.GetСatalogs(providerId);
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<СatalogDTO, CatalogViewModel>()).CreateMapper();
+                var catalogs = mapper.Map<IEnumerable<СatalogDTO>, List<CatalogViewModel>>(сatalogDTOs);
 
                 var provider = _providerService.GetProvider(providerId);
 
@@ -47,36 +47,30 @@ namespace Web.Controllers
                 ViewData["NameProvider"] = "" + provider.Name;
 
                 // элементы поиска
-                List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации", "Дата добавления" };
+                List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации"};
 
                 // простой поиск
                 switch (searchSelectionString)
                 {
                     case "Названию":
-                        menus = menus.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
+                        catalogs = catalogs.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
                         break;
                     case "Информации":
-                        menus = menus.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Дата добавления":
-                        menus = menus.Where(t => t.Date.ToShortDateString().ToLower().Contains(name)).ToList();
+                        catalogs = catalogs.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
                         break;
                 }
 
-                ViewData["NameSort"] = sortMenu == SortState.NameAsc ? SortState.NameDesc : SortState.NameAsc;
-                ViewData["DateSort"] = sortMenu == SortState.DateAsc ? SortState.DateDesc : SortState.DateAsc;
+                ViewData["NameSort"] = sortCatalog == SortState.NameAsc ? SortState.NameDesc : SortState.NameAsc;
 
-                menus = sortMenu switch
+                catalogs = sortCatalog switch
                 {
-                    SortState.NameDesc => menus.OrderByDescending(s => s.Name).ToList(),
-                    SortState.DateAsc => menus.OrderBy(s => s.Date).ToList(),
-                    SortState.DateDesc => menus.OrderByDescending(s => s.Date).ToList(),
-                    _ => menus.OrderBy(s => s.Name).ToList(),
+                    SortState.NameDesc => catalogs.OrderByDescending(s => s.Name).ToList(),
+                    _ => catalogs.OrderBy(s => s.Name).ToList(),
                 };
 
-                return View(new MenuAndProviderIdViewModel()
+                return View(new CatalogdProviderIdViewModel()
                 {
-                    Menus = menus,
+                    Catalogs = catalogs,
                     ProviderId = providerId.Value,
                     SeacrhString = name,
                     SearchSelection = new SelectList(searchSelection),
@@ -98,31 +92,30 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Add(int providerId)
         {
-            _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Menu/Add");
+            _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Catalog/Add");
 
-            return View(new AddMenuViewModel() { ProviderId = providerId });
+            return View(new AddCatalogViewModel() { ProviderId = providerId });
         }
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public IActionResult Add(AddMenuViewModel model)
+        public IActionResult Add(AddCatalogViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    MenuDTO menuDTO = new MenuDTO()
+                    СatalogDTO сatalogDTO = new СatalogDTO()
                     {
                         Info = model.Info,
                         Name = model.Name,
-                        ProviderId = model.ProviderId,
-                        Date = model.Date
+                        ProviderId = model.ProviderId
                     };
 
-                    _menuService.AddMenu(menuDTO);
+                    _сatalogService.AddСatalog(сatalogDTO);
 
                     string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} added new menu");
+                    _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} added new catalog");
 
                     return RedirectToAction("Index", new { model.ProviderId });
                 }
@@ -141,10 +134,10 @@ namespace Web.Controllers
         {
             try
             {
-                _menuService.DeleteMenu(id);
+                _сatalogService.DeleteСatalog(id);
 
                 string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} deleted menu {id}");
+                _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} deleted catalog {id}");
 
                 return RedirectToAction("Index", new { providerId, searchSelectionString, name });
             }
@@ -159,21 +152,20 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Edit(int? id)
         {
-            _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Menu/Edit");
+            _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Catalog/Edit");
 
             try
             {
-                MenuDTO menuDTO = _menuService.GetMenu(id);
-                if (menuDTO==null)
-                throw new ValidationException("Меню не найдено", "");
+                СatalogDTO сatalogDTO = _сatalogService.GetСatalog(id);
+                if (сatalogDTO == null)
+                throw new ValidationException("Каталог не найдено", "");
 
-                var provider = new EditMenuViewModel()
+                var provider = new EditCatalogViewModel()
                 {
-                    Id = menuDTO.Id,
-                    Date = menuDTO.Date,
-                    Info = menuDTO.Info,
-                    Name = menuDTO.Name,
-                    ProviderId = menuDTO.ProviderId
+                    Id = сatalogDTO.Id,
+                    Info = сatalogDTO.Info,
+                    Name = сatalogDTO.Name,
+                    ProviderId = сatalogDTO.ProviderId
                 };
 
                 return View(provider);
@@ -187,25 +179,24 @@ namespace Web.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public IActionResult Edit(EditMenuViewModel model)
+        public IActionResult Edit(EditCatalogViewModel model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    MenuDTO menuDto = new MenuDTO
+                    СatalogDTO сatalogDTO = new СatalogDTO
                     {
                         Id = model.Id,
-                        Date = model.Date,
                         Name = model.Name,
                         Info = model.Info,
                         ProviderId = model.ProviderId
                     };
 
-                    _menuService.EditMenu(menuDto);
+                    _сatalogService.EditСatalog(сatalogDTO);
 
                     string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} edited menu {model.Id}");
+                    _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} edited catalog {model.Id}");
 
                     return RedirectToAction("Index", new { providerId = model.ProviderId });
                 }

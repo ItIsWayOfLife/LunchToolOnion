@@ -6,8 +6,8 @@ namespace ApplicationCore.Entities
     public class Dish : BaseEntity
     {
         [Required]
-        public int MenuId { get; set; }
-        public Menu Menu { get; set; }
+        public int CatalogId { get; set; }
+        public Catalog Сatalog { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

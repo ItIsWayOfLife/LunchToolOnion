@@ -21,36 +21,36 @@ namespace Web.Controllers
     public class DishController:Controller
     {
         private readonly IDishService _dishService;
-        private readonly IMenuService _menuService;
+        private readonly IСatalogService _сatalogService;
         private readonly IWebHostEnvironment _appEnvironment;
 
         private readonly ILogger<DishController> _logger;
 
         public DishController(IDishService dishService, IWebHostEnvironment appEnvironment,
-             IMenuService menuService,
+             IСatalogService сatalogService,
              ILogger<DishController> logger) 
         {
             _dishService = dishService;
             _appEnvironment = appEnvironment;
-            _menuService = menuService;
+            _сatalogService = сatalogService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IActionResult Index(int? menuId, string searchSelectionString, string name, SortState sortMenu = SortState.PriceAsc)
+        public IActionResult Index(int? catalogId, string searchSelectionString, string name, SortState sortDish = SortState.PriceAsc)
         {
             _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Dish/Index");
 
             try
             {
-                var menu = _menuService.GetMenu(menuId);
+                var catalog = _сatalogService.GetСatalog(catalogId);
 
-                if (menu==null)
-                    throw new ValidationException($"Меню {menuId} не найдено", "");
+                if (catalog == null)
+                    throw new ValidationException($"Каталог {catalogId} не найдено", "");
                 
-                ViewData["NameMenu"] = "" +menu.Name;
+                ViewData["NameCatalog"] = "" + catalog.Name;
 
-                IEnumerable<DishDTO> providersDtos = _dishService.GetDishes(menuId);
+                IEnumerable<DishDTO> providersDtos = _dishService.GetDishes(catalogId);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DishDTO, DishViewModel>()).CreateMapper();
                 var dishes = mapper.Map<IEnumerable<DishDTO>, List<DishViewModel>>(providersDtos);
 
@@ -74,9 +74,9 @@ namespace Web.Controllers
                         break;
                 }
 
-                ViewData["PriceSort"] = sortMenu == SortState.PriceAsc ? SortState.PriceDesc : SortState.PriceAsc;
+                ViewData["PriceSort"] = sortDish == SortState.PriceAsc ? SortState.PriceDesc : SortState.PriceAsc;
 
-                dishes = sortMenu switch
+                dishes = sortDish switch
                 {
                     SortState.PriceDesc => dishes.OrderByDescending(s => s.Price).ToList(),
                     _ => dishes.OrderBy(s => s.Price).ToList(),
@@ -85,7 +85,7 @@ namespace Web.Controllers
                 return View(new ListDishViewModel()
                 {
                     Dishes = dishes,
-                    MenuId = menuId.Value,
+                    CatalogId = catalogId.Value,
                     SeacrhString = name,
                     SearchSelection = new SelectList(searchSelection),
                     SearchSelectionString = searchSelectionString
@@ -104,11 +104,11 @@ namespace Web.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpGet]
-        public IActionResult Add(int menuId)
+        public IActionResult Add(int catalogId)
         {
             _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Dish/Add");
 
-            return View(new AddDishViewModel() { MenuId = menuId });
+            return View(new AddDishViewModel() { CatalogId = catalogId });
         }
 
         [Authorize(Roles = "admin")]
@@ -138,7 +138,7 @@ namespace Web.Controllers
                     dishDTO = new DishDTO
                     {
                         Info = model.Info,
-                        MenuId = model.MenuId,
+                        CatalogId = model.CatalogId,
                         Name = model.Name,
                         Path = path,
                         Price = model.Price,
@@ -163,7 +163,7 @@ namespace Web.Controllers
 
         [Authorize(Roles = "admin")]
         [HttpPost]
-        public IActionResult Delete(int? id, int menuId, string searchSelectionString, string name)
+        public IActionResult Delete(int? id, int catalogId, string searchSelectionString, string name)
         {
             try
             {
@@ -172,7 +172,7 @@ namespace Web.Controllers
                 string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} deleted dish {id}");
 
-                return RedirectToAction("Index", new { menuId, searchSelectionString, name });
+                return RedirectToAction("Index", new { catalogId, searchSelectionString, name });
             }
             catch (ValidationException ex)
             {
@@ -199,7 +199,7 @@ namespace Web.Controllers
                     Path = dishDTO.Path,
                     Price = dishDTO.Price,
                     Weight = dishDTO.Weight,
-                    MenuId = dishDTO.MenuId
+                    CatalogId = dishDTO.CatalogId
                 };
 
                 return View(provider);
@@ -247,7 +247,7 @@ namespace Web.Controllers
                         Path = path, // путь к картинке
                         Price = model.Price,
                         Weight = model.Weight,
-                        MenuId = model.MenuId
+                        CatalogId = model.CatalogId
                     };
 
                     _dishService.EditDish(dishDTO);
@@ -255,7 +255,7 @@ namespace Web.Controllers
                     string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                     _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} edit dish {model.Id}");
 
-                    return RedirectToAction("Index", new { dishDTO.MenuId });
+                    return RedirectToAction("Index", new { dishDTO.CatalogId });
                 }
                 catch (ValidationException ex)
                 {

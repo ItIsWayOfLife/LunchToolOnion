@@ -21,6 +21,6 @@ namespace ApplicationCore.Entities
         [Required]
         public bool IsFavorite { get; set; }
         public string Info { get; set; }
-        public ICollection<Menu> Menus { get; set; }
+        public ICollection<Catalog> Сatalogs { get; set; }
     }
 }

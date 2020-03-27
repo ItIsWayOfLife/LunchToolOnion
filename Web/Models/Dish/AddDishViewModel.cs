@@ -4,7 +4,7 @@ namespace Web.Models.Dish
 {
     public class AddDishViewModel
     {
-        public int MenuId { get; set; }
+        public int CatalogId { get; set; }
 
         [Required(ErrorMessage = "Не указано название")]
         [Display(Name = "Название")]

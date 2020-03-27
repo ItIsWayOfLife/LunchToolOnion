@@ -22,6 +22,6 @@ namespace Web.Models.Dish
         [Display(Name = "Цена")]
         public decimal Price { get; set; }
         public string Path { get; set; }
-        public int MenuId { get; set; }
+        public int CatalogId { get; set; }
     }
 }

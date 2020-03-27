@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories
         private CartDishesRepository _cartDishesRepository;
         private CartRepository _cartRepository;
         private DishRepository _dishRepository;
-        private MenuRepository _menuRepository;
+        private CatalogRepository _catalogRepository;
         private OrderDishesRepository _orderDishesRepository;
         private OrderRepository _orderRepository;
         private ProviderRepository _providerRepository;
@@ -34,15 +34,15 @@ namespace Infrastructure.Repositories
             }
         }
 
-        public IRepository<Menu> Menu
+        public IRepository<Catalog> Catalog
         {
             get
             {
-                if (_menuRepository == null)
+                if (_catalogRepository == null)
                 {
-                    _menuRepository = new MenuRepository(_applicationContext);
+                    _catalogRepository = new CatalogRepository(_applicationContext);
                 }
-                return _menuRepository;
+                return _catalogRepository;
             }
         }
 

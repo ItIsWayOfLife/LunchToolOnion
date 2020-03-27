@@ -6,7 +6,7 @@ namespace ApplicationCore.Interfaces
     public interface IUnitOfWork : IDisposable
     {
         IRepository<Provider> Provider { get; }
-        IRepository<Menu> Menu { get; }
+        IRepository<Catalog> Catalog { get; }
         IRepository<Dish> Dish { get; }
         IRepository<CartDishes> CartDishes { get; }
         IRepository<Cart> Cart { get; }

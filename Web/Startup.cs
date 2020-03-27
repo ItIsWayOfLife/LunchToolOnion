@@ -40,11 +40,11 @@ namespace Web
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
 
             services.AddTransient<IProviderService, ProviderService>();
-            services.AddTransient<IMenuService, MenuService>();
+            services.AddTransient<IÑatalogService, ÑatalogService>();
             services.AddTransient<IDishService, DishService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrderService, OrderService>();
-            services.AddTransient<IReportService, ReportService>();
+          //  services.AddTransient<IReportService, ReportService>();
 
             services.AddControllersWithViews();
         }

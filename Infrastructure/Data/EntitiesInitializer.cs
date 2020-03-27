@@ -50,47 +50,41 @@ namespace Infrastructure.Data
                 );
                 context.SaveChanges();
 
-                context.Menus.AddRange(
-                  new Menu
+                context.Catalogs.AddRange(
+                  new Catalog
                   {
-                      ProviderId = context.Providers.Where(p=>p.Email=="holavkysno@gmail.com").FirstOrDefault().Id,
+                      ProviderId = context.Providers.Where(p => p.Email == "holavkysno@gmail.com").FirstOrDefault().Id,
                       Name = "Сэндвичи",
-                      Date = DateTime.Now,
                       Info = "Только лучшие"
                   },
-                  new Menu
+                  new Catalog
                   {
                       ProviderId = context.Providers.Where(p => p.Email == "holavkysno@gmail.com").FirstOrDefault().Id,
                       Name = "Блинчики",
-                      Date = DateTime.Now,
                       Info = "Разные виды и начинки"
                   },
-                   new Menu
+                   new Catalog
                    {
                        ProviderId = context.Providers.Where(p => p.Email == "holavkysno@gmail.com").FirstOrDefault().Id,
                        Name = "Салаты",
-                       Date = DateTime.Now,
                        Info = "Различные рецепты"
                    },
-                     new Menu
+                     new Catalog
                      {
                          ProviderId = context.Providers.Where(p => p.Email == "shawarma777@gmail.com").FirstOrDefault().Id,
                          Name = "Шаурма",
-                         Date = DateTime.Now,
                          Info = "Различные рецепты, ингредиенты и размеры"
                      },
-                       new Menu
+                       new Catalog
                        {
                            ProviderId = context.Providers.Where(p => p.Email == "shawarma777@gmail.com").FirstOrDefault().Id,
                            Name = "Напитки",
-                           Date = DateTime.Now,
                            Info = "Соки и газировка"
                        },
-                         new Menu
+                         new Catalog
                          {
                              ProviderId = context.Providers.Where(p => p.Email == "sushi@gmail.com").FirstOrDefault().Id,
                              Name = "Супы",
-                             Date = DateTime.Now,
                              Info = "Лучшие рецепты"
                          }
             );
@@ -99,7 +93,7 @@ namespace Infrastructure.Data
                 context.Dishes.AddRange(
              new Dish
              {
-                 MenuId = context.Menus.Where(p => p.Name == "Сэндвичи").FirstOrDefault().Id,
+                 CatalogId = context.Catalogs.Where(p => p.Name == "Сэндвичи").FirstOrDefault().Id,
                  Info = "Сэндвич с ветчиной, сыром и овощами",
                  Name = "Cheese friend",
                  Weight = 200,
@@ -108,7 +102,7 @@ namespace Infrastructure.Data
              },
              new Dish
              {
-                 MenuId = context.Menus.Where(p => p.Name == "Сэндвичи").FirstOrDefault().Id,
+                 CatalogId = context.Catalogs.Where(p => p.Name == "Сэндвичи").FirstOrDefault().Id,
                  Info = "Сэндвич с ветчиной, сыром и овощами",
                  Name = "Vegetarian",
                  Weight = 200,
@@ -117,7 +111,7 @@ namespace Infrastructure.Data
              },
                new Dish
                {
-                   MenuId = context.Menus.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
+                   CatalogId = context.Catalogs.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
                    Info = "Ветчина, сыр, маринованные огурцы, зелень",
                    Name = "Блинчики фирменные",
                    Weight = 150,
@@ -126,7 +120,7 @@ namespace Infrastructure.Data
                },
                  new Dish
                  {
-                     MenuId = context.Menus.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
+                     CatalogId = context.Catalogs.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
                      Info = "Ветчина, сыр, маринованные огурцы, зелень, майонез",
                      Name = "Блинчики Друзья",
                      Weight = 150,
@@ -135,7 +129,7 @@ namespace Infrastructure.Data
                  },
                    new Dish
                    {
-                       MenuId = context.Menus.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
+                       CatalogId = context.Catalogs.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
                        Info = "Ветчина, маринованные огурцы, зелень",
                        Name = "Блинчики Вкусно",
                        Weight = 150,
@@ -144,7 +138,7 @@ namespace Infrastructure.Data
                    },
                     new Dish
                     {
-                        MenuId = context.Menus.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
+                        CatalogId = context.Catalogs.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
                         Info = "Ветчина, сыр, маринованные огурцы, зелень, красная рыба",
                         Name = "Блинчики Рыбные",
                         Weight = 150,
@@ -153,7 +147,7 @@ namespace Infrastructure.Data
                     },
                      new Dish
                      {
-                         MenuId = context.Menus.Where(p => p.Name == "Салаты").FirstOrDefault().Id,
+                         CatalogId = context.Catalogs.Where(p => p.Name == "Салаты").FirstOrDefault().Id,
                          Info = "Картофель, яйца, морковка, колбаса вареная, огурцы, майонец",
                          Name = "Салат Оливье",
                          Weight = 220,
@@ -162,7 +156,7 @@ namespace Infrastructure.Data
                      },
                       new Dish
                       {
-                          MenuId = context.Menus.Where(p => p.Name == "Салаты").FirstOrDefault().Id,
+                          CatalogId = context.Catalogs.Where(p => p.Name == "Салаты").FirstOrDefault().Id,
                           Info = "Филе, сыр, пимодор, чеснок, майонез, хлеб белый, салат",
                           Name = "Салат Цезарь",
                           Weight = 220,
@@ -171,7 +165,7 @@ namespace Infrastructure.Data
                       },
                         new Dish
                         {
-                            MenuId = context.Menus.Where(p => p.Name == "Шаурма").FirstOrDefault().Id,
+                            CatalogId = context.Catalogs.Where(p => p.Name == "Шаурма").FirstOrDefault().Id,
                             Info = "Лаваш, мясо птицы, огурец, сыр, зелень, помидор",
                             Name = "Шаурма маленькая",
                             Weight = 400,
@@ -180,7 +174,7 @@ namespace Infrastructure.Data
                         },
                          new Dish
                          {
-                             MenuId = context.Menus.Where(p => p.Name == "Шаурма").FirstOrDefault().Id,
+                             CatalogId = context.Catalogs.Where(p => p.Name == "Шаурма").FirstOrDefault().Id,
                              Info = "Лаваш, мясо птицы, огурец, сыр, зелень, помидор",
                              Name = "Шаурма средняя",
                              Weight = 550,
@@ -189,7 +183,7 @@ namespace Infrastructure.Data
                          },
                           new Dish
                           {
-                              MenuId = context.Menus.Where(p => p.Name == "Шаурма").FirstOrDefault().Id,
+                              CatalogId = context.Catalogs.Where(p => p.Name == "Шаурма").FirstOrDefault().Id,
                               Info = "Лаваш, мясо птицы, огурец, сыр, зелень, помидор",
                               Name = "Шаурма большая",
                               Weight = 700,
@@ -198,7 +192,7 @@ namespace Infrastructure.Data
                           },
                            new Dish
                            {
-                               MenuId = context.Menus.Where(p => p.Name == "Шаурма").FirstOrDefault().Id,
+                               CatalogId = context.Catalogs.Where(p => p.Name == "Шаурма").FirstOrDefault().Id,
                                Info = "Эксклюзивная булочка, чеснок, капуста, мясо птицы, огурец, сыр, зелень",
                                Name = "Шаурма в пите",
                                Weight = 5500,
@@ -207,7 +201,7 @@ namespace Infrastructure.Data
                            },
                            new Dish
                            {
-                               MenuId = context.Menus.Where(p => p.Name == "Напитки").FirstOrDefault().Id,
+                               CatalogId = context.Catalogs.Where(p => p.Name == "Напитки").FirstOrDefault().Id,
                                Info = "Газировка",
                                Name = "Кока Кола",
                                Weight = 0.5,
@@ -216,7 +210,7 @@ namespace Infrastructure.Data
                            },
                              new Dish
                              {
-                                 MenuId = context.Menus.Where(p => p.Name == "Напитки").FirstOrDefault().Id,
+                                 CatalogId = context.Catalogs.Where(p => p.Name == "Напитки").FirstOrDefault().Id,
                                  Info = "Газировка",
                                  Name = "Фанта",
                                  Weight = 0.5,
@@ -225,7 +219,7 @@ namespace Infrastructure.Data
                              },
                               new Dish
                               {
-                                  MenuId = context.Menus.Where(p => p.Name == "Супы").FirstOrDefault().Id,
+                                  CatalogId = context.Catalogs.Where(p => p.Name == "Супы").FirstOrDefault().Id,
                                   Info = "Грибы намеко, сыр Тофу, водоросли Вакаме",
                                   Name = "Мисо суп",
                                   Weight = 200,
@@ -234,7 +228,7 @@ namespace Infrastructure.Data
                               },
                                new Dish
                                {
-                                   MenuId = context.Menus.Where(p => p.Name == "Супы").FirstOrDefault().Id,
+                                   CatalogId = context.Catalogs.Where(p => p.Name == "Супы").FirstOrDefault().Id,
                                    Info = "Жареный лосось, яичная лапша, зелёный лук, острый соус",
                                    Name = "Отстрый суп с жареным лососем",
                                    Weight = 200,
@@ -243,7 +237,7 @@ namespace Infrastructure.Data
                                },
                                 new Dish
                                 {
-                                    MenuId = context.Menus.Where(p => p.Name == "Супы").FirstOrDefault().Id,
+                                    CatalogId = context.Catalogs.Where(p => p.Name == "Супы").FirstOrDefault().Id,
                                     Info = "Филе цыплёнка в соусе Терияки, водоросли Вакаме, яичная ламша, зелёный лук",
                                     Name = "Мисо с курицей",
                                     Weight = 200,
@@ -252,7 +246,7 @@ namespace Infrastructure.Data
                                 });
 
                 context.SaveChanges();
-            }        
+            }
         }
     }
 }

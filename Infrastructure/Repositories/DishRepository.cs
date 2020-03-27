@@ -33,7 +33,7 @@ namespace Infrastructure.Repositories
 
         public IEnumerable<Dish> Find(Func<Dish, bool> predicate)
         {
-            return _applicationContext.Dishes.Include(m=>m.Menu).Where(predicate).ToList();
+            return _applicationContext.Dishes.Include(c=>c.Сatalog).Where(predicate).ToList();
         }
 
         public Dish Get(int id)
@@ -43,7 +43,7 @@ namespace Infrastructure.Repositories
 
         public IEnumerable<Dish> GetAll()
         {
-            return _applicationContext.Dishes.Include(m => m.Menu);
+            return _applicationContext.Dishes.Include(c=>c.Сatalog);
         }
 
         public void Update(Dish item)

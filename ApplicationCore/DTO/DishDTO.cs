@@ -3,7 +3,7 @@ namespace ApplicationCore.DTO
 {
    public class DishDTO : BaseEntityDTO
     {
-        public int MenuId { get; set; }
+        public int CatalogId { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }
         public double Weight { get; set; }

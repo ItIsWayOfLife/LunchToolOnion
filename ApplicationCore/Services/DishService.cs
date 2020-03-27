@@ -17,19 +17,19 @@ namespace ApplicationCore.Services
             Database = uow;
         }
 
-        public IEnumerable<DishDTO> GetDishes(int? menuId)
+        public IEnumerable<DishDTO> GetDishes(int? catalogId)
         {
-            if (menuId == null)
-                throw new ValidationException("Не установлен id меню", "");
-            var menu = Database.Menu.Get(menuId.Value);
-            if (menu == null)
-                throw new ValidationException("Меню не найдено", "");
+            if (catalogId == null)
+                throw new ValidationException("Не установлен id каталога", "");
+            var сatalog = Database.Catalog.Get(catalogId.Value);
+            if (сatalog == null)
+                throw new ValidationException("Каталог не найдено", "");
 
             // применяем автомаппер для проекции одной коллекции на другую
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Dish, DishDTO>()).CreateMapper();
             var dishes = mapper.Map<IEnumerable<Dish>, List<DishDTO>>(Database.Dish.GetAll());
 
-            return dishes.Where(p => p.MenuId == menuId).ToList();
+            return dishes.Where(p => p.CatalogId == catalogId).ToList();
         }
 
         public void AddDish(DishDTO dishDTO)
@@ -42,7 +42,7 @@ namespace ApplicationCore.Services
 
             Dish dish = new Dish()
             {
-                MenuId = dishDTO.MenuId,
+                CatalogId = dishDTO.CatalogId,
                 Info = dishDTO.Info,
                 Name = dishDTO.Name,
                 Path = dishDTO.Path,
@@ -79,7 +79,7 @@ namespace ApplicationCore.Services
                 Id = dish.Id,
                 Info = dish.Info,
                 Name = dish.Name,
-                MenuId = dish.MenuId,
+                CatalogId = dish.CatalogId,
                 Path = dish.Path,
                 Price = dish.Price,
                 Weight = dish.Weight

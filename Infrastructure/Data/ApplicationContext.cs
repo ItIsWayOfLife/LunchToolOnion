@@ -1,5 +1,8 @@
 ﻿using ApplicationCore.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Infrastructure.Data
 {
@@ -14,7 +17,7 @@ namespace Infrastructure.Data
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartDishes> CartDishes { get; set; }
         public DbSet<Dish> Dishes { get; set; }
-        public DbSet<Menu> Menus { get; set; }
+        public DbSet<Catalog> Catalogs { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDishes> OrderDishes { get; set; }
         public DbSet<Provider> Providers { get; set; }

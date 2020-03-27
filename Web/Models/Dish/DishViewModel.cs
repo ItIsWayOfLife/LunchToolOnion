@@ -4,7 +4,7 @@ namespace Web.Models.Dish
     public class DishViewModel
     {
         public int Id { get; set; }
-        public int MenuId { get; set; }
+        public int CatalogId { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }
         public double Weight { get; set; }

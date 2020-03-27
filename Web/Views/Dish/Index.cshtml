@@ -6,24 +6,24 @@
 
 @if (User.IsInRole("admin"))
 {
-    <a class="btn btn-sm btn-success" asp-controller="Dish" asp-action="Add" asp-route-menuId="@Model.MenuId">Добавить блюдо</a>
+    <a class="btn btn-sm btn-success" asp-controller="Dish" asp-action="Add" asp-route-catalogId="@Model.CatalogId">Добавить блюдо</a>
 }
 
-<h1 class="text-center">Блюда @ViewData["NameMenu"]</h1>
+<h1 class="text-center">Блюда @ViewData["NameCatalog"]</h1>
 <br/>
 
 <form method="get">
-    <input type="hidden" name="menuId" value="@Model.MenuId" />
+    <input type="hidden" name="catalogId" value="@Model.CatalogId\" />
     <div class="form-inline form-group">
         <label class="control-label" style="margin-left: 5px;">Поиск по: </label>
         <select name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control" style="margin-left: 5px;"></select>
         <label class="control-label" style="margin-left: 5px;">Значение: </label>
         <input name="name" class="form-control" asp-for="SeacrhString" style="margin-left: 5px;" />
         <input type="submit" value="Поиск" class="btn btn-sm btn-success" style="margin-left: 5px;" />
-        <a asp-action="Index" asp-route-menuId="@Model.MenuId" class="btn btn-sm btn-success" style="margin-left: 5px;">Обновить</a>
+        <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" class="btn btn-sm btn-success" style="margin-left: 5px;">Обновить</a>
         @if (Model.Dishes.Any())
         {
-            <a asp-action="Index" asp-route-menuId="@Model.MenuId" asp-route-sortMenu="@ViewData["PriceSort"]"
+            <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" asp-route-sortDish="@ViewData["PriceSort"]"
                asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString" class="btn btn-sm btn-success"
                style="margin-left: 5px;">
                 Сортировать по цене

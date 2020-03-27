@@ -11,7 +11,7 @@
     <p>Цена: @Model.Price BYN</p>
     @if (User.IsInRole("admin"))
     {
-<form asp-action="Delete" asp-route-id="@Model.Id" asp-route-menuId="@Model.MenuId" method="post">
+<form asp-action="Delete" asp-route-id="@Model.Id" asp-route-menuId="@Model.CatalogId" method="post">
     <input type="hidden" name="searchSelectionString" value="@ViewData["SearchSelectionString"]" />
     <input type="hidden" name="name" value="@ViewData["SeacrhString"]" />
     <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Изменить</a>

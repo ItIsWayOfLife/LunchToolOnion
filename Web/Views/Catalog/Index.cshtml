@@ -1,15 +1,15 @@
-﻿@model Web.Models.Menu.MenuAndProviderIdViewModel
+﻿@model Web.Models.Catalog.CatalogdProviderIdViewModel
 
 @{
-    ViewData["Title"] = "Меню";
+    ViewData["Title"] = "Каталог";
 }
 
 @if (User.IsInRole("admin"))
 {
-    <a class="btn btn-sm btn-success"  asp-controller="Menu" asp-action="Add" asp-route-providerId="@Model.ProviderId">Добавить меню</a>
+    <a class="btn btn-sm btn-success"  asp-controller="Catalog" asp-action="Add" asp-route-providerId="@Model.ProviderId">Добавить каталог</a>
 }
 
-<h1 class="text-center">Меню  "@ViewData["NameProvider"]"</h1>
+<h1 class="text-center">Каталог  "@ViewData["NameProvider"]"</h1>
 <br/>
 
 <form method="get">
@@ -19,49 +19,42 @@
         <select  style="margin-left: 5px;" name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control"></select>
         <label  style="margin-left: 5px;" class="control-label">Значение: </label>
         <input  style="margin-left: 5px;" name="name" class="form-control" asp-for="SeacrhString" />
-        <input class="btn btn-sm btn-success"  style="margin-left: 5px;" type="submit" value="Поиск" class="btn btn-default" />
+        <input class="btn btn-sm btn-success"  style="margin-left: 5px;" type="submit" value="Поиск" />
         <a  style="margin-left: 5px;" class="btn btn-sm btn-success" asp-action="Index" asp-route-providerId="@Model.ProviderId">Обновить</a>
     </div>
 </form>
-@if (Model.Menus.Any())
+@if (Model.Catalogs.Any())
 {
 
     <table class="table">
         <tr>
             <th>
-                <a asp-action="Index" asp-route-providerId="@Model.ProviderId" asp-route-sortMenu="@ViewBag.NameSort"
+                <a asp-action="Index" asp-route-providerId="@Model.ProviderId" asp-route-sortCatalog="@ViewBag.NameSort"
                    asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString">
-                    Меню
+                    Каталог
                 </a>
             </th>
             <th>Информация</th>
-            <th>
-                <a asp-action="Index" asp-route-providerId="@Model.ProviderId" asp-route-sortMenu="@ViewBag.DateSort"
-                   asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString">
-                    Дата добавления
-                </a>
-            </th>
             <th></th>
             <th></th>
         </tr>
 
-        @foreach (var menu in Model.Menus)
+        @foreach (var catalog in Model.Catalogs)
         {
             <tr>
-                <td>@menu.Name</td>
-                <td>@menu.Info</td>
-                <td>@menu.Date.ToShortDateString()</td>
-                <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-menuId="@menu.Id">Блюда</a></td>
+                <td>@catalog.Name</td>
+                <td>@catalog.Info</td>
+                <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id">Блюда</a></td>
                 @if (User.IsInRole("admin"))
                 {
                     <td>
-                        <form asp-action="Delete" asp-route-id="@menu.Id"
-                              asp-route-providerId="@menu.ProviderId"
+                        <form asp-action="Delete" asp-route-id="@catalog.Id"
+                              asp-route-providerId="@catalog.ProviderId"
                               asp-route-searchSelectionString="@Model.SearchSelectionString"
                               asp-route-name="@Model.SeacrhString"
                               method="post">
                             <input type="hidden" name="providerId" value="@Model.ProviderId" />
-                            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@menu.Id">Изменить</a>
+                            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@catalog.Id">Изменить</a>
                             <button type="submit" class="btn btn-sm btn-danger">
                                 Удалить
                             </button>
@@ -75,5 +68,5 @@
 }
 else
 {
-    <h3>Меню отсутствует</h3>
+    <h3>Каталог отсутствует</h3>
 }

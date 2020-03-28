@@ -3,7 +3,7 @@
     <div class="col-lg-4">
         @if (Model.Path != null)
         {
-            <a asp-action="Index" asp-controller="Catalog" asp-route-providerId="@Model.Id"> <img width="360" height="180" class="img-thumbnail" src="@Model.Path" alt="@Model.Name" /></a>
+            <a asp-action="Index" asp-controller="Menu" asp-route-providerId="@Model.Id"> <img width="360" height="180" class="img-thumbnail" src="@Model.Path" alt="@Model.Name" /></a>
         }
         <h2>Название: @Model.Name</h2>
         @if (User.IsInRole("admin"))
@@ -34,7 +34,8 @@
                 </button>
             </form>
             <br />
+            <a class="btn btn-sm btn-primary" asp-action="Index" asp-controller="Catalog" asp-route-providerId="@Model.Id">Каталог блюд</a>
         }
-        <a class="btn btn-sm btn-primary" asp-action="Index" asp-controller="Catalog" asp-route-providerId="@Model.Id">Каталог блюд</a>
+        <a class="btn btn-sm btn-primary" asp-action="Index" asp-controller="Menu" asp-route-providerId="@Model.Id">Меню</a>
         <br />
     </div>

@@ -44,8 +44,9 @@ namespace Web
             services.AddTransient<IDishService, DishService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrderService, OrderService>();
-          //  services.AddTransient<IReportService, ReportService>();
-
+            services.AddTransient<IMenuService, MenuService>();
+            //  services.AddTransient<IReportService, ReportService>();
+            
             services.AddControllersWithViews();
         }
 

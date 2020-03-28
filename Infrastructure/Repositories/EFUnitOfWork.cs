@@ -16,10 +16,36 @@ namespace Infrastructure.Repositories
         private OrderDishesRepository _orderDishesRepository;
         private OrderRepository _orderRepository;
         private ProviderRepository _providerRepository;
+        private MenuRepository  _menuRepository;
+        private MenuDishesRepository _menuDishesRepository;
 
         public EFUnitOfWork(ApplicationContext applicationContext)
         {
             _applicationContext = applicationContext;
+        }
+
+        public IRepository<MenuDishes> MenuDishes
+        {
+            get
+            {
+                if (_menuDishesRepository == null)
+                {
+                    _menuDishesRepository = new MenuDishesRepository(_applicationContext);
+                }
+                return _menuDishesRepository;
+            }
+        }
+
+        public IRepository<Menu> Menu
+        {
+            get
+            {
+                if (_menuRepository == null)
+                {
+                    _menuRepository = new MenuRepository(_applicationContext);
+                }
+                return _menuRepository;
+            }
         }
 
         public IRepository<Provider> Provider

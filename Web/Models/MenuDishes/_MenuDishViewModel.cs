@@ -1,5 +1,5 @@
 ﻿
-namespace Web.Models.Dish
+namespace Web.Models.MenuDishes
 {
     public class _MenuDishViewModel
     {

@@ -23,21 +23,24 @@ namespace Web.Controllers
         private readonly IDishService _dishService;
         private readonly IСatalogService _сatalogService;
         private readonly IWebHostEnvironment _appEnvironment;
+        private readonly IMenuService _menuService;
 
         private readonly ILogger<DishController> _logger;
 
         public DishController(IDishService dishService, IWebHostEnvironment appEnvironment,
              IСatalogService сatalogService,
-             ILogger<DishController> logger) 
+             IMenuService menuService,
+        ILogger<DishController> logger) 
         {
             _dishService = dishService;
             _appEnvironment = appEnvironment;
             _сatalogService = сatalogService;
+            _menuService = menuService;
             _logger = logger;
         }
 
         [HttpGet]
-        public IActionResult Index(int? catalogId, string searchSelectionString, string name, SortState sortDish = SortState.PriceAsc)
+        public IActionResult Index(int? catalogId, int? menuId, string searchSelectionString, string name, SortState sortDish = SortState.PriceAsc)
         {
             _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Dish/Index");
 
@@ -82,8 +85,22 @@ namespace Web.Controllers
                     _ => dishes.OrderBy(s => s.Price).ToList(),
                 };
 
+                // for add in menu dish
+                ChangeMenuDishViewModel changeMenuDishViewModel = new ChangeMenuDishViewModel();
+
+                if (menuId!=null)
+                {
+                    var menuDishes = _menuService.GetMenuDishes(menuId);
+
+                    foreach (var maniDishes in menuDishes)
+                    {
+                        changeMenuDishViewModel.AddedIdDishes.Add(maniDishes.DishId.Value);
+                    }
+                }
+
                 return View(new ListDishViewModel()
                 {
+                    ChangeMenuDishes = changeMenuDishViewModel,
                     Dishes = dishes,
                     CatalogId = catalogId.Value,
                     SeacrhString = name,

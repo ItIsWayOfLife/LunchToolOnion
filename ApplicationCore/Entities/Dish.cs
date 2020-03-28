@@ -5,10 +5,8 @@ namespace ApplicationCore.Entities
 {
     public class Dish : BaseEntity
     {
-        [Required]
         public int CatalogId { get; set; }
         public Catalog Сatalog { get; set; }
-        [Required]
         public string Name { get; set; }
         [Required]
         public string Info { get; set; }

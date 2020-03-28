@@ -44,7 +44,7 @@
             <tr>
                 <td>@catalog.Name</td>
                 <td>@catalog.Info</td>
-                <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id">Блюда</a></td>
+                <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id" asp-route-menuId="@Model.MenuId">Блюда</a></td>
                 @if (User.IsInRole("admin"))
                 {
                     <td>

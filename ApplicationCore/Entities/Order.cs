@@ -7,7 +7,6 @@ namespace ApplicationCore.Entities
     {
         [Required]
         public DateTime DateOrder { get; set; }
-        [Required]
         public string ApplicationUserId { get; set; }
     }
 }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Web.Views.Catalog
+namespace Web.Views.MenuDishes
 {
-    public class IndexModel : PageModel
+    public class _MenuDishesListModel : PageModel
     {
         public void OnGet()
         {

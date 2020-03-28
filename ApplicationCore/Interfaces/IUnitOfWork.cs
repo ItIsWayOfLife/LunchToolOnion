@@ -12,6 +12,9 @@ namespace ApplicationCore.Interfaces
         IRepository<Cart> Cart { get; }
         IRepository<Order> Orders { get; }
         IRepository<OrderDishes> OrderDishes { get; }
+        IRepository<Menu> Menu { get; }
+        IRepository<MenuDishes> MenuDishes { get; }
+
         void Save();
     }
 }

@@ -10,39 +10,69 @@
 }
 
 <h1 class="text-center">Блюда @ViewData["NameCatalog"]</h1>
-<br/>
+<br />
 
-<form method="get">
-    <input type="hidden" name="catalogId" value="@Model.CatalogId\" />
+<form method="get" asp-route-menuId="@Model.MenuId">
+    <input type="hidden" name="catalogId" value="@Model.CatalogId" />
     <div class="form-inline form-group">
         <label class="control-label" style="margin-left: 5px;">Поиск по: </label>
         <select name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control" style="margin-left: 5px;"></select>
         <label class="control-label" style="margin-left: 5px;">Значение: </label>
         <input name="name" class="form-control" asp-for="SeacrhString" style="margin-left: 5px;" />
         <input type="submit" value="Поиск" class="btn btn-sm btn-success" style="margin-left: 5px;" />
-        <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" class="btn btn-sm btn-success" style="margin-left: 5px;">Обновить</a>
+        <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" asp-route-menuId="@Model.MenuId" class="btn btn-sm btn-success" style="margin-left: 5px;">Обновить</a>
         @if (Model.Dishes.Any())
         {
-            <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" asp-route-sortDish="@ViewData["PriceSort"]"
+            <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" asp-route-sortDish="@ViewData["PriceSort"]" asp-route-menuId="@Model.MenuId"
                asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString" class="btn btn-sm btn-success"
                style="margin-left: 5px;">
                 Сортировать по цене
             </a>
         }
-        </div>
+    </div>
 </form>
 @if (Model.Dishes.Any())
 {
-    <div class="row mt-5 mb-2">
-        @{
-            foreach (Web.Models.Dish.DishViewModel dish in Model.Dishes)
-            {
-                @await Html.PartialAsync("_DishesList", dish, new ViewDataDictionary(this.ViewData) {
-               { "SearchSelectionString", Model.SearchSelectionString },
-                { "SeacrhString", Model.SeacrhString }})
+    @if (Model.MenuId != null)
+    {
+        <form asp-action="MakeMenu" asp-controller="Dish" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" name="menuId" value="@Model.MenuId" />
+
+            <div class="row mt-5 mb-2">
+                @{
+                    foreach (Web.Models.Dish.DishViewModel dish in Model.Dishes)
+                    {
+                        <input type="hidden" name="addedDish" value="@dish.AddMenu" />
+
+                        @await Html.PartialAsync("_DishesList", dish, new ViewDataDictionary(this.ViewData) {
+                       { "SearchSelectionString", Model.SearchSelectionString },
+                        { "SeacrhString", Model.SeacrhString },
+                       { "MenuId", Model.MenuId} })
+                    }
+                }
+
+            </div>
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+    }
+    else
+    {
+        <div class="row mt-5 mb-2">
+            @{
+                foreach (Web.Models.Dish.DishViewModel dish in Model.Dishes)
+                {
+                    <input type="hidden" name="addedDish" value="@dish.AddMenu" />
+
+                    @await Html.PartialAsync("_DishesList", dish, new ViewDataDictionary(this.ViewData) {
+                   { "SearchSelectionString", Model.SearchSelectionString },
+                    { "SeacrhString", Model.SeacrhString },
+                   { "MenuId", Model.MenuId} })
+                }
             }
-        }
-    </div>
+
+        </div>
+    }
 }
 else
 {

@@ -53,6 +53,9 @@ namespace Web.Controllers
                 }
                 searchSelection.AddRange(new string[] { "Названию", "Email", "Время работы с", "Время работы до", "Активный", "Неактивный" } );
 
+                if (name == null)
+                    name = "";
+
                 switch (searchSelectionString)
                 {
                     case "Id":

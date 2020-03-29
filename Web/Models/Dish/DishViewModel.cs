@@ -10,5 +10,6 @@ namespace Web.Models.Dish
         public double Weight { get; set; }
         public decimal Price { get; set; }
         public string Path { get; set; }
+        public bool AddMenu { get; set; }
     }
 }

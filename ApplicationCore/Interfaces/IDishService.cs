@@ -9,7 +9,8 @@ namespace ApplicationCore.Interfaces
         void DeleteDish(int? id);
         void EditDish(DishDTO dishDTO);
         DishDTO GetDish(int? id);
-        IEnumerable<DishDTO> GetDishes(int? menuId);
+        IEnumerable<DishDTO> GetDishesForMenu(int? catalogId, List<int> addedDishes);
+        IEnumerable<DishDTO> GetDishes(int? catalogId);
         void Dispose();
     }
 }

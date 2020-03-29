@@ -17,6 +17,35 @@ namespace ApplicationCore.Services
             Database = uow;
         }
 
+        public IEnumerable<DishDTO> GetDishesForMenu(int? catalogId, List<int> addedDishes)
+        {
+            if (catalogId == null)
+                throw new ValidationException("Не установлен id каталога", "");
+
+            var сatalog = Database.Catalog.Get(catalogId.Value);
+
+            if (сatalog == null)
+                throw new ValidationException("Каталог не найдено", "");
+
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Dish, DishDTO>()).CreateMapper();
+            var dishes = mapper.Map<IEnumerable<Dish>, List<DishDTO>>(Database.Dish.GetAll());
+
+            foreach (var dish in dishes)
+            {
+                if (addedDishes.Contains(dish.Id))
+                {
+                    dish.AddMenu = true;
+                }
+                else
+                {
+                    dish.AddMenu = false;
+                }
+            }
+
+            return dishes.Where(p => p.CatalogId == catalogId).ToList();
+        }
+
         public IEnumerable<DishDTO> GetDishes(int? catalogId)
         {
             if (catalogId == null)
@@ -61,6 +90,14 @@ namespace ApplicationCore.Services
             var provider = Database.Dish.Get(id.Value);
             if (provider == null)
                 throw new ValidationException("Блюдо не найдено", "");
+
+
+            var dishesInMenu = Database.MenuDishes.GetAll().Where(p=>p.DishId==id.Value);
+           
+            foreach (var dishInMenu in dishesInMenu)
+            {
+                Database.MenuDishes.Delete(dishInMenu.Id);
+            }
 
             Database.Dish.Delete(id.Value);
             Database.Save();

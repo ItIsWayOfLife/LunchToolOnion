@@ -70,6 +70,13 @@ namespace ApplicationCore.Services
             if (provider == null)
                 throw new ValidationException("Поставщик не найден", "");
 
+            var dishesInMenu = Database.MenuDishes.GetAll().Where(p => p.Menu.ProviderId == id.Value);
+
+            foreach (var dishInMenu in dishesInMenu)
+            {
+                Database.MenuDishes.Delete(dishInMenu.Id);
+            }
+
             Database.Provider.Delete(id.Value);
             Database.Save();
         }

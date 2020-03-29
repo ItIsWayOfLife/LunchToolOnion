@@ -11,6 +11,8 @@ namespace ApplicationCore.Interfaces
         MenuDTO GetMenu(int? id);
         IEnumerable<MenuDTO> GetMenus(int? providerId);
         IEnumerable<MenuDishesDTO> GetMenuDishes(int? menuId);
+        List<int> GetMenuIdDishes(int? menuId);
+        void MakeMenu(int? menuId, List<int> newAddedDishes, List<int> allSelect);
         void Dispose();
     }
 }

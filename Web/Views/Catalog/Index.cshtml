@@ -6,21 +6,21 @@
 
 @if (User.IsInRole("admin"))
 {
-    <a class="btn btn-sm btn-success"  asp-controller="Catalog" asp-action="Add" asp-route-providerId="@Model.ProviderId">Добавить каталог</a>
+    <a class="btn btn-sm btn-success" asp-controller="Catalog" asp-action="Add" asp-route-providerId="@Model.ProviderId">Добавить каталог</a>
 }
 
 <h1 class="text-center">Каталог  "@ViewData["NameProvider"]"</h1>
-<br/>
+<br />
 
 <form method="get">
     <input type="hidden" name="providerId" value="@Model.ProviderId" />
     <div class="form-inline form-group">
-        <label  style="margin-left: 5px;" class="control-label">Поиск по: </label>
-        <select  style="margin-left: 5px;" name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control"></select>
-        <label  style="margin-left: 5px;" class="control-label">Значение: </label>
-        <input  style="margin-left: 5px;" name="name" class="form-control" asp-for="SeacrhString" />
-        <input class="btn btn-sm btn-success"  style="margin-left: 5px;" type="submit" value="Поиск" />
-        <a  style="margin-left: 5px;" class="btn btn-sm btn-success" asp-action="Index" asp-route-providerId="@Model.ProviderId">Обновить</a>
+        <label style="margin-left: 5px;" class="control-label">Поиск по: </label>
+        <select style="margin-left: 5px;" name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control"></select>
+        <label style="margin-left: 5px;" class="control-label">Значение: </label>
+        <input style="margin-left: 5px;" name="name" class="form-control" asp-for="SeacrhString" />
+        <input class="btn btn-sm btn-success" style="margin-left: 5px;" type="submit" value="Поиск" />
+        <a style="margin-left: 5px;" class="btn btn-sm btn-success" asp-action="Index" asp-route-providerId="@Model.ProviderId">Обновить</a>
     </div>
 </form>
 @if (Model.Catalogs.Any())
@@ -68,5 +68,5 @@
 }
 else
 {
-    <h3>Каталог отсутствует</h3>
-}
+    <h3 class="text-center" style="color:red;">Каталог отсутствует</h3>
+} 

@@ -56,6 +56,13 @@ namespace ApplicationCore.Services
             if (provider == null)
                 throw new ValidationException("Каталог не найдено", "");
 
+            var dishesInMenu = Database.MenuDishes.GetAll().Where(p => p.Dish.CatalogId == id.Value);
+
+            foreach (var dishInMenu in dishesInMenu)
+            {
+                Database.MenuDishes.Delete(dishInMenu.Id);
+            }
+
             Database.Catalog.Delete(id.Value);
             Database.Save();
         }

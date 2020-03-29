@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApplicationCore.Entities
@@ -16,5 +17,11 @@ namespace ApplicationCore.Entities
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         public string Path { get; set; }
+        public List<MenuDishes> MenuDishes { get; set; }
+
+        public Dish()
+        {
+            MenuDishes = new List<MenuDishes>();
+        }
     }
 }

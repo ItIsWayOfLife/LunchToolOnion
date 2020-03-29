@@ -18,6 +18,27 @@ namespace ApplicationCore.Services
             Database = uow;
         }
 
+        public List<int> GetMenuIdDishes(int? menuId)
+        {
+            if (menuId == null)
+                throw new ValidationException("Не установлено id меню", "");
+
+            var menu = Database.Menu.Get(menuId.Value);
+            if (menu == null)
+                throw new ValidationException("Поставщик не найден", "");
+
+            List<int> addedDish = new List<int>();
+
+                var menuDishes = GetMenuDishes(menuId);
+
+                foreach (var menuDish in menuDishes)
+                {
+                    addedDish.Add(menuDish.DishId.Value);
+                }
+
+            return addedDish;
+        }
+
         public IEnumerable<MenuDTO> GetMenus(int? providerId)
         {
             if (providerId == null)
@@ -41,6 +62,11 @@ namespace ApplicationCore.Services
             if (menuDTO.Date.Date<DateTime.Now.Date)
                 throw new ValidationException("Меню нельзя составлять на прошедшую дату", "");
 
+            var menus = Database.Menu.GetAll().Where(p=>p.ProviderId==menuDTO.ProviderId);
+
+            if (menus.Where(p=>p.Date.Date==menuDTO.Date).FirstOrDefault()!=null)
+                throw new ValidationException("На эту дату меню уже существует", "");
+
             Menu menu = new Menu()
             {
                 Date = menuDTO.Date,
@@ -60,6 +86,13 @@ namespace ApplicationCore.Services
             var provider = Database.Menu.Get(id.Value);
             if (provider == null)
                 throw new ValidationException("Меню не найдено", "");
+
+            var dishesInMenu = Database.MenuDishes.GetAll().Where(p => p.MenuId == id.Value);
+
+            foreach (var dishInMenu in dishesInMenu)
+            {
+                Database.MenuDishes.Delete(dishInMenu.Id);
+            }
 
             Database.Menu.Delete(id.Value);
             Database.Save();
@@ -92,12 +125,16 @@ namespace ApplicationCore.Services
             if (menuDTO.Date.Date < DateTime.Now.Date)
                 throw new ValidationException("Меню нельзя изменять на прошедшую дату", "");
 
+            var menus = Database.Menu.GetAll().Where(p => p.ProviderId == menuDTO.ProviderId);
+            var checkDateMenu = menus.Where(p => p.Date.Date == menuDTO.Date).FirstOrDefault();
+
+            if (checkDateMenu!=null && checkDateMenu.Id != menuDTO.Id)
+                    throw new ValidationException("На эту дату меню уже существует", "");
+
             Menu menu = Database.Menu.Get(menuDTO.Id);
 
             if (menu == null)
-            {
                 throw new ValidationException("Меню не найдено", "");
-            }
 
             menu.Info = menuDTO.Info;
             menu.Date = menuDTO.Date;
@@ -111,7 +148,7 @@ namespace ApplicationCore.Services
             if (menuId == null)
                 throw new ValidationException("Не установлен id меню", "");
 
-            var menuDishes = Database.MenuDishes.Find(p=>p.MenuId==menuId.Value).ToList();
+            var menuDishes = Database.MenuDishes.GetAll().Where(p=>p.MenuId==menuId.Value).ToList();
 
             List<MenuDishesDTO> menuDishesDTOs = new List<MenuDishesDTO>();
 
@@ -131,6 +168,41 @@ namespace ApplicationCore.Services
             }
 
             return menuDishesDTOs;
+        }
+
+        // ToDo: Bad work
+        public void MakeMenu(int? menuId, List<int> newAddedDishes, List<int> allSelect)
+        {
+            if (menuId == null)
+                throw new ValidationException("Не установлен id меню", "");
+
+            var menuDishes = GetMenuDishes(menuId);
+
+            // remove any selected dishes
+            foreach (int id in allSelect)
+            {
+                // added in menu dish
+                var dbMenuDish = Database.MenuDishes.GetAll().Where(p=>p.MenuId==menuId).Where(p => p.DishId == id).FirstOrDefault();
+
+                if (newAddedDishes.Contains(id))
+                {
+                    if (dbMenuDish == null)
+                    {
+                        Database.MenuDishes.Create(new MenuDishes()
+                        {
+                            DishId = id,
+                            MenuId = menuId
+                        });
+                    }
+                }
+                else
+                { 
+                    if (dbMenuDish!=null)           
+                    Database.MenuDishes.Delete(dbMenuDish.Id);
+                }                
+            }
+
+            Database.Save();
         }
 
         public void Dispose()

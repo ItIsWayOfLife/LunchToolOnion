@@ -49,6 +49,9 @@ namespace Web.Controllers
                 // элементы поиска
                 List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации"};
 
+                if (name == null)
+                    name = "";
+
                 // простой поиск
                 switch (searchSelectionString)
                 {

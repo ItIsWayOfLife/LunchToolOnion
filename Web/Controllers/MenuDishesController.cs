@@ -15,27 +15,34 @@ namespace Web.Controllers
     public class MenuDishesController : Controller
     {
         private readonly IMenuService _menuService;
+        private readonly IProviderService _providerService;
         private readonly ILogger<MenuController> _logger;
 
-        public MenuDishesController(IMenuService menuService, ILogger<MenuController> logger)
+        public MenuDishesController(IMenuService menuService, IProviderService providerService, ILogger<MenuController> logger)
         {
             _menuService = menuService;
+            _providerService = providerService;
             _logger = logger;
         }
 
         [HttpGet]
         public IActionResult Index(int? menuId, string searchSelectionString, string name, SortStateMenuDishes sortMenuDish = SortStateMenuDishes.PriceAsc)
         {
-            _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Dish/Index");
+            _logger.LogInformation($"{DateTime.Now.ToString()}: Processing request MenuDishes/Index");
 
             try
             {
-                var manu = _menuService.GetMenu(menuId);
+                var menu = _menuService.GetMenu(menuId);
 
-                if (manu == null)
+                if (menu == null)
                     throw new ValidationException($"Меню {menuId} не найдено", "");
 
-                ViewData["DateCatalog"] = "" + manu.Date.Date;
+                var provider = _providerService.GetProvider(menu.ProviderId);
+
+                if (provider == null)
+                    throw new ValidationException($"Поставщик {menu.ProviderId} не найдено", "");
+
+                ViewData["NameMeniDishes"] = $"Блюда {provider.Name} на " + menu.Date.ToShortDateString();
 
                 IEnumerable<MenuDishesDTO> menuDishesDTOs = _menuService.GetMenuDishes(menuId);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesViewModel>()).CreateMapper();
@@ -44,6 +51,9 @@ namespace Web.Controllers
                 // элементы поиска
                 List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации", "Весу", "Цене" };
 
+                if (name == null)
+                    name = "";
+                
                 // простой поиск
                 switch (searchSelectionString)
                 {
@@ -76,7 +86,7 @@ namespace Web.Controllers
                     SeacrhString = name,
                     SearchSelection = new SelectList(searchSelection),
                     SearchSelectionString = searchSelectionString,
-                     ProviderId = manu.ProviderId
+                     ProviderId = menu.ProviderId
                 });
             }
             catch (ValidationException ex)

@@ -53,29 +53,43 @@ namespace Web.Controllers
                 
                 ViewData["NameCatalog"] = "" + catalog.Name;
 
-                IEnumerable<DishDTO> providersDtos = _dishService.GetDishes(catalogId);
+                IEnumerable<DishDTO> providersDtos;
+                List<int> addedDish = new List<int>();
+
+                if (menuId != null)
+                {
+                    addedDish = _menuService.GetMenuIdDishes(menuId);
+                    providersDtos = _dishService.GetDishesForMenu(catalogId, addedDish);
+                }
+                else
+                {
+                    providersDtos = _dishService.GetDishes(catalogId);
+                }
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DishDTO, DishViewModel>()).CreateMapper();
                 var dishes = mapper.Map<IEnumerable<DishDTO>, List<DishViewModel>>(providersDtos);
 
                 // элементы поиска
                 List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации", "Весу", "Цене" };
 
-                // простой поиск
-                switch (searchSelectionString)
-                {
-                    case "Названию":
-                        dishes = dishes.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Информации":
-                        dishes = dishes.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Весу":
-                        dishes = dishes.Where(t => t.Weight.ToString() == name).ToList();
-                        break;
-                    case "Цене":
-                        dishes = dishes.Where(t => t.Price.ToString() == name).ToList();
-                        break;
-                }
+                if (name == null)
+                    name = "";
+
+                    // простой поиск
+                    switch (searchSelectionString)
+                    {
+                        case "Названию":
+                            dishes = dishes.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
+                            break;
+                        case "Информации":
+                            dishes = dishes.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
+                            break;
+                        case "Весу":
+                            dishes = dishes.Where(t => t.Weight.ToString() == name).ToList();
+                            break;
+                        case "Цене":
+                            dishes = dishes.Where(t => t.Price.ToString() == name).ToList();
+                            break;
+                    }
 
                 ViewData["PriceSort"] = sortDish == SortState.PriceAsc ? SortState.PriceDesc : SortState.PriceAsc;
 
@@ -84,25 +98,13 @@ namespace Web.Controllers
                     SortState.PriceDesc => dishes.OrderByDescending(s => s.Price).ToList(),
                     _ => dishes.OrderBy(s => s.Price).ToList(),
                 };
-
-                // for add in menu dish
-                ChangeMenuDishViewModel changeMenuDishViewModel = new ChangeMenuDishViewModel();
-
-                if (menuId!=null)
-                {
-                    var menuDishes = _menuService.GetMenuDishes(menuId);
-
-                    foreach (var maniDishes in menuDishes)
-                    {
-                        changeMenuDishViewModel.AddedIdDishes.Add(maniDishes.DishId.Value);
-                    }
-                }
-
+             
                 return View(new ListDishViewModel()
                 {
-                    ChangeMenuDishes = changeMenuDishViewModel,
+                     MenuId = menuId,
                     Dishes = dishes,
                     CatalogId = catalogId.Value,
+                     AddedDish = addedDish,
                     SeacrhString = name,
                     SearchSelection = new SelectList(searchSelection),
                     SearchSelectionString = searchSelectionString
@@ -117,7 +119,27 @@ namespace Web.Controllers
             return BadRequest("Некорректный запрос");
         }
 
+
         #region For admin
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        public IActionResult MakeMenu(int menuId, List<int> newAddedDishes, List<int> allSelect)
+        {
+            try
+            {
+                _menuService.MakeMenu(menuId, newAddedDishes, allSelect);
+
+                _logger.LogInformation($"{DateTime.Now.ToString()}: Make menu for {menuId}");
+                return RedirectToAction("Index", "MenuDishes", new { menuId = menuId });
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                return Content(ex.Message);
+            }
+
+        }
 
         [Authorize(Roles = "admin")]
         [HttpGet]
@@ -167,7 +189,7 @@ namespace Web.Controllers
                     string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                     _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} added new dish");
 
-                    return Content("Блюдо успешно добавлено");
+                    return RedirectToAction("Index",new { dishDTO.CatalogId });
                 }
                 catch (ValidationException ex)
                 {
@@ -242,7 +264,7 @@ namespace Web.Controllers
                     // сохранение картинки
                     if (uploadedFile != null)
                     {
-                        // путь к папке files/provider/
+                        // путь к папке files/dishes/
                         path = "/files/dishes/" + uploadedFile.FileName;
                         // сохраняем файл в папку files/provider/ в каталоге wwwroot
                         using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))

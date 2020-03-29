@@ -9,11 +9,11 @@
     <a class="btn btn-sm btn-success" asp-controller="Catalog" asp-action="Index" asp-route-providerId="@Model.ProviderId" asp-route-menuId="@Model.MenuId">Составление меню</a>
 }
 
-<h1 class="text-center">Блюда @ViewData["NameCatalog"]</h1>
+<h1 class="text-center">@ViewData["NameMeniDishes"]</h1>
 <br />
 
 <form method="get">
-    <input type="hidden" name="catalogId" value="@Model.MenuId\" />
+    <input type="hidden" name="menuId" value="@Model.MenuId" />
     <div class="form-inline form-group">
         <label class="control-label" style="margin-left: 5px;">Поиск по: </label>
         <select name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control" style="margin-left: 5px;"></select>
@@ -23,7 +23,7 @@
         <a asp-action="Index" asp-route-menuId="@Model.MenuId" class="btn btn-sm btn-success" style="margin-left: 5px;">Обновить</a>
         @if (Model.MenuDishes.Any())
         {
-            <a asp-action="Index" asp-route-menuId="@Model.MenuId" asp-route-sortDish="@ViewData["PriceSort"]"
+            <a asp-action="Index" asp-route-menuId="@Model.MenuId" asp-route-sortMenuDish="@ViewData["PriceSort"]"
                asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString" class="btn btn-sm btn-success"
                style="margin-left: 5px;">
                 Сортировать по цене
@@ -42,6 +42,7 @@
                 { "SeacrhString", Model.SeacrhString }})
             }
         }
+        <br/>
     </div>
 }
 else

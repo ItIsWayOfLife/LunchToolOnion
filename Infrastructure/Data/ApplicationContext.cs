@@ -1,6 +1,5 @@
 ﻿using ApplicationCore.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Infrastructure.Data
 {
@@ -11,24 +10,6 @@ namespace Infrastructure.Data
         {
             Database.EnsureCreated();
         }
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-        //    {
-        //        relationship.DeleteBehavior = DeleteBehavior.SetNull;
-        //    }
-        //}
-
-
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<MenuDishes>()
-        //        .HasOne(b => b.Dish)
-        //        .WithMany(a => a.)
-        //        .OnDelete(DeleteBehavior.SetNull);
-        //}
-
 
         public DbSet<Cart> Carts { get; set; }
         public DbSet<CartDishes> CartDishes { get; set; }

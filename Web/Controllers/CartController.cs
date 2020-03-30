@@ -1,4 +1,5 @@
-﻿using ApplicationCore.DTO;
+﻿using ApplicationCore.Constants;
+using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
@@ -18,10 +19,16 @@ namespace Web.Controllers
         private readonly ICartService _cartService;
         private readonly ILogger<CartController> _logger;
 
+        private readonly PathConstants _pathConstants;
+
+        private readonly string _path;
+
         public CartController(ICartService cartService, ILogger<CartController> logger)
         {
             _cartService = cartService;
             _logger = logger;
+            _pathConstants = new PathConstants();
+            _path = _pathConstants.pathDish;
         }
 
         [HttpGet]
@@ -39,6 +46,11 @@ namespace Web.Controllers
                     IEnumerable<CartDishesDTO> cartDishDTO = _cartService.GetCartDishes(currentUserId);
                     var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CartDishesDTO, CartDishesViewModel>()).CreateMapper();
                     var cartDishes = mapper.Map<IEnumerable<CartDishesDTO>, List<CartDishesViewModel>>(cartDishDTO);
+
+                    foreach (var cD in cartDishes)
+                    {
+                        cD.Path = _path + cD.Path;
+                    }
 
                  ViewData["FullPrice"] =  _cartService.FullPriceCart(currentUserId);
 

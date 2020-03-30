@@ -1,4 +1,5 @@
-﻿using ApplicationCore.DTO;
+﻿using ApplicationCore.Constants;
+using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
@@ -26,6 +27,10 @@ namespace Web.Controllers
         private readonly IWebHostEnvironment _appEnvironment;
         private readonly IMenuService _menuService;
 
+        private readonly PathConstants _pathConstants;
+
+        private readonly string _path;
+
         private readonly ILogger<DishController> _logger;
 
         public DishController(IDishService dishService, IWebHostEnvironment appEnvironment,
@@ -38,6 +43,8 @@ namespace Web.Controllers
             _сatalogService = сatalogService;
             _menuService = menuService;
             _logger = logger;
+            _pathConstants = new PathConstants();
+            _path = _pathConstants.pathDish;
         }
 
         [AllowAnonymous]
@@ -69,6 +76,11 @@ namespace Web.Controllers
                 }
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<DishDTO, DishViewModel>()).CreateMapper();
                 var dishes = mapper.Map<IEnumerable<DishDTO>, List<DishViewModel>>(providersDtos);
+
+                foreach (var d in dishes)
+                {
+                    d.Path = _path + d.Path;
+                }
 
                 // элементы поиска
                 List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации", "Весу", "Цене" };
@@ -163,13 +175,12 @@ namespace Web.Controllers
                     // сохранение картинки
                     if (uploadedFile != null)
                     {
-                        // путь к папке files/provider/
-                        path = "/files/dishes/" + uploadedFile.FileName;
-                        // сохраняем файл в папку files/provider/ в каталоге wwwroot
-                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                        path = uploadedFile.FileName;
+                        // сохраняем файл в папку files/provider/ в каталоге wwwroot=
+                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath +_path + path, FileMode.Create))
                         {
                             await uploadedFile.CopyToAsync(fileStream);
-                            _logger.LogInformation($"{DateTime.Now.ToString()}: Save image {path}");
+                            _logger.LogInformation($"{DateTime.Now.ToString()}: Save image {path} in {_path}");
                         }
                     }
 
@@ -232,7 +243,7 @@ namespace Web.Controllers
                     Info = dishDTO.Info,
                     Id = dishDTO.Id,
                     Name = dishDTO.Name,
-                    Path = dishDTO.Path,
+                    Path = _path +dishDTO.Path,
                     Price = dishDTO.Price,
                     Weight = dishDTO.Weight,
                     CatalogId = dishDTO.CatalogId
@@ -260,10 +271,9 @@ namespace Web.Controllers
                     // сохранение картинки
                     if (uploadedFile != null)
                     {
-                        // путь к папке files/dishes/
-                        path = "/files/dishes/" + uploadedFile.FileName;
+                        path = uploadedFile.FileName;
                         // сохраняем файл в папку files/provider/ в каталоге wwwroot
-                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath +_path + path, FileMode.Create))
                         {
                             await uploadedFile.CopyToAsync(fileStream);
                             _logger.LogInformation($"{DateTime.Now.ToString()}: Save image {path}");
@@ -279,7 +289,7 @@ namespace Web.Controllers
                         Id = model.Id,
                         Info = model.Info,
                         Name = model.Name,
-                        Path = path, // путь к картинке
+                        Path = path.Replace(_path, ""),
                         Price = model.Price,
                         Weight = model.Weight,
                         CatalogId = model.CatalogId

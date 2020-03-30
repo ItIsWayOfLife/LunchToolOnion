@@ -18,7 +18,7 @@ namespace Infrastructure.Data
                         IsActive = true,
                         IsFavorite = true,
                         Name = "HOLA",
-                        Path = "/files/provider/hola.jpeg",
+                        Path = "hola.jpeg",
                         TimeWorkTo = new DateTime(2020, 03, 19, 08, 00, 00),
                         TimeWorkWith = new DateTime(2020, 03, 19, 23, 00, 00),
                         WorkingDays = "Понедельник - Суббота"
@@ -30,7 +30,7 @@ namespace Infrastructure.Data
                         IsActive = true,
                         IsFavorite = true,
                         Name = "777",
-                        Path = "/files/provider/777.jpeg",
+                        Path = "777.jpeg",
                         TimeWorkTo = new DateTime(2020, 03, 19, 08, 30, 00),
                         TimeWorkWith = new DateTime(2020, 03, 19, 22, 00, 00),
                         WorkingDays = "Понедельник - Воскресенье"
@@ -42,7 +42,7 @@ namespace Infrastructure.Data
                         IsActive = true,
                         IsFavorite = false,
                         Name = "Суши ВЕСЛА",
-                        Path = "/files/provider/TAKE_AWAY.jpeg",
+                        Path = "TAKE_AWAY.jpeg",
                         TimeWorkTo = new DateTime(2020, 03, 19, 10, 00, 00),
                         TimeWorkWith = new DateTime(2020, 03, 19, 22, 00, 00),
                         WorkingDays = "Понедельник - Суббота"
@@ -98,7 +98,7 @@ namespace Infrastructure.Data
                  Name = "Cheese friend",
                  Weight = 200,
                  Price = 3.10M,
-                 Path = "/files/dishes/send1.jpeg",
+                 Path = "send1.jpeg",
              },
              new Dish
              {
@@ -107,7 +107,7 @@ namespace Infrastructure.Data
                  Name = "Vegetarian",
                  Weight = 200,
                  Price = 2.90M,
-                 Path = "/files/dishes/send2.jpeg",
+                 Path = "send2.jpeg",
              },
                new Dish
                {
@@ -116,7 +116,7 @@ namespace Infrastructure.Data
                    Name = "Блинчики фирменные",
                    Weight = 150,
                    Price = 4.90M,
-                   Path = "/files/dishes/firm.jpeg",
+                   Path = "firm.jpeg",
                },
                  new Dish
                  {
@@ -125,7 +125,7 @@ namespace Infrastructure.Data
                      Name = "Блинчики Друзья",
                      Weight = 150,
                      Price = 4.50M,
-                     Path = "/files/dishes/fr.jpeg",
+                     Path = "fr.jpeg",
                  },
                    new Dish
                    {
@@ -134,7 +134,7 @@ namespace Infrastructure.Data
                        Name = "Блинчики Вкусно",
                        Weight = 150,
                        Price = 4.20M,
-                       Path = "/files/dishes/fis.jpeg",
+                       Path = "fis.jpeg",
                    },
                     new Dish
                     {
@@ -143,7 +143,7 @@ namespace Infrastructure.Data
                         Name = "Блинчики Рыбные",
                         Weight = 150,
                         Price = 5.90M,
-                        Path = "/files/dishes/3.jpeg",
+                        Path = "3.jpeg",
                     },
                      new Dish
                      {
@@ -152,7 +152,7 @@ namespace Infrastructure.Data
                          Name = "Салат Оливье",
                          Weight = 220,
                          Price = 5.90M,
-                         Path = "/files/dishes/ol.jpeg",
+                         Path = "ol.jpeg",
                      },
                       new Dish
                       {
@@ -161,7 +161,7 @@ namespace Infrastructure.Data
                           Name = "Салат Цезарь",
                           Weight = 220,
                           Price = 7.60M,
-                          Path = "/files/dishes/ce.jpeg",
+                          Path = "ce.jpeg",
                       },
                         new Dish
                         {
@@ -170,7 +170,7 @@ namespace Infrastructure.Data
                             Name = "Шаурма маленькая",
                             Weight = 400,
                             Price = 5.50M,
-                            Path = "/files/dishes/sm.jpeg",
+                            Path = "sm.jpeg",
                         },
                          new Dish
                          {
@@ -179,7 +179,7 @@ namespace Infrastructure.Data
                              Name = "Шаурма средняя",
                              Weight = 550,
                              Price = 7.50M,
-                             Path = "/files/dishes/sm.jpeg",
+                             Path = "sm.jpeg",
                          },
                           new Dish
                           {
@@ -188,7 +188,7 @@ namespace Infrastructure.Data
                               Name = "Шаурма большая",
                               Weight = 700,
                               Price = 10.00M,
-                              Path = "/files/dishes/sm.jpeg",
+                              Path = "sm.jpeg",
                           },
                            new Dish
                            {
@@ -197,7 +197,7 @@ namespace Infrastructure.Data
                                Name = "Шаурма в пите",
                                Weight = 5500,
                                Price = 5.50M,
-                               Path = "/files/dishes/sbv.jpeg",
+                               Path = "sbv.jpeg",
                            },
                            new Dish
                            {
@@ -206,7 +206,7 @@ namespace Infrastructure.Data
                                Name = "Кока Кола",
                                Weight = 0.5,
                                Price = 2.00M,
-                               Path = "/files/dishes/cola.jpeg",
+                               Path = "cola.jpeg",
                            },
                              new Dish
                              {
@@ -215,7 +215,7 @@ namespace Infrastructure.Data
                                  Name = "Фанта",
                                  Weight = 0.5,
                                  Price = 2.00M,
-                                 Path = "/files/dishes/fant.jpeg",
+                                 Path = "fant.jpeg",
                              },
                               new Dish
                               {
@@ -224,7 +224,7 @@ namespace Infrastructure.Data
                                   Name = "Мисо суп",
                                   Weight = 200,
                                   Price = 3.20M,
-                                  Path = "/files/dishes/ms.jpeg",
+                                  Path = "ms.jpeg",
                               },
                                new Dish
                                {
@@ -233,7 +233,7 @@ namespace Infrastructure.Data
                                    Name = "Отстрый суп с жареным лососем",
                                    Weight = 200,
                                    Price = 5.90M,
-                                   Path = "/files/dishes/ms.jpeg",
+                                   Path = "ms.jpeg",
                                },
                                 new Dish
                                 {
@@ -242,7 +242,7 @@ namespace Infrastructure.Data
                                     Name = "Мисо с курицей",
                                     Weight = 200,
                                     Price = 4.20M,
-                                    Path = "/files/dishes/sk.jpeg"
+                                    Path = "sk.jpeg"
                                 });
 
                 context.SaveChanges();

@@ -1,4 +1,5 @@
-﻿using ApplicationCore.DTO;
+﻿using ApplicationCore.Constants;
+using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
@@ -18,11 +19,17 @@ namespace Web.Controllers
         private readonly IProviderService _providerService;
         private readonly ILogger<MenuController> _logger;
 
+        private readonly PathConstants _pathConstants;
+
+        private readonly string _path;
+
         public MenuDishesController(IMenuService menuService, IProviderService providerService, ILogger<MenuController> logger)
         {
             _menuService = menuService;
             _providerService = providerService;
             _logger = logger;
+            _pathConstants = new PathConstants();
+            _path = _pathConstants.pathDish;
         }
 
         [HttpGet]
@@ -47,6 +54,11 @@ namespace Web.Controllers
                 IEnumerable<MenuDishesDTO> menuDishesDTOs = _menuService.GetMenuDishes(menuId);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesViewModel>()).CreateMapper();
                 var menuDishes = mapper.Map<IEnumerable<MenuDishesDTO>, List<MenuDishesViewModel>>(menuDishesDTOs);
+
+                foreach (var mD in menuDishes)
+                {
+                    mD.Path = _path + mD.Path;
+                }
 
                 // элементы поиска
                 List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации", "Весу", "Цене" };

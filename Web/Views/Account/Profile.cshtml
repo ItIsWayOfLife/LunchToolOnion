@@ -11,17 +11,9 @@
         <br />
         <p>Имя: @Model.Firstname</p>
         <p>Фамилия: @Model.Lastname</p>
-        <p>Отвество: @Model.Patronymic</p>
+        <p>Отчество: @Model.Patronymic</p>
         <p>Емаил: @Model.Email</p>
         <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="Edit">Изменить</a>
         <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="ChangePassword">Сменить пароль</a>
-    }
-    else
-    {
-        <div class="text-black-50">
-            <h1>
-                Необходимо войти в аккаунт
-            </h1>
-        </div>
     }
 </div>

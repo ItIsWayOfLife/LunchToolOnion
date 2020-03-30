@@ -1,4 +1,5 @@
-﻿using ApplicationCore.DTO;
+﻿using ApplicationCore.Constants;
+using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
@@ -24,7 +25,11 @@ namespace Web.Controllers
         private readonly IProviderService _providerService;
         private readonly IWebHostEnvironment _appEnvironment;
 
+        private readonly PathConstants _pathConstants;
+
         private readonly ILogger<ProviderController> _logger;
+
+        private readonly string _path;
 
         public ProviderController(IProviderService providerService, IWebHostEnvironment appEnvironment,
             ILogger<ProviderController> logger)
@@ -32,6 +37,8 @@ namespace Web.Controllers
             _providerService = providerService;
             _appEnvironment = appEnvironment;
             _logger = logger;
+            _pathConstants = new PathConstants();
+            _path = _pathConstants.pathProvider;
         }
 
         [AllowAnonymous]
@@ -45,6 +52,11 @@ namespace Web.Controllers
                 IEnumerable<ProviderDTO> providersDtos = _providerService.GetProviders();
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderViewModel>()).CreateMapper();
                 var provider = mapper.Map<IEnumerable<ProviderDTO>, List<ProviderViewModel>>(providersDtos);
+
+                foreach (var pr in provider)
+                {
+                    pr.Path = _path + pr.Path;
+                }
 
                 List<string> searchSelection = new List<string>() { "Поиск по" };
 
@@ -109,6 +121,11 @@ namespace Web.Controllers
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderViewModel>()).CreateMapper();
             var provider = mapper.Map<IEnumerable<ProviderDTO>, List<ProviderViewModel>>(providersDtos);
 
+            foreach (var pr in provider)
+            {
+                pr.Path = _path + pr.Path;
+            }
+
             return View(new ListProviderViewModel() { Providers = provider });
         }
 
@@ -135,13 +152,12 @@ namespace Web.Controllers
                     // сохранение картинки
                     if (uploadedFile != null)
                     {
-                        // путь к папке files/provider/
-                        path = "/files/provider/" + uploadedFile.FileName;
+                        path =  uploadedFile.FileName;
                         // сохраняем файл в папку files/provider/ в каталоге wwwroot
-                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath +_path +path, FileMode.Create))
                         {
                             await uploadedFile.CopyToAsync(fileStream);
-                            _logger.LogInformation($"{DateTime.Now.ToString()}: Save image {path}");
+                            _logger.LogInformation($@"{DateTime.Now.ToString()}: Save image {path} in {_path}");
                         }
                     }
 
@@ -152,7 +168,7 @@ namespace Web.Controllers
                         IsActive = model.IsActive,
                         IsFavorite = model.IsFavorite,
                         Name = model.Name,
-                        Path = path, // путь к картинке
+                        Path = path, 
                         TimeWorkTo = model.TimeWorkTo,
                         TimeWorkWith = model.TimeWorkWith,
                         WorkingDays = model.WorkingDays
@@ -163,7 +179,7 @@ namespace Web.Controllers
                     string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                     _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} added new provider");
 
-                    return Content("Поставщик успешно добавлен");
+                    return RedirectToAction("Index");
                 }
                 catch (ValidationException ex)
                 {
@@ -214,7 +230,7 @@ namespace Web.Controllers
                     IsActive = providerDto.IsActive,
                     IsFavorite = providerDto.IsFavorite,
                     Name = providerDto.Name,
-                    Path = providerDto.Path,
+                    Path = _path+ providerDto.Path,
                     TimeWorkTo = providerDto.TimeWorkTo,
                     TimeWorkWith = providerDto.TimeWorkWith,
                     WorkingDays = providerDto.WorkingDays
@@ -241,13 +257,12 @@ namespace Web.Controllers
                     // сохранение картинки
                     if (uploadedFile != null)
                     {
-                        // путь к папке files/provider/
-                        path = "/files/provider/" + uploadedFile.FileName;
+                        path = uploadedFile.FileName;
                         // сохраняем файл в папку files/provider/ в каталоге wwwroot
-                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + _path + path, FileMode.Create))
                         {
                             await uploadedFile.CopyToAsync(fileStream);
-                            _logger.LogInformation($"{DateTime.Now.ToString()}: Save image {path}");
+                            _logger.LogInformation($@"{DateTime.Now.ToString()}: Save image {path} in {_path}");
                         }
                     }
                     else
@@ -263,7 +278,7 @@ namespace Web.Controllers
                         IsActive = model.IsActive,
                         IsFavorite = model.IsFavorite,
                         Name = model.Name,
-                        Path = path, // путь к картинке
+                        Path = path.Replace(_path,""), 
                         TimeWorkTo = model.TimeWorkTo,
                         TimeWorkWith = model.TimeWorkWith,
                         WorkingDays = model.WorkingDays

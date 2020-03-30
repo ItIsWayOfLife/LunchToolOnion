@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -194,35 +195,44 @@ namespace Web.Controllers.Identity
         [HttpPost]
         public async Task<IActionResult> ChangePassword(Models.Users.ChangePasswordViewModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = await _userManager.FindByIdAsync(model.Id);
-                if (user != null)
+                if (ModelState.IsValid)
                 {
-                    IdentityResult result =
-                        await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-                    if (result.Succeeded)
+                    var user = await _userManager.FindByIdAsync(model.Id);
+                    if (user != null)
                     {
-                        string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                        _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} changed password user: {model.Id}");
+                        IdentityResult result =
+                            await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                        if (result.Succeeded)
+                        {
+                            string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                            _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} changed password user: {model.Id}");
 
-                        return RedirectToAction("Index");
+                            return RedirectToAction("Index");
+                        }
+                        else
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                                _logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
+                            }
+                        }
                     }
                     else
                     {
-                        foreach (var error in result.Errors)
-                        {
-                            ModelState.AddModelError(string.Empty, error.Description);
-                            _logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
-                        }
+                        ModelState.AddModelError(string.Empty, "Пользователь не найден");
+                        _logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Пользователь не найден");
-                    _logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
-                }
             }
+            catch (ApplicationCore.Exceptions.ValidationException ex)
+            {
+                ModelState.AddModelError(ex.Property, ex.Message);
+                _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+            }
+
             return View(model);
         }
     }

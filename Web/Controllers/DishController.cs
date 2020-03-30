@@ -133,7 +133,6 @@ namespace Web.Controllers
             return BadRequest("Некорректный запрос");
         }
 
-
         #region For admin
 
         [HttpPost]

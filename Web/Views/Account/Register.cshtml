@@ -7,40 +7,36 @@
 <br />
 <div class="text-center">
     <form method="post" autocomplete="off" asp-controller="Account" asp-action="Register">
-        <div asp-validation-summary="ModelOnly"></div>
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div>
-            <label asp-for="Firstname" style="font-size: 24px;"></label><br />
-            <input asp-for="Firstname" style="width:250px;"/>
+            <label asp-for="Firstname" class="control-label"></label><br />
+            <input asp-for="Firstname" class="form-control" />
             <span asp-validation-for="Firstname"></span>
         </div>
         <div>
-            <label asp-for="Lastname" style="font-size: 24px;"></label><br />
-            <input asp-for="Lastname" style="width:250px;"/>
+            <label asp-for="Lastname" class="control-label"></label><br />
+            <input asp-for="Lastname" class="form-control"/>
             <span asp-validation-for="Lastname"></span>
         </div>
         <div>
-            <label asp-for="Patronymic" style="font-size: 24px;"></label><br />
-            <input asp-for="Patronymic" style="width:250px;"/>
-            <span asp-validation-for="Patronymic"></span>
+            <label asp-for="Patronymic" class="control-label"></label><br />
+            <input asp-for="Patronymic" class="form-control"/>
         </div>
         <div>
-            <label asp-for="Email" style="font-size: 24px;"></label><br />
-            <input asp-for="Email" style="width:250px;"/>
-            <span asp-validation-for="Email"></span>
+            <label asp-for="Email" class="control-label"></label><br />
+            <input asp-for="Email" class="form-control" />
         </div>
         <div>
-            <label asp-for="Password" style="font-size: 24px;"></label><br />
-            <input asp-for="Password" style="width:250px;"/>
-            <span asp-validation-for="Password"></span>
+            <label asp-for="Password" class="control-label"></label><br />
+            <input asp-for="Password" class="form-control" />
         </div>
         <div>
-            <label asp-for="PasswordConfirm" style="font-size: 24px;"></label><br />
-            <input asp-for="PasswordConfirm" style="width:250px;"/>
-            <span asp-validation-for="PasswordConfirm"></span>
+            <label asp-for="PasswordConfirm" class="control-label"></label><br />
+            <input asp-for="PasswordConfirm" class="form-control" />
         </div>
         <br />
         <div>
-            <input type="submit" value="Зарегистрироваться"  class="btn btn-outline-success"/>
+            <input type="submit" value="Зарегистрироваться"  class="btn btn-sm btn-success"  />
         </div>
     </form>
     </div>

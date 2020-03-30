@@ -35,6 +35,7 @@ namespace Web.Controllers
             _path = _pathConstants.pathDish;
         }
 
+        [Authorize(Roles = "employee")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -65,6 +66,7 @@ namespace Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [Authorize(Roles = "employee")]
         [HttpGet]
         public IActionResult Index(SortState sortOrder = SortState.DateOrderAsc)
         {
@@ -111,6 +113,7 @@ namespace Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [Authorize(Roles = "employee")]
         [HttpGet]
         public IActionResult GetOrderDishes(int? orderId)
         {

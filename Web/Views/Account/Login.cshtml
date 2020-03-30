@@ -5,28 +5,26 @@
 }
     <h1 class="text-center">Вход</h1>
 <br />
-<div  class="text-center">
-<form method="post" asp-controller="Account" asp-action="Login"
-      asp-route-returnUrl="@Model.ReturnUrl">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div>
-        <label asp-for="Email" style="font-size: 24px;"></label><br/>
-        <input asp-for="Email" style="width:250px;" />
-        <span asp-validation-for="Email"></span>
-    </div>
-    <div>
-        <label asp-for="Password" style="font-size: 24px;"></label><br />
-        <input asp-for="Password" style="width:250px;"/>
-        <span asp-validation-for="Password"></span>
-    </div>
-    <div>
-        <label asp-for="RememberMe"></label>
-        <input asp-for="RememberMe" />
-    </div>
-    <div>
-        <input type="submit" value="Войти"  class="btn btn-outline-success"/>
-    </div>
-</form>
+<div class="text-center">
+    <form method="post" asp-controller="Account" asp-action="Login"
+          asp-route-returnUrl="@Model.ReturnUrl">
+        <div asp-validation-summary="All"  class="text-danger"></div>
+        <div>
+            <label asp-for="Email" class="control-label"></label><br />
+            <input asp-for="Email" class="form-control"  />
+        </div>
+        <div>
+            <label asp-for="Password" class="control-label"></label><br />
+            <input asp-for="Password" class="form-control" />
+        </div>
+        <div>
+            <label asp-for="RememberMe"></label>
+            <input asp-for="RememberMe"/>
+        </div>
+        <div>
+            <input type="submit" value="Войти"  class="btn btn-sm btn-success" />
+        </div>
+    </form>
 </div>
 
 

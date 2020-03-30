@@ -31,6 +31,7 @@ namespace Web.Controllers
             _path = _pathConstants.pathDish;
         }
 
+        [Authorize(Roles = "employee")]
         [HttpGet]
         public IActionResult Index()
         {
@@ -68,6 +69,7 @@ namespace Web.Controllers
             return RedirectToAction("Login","Account");
         }
 
+        [Authorize(Roles = "employee")]
         [HttpPost]
         public IActionResult Delete(int? cartDishId)
         {
@@ -94,6 +96,7 @@ namespace Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [Authorize(Roles = "employee")]
         [HttpGet]
         public IActionResult Add(int? dishId)
         {
@@ -122,6 +125,7 @@ namespace Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [Authorize(Roles = "employee")]
         [HttpPost]
         public IActionResult DeleteAll()
         {
@@ -147,6 +151,7 @@ namespace Web.Controllers
             return RedirectToAction("Login", "Account");
         }
 
+        [Authorize(Roles = "employee")]
         [HttpPost]
         public IActionResult Update(int? dishCartId, int count)
         {

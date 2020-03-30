@@ -21,7 +21,7 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-action="Index" asp-controller="Provider">Поставщики</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("employee"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link " asp-action="Index" asp-controller="Cart">Корзина</a>

@@ -23,7 +23,7 @@ namespace Web.Controllers
     public class DishController:Controller
     {
         private readonly IDishService _dishService;
-        private readonly IСatalogService _сatalogService;
+        private readonly ICatalogService _сatalogService;
         private readonly IWebHostEnvironment _appEnvironment;
         private readonly IMenuService _menuService;
 
@@ -34,7 +34,7 @@ namespace Web.Controllers
         private readonly ILogger<DishController> _logger;
 
         public DishController(IDishService dishService, IWebHostEnvironment appEnvironment,
-             IСatalogService сatalogService,
+             ICatalogService сatalogService,
              IMenuService menuService,
         ILogger<DishController> logger) 
         {

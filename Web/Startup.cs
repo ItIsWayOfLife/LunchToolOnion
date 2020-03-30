@@ -40,7 +40,7 @@ namespace Web
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
 
             services.AddTransient<IProviderService, ProviderService>();
-            services.AddTransient<IÑatalogService, ÑatalogService>();
+            services.AddTransient<ICatalogService, ÑatalogService>();
             services.AddTransient<IDishService, DishService>();
             services.AddTransient<ICartService, CartService>();
             services.AddTransient<IOrderService, OrderService>();

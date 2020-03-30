@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace ApplicationCore.Services
 {
-    public class СatalogService : IСatalogService
+    public class СatalogService : ICatalogService
     {
         private IUnitOfWork Database { get; set; }
 

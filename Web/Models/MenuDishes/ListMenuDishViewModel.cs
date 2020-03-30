@@ -14,5 +14,7 @@ namespace Web.Models.MenuDishes
         public SelectList SearchSelection { get; set; }
         public string SeacrhString { get; set; }
         public string SearchSelectionString { get; set; }
+        public SelectList FilterCategorySelection { get; set; }
+        public string FilterCatalog { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationCore.Interfaces
 {
-    public interface IСatalogService
+    public interface ICatalogService
     {
         void AddСatalog(СatalogDTO сatalogDTO);
         void DeleteСatalog(int? id);

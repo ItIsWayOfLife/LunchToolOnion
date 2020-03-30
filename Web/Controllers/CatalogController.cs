@@ -17,11 +17,11 @@ namespace Web.Controllers
     [Authorize(Roles = "admin")]
     public class CatalogController : Controller
     {
-        private readonly IСatalogService _сatalogService;
+        private readonly ICatalogService _сatalogService;
         private readonly IProviderService _providerService;
         private readonly ILogger<CatalogController> _logger;
 
-        public CatalogController(IСatalogService сatalogService, IProviderService providerService,
+        public CatalogController(ICatalogService сatalogService, IProviderService providerService,
             ILogger<CatalogController> logger)
         {
             _сatalogService = сatalogService;

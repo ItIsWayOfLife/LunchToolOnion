@@ -18,6 +18,7 @@ using Web.Models.Dish;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class DishController:Controller
     {
         private readonly IDishService _dishService;
@@ -39,6 +40,7 @@ namespace Web.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index(int? catalogId, int? menuId, string searchSelectionString, string name, SortState sortDish = SortState.PriceAsc)
         {
@@ -122,7 +124,6 @@ namespace Web.Controllers
 
         #region For admin
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult MakeMenu(int menuId, List<int> newAddedDishes, List<int> allSelect)
         {
@@ -141,7 +142,6 @@ namespace Web.Controllers
 
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Add(int catalogId)
         {
@@ -150,7 +150,6 @@ namespace Web.Controllers
             return View(new AddDishViewModel() { CatalogId = catalogId });
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Add(IFormFile uploadedFile, [FromForm]AddDishViewModel model)
         {
@@ -200,7 +199,6 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Delete(int? id, int catalogId, string searchSelectionString, string name)
         {
@@ -220,7 +218,6 @@ namespace Web.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -250,7 +247,6 @@ namespace Web.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> Edit(IFormFile uploadedFile, [FromForm]EditDithViewModel model)
         {

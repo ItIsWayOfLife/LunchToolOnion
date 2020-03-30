@@ -2,6 +2,7 @@
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -11,6 +12,7 @@ using Web.Models.Cart;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class CartController:Controller
     {
         private readonly ICartService _cartService;

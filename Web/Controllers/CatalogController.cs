@@ -14,6 +14,7 @@ using Web.Models.Catalog;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class CatalogController : Controller
     {
         private readonly IСatalogService _сatalogService;
@@ -28,6 +29,7 @@ namespace Web.Controllers
             _providerService = providerService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index(int? providerId, int? menuId, string searchSelectionString, string name, SortState sortCatalog = SortState.NameAsc)
         {
@@ -92,7 +94,6 @@ namespace Web.Controllers
 
         #region For admin
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public IActionResult Add(int providerId)
         {
@@ -101,7 +102,6 @@ namespace Web.Controllers
             return View(new AddCatalogViewModel() { ProviderId = providerId });
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Add(AddCatalogViewModel model)
         {
@@ -132,7 +132,6 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Delete(int? id, int providerId, string searchSelectionString, string name)
         {
@@ -152,7 +151,6 @@ namespace Web.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -181,7 +179,6 @@ namespace Web.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Edit(EditCatalogViewModel model)
         {

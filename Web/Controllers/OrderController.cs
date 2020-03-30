@@ -2,6 +2,7 @@
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +13,7 @@ using Web.Models.Order;
 
 namespace Web.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly IOrderService _orderService;
@@ -42,8 +44,7 @@ namespace Web.Controllers
 
                     _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} created order {orderDTO.Id}");
 
-                    return Content($"Заказ успешно оформлен. Номер заказа: {orderDTO.Id}, дата заказа: {orderDTO.DateOrder}," +
-                        $" количество блюд: {orderDTO.CountDish}, цена: {orderDTO.FullPrice}");
+                    return RedirectToAction($"Index");
                 }
                 catch (ValidationException ex)
                 {

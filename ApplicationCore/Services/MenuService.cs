@@ -170,7 +170,6 @@ namespace ApplicationCore.Services
             return menuDishesDTOs;
         }
 
-        // ToDo: Bad work
         public void MakeMenu(int? menuId, List<int> newAddedDishes, List<int> allSelect)
         {
             if (menuId == null)

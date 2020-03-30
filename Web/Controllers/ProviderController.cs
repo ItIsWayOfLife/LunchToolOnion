@@ -18,6 +18,7 @@ using Web.Models.Provider;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ProviderController : Controller
     {
         private readonly IProviderService _providerService;
@@ -33,7 +34,7 @@ namespace Web.Controllers
             _logger = logger;
         }
 
-        // All Providers
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult Index(string searchSelectionString, string name)
         {
@@ -98,6 +99,7 @@ namespace Web.Controllers
             return BadRequest("Некорректный запрос");
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public ActionResult ListFavoriteProvider()
         { 
@@ -112,7 +114,6 @@ namespace Web.Controllers
 
         #region For admin
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult Add()
         {
@@ -121,7 +122,6 @@ namespace Web.Controllers
             return View();
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Add(IFormFile uploadedFile, [FromForm]AddProviderViewModel model)
         {
@@ -174,7 +174,6 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Delete(int? id)
         {
@@ -194,7 +193,6 @@ namespace Web.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -230,7 +228,6 @@ namespace Web.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<ActionResult> Edit(IFormFile uploadedFile, [FromForm]EditProviderViewModel model)
         {

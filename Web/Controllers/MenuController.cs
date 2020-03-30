@@ -14,6 +14,7 @@ using Web.Models.Menu;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class MenuController : Controller
     {
         private readonly IMenuService _menuService;
@@ -28,6 +29,7 @@ namespace Web.Controllers
             _providerService = providerService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Index(int? providerId, string searchSelectionString, string name, SortState sortMenu = SortState.DateAsc)
         {
@@ -90,8 +92,7 @@ namespace Web.Controllers
         }
 
         #region For admin
-
-        [Authorize(Roles = "admin")]
+      
         [HttpGet]
         public IActionResult Add(int providerId)
         {
@@ -100,7 +101,6 @@ namespace Web.Controllers
             return View(new AddMenuViewModel() { ProviderId = providerId });
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Add(AddMenuViewModel model)
         {
@@ -131,7 +131,6 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public ActionResult Delete(int? id, int providerId, string searchSelectionString, string name)
         {
@@ -151,7 +150,6 @@ namespace Web.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpGet]
         public ActionResult Edit(int? id)
         {
@@ -180,7 +178,6 @@ namespace Web.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Edit(EditMenuViewModel model)
         {

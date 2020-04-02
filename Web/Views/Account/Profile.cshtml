@@ -1,19 +1,19 @@
 ﻿@model Web.Models.Account.ProfileViewModel
 
 @{
-    ViewBag.Title = "Профиль";
+    ViewBag.Title =  @SharedLocalizer["Profile"];
 }
 <div class="text-center">
 
     @if (User.Identity.IsAuthenticated)
     {
-        <h1 class="text-center">Профиль</h1>
+    <h1 class="text-center"> @SharedLocalizer["Profile"]</h1>
         <br />
-        <p>Имя: @Model.Firstname</p>
-        <p>Фамилия: @Model.Lastname</p>
-        <p>Отчество: @Model.Patronymic</p>
-        <p>Email: @Model.Email</p>
-        <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="Edit">Изменить</a>
-        <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="ChangePassword">Сменить пароль</a>
+        <p> @SharedLocalizer["Firstname"]: @Model.Firstname</p>
+        <p> @SharedLocalizer["Lastname"]: @Model.Lastname</p>
+        <p> @SharedLocalizer["Patronymic"]: @Model.Patronymic</p>
+        <p> @SharedLocalizer["Email"]: @Model.Email</p>
+        <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="Edit"> @SharedLocalizer["Edit"]</a>
+        <a class="btn btn-sm btn-success" asp-controller="Account" asp-action="ChangePassword"> @SharedLocalizer["ChangePassword"]</a>
     }
 </div>

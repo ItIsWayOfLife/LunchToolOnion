@@ -1,23 +1,23 @@
 ﻿@model IEnumerable<Web.Models.Cart.CartDishesViewModel>
 @{
-    ViewData["Title"] = "Корзина";
+    ViewData["Title"] = @SharedLocalizer["Cart"];
 }
 
-<h1 class="text-center">Корзина</h1>
-<h6 class="text-center">Обновляйте количество каждого блюда</h6>
+    <h1 class="text-center">@SharedLocalizer["Cart"]</h1>
+    <h6 class="text-center">@SharedLocalizer["Обновляйте количество каждого блюда"]</h6>
 <br />
 
 @if (Model.Any())
 {
     <table class="table">
         <tr>
-            <th>Блюдо</th>
-            <th>Название</th>
-            <th>Информация</th>
-            <th>Вес</th>
-            <th>Цена</th>
-            <th>Количество</th>
-            <th>Общая цена</th>
+            <th>@SharedLocalizer["Dish"]</th>
+            <th>@SharedLocalizer["Name"]</th>
+            <th>@SharedLocalizer["Info"]</th>
+            <th>@SharedLocalizer["Weight"]</th>
+            <th>@SharedLocalizer["Price"]</th>
+            <th>@SharedLocalizer["Amount"]</th>
+            <th>@SharedLocalizer["TotalPrice"]</th>
             <th></th>
             <th></th>
         </tr>
@@ -34,16 +34,16 @@
                     <form method="post" asp-controller="Cart" asp-action="Update">
                         <input type="hidden" name="dishCartId" value="@cartD.Id" />
                         <input type="number" min="1" value="@cartD.Count" name="count" />
-                        <input type="submit" value="Обновить" class="btn btn-sm btn-success" style="margin-top: 5px; margin-left: 50px;" />
+                        <input type="submit" value="@SharedLocalizer["Update"]" class="btn btn-sm btn-success" style="margin-top: 5px; margin-left: 50px;" />
                     </form>
                 </td>
 
-                <td>@Math.Round(cartD.Count * cartD.Price, 2).ToString("N2") BYN</td>
+                <td>@Math.Round(cartD.Count * cartD.Price, 2).ToString("N2") "@SharedLocalizer["Currency"]"</td>
                 <td>
                     <form method="post" asp-action="Delete" asp-route-cartDishId="@cartD.Id">
                         <div asp-validation-summary="All" class="text-danger"></div>
                         <button class="btn btn-sm btn-danger">
-                            Удалить
+                            @SharedLocalizer["Delete"]
                         </button>
                     </form>
                 </td>
@@ -57,18 +57,18 @@
     <div>
         <form method="post" asp-controller="Cart" asp-action="DeleteAll">
             <div asp-validation-summary="All" class="text-danger"></div>
-            <a class="btn btn-sm btn-primary" asp-controller="Provider" asp-action="Index">К поставщикам</a>
+            <a class="btn btn-sm btn-primary" asp-controller="Provider" asp-action="Index">@SharedLocalizer["ToProviders"]</a>
             <button class="btn btn-sm btn-danger">
-                Очистить корзину
+                @SharedLocalizer["EmptyTrash"]
             </button>
-            <a class="btn btn-sm btn-primary" asp-controller="Order" asp-action="Create">Заказать</a>
-            <h3 class="float-right">Общая цена: @ViewData["FullPrice"].ToString() BYN</h3>
+            <a class="btn btn-sm btn-primary" asp-controller="Order" asp-action="Create">@SharedLocalizer["ToOrder"]</a>
+            <h3 class="float-right">@SharedLocalizer["TotalPrice"]: @ViewData["FullPrice"].ToString() "@SharedLocalizer["Currency"]"</h3>
         </form>
     </div>
 }
 else
 {
-<h3 class="text-center" style="color:red;">Корзина пуста</h3>
+<h3 class="text-center" style="color:red;">@SharedLocalizer["CartIsEmpty"]</h3>
     <br />
 }
 

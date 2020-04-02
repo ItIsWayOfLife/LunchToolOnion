@@ -1,56 +1,56 @@
 ﻿@model Web.Models.Provider.EditProviderViewModel
 
 @{
-    ViewData["Title"] = "Изменение поставщика";
+    ViewData["Title"] =  @SharedLocalizer["EditProvider"];
 }
 
-<h1 class="text-center">Изменение поставщика "@Model.Name"</h1>
+    <h1 class="text-center"> @SharedLocalizer["EditProvider"] "@Model.Name"</h1>
 <br/>
 @if (Model.Path != null)
 {
 <img width="360" height="180" class="img-thumbnail" src="@Model.Path" alt="@Model.Name" />
 }
-<h3>Выберите файл для загрузки (если файл не выбран картинка будет старая) </h3>
+<h3>@SharedLocalizer["DishEditImgInfo"] </h3>
 <form method="post" asp-controller=Provider asp-action="Edit" enctype="multipart/form-data">
     <input type="file" name="uploadedFile" /><br>
     <input type="hidden" asp-for="Id" />
     <input type="hidden" asp-for="Path" />
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="Email" class="control-label">Email</label>
+        <label asp-for="Email" class="control-label">@SharedLocalizer["Email"]</label>
         <input type="text" asp-for="Email" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Name" class="control-label">Имя</label>
+        <label asp-for="Name" class="control-label">@SharedLocalizer["Name"]</label>
         <input type="text" asp-for="Name" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="IsActive" class="control-label">Активен</label>
+        <label asp-for="IsActive" class="control-label">@SharedLocalizer["IsActive"]</label>
         <input type="checkbox" asp-for="IsActive" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="TimeWorkWith" class="control-label">Время откр</label>
+        <label asp-for="TimeWorkWith" class="control-label">@SharedLocalizer["TimeWorkWith"]</label>
         <input type="time" asp-for="TimeWorkWith" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="TimeWorkTo" class="control-label">Время закр</label>
+        <label asp-for="TimeWorkTo" class="control-label">@SharedLocalizer["TimeWorkTo"]</label>
         <input type="time" asp-for="TimeWorkTo" class="form-control" />
     </div>
 
     <div class="form-group">
-        <label asp-for="WorkingDays" class="control-label">Дни работы</label>
+        <label asp-for="WorkingDays" class="control-label">@SharedLocalizer["WorkingDays"]</label>
         <input type="text" asp-for="WorkingDays" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="IsFavorite" class="control-label">На главную</label>
+        <label asp-for="IsFavorite" class="control-label">@SharedLocalizer["InMain"]</label>
         <input type="checkbox" asp-for="IsFavorite" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Info" class="control-label">ИнФО</label>
+        <label asp-for="Info" class="control-label">@SharedLocalizer["Info"]</label>
         <input type="text" asp-for="Info" class="form-control" />
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Изменить" class="btn btn-outline-secondary" />
+        <input type="submit" value="@SharedLocalizer["Edit"]" class="btn btn-outline-secondary" />
     </div>
 </form>

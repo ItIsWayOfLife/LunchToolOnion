@@ -1,22 +1,22 @@
 ﻿@model IEnumerable<Web.Models.Order.OrderDishesViewModel>
 
 @{
-    ViewData["Title"] = "Блюда заказа";
+    ViewData["Title"] = @SharedLocalizer["Providers"];
 }
 
-<h1 class="text-center">Блюда заказа</h1>
+    <h1 class="text-center">   @SharedLocalizer["Providers"]</h1>
 <br />
 
 @if (Model.Any())
 {
     <table class="table">
         <tr>
-            <th>Блюдо</th>
-            <th>Название</th>
-            <th>Информация</th>
-            <th>Вес</th>
-            <th>Цена</th>
-            <th>Количество</th>
+            <th> @SharedLocalizer["Dish"]</th>
+            <th> @SharedLocalizer["Name"]</th>
+            <th> @SharedLocalizer["Info"]</th>
+            <th> @SharedLocalizer["Weight"]</th>
+            <th> @SharedLocalizer["Price"]</th>
+            <th> @SharedLocalizer["Amount"]</th>
             <th>Общая цена</th>
         </tr>
 
@@ -27,7 +27,7 @@
                 <td>@cartD.Name</td>
                 <td>@cartD.Info</td>
                 <td>@cartD.Weight</td>
-                <td>@cartD.Price BYN</td>
+                <td>@cartD.Price @SharedLocalizer["Currency"]</td>
                 <td>@cartD.Count</td>
 
                 <td>@Math.Round(cartD.Count * cartD.Price, 2).ToString("N2")</td>
@@ -37,12 +37,12 @@
     <br />
 
     <div class="float-right">
-        <span> Полная стоимость: @ViewData["FullPrice"] BYN</span>
+        <span> @SharedLocalizer["FullPrice"]: @ViewData["FullPrice"]  @SharedLocalizer["Currency"]</span>
     </div>
     <br/>
 }
 else
 {
-    <h3 class="text-center" style="color:red;">Заказ пустой</h3>
+<h3 class="text-center" style="color:red;">@SharedLocalizer["OrderInfoEmpty"]</h3>
     <br />
 }

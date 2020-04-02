@@ -2,10 +2,10 @@
 @model Web.Models.Roles.ChangeRoleViewModel
 
 @{
-    ViewData["Title"] = "Изменение ролей";
+    ViewData["Title"] = @SharedLocalizer["ChangeRoles"];
 }
 
-    <h1 class="text-center">Изменение ролей для пользователя @Model.UserEmail</h1>
+    <h1 class="text-center">@SharedLocalizer["ChangeRolesForUsers"] @Model.UserEmail</h1>
 <br />
 
 <form asp-action="Edit" method="post">
@@ -18,5 +18,5 @@
                    @(Model.UserRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />@role.Name <br />
             }
     </div>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <button type="submit" class="btn btn-primary">@SharedLocalizer["Save"]</button>
 </form>

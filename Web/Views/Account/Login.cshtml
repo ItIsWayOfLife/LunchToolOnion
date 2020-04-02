@@ -1,9 +1,9 @@
 ﻿@model Web.Models.Account.LoginViewModel
 
 @{
-    ViewData["Title"] = "Авторизация";
+    ViewData["Title"] = @SharedLocalizer["ViewAccountLogin_Title"];
 }
-    <h1 class="text-center">Вход</h1>
+    <h1 class="text-center">@SharedLocalizer["Login"]</h1>
 <br />
 <div class="text-center">
     <form method="post" asp-controller="Account" asp-action="Login"
@@ -22,7 +22,7 @@
             <input asp-for="RememberMe"/>
         </div>
         <div>
-            <input type="submit" value="Войти"  class="btn btn-sm btn-success" />
+            <input type="submit" value="@SharedLocalizer["ComeIn"]"  class="btn btn-sm btn-success" />
         </div>
     </form>
 </div>

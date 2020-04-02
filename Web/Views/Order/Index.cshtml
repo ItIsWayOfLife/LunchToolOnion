@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Web.Models.Order.OrderViewModel>
 
 @{
-    ViewData["Title"] = "Заказы";
+    ViewData["Title"] = @SharedLocalizer["Orders"];
 }
 
-<h1 class="text-center">Заказы</h1>
+    <h1 class="text-center">@SharedLocalizer["Orders"]</h1>
 <br />
 
 @if (Model.Any())
@@ -14,22 +14,22 @@
         <tr>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["IdSort"]">
-                    Номер заказа
+                    @SharedLocalizer["NumberOrder"]
                 </a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSort"]">
-                    Дата и время заказа
+                    @SharedLocalizer["DataAndTimeOrder"]
                 </a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["FullPriceSort"]">
-                    Количество блюд
+                    @SharedLocalizer["CountDish"]
                 </a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["CountDishSort"]">
-                    Цена
+                    @SharedLocalizer["Price"]
                 </a>
             </th>
             <th></th>
@@ -42,13 +42,13 @@
                 <td>@order.CountDish</td>
                 <td>@order.FullPrice</td>
                 <td><a asp-controller="Order" asp-action="GetOrderDishes" asp-route-orderId="@order.Id"
-                       class="btn btn-sm btn-success">Подробнее</a></td>
+   class="btn btn-sm btn-success">@SharedLocalizer["MoreDetails"]</a></td>
             </tr>
         }
     </table>
 }
 else
 {
-<h3 class="text-center" style="color:red;">Заказов не было</h3>
+<h3 class="text-center" style="color:red;">@SharedLocalizer["OrderInfo"]</h3>
     <br />
 }

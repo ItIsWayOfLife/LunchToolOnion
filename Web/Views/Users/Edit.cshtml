@@ -1,8 +1,8 @@
 ﻿@model Web.Models.Users.EditUserViewModel
 @{
-    ViewBag.Title = "Редактирование пользователя";
+    ViewBag.Title = @SharedLocalizer["EditingUser"];
 }
-    <h1 class="text-center">Редактирование пользователя</h1>
+    <h1 class="text-center">@SharedLocalizer["EditingUser"]</h1>
 <br />
 
 <form method="post" autocomplete="off" asp-action="Edit" asp-controller="Users">
@@ -11,22 +11,22 @@
         <input type="hidden" asp-for="Id" />
     </div>
     <div class="form-group">
-        <label asp-for="Email" class="control-label">Email</label>
+        <label asp-for="Email" class="control-label">@SharedLocalizer["Email"]</label>
         <input type="text" asp-for="Email" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Firstname" class="control-label">Имя</label>
+        <label asp-for="Firstname" class="control-label">@SharedLocalizer["Firstname"]</label>
         <input type="text" asp-for="Firstname" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Lastname" class="control-label">Фамилия</label>
+        <label asp-for="Lastname" class="control-label">@SharedLocalizer["Lastname"]</label>
         <input type="text" asp-for="Lastname" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Patronomic" class="control-label">Отчество</label>
+        <label asp-for="Patronomic" class="control-label">@SharedLocalizer["Patronomic"]</label>
         <input type="text" asp-for="Patronomic" class="form-control" />
     </div>
     <div class="form-group">
-        <input type="submit" value="Сохранить" class="btn btn-outline-secondary" />
+        <input type="submit" value="@SharedLocalizer["Save"]" class="btn btn-outline-secondary" />
     </div>
 </form>

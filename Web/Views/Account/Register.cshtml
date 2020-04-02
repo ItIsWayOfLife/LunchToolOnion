@@ -1,9 +1,9 @@
 ﻿@model Web.Models.Account.RegisterViewModel
 
 @{
-    ViewData["Title"] = "Регистрация";
+    ViewData["Title"] =  @SharedLocalizer["Registration"];
 }
-    <h1 class="text-center">Регистрация нового пользователя</h1>
+    <h1 class="text-center"> @SharedLocalizer["Registration"]</h1>
 <br />
 <div class="text-center">
     <form method="post" autocomplete="off" asp-controller="Account" asp-action="Register">
@@ -36,7 +36,7 @@
         </div>
         <br />
         <div>
-            <input type="submit" value="Зарегистрироваться"  class="btn btn-sm btn-success"  />
+            <input type="submit" value=" @SharedLocalizer["SignUp"]"  class="btn btn-sm btn-success"  />
         </div>
     </form>
     </div>

@@ -1,22 +1,22 @@
 ﻿@model Web.Models.Catalog.AddCatalogViewModel
 @{
-    ViewBag.Title = "Добавление каталога";
+    ViewBag.Title = @SharedLocalizer["ViewCatalogAdd_TitleAndHeader"];
 }
-<h1 class="text-center">Добавление каталога</h1>
+    <h1 class="text-center">@SharedLocalizer["ViewCatalogAdd_TitleAndHeader"]</h1>
 <br/>
 <form method="post" asp-controller="Catalog" asp-action="Add">
     <div asp-validation-summary="All" class="text-danger"></div>
     <input type="hidden" asp-for="ProviderId" />
     <div class="form-group">
-        <label asp-for="Name" class="control-label">Название</label>
+        <label asp-for="Name" class="control-label">@SharedLocalizer["Name"]</label>
         <input type="text" asp-for="Name" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Info" class="control-label">Информация</label>
+        <label asp-for="Info" class="control-label">@SharedLocalizer["Info"]</label>
         <input type="text" asp-for="Info" class="form-control" />
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Добавить" class="btn btn-outline-secondary" />
+        <input type="submit" value="@SharedLocalizer["Add"]" class="btn btn-outline-secondary" />
     </div>
 </form>

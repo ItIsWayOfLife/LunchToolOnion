@@ -1,25 +1,25 @@
 ﻿@model Web.Models.Provider.ProviderListViewModel
 @{
-    ViewData["Title"] = "Поставщики";
+    ViewData["Title"] = @SharedLocalizer["Providers"];
 }
 
 @if (User.IsInRole("admin"))
 {
-    <a class="btn btn-sm btn-success" asp-controller="Provider" asp-action="Add">Добавить поставщика</a>
+    <a class="btn btn-sm btn-success" asp-controller="Provider" asp-action="Add">@SharedLocalizer["AddProvider"]</a>
 }
 
-<h1 class="text-center">Поставщики</h1>
+<h1 class="text-center">@SharedLocalizer["Providers"]</h1>
 <br/>
 
 <form method="get">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-inline form-group">
-        <label style="margin-left: 5px;" class="control-label">Поиск по: </label>
+        <label style="margin-left: 5px;" class="control-label">@SharedLocalizer["SearchBy"]: </label>
         <select style="margin-left: 5px;" name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control"></select>
-        <label style="margin-left: 5px;" class="control-label">Значение: </label>
+        <label style="margin-left: 5px;" class="control-label">@SharedLocalizer["Value"]: </label>
         <input style="margin-left: 5px;" name="name" class="form-control" asp-for="SeacrhString" />
-        <input style="margin-left: 5px;" class="btn btn-sm btn-success" type="submit" value="Поиск" />
-        <a class="btn btn-sm btn-success" style="margin-left: 5px;" asp-action="Index">Обновить</a>
+        <input style="margin-left: 5px;" class="btn btn-sm btn-success" type="submit" value="@SharedLocalizer["Search"]" />
+        <a class="btn btn-sm btn-success" style="margin-left: 5px;" asp-action="Index">@SharedLocalizer["Update"]</a>
     </div>
 </form>
 

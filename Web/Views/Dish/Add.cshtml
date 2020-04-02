@@ -1,35 +1,35 @@
 ﻿@model Web.Models.Dish.AddDishViewModel
 @{
-    ViewData["Title"] = "Добавление блюдо";
+    ViewData["Title"] = @SharedLocalizer["AddingDish"];
 }
 
-<h1 class="text-center">Добавление блюда</h1>
+    <h1 class="text-center">@SharedLocalizer["AddingDish"]</h1>
 <br />
 
-<h3>Выберите файл для загрузки</h3>
+<h3>@SharedLocalizer["AddImgInfo"]</h3>
 <form method="post" asp-controller=Dish asp-action="Add" enctype="multipart/form-data">
     <input type="file" name="uploadedFile" /><br>
     <input type="hidden" asp-for="CatalogId" />
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="Name" class="control-label">Название</label>
+        <label asp-for="Name" class="control-label">@SharedLocalizer["Name"]</label>
         <input type="text" asp-for="Name" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Info" class="control-label">Информация</label>
+        <label asp-for="Info" class="control-label">@SharedLocalizer["Info"]</label>
         <input type="text" asp-for="Info" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Weight" class="control-label">Вес</label>
+        <label asp-for="Weight" class="control-label">@SharedLocalizer["Weight"]</label>
         <input type="text" asp-for="Weight" class="form-control" />
     </div>
     <div class="form-group">
-        <label asp-for="Price" class="control-label">Цена</label>
+        <label asp-for="Price" class="control-label">@SharedLocalizer["Price"]</label>
         <input type="text" asp-for="Price" class="form-control" />
     </div>
 
     <div class="form-group">
-        <input type="submit" value="Добавить" class="btn btn-outline-secondary" />
+        <input type="submit" value="@SharedLocalizer["Add"]" class="btn btn-outline-secondary" />
     </div>
 </form>
 

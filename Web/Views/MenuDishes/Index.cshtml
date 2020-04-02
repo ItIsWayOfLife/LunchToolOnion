@@ -1,12 +1,12 @@
 ﻿@model Web.Models.MenuDishes.ListMenuDishViewModel
 @{
-    ViewData["Title"] = "Блюда меню";
+    ViewData["Title"] = @SharedLocalizer["DishesMenu"];
 }
 
 
 @if (User.IsInRole("admin"))
 {
-    <a class="btn btn-sm btn-success" asp-controller="Catalog" asp-action="Index" asp-route-providerId="@Model.ProviderId" asp-route-menuId="@Model.MenuId">Составление меню</a>
+    <a class="btn btn-sm btn-success" asp-controller="Catalog" asp-action="Index" asp-route-providerId="@Model.ProviderId" asp-route-menuId="@Model.MenuId"> @SharedLocalizer["MenuCompilation"]</a>
 }
 
 <h1 class="text-center">@ViewData["NameMeniDishes"]</h1>
@@ -15,22 +15,22 @@
 <form method="get">
     <input type="hidden" name="menuId" value="@Model.MenuId" />
     <div class="form-inline form-group">
-        <label class="control-label" style="margin-left: 5px;">Категории: </label>
+        <label class="control-label" style="margin-left: 5px;">@SharedLocalizer["Categories"]: </label>
         <select name="filterCatalog" asp-items="Model.FilterCategorySelection" asp-for="FilterCatalog"  class="form-control" style="margin-left: 5px;"></select>
-        <label class="control-label" style="margin-left: 5px;">Поиск по: </label>
+        <label class="control-label" style="margin-left: 5px;">@SharedLocalizer["SearchBy"]: </label>
         <select name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control" style="margin-left: 5px;"></select>
-        <label class="control-label" style="margin-left: 5px;">Значение: </label>
+        <label class="control-label" style="margin-left: 5px;">@SharedLocalizer["Value"]: </label>
         <input name="name" class="form-control" asp-for="SeacrhString" style="margin-left: 5px;" />
-        <input type="submit" value="Фильтровать" class="btn btn-sm btn-success" style="margin-left: 5px;" />
-        <a asp-action="Index" asp-route-menuId="@Model.MenuId" class="btn btn-sm btn-success" style="margin-left: 5px;">Обновить</a>
+        <input type="submit" value="@SharedLocalizer["Filter"]" class="btn btn-sm btn-success" style="margin-left: 5px;" />
+        <a asp-action="Index" asp-route-menuId="@Model.MenuId" class="btn btn-sm btn-success" style="margin-left: 5px;">@SharedLocalizer["Update"]</a>
         @if (Model.MenuDishes.Any())
         {
-            <a asp-action="Index" asp-route-menuId="@Model.MenuId" asp-route-sortMenuDish="@ViewData["PriceSort"]" 
-               asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString" 
-               asp-route-filterCatalog="@Model.FilterCatalog" class="btn btn-sm btn-success"
-               style="margin-left: 5px;">
-                Сортировать по цене
-            </a>
+    <a asp-action="Index" asp-route-menuId="@Model.MenuId" asp-route-sortMenuDish="@ViewData["PriceSort"]"
+       asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString"
+       asp-route-filterCatalog="@Model.FilterCatalog" class="btn btn-sm btn-success"
+       style="margin-left: 5px;">
+        @SharedLocalizer["SortByPrice"]
+    </a>
         }
     </div>
 </form>
@@ -50,5 +50,5 @@
 }
 else
 {
-    <h3 class="text-center" style="color:red;">Блюда осутствуют</h3>
+<h3 class="text-center" style="color:red;">@SharedLocalizer["DishesInfo"]</h3>
 }

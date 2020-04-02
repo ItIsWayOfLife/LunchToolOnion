@@ -1,42 +1,42 @@
 ﻿@model Web.Models.Provider.ProviderViewModel
 
-    <div class="col-lg-4">
-        @if (Model.Path != null)
-        {
-            <a asp-action="Index" asp-controller="Menu" asp-route-providerId="@Model.Id"> <img width="360" height="180" class="img-thumbnail" src="@Model.Path" alt="@Model.Name" /></a>
-        }
-        <h2>Название: @Model.Name</h2>
-        @if (User.IsInRole("admin"))
-        {
-            <p>Id: @Model.Id </p>
-        }
-        <p>Режим работы: @Model.WorkingDays </p>
-        <p>Время работы: @Model.TimeWorkWith.ToShortTimeString() : @Model.TimeWorkTo.ToShortTimeString()</p>
-        <p>Информация: @Model.Info</p>
-        <p>Email: @Model.Email</p>
-        @if (Model.IsActive)
-        {
-            <p>Статус: Активен</p>
-        }
-        else
-        {
-            <p>Статус: Не активен</p>
-        }
+<div class="col-lg-4">
+    @if (Model.Path != null)
+    {
+        <a asp-action="Index" asp-controller="Menu" asp-route-providerId="@Model.Id"> <img width="360" height="180" class="img-thumbnail" src="@Model.Path" alt="@Model.Name" /></a>
+    }
+<h2>@SharedLocalizer["Name"]: @Model.Name</h2>
+    @if (User.IsInRole("admin"))
+    {
+<p>@SharedLocalizer["Id"]: @Model.Id </p>
+    }
+<p>@SharedLocalizer["WorkingDays"]: @Model.WorkingDays </p>
+<p>@SharedLocalizer["TimeWork"]: @Model.TimeWorkWith.ToShortTimeString() : @Model.TimeWorkTo.ToShortTimeString()</p>
+<p>@SharedLocalizer["Info"]: @Model.Info</p>
+<p>@SharedLocalizer["Email"]: @Model.Email</p>
+    @if (Model.IsActive)
+    {
+<p>@SharedLocalizer["StatusActive"]</p>
+    }
+    else
+    {
+<p>@SharedLocalizer["StatusInactive"]</p>
+    }
 
-        @if (User.IsInRole("admin"))
-        {
-            <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
-                <input type="hidden" name="searchSelectionString" value="@ViewData["SearchSelectionString"]" />
-                <input type="hidden" name="name" value="@ViewData["SeacrhString"]" />
-                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@Model.Id">Изменить</a>
-                <button type="submit" class="btn btn-sm btn-danger">
-                    Удалить
-                </button>
-            </form>
-            <br />
-        }
-        <a class="btn btn-sm btn-primary" asp-action="Index" asp-controller="Menu" asp-route-providerId="@Model.Id">Меню</a>
-        <a class="btn btn-sm btn-primary" asp-action="Index" asp-controller="Catalog" asp-route-providerId="@Model.Id">Каталог блюд</a>
+    @if (User.IsInRole("admin"))
+    {
+        <form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+            <input type="hidden" name="searchSelectionString" value="@ViewData["SearchSelectionString"]" />
+            <input type="hidden" name="name" value="@ViewData["SeacrhString"]" />
+            <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@Model.Id">@SharedLocalizer["Edit"]</a>
+            <button type="submit" class="btn btn-sm btn-danger">
+                @SharedLocalizer["Delete"]
+            </button>
+        </form>
         <br />
-        <br/>
-    </div>
+    }
+<a class="btn btn-sm btn-primary" asp-action="Index" asp-controller="Menu" asp-route-providerId="@Model.Id">@SharedLocalizer["Menu"]</a>
+<a class="btn btn-sm btn-primary" asp-action="Index" asp-controller="Catalog" asp-route-providerId="@Model.Id">@SharedLocalizer["CatalogDishes"]</a>
+    <br />
+    <br />
+</div>

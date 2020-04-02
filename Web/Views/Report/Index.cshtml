@@ -1,99 +1,99 @@
 ﻿@{
-    ViewData["Title"] = "Отчёты";
+    ViewData["Title"] = @SharedLocalizer["Report"];
 }
 
-<h1 class="text-center">Отчёты</h1>
+<h1 class="text-center">@SharedLocalizer["Report"]</h1>
 <br />
 
-<h3>Отчёты по поставщикам</h3>
+<h3>@SharedLocalizer["ReportByProvider"]</h3>
 <div class="container">
     <form method="post" asp-controller="Report" asp-action="GetReportProvider">
-        <h5>За всё время</h5>
-        <label>Укажите id поставщика</label>
+        <h5>@SharedLocalizer["ForAllTime"]</h5>
+        <label>@SharedLocalizer["ProvideIdProvider"]</label>
         <input type="number" name="providerId" />
-        <input type="submit" value="Составить" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
     </form>
     <form method="post" asp-controller="Report" asp-action="GetReportProvider">
-        <h5>За день</h5>
-        <label>Укажите id поставщика</label>
+        <h5>@SharedLocalizer["PerDay"]</h5>
+        <label>@SharedLocalizer["ProvideIdProvider"]</label>
         <input type="number" name="providerId" />
-        <label>Укажите дату дня</label>
+        <label>@SharedLocalizer["ProvideDate"]</label>
         <input type="date" name="dateWith" />
-        <input type="submit" value="Составить" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
     </form>
     <form method="post" asp-controller="Report" asp-action="GetReportProvider">
-        <h5>За определённое время (неделя, месяц, ...)</h5>
-        <label>Укажите id поставщика</label>
+        <h5>@SharedLocalizer["ForCertainTime"]</h5>
+        <label>@SharedLocalizer["ProvideIdProvider"]</label>
         <input type="number" name="providerId" />
-        <label>Укажите дату с</label>
+        <label>@SharedLocalizer["EnterDateFrom"]</label>
         <input type="date" name="dateWith" />
-        <label>Укажите дату по</label>
+        <label>@SharedLocalizer["EnterDateBy"]</label>
         <input type="date" name="dateTo" />
-        <input type="submit" value="Составить" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
     </form>
     <form method="post" asp-controller="Report" asp-action="GetReportProviders">
-        <h5>По всем поставщикам за всё время</h5>
-        <input type="submit" value="Составить" />
+        <h5>@SharedLocalizer["ForAllProvidersForAllTime"]</h5>
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
     </form>
     <form method="post" asp-controller="Report" asp-action="GetReportProviders">
-        <h5>По всем поставщикам за день</h5>
-        <label>Укажите дату дня</label>
+        <h5>@SharedLocalizer["ForAllProvidersForDay"]</h5>
+        <label>@SharedLocalizer["ProvideDate"]</label>
         <input type="date" name="dateWith" />
-        <input type="submit" value="Составить" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
     </form>
     <form method="post" asp-controller="Report" asp-action="GetReportProviders">
-        <h5>По всем поставщикам за определённое время (неделя, месяц, ...)</h5>
-        <label>Укажите дату с</label>
+        <h5>@SharedLocalizer["ForAllProvidersForCertainTime"]</h5>
+        <label>@SharedLocalizer["EnterDateFrom"]</label>
         <input type="date" name="dateWith" />
-        <label>Укажите дату по</label>
+        <label>@SharedLocalizer["EnterDateBy"]</label>
         <input type="date" name="dateTo" />
-        <input type="submit" value="Составить" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
     </form>
-    </div>
-    <h3>Отчёты по пользователям</h3>
-    <div class="container">
-        <form method="post" asp-controller="Report" asp-action="GetReportUser">
-            <h4>За всё время</h4>
-            <label>Укажите id пользователя</label>
-            <input type="text" style="width:290px" name="userId" />
-            <input type="submit" value="Составить" />
-        </form>
-        <form method="post" asp-controller="Report" asp-action="GetReportUser">
-            <h5>За день</h5>
-            <label>Укажите id пользователя</label>
-            <input type="text" style="width:290px" name="userId" />
-            <label>Укажите дату дня</label>
-            <input type="date" name="dateWith" />
-            <input type="submit" value="Составить" />
-        </form>
-        <form method="post" asp-controller="Report" asp-action="GetReportUser">
-            <h5>За определённое время (неделя, месяц, ...)</h5>
-            <label>Укажите id пользователя</label>
-            <input type="text" style="width:290px" name="userId" />
-            <label>Укажите дату с</label>
-            <input type="date" name="dateWith" />
-            <label>Укажите дату по</label>
-            <input type="date" name="dateTo" />
-            <input type="submit" value="Составить" />
-        </form>
-        <form method="post" asp-controller="Report" asp-action="GetReportUsers">
-            <h5>По всем пользователям за всё время</h5>
-            <input type="submit" value="Составить" />
-        </form>
-        <form method="post" asp-controller="Report" asp-action="GetReportUsers">
-            <h5>По всем пользователям за день</h5>
-            <label>Укажите дату дня</label>
-            <input type="date" name="dateWith" />
-            <input type="submit" value="Составить" />
-        </form>
-        <form method="post" asp-controller="Report" asp-action="GetReportUsers">
-            <h5>По всем пользователям за определённое время (неделя, месяц, ...)</h5>
-            <label>Укажите дату с</label>
-            <input type="date" name="dateWith" />
-            <label>Укажите дату по</label>
-            <input type="date" name="dateTo" />
-            <input type="submit" value="Составить" />
-        </form>
-    </div>
+</div>
+<h3>@SharedLocalizer["ReportByUsers"]</h3>
+<div class="container">
+    <form method="post" asp-controller="Report" asp-action="GetReportUser">
+        <h4>@SharedLocalizer["ForAllTime"]</h4>
+        <label>@SharedLocalizer["ProvideIdUser"]</label>
+        <input type="text" style="width:290px" name="userId" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUser">
+        <h5>@SharedLocalizer["PerDay"]</h5>
+        <label>@SharedLocalizer["ProvideIdProvider"]</label>
+        <input type="text" style="width:290px" name="userId" />
+        <label>@SharedLocalizer["ProvideDate"]</label>
+        <input type="date" name="dateWith" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUser">
+        <h5>@SharedLocalizer["ForCertainTime"]</h5>
+        <label>@SharedLocalizer["ProvideIdUser"]</label>
+        <input type="text" style="width:290px" name="userId" />
+        <label>@SharedLocalizer["EnterDateFrom"]</label>
+        <input type="date" name="dateWith" />
+        <label>@SharedLocalizer["EnterDateBy"]</label>
+        <input type="date" name="dateTo" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUsers">
+        <h5>@SharedLocalizer["ForAllUsersForAllTime"]</h5>
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUsers">
+        <h5>@SharedLocalizer["ForAllUsersForDay"]</h5>
+        <label>@SharedLocalizer["ProvideDate"]</label>
+        <input type="date" name="dateWith" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
+    </form>
+    <form method="post" asp-controller="Report" asp-action="GetReportUsers">
+        <h5>@SharedLocalizer["ForAllusersForCertainTime"]</h5>
+        <label>@SharedLocalizer["EnterDateFrom"]</label>
+        <input type="date" name="dateWith" />
+        <label>@SharedLocalizer["EnterDateBy"]</label>
+        <input type="date" name="dateTo" />
+        <input type="submit" value="@SharedLocalizer["MakeUp"]" />
+    </form>
+</div>
 
 

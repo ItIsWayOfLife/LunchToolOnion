@@ -1,29 +1,29 @@
 ﻿@model Web.Models.Users.UserFilterListViewModel
 @{
-    ViewBag.Title = "Список пользователей";
+    ViewBag.Title = @SharedLocalizer["ListUsers"];
 }
 
-    <h1 class="text-center">Пользователи</h1>
+    <h1 class="text-center">@SharedLocalizer["ListUsers"]</h1>
 <br />
 
 
-<a asp-action="Create" class="btn btn-sm btn-success">Добавить пользователя</a>
+<a asp-action="Create" class="btn btn-sm btn-success">@SharedLocalizer["AddUser"]</a>
 <br />
 <br />
 <form method="get">
     <div class="form-inline form-group">
-        <label class="control-label" style="margin-left: 5px;">Поиск по: </label>
+        <label class="control-label" style="margin-left: 5px;">@SharedLocalizer["SearchBy"]: </label>
         <select name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control" style="margin-left: 5px;"></select>
 
-        <label class="control-label" style="margin-left: 5px;">Значение: </label>
+        <label class="control-label" style="margin-left: 5px;">@SharedLocalizer["Value"]: </label>
         <input name="name" class="form-control" asp-for="SeacrhString" style="margin-left: 5px;"/>
-        <input type="submit" value="Поиск" class="btn btn-sm btn-success" style="margin-left: 5px;"/>
-        <a asp-action="Index" class="btn btn-sm btn-success" style="margin-left: 5px;">Обновить</a>
+        <input type="submit" value="@SharedLocalizer["Search"]" class="btn btn-sm btn-success" style="margin-left: 5px;"/>
+        <a asp-action="Index" class="btn btn-sm btn-success" style="margin-left: 5px;">@SharedLocalizer["Update"]</a>
     </div>
 </form>
 
 <table class="table">
-    <tr><th>Id</th><th>Email</th><th>ФИО</th><th></th></tr>
+    <tr><th>@SharedLocalizer["Id"]</th><th>@SharedLocalizer["Email"]</th><th>@SharedLocalizer["LFP"]</th><th></th></tr>
 
     @{
         foreach (var user in Model.ListUsers.Users)

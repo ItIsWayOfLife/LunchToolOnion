@@ -1,33 +1,32 @@
 ﻿@model Web.Models.Dish.ListDishViewModel
 @{
-    ViewData["Title"] = "Блюда";
+    ViewData["Title"] = @SharedLocalizer["Dishes"];
 }
-
 
 @if (User.IsInRole("admin"))
 {
-    <a class="btn btn-sm btn-success" asp-controller="Dish" asp-action="Add" asp-route-catalogId="@Model.CatalogId">Добавить блюдо</a>
+    <a class="btn btn-sm btn-success" asp-controller="Dish" asp-action="Add" asp-route-catalogId="@Model.CatalogId">@SharedLocalizer["AddDish"]</a>
 }
 
-<h1 class="text-center">Блюда @ViewData["NameCatalog"]</h1>
+<h1 class="text-center">@SharedLocalizer["Dishes"] @ViewData["NameCatalog"]</h1>
 <br />
 
 <form method="get" asp-route-menuId="@Model.MenuId">
     <input type="hidden" name="catalogId" value="@Model.CatalogId" />
     <div class="form-inline form-group">
-        <label class="control-label" style="margin-left: 5px;">Поиск по: </label>
+        <label class="control-label" style="margin-left: 5px;">@SharedLocalizer["SearchBy"] </label>
         <select name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString" class="form-control" style="margin-left: 5px;"></select>
-        <label class="control-label" style="margin-left: 5px;">Значение: </label>
+        <label class="control-label" style="margin-left: 5px;">@SharedLocalizer["Value"]: </label>
         <input name="name" class="form-control" asp-for="SeacrhString" style="margin-left: 5px;" />
-        <input type="submit" value="Поиск" class="btn btn-sm btn-success" style="margin-left: 5px;" />
-        <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" asp-route-menuId="@Model.MenuId" class="btn btn-sm btn-success" style="margin-left: 5px;">Обновить</a>
+        <input type="submit" value="@SharedLocalizer["Search"]" class="btn btn-sm btn-success" style="margin-left: 5px;" />
+        <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" asp-route-menuId="@Model.MenuId" class="btn btn-sm btn-success" style="margin-left: 5px;">@SharedLocalizer["Update"]</a>
         @if (Model.Dishes.Any())
         {
-            <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" asp-route-sortDish="@ViewData["PriceSort"]" asp-route-menuId="@Model.MenuId"
-               asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString" class="btn btn-sm btn-success"
-               style="margin-left: 5px;">
-                Сортировать по цене
-            </a>
+    <a asp-action="Index" asp-route-catalogId="@Model.CatalogId" asp-route-sortDish="@ViewData["PriceSort"]" asp-route-menuId="@Model.MenuId"
+       asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-name="@Model.SeacrhString" class="btn btn-sm btn-success"
+       style="margin-left: 5px;">
+        @SharedLocalizer["SortByPrice"]
+    </a>
         }
     </div>
 </form>
@@ -53,7 +52,7 @@
                 }
 
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <button type="submit" class="btn btn-primary">  @SharedLocalizer["Save"]"</button>
         </form>
     }
     else
@@ -76,5 +75,5 @@
 }
 else
 {
-    <h3 class="text-center" style="color:red;">Блюда осутствуют</h3>
+<h3 class="text-center" style="color:red;">@SharedLocalizer["DishesInfo"]</h3>
 }

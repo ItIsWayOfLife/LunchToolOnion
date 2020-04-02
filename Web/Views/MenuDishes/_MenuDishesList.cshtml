@@ -5,11 +5,11 @@
         {
             <img width="360" height="180" class="img-thumbnail" src="@Model.Path" alt="@Model.Name" />
         }
-        <h2>Название: @Model.Name</h2>
-        <p> Информация: @Model.Info </p>
-        <p>Вес: @Model.Weight</p>
-        <p>Цена: @Model.Price BYN</p>
-        <a class="btn btn-sm btn-primary" asp-action="Add" asp-controller="Cart" asp-route-dishId="@Model.DishId">В корзину</a>
+    <h2>@SharedLocalizer["Name"]: @Model.Name</h2>
+        <p> @SharedLocalizer["Info"]: @Model.Info </p>
+        <p>@SharedLocalizer["Weight"]: @Model.Weight</p>
+        <p>@SharedLocalizer["Price"]: @Model.Price @SharedLocalizer["Currency"]</p>
+        <a class="btn btn-sm btn-primary" asp-action="Add" asp-controller="Cart" asp-route-dishId="@Model.DishId">@SharedLocalizer["InCart"]</a>
         <br />
         <br />
     </div>

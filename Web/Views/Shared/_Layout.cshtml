@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Заказ обедов</title>
+    <title>@ViewData["Title"] - @SharedLocalizer["ViewShared_Layout_Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["MainPage"]</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,24 +19,24 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link" asp-action="Index" asp-controller="Provider">Поставщики</a>
+                            <a class="nav-link" asp-action="Index" asp-controller="Provider">@SharedLocalizer["Providers"]</a>
                         </li>
                         @if (User.IsInRole("employee"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-action="Index" asp-controller="Cart">Корзина</a>
+                                <a class="nav-link " asp-action="Index" asp-controller="Cart">@SharedLocalizer["Cart"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link " asp-action="Index" asp-controller="Order">Заказы</a>
+                                <a class="nav-link " asp-action="Index" asp-controller="Order">@SharedLocalizer["Orders"]</a>
                             </li>
                         }
                         @if (User.IsInRole("admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Users" asp-action="Index">Пользователи</a>
+                                <a class="nav-link" asp-controller="Users" asp-action="Index">@SharedLocalizer["Users"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Report" asp-action="Index">Отчёты</a>
+                                <a class="nav-link" asp-controller="Report" asp-action="Index">@SharedLocalizer["Reports"]</a>
                             </li>
                         }
                     </ul>
@@ -48,11 +48,11 @@
                         <ul class="navbar-nav text-right">
                             <li class="nav-item">
                                 <form class="text-black-50" method="post" asp-controller="Account" asp-action="Logout">
-                                    <input class="nav-link text-dark" type="submit" value="Выход" style="outline: none; border: none; background-color: white;" />
+                                    <input class="nav-link text-dark" type="submit" value="@SharedLocalizer["Logout"]" style="outline: none; border: none; background-color: white;" />
                                 </form>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black-50" asp-area="" asp-controller="Account" asp-action="Profile">Личный кабинет</a>
+                                <a class="nav-link text-black-50" asp-area="" asp-controller="Account" asp-action="Profile">@SharedLocalizer["Profil"]</a>
                             </li>
                         </ul>
                     </div>
@@ -62,10 +62,10 @@
                     <div class="navbar-collapse collapse justify-content-end">
                         <ul class="navbar-nav text-right">
                             <li class="nav-item">
-                                <a class="nav-link text-black-50" asp-area="" asp-controller="Account" asp-action="Login">Вход</a>
+                                <a class="nav-link text-black-50" asp-area="" asp-controller="Account" asp-action="Login">@SharedLocalizer["Login"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-black-50" asp-area="" asp-controller="Account" asp-action="Register">Регистрация</a>
+                                <a class="nav-link text-black-50" asp-area="" asp-controller="Account" asp-action="Register">@SharedLocalizer["Registration"]</a>
 
                             </li>
                         </ul>
@@ -83,7 +83,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - Заказ обедов - <a asp-area="" asp-controller="Home" asp-action="Privacy">Политика конфиденциальности</a>
+            &copy; @SharedLocalizer["CopyName"] - <a asp-area="" asp-controller="Home" asp-action="Privacy">@SharedLocalizer["Privacypolicy"]</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

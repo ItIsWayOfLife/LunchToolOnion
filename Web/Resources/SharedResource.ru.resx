@@ -1,0 +1,596 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccessRights" xml:space="preserve">
+    <value>Права доступа</value>
+    <comment>Ссылка на права доступа</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Добавить</value>
+    <comment>Кнопка добавления</comment>
+  </data>
+  <data name="AddCatalog" xml:space="preserve">
+    <value>Добавить каталог</value>
+    <comment>Кнопка добавления каталога</comment>
+  </data>
+  <data name="AddDish" xml:space="preserve">
+    <value>Добавить блюдо</value>
+    <comment>Ссылка на добавление блюд</comment>
+  </data>
+  <data name="AddImgInfo" xml:space="preserve">
+    <value>Выберите файл для загрузки</value>
+    <comment>Информаци о картинке на странице добавление блюда</comment>
+  </data>
+  <data name="AddingDish" xml:space="preserve">
+    <value>Добавление блюда</value>
+    <comment>Заголовок (на) страницы(е) добавление блюда</comment>
+  </data>
+  <data name="AddingUser" xml:space="preserve">
+    <value>Добавление пользователя</value>
+    <comment>Заголовок (на) страницы(е) добавления пользователя</comment>
+  </data>
+  <data name="AddInMenu" xml:space="preserve">
+    <value>Добавить в меню</value>
+    <comment>Надпись рядом с добавлением в меню</comment>
+  </data>
+  <data name="AddProvider" xml:space="preserve">
+    <value>Добавление поставщика</value>
+    <comment>Заголовок (на) страницы(е) добавления поставщика</comment>
+  </data>
+  <data name="AddUser" xml:space="preserve">
+    <value>Добавить пользователя</value>
+    <comment>Заголовок на странице список пользователей</comment>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Количество</value>
+    <comment>Надпись рядом с выводом суммы</comment>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Корзина</value>
+    <comment>Ссылка на корзину</comment>
+  </data>
+  <data name="CartInfo" xml:space="preserve">
+    <value>Обновляйте количество каждого блюда</value>
+    <comment>Информация о работе с корзиной</comment>
+  </data>
+  <data name="CartIsEmpty" xml:space="preserve">
+    <value>Корзина пуста</value>
+    <comment>Информация о корзине </comment>
+  </data>
+  <data name="Catalog" xml:space="preserve">
+    <value>Каталог</value>
+    <comment>Надпись возле названия каталога</comment>
+  </data>
+  <data name="CatalogDishes" xml:space="preserve">
+    <value>Каталог блюд</value>
+    <comment>Ссылка на блюда </comment>
+  </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Категории</value>
+    <comment>Надпись рядом с ыфбором категорий</comment>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Сменить пароль</value>
+    <comment>Ссылка на смену пароля</comment>
+  </data>
+  <data name="ChangePasswordForUser" xml:space="preserve">
+    <value>Изменение пароля для пользователя</value>
+    <comment>Заголовок (на) страницы(е) смены пароля для пользоваелй</comment>
+  </data>
+  <data name="ChangeRoles" xml:space="preserve">
+    <value>Изменение ролей</value>
+    <comment>Заголовок страницы изменение ролей</comment>
+  </data>
+  <data name="ChangeRolesForUsers" xml:space="preserve">
+    <value>Изменение ролей для пользователя</value>
+    <comment>Заголовок на странице изменение ролей</comment>
+  </data>
+  <data name="ComeIn" xml:space="preserve">
+    <value>Войти</value>
+    <comment>Кнопка входа</comment>
+  </data>
+  <data name="CopyName" xml:space="preserve">
+    <value>2020 - Заказ обедов</value>
+    <comment>Название копирайта</comment>
+  </data>
+  <data name="CountDish" xml:space="preserve">
+    <value>Количество блюд</value>
+    <comment>Ссылка на сортировку заказов</comment>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>BYN</value>
+    <comment>Валюта</comment>
+  </data>
+  <data name="DataAndTimeOrder" xml:space="preserve">
+    <value>Дата и время заказа</value>
+    <comment>Ссылка на сортировку заказов</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+    <comment>Кнопка удаления</comment>
+  </data>
+  <data name="Dish" xml:space="preserve">
+    <value>Блюдо</value>
+    <comment>Надпись рядом с выводом блюда</comment>
+  </data>
+  <data name="DishEditImgInfo" xml:space="preserve">
+    <value>Выберите файл для загрузки (если файл не выбран картинка будет старая)</value>
+    <comment>Информация о изменение картинки</comment>
+  </data>
+  <data name="Dishes" xml:space="preserve">
+    <value>Блюда</value>
+    <comment>Ссылка на блюда</comment>
+  </data>
+  <data name="DishesInfo" xml:space="preserve">
+    <value>Блюда осутствуют</value>
+    <comment>Информация о блюдах</comment>
+  </data>
+  <data name="DishesMenu" xml:space="preserve">
+    <value>Блюда меню</value>
+    <comment>Заголовок (на) страницы(е) блюда меню</comment>
+  </data>
+  <data name="DishesOrder" xml:space="preserve">
+    <value>Блюда заказа</value>
+    <comment>Заголовок (на) страницы(е) блюда заказа</comment>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Изменить</value>
+    <comment>Кнопка(ссылка) изменения </comment>
+  </data>
+  <data name="EditDish" xml:space="preserve">
+    <value>Изменение блюда</value>
+    <comment>Заголовок (на) страницы(е) изменения блюда</comment>
+  </data>
+  <data name="EditingUser" xml:space="preserve">
+    <value>Редактирование пользователя</value>
+    <comment>Заголовок (на) страницы(е) редактирования пользователя</comment>
+  </data>
+  <data name="EditProvider" xml:space="preserve">
+    <value>Изменение поставщика</value>
+    <comment>Заголовок (на) страницы(е) изменение поставщика</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+    <comment>Надпись рядом с выводом email</comment>
+  </data>
+  <data name="EmptyTrash" xml:space="preserve">
+    <value>Очистить корзину</value>
+    <comment>Кнопка очистки корзины</comment>
+  </data>
+  <data name="EnterDateBy" xml:space="preserve">
+    <value>Укажите дату по</value>
+    <comment>Надпись рядом с вводом даты</comment>
+  </data>
+  <data name="EnterDateFrom" xml:space="preserve">
+    <value>Укажите дату с</value>
+    <comment>Надпись рядом с вводом даты</comment>
+  </data>
+  <data name="FavoriteProvider" xml:space="preserve">
+    <value>Популярные поставщики</value>
+    <comment>Заголовок (на) страницы(е) популярных поставщики</comment>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Фильтровать</value>
+    <comment>Кнопка фильтрации</comment>
+  </data>
+  <data name="Firstname" xml:space="preserve">
+    <value>Имя</value>
+    <comment>Надпись рядом с выводом имени</comment>
+  </data>
+  <data name="ForAllProvidersForAllTime" xml:space="preserve">
+    <value>По всем поставщикам за всё время</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ForAllProvidersForCertainTime" xml:space="preserve">
+    <value>По всем поставщикам за определённое время (неделя, месяц, ...)</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ForAllProvidersForDay" xml:space="preserve">
+    <value>По всем поставщикам за день</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ForAllTime" xml:space="preserve">
+    <value>За всё время</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ForAllUsersForAllTime" xml:space="preserve">
+    <value>По всем пользователям за всё время</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ForAllusersForCertainTime" xml:space="preserve">
+    <value>По всем пользователям за определённое время (неделя, месяц, ...)</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ForAllUsersForDay" xml:space="preserve">
+    <value>По всем пользователям за день</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ForCertainTime" xml:space="preserve">
+    <value>За определённое время (неделя, месяц, ...)</value>
+    <comment>Заголовок на страницы отчётов</comment>
+  </data>
+  <data name="FullPrice" xml:space="preserve">
+    <value>Полная стоимость</value>
+    <comment>Надпись рядом с выводом полной стоимости</comment>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>Id</value>
+    <comment>Надпись возле ввода id</comment>
+  </data>
+  <data name="InCart" xml:space="preserve">
+    <value>В корзину</value>
+    <comment>Ссылка на добавление в корзину</comment>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Информация</value>
+    <comment>Надпись рядом с выводом информации </comment>
+  </data>
+  <data name="InMain" xml:space="preserve">
+    <value>На главную</value>
+    <comment>Надпись рядом с выводом с переходом на главную</comment>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>Активен</value>
+    <comment>Надпись рядом с выбором активности поставщика</comment>
+  </data>
+  <data name="Lastname" xml:space="preserve">
+    <value>Фамилия</value>
+    <comment>Надпись рядом с выводом фамилии</comment>
+  </data>
+  <data name="LFP" xml:space="preserve">
+    <value>ФИО</value>
+    <comment>Заголовок столбца таблицы инициалов</comment>
+  </data>
+  <data name="ListUsers" xml:space="preserve">
+    <value>Список пользователей</value>
+    <comment>Заголовок (на) страницы(е) список пользователей</comment>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Вход</value>
+    <comment>Ссылка на вход в учётную запись</comment>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Выход</value>
+    <comment>Кнопка выхода с учётной записи</comment>
+  </data>
+  <data name="MainPage" xml:space="preserve">
+    <value>Главная</value>
+    <comment>Ссылка на главную страницу</comment>
+  </data>
+  <data name="MakeUp" xml:space="preserve">
+    <value>Составить</value>
+    <comment>Кнопка составления отчёта</comment>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Меню</value>
+    <comment>Кнопка меню</comment>
+  </data>
+  <data name="MenuCompilation" xml:space="preserve">
+    <value>Составление меню</value>
+    <comment>Ссылка на составление меню</comment>
+  </data>
+  <data name="MoreDetails" xml:space="preserve">
+    <value>Подробнее</value>
+    <comment>Ссылка на заказы</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Название</value>
+    <comment>Надпись рядом с выводом названия </comment>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+    <comment>Надпись рядом с полем для ввода нового пароля</comment>
+  </data>
+  <data name="NoCatalog" xml:space="preserve">
+    <value>Каталог отсутствует</value>
+    <comment>Информация о каталоге</comment>
+  </data>
+  <data name="NumberOrder" xml:space="preserve">
+    <value>Номер заказа</value>
+    <comment>Ссылка на сортировку номер заказа</comment>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Старый пароль</value>
+    <comment>Надпись рядом с полем для ввода старого пароля</comment>
+  </data>
+  <data name="OrderInfo" xml:space="preserve">
+    <value>Заказов не было</value>
+    <comment>Информация о заказов</comment>
+  </data>
+  <data name="OrderInfoEmpty" xml:space="preserve">
+    <value>Заказ пустой</value>
+    <comment>Информация о заказе</comment>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Заказы</value>
+    <comment>Ссылка на заказы</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+    <comment>Надпись рядом с вводом пароля</comment>
+  </data>
+  <data name="Patronymic" xml:space="preserve">
+    <value>Отчество</value>
+    <comment>Надпись рядом с выводом отчества</comment>
+  </data>
+  <data name="PerDay" xml:space="preserve">
+    <value>За день</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Цена</value>
+    <comment>Надпись рядом с выводом цены</comment>
+  </data>
+  <data name="Privacypolicy" xml:space="preserve">
+    <value>Политика конфиденциальности</value>
+    <comment>Ссылка на политику конфиденциальности</comment>
+  </data>
+  <data name="PrivacypolicyInfo" xml:space="preserve">
+    <value>Это учебный проект.</value>
+    <comment>Информация о проекте</comment>
+  </data>
+  <data name="Profil" xml:space="preserve">
+    <value>Личный кабинет</value>
+    <comment>Ссылка на профиль</comment>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+    <comment>Заголовок (на) страницы(е) профиль</comment>
+  </data>
+  <data name="ProvideDate" xml:space="preserve">
+    <value>Укажите дату</value>
+    <comment>Надпись рядом с вводом даты</comment>
+  </data>
+  <data name="ProvideIdProvider" xml:space="preserve">
+    <value>Укажите id поставщика</value>
+    <comment>Надпись рядом с вводом id поставщика</comment>
+  </data>
+  <data name="ProvideIdUser" xml:space="preserve">
+    <value>Укажите id пользователя</value>
+    <comment>Надпись рядом с вводом id пользователя</comment>
+  </data>
+  <data name="Providers" xml:space="preserve">
+    <value>Поставщики</value>
+    <comment>Заголовок (на) страницы(е) поставщики, ссылка на поставщиков</comment>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Регистрация</value>
+    <comment>Ссылка на регистрацию учётной записи</comment>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Отчёты</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ReportByProvider" xml:space="preserve">
+    <value>Отчёты по поставщикам</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ReportByUsers" xml:space="preserve">
+    <value>Отчёты по пользователям</value>
+    <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="Reports" xml:space="preserve">
+    <value>Отчёты</value>
+    <comment>Ссылка на отчёты</comment>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+    <comment>Кнопка сохранения</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+    <comment>Кнопка поиск</comment>
+  </data>
+  <data name="SearchBy" xml:space="preserve">
+    <value>Поиск по</value>
+    <comment>Выбор поиска</comment>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+    <comment>Кнопка регистрации</comment>
+  </data>
+  <data name="SortByPrice" xml:space="preserve">
+    <value>Сортировать по цене</value>
+    <comment>Ссылка сортировки по цене</comment>
+  </data>
+  <data name="StatusActive" xml:space="preserve">
+    <value>Статус: Активен</value>
+    <comment>Надпись рядом с выводом статуса поставщика</comment>
+  </data>
+  <data name="StatusInactive" xml:space="preserve">
+    <value>Статус: Не активен</value>
+    <comment>Надпись рядом с выводом статуса поставщика</comment>
+  </data>
+  <data name="TimeWork" xml:space="preserve">
+    <value>Время работы</value>
+    <comment>Надпись рядом с выводом время работы </comment>
+  </data>
+  <data name="TimeWorkTo" xml:space="preserve">
+    <value>Время закрытия</value>
+    <comment>Надпись рялом с вводом времени работы (до)</comment>
+  </data>
+  <data name="TimeWorkWith" xml:space="preserve">
+    <value>Время открытия</value>
+    <comment>Надпись рялом с вводом времени работы (с)</comment>
+  </data>
+  <data name="ToOrder" xml:space="preserve">
+    <value>Заказать</value>
+    <comment>Ссылка заказа</comment>
+  </data>
+  <data name="ToProviders" xml:space="preserve">
+    <value>К поставщикам</value>
+    <comment>Ссылка на поставщиков</comment>
+  </data>
+  <data name="TotalPrice" xml:space="preserve">
+    <value>Общая цена</value>
+    <comment>Надпись рядом с выводом общей цены</comment>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Обновить</value>
+    <comment>Кнопка оновить</comment>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Пользователи</value>
+    <comment>Ссылка на пользователей</comment>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Значение</value>
+    <comment>Надпись возле ввода поисковой строки</comment>
+  </data>
+  <data name="ViewAccountChangePassword_Header" xml:space="preserve">
+    <value>Изменение пароля для пользователя</value>
+    <comment>Заголовок на странице смены пароля</comment>
+  </data>
+  <data name="ViewAccountChangePassword_Title" xml:space="preserve">
+    <value>Изменение пароля</value>
+    <comment>Заголовок страницы смены пароля</comment>
+  </data>
+  <data name="ViewAccountEdit_TitleAndHeader" xml:space="preserve">
+    <value>Изменение данных пользователя</value>
+    <comment>Заголовок (на) страницы(е)</comment>
+  </data>
+  <data name="ViewAccountLogin_Title" xml:space="preserve">
+    <value>Авторизация</value>
+    <comment>Заголовок на странице входа</comment>
+  </data>
+  <data name="ViewAccountRegister_Header" xml:space="preserve">
+    <value>Регистрация нового пользователя</value>
+    <comment>Заголовок на странице регистрации</comment>
+  </data>
+  <data name="ViewCatalogAdd_TitleAndHeader" xml:space="preserve">
+    <value>Добавление каталога</value>
+    <comment>Заголовок (на) страницы(е) добавления каталога</comment>
+  </data>
+  <data name="ViewCatalogEdit_TitleAndHeader" xml:space="preserve">
+    <value>Изменение каталога</value>
+    <comment>Заголовок (на) страницы(е) профиль</comment>
+  </data>
+  <data name="ViewShared_Layout_Title" xml:space="preserve">
+    <value>Заказ обедов</value>
+    <comment>Название приложения</comment>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Вес</value>
+    <comment>Надпись рядом с выводом веса</comment>
+  </data>
+  <data name="WorkingDays" xml:space="preserve">
+    <value>Режим работы</value>
+    <comment>Надпись рядом с выводом режима работы</comment>
+  </data>
+</root>

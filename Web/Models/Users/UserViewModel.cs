@@ -7,7 +7,7 @@ namespace Web.Models.Users
         public string Id { get; set; }
         public string FLP { get; set; }
 
-        [Required(ErrorMessage = "Не указан email")]
+        [Required(ErrorMessage = "EmailNotSpecified")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

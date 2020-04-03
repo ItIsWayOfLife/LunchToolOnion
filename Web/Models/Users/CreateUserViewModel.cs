@@ -4,12 +4,12 @@ namespace Web.Models.Users
 {
     public class CreateUserViewModel
     {
-        [Required(ErrorMessage = "Не указан email")]
+        [Required(ErrorMessage = "EmailNotSpecified")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Не указан пароль")]
+        [Required(ErrorMessage = "PasswordNotSpecified")]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }

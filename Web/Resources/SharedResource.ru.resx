@@ -217,6 +217,10 @@
     <value>Изменение ролей для пользователя</value>
     <comment>Заголовок на странице изменение ролей</comment>
   </data>
+  <data name="ClosingTimeNotSpecified" xml:space="preserve">
+    <value>Не указано время закрытия</value>
+    <comment>Аннотация ошибки  время закрытия</comment>
+  </data>
   <data name="ComeIn" xml:space="preserve">
     <value>Войти</value>
     <comment>Кнопка входа</comment>
@@ -236,6 +240,14 @@
   <data name="DataAndTimeOrder" xml:space="preserve">
     <value>Дата и время заказа</value>
     <comment>Ссылка на сортировку заказов</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+    <comment>Аннотация даты</comment>
+  </data>
+  <data name="DateNotSpecified" xml:space="preserve">
+    <value>Не указана дата</value>
+    <comment>Аннотация ошибки даты</comment>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Удалить</value>
@@ -284,6 +296,10 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
     <comment>Надпись рядом с выводом email</comment>
+  </data>
+  <data name="EmailNotSpecified" xml:space="preserve">
+    <value>Не указан email</value>
+    <comment>Аннотация ошибки email</comment>
   </data>
   <data name="EmptyTrash" xml:space="preserve">
     <value>Очистить корзину</value>
@@ -373,6 +389,10 @@
     <value>Информация</value>
     <comment>Надпись рядом с выводом информации </comment>
   </data>
+  <data name="InfoNotSpecified" xml:space="preserve">
+    <value>Не указана информация</value>
+    <comment>Аннотация ошибки информации</comment>
+  </data>
   <data name="InMain" xml:space="preserve">
     <value>На главную</value>
     <comment>Надпись рядом с выводом с переходом на главную</comment>
@@ -425,6 +445,14 @@
     <value>Меню не найдено</value>
     <comment>Информация о неудачном поиске меню</comment>
   </data>
+  <data name="MissingFirstname" xml:space="preserve">
+    <value>Не указано имя</value>
+    <comment>Аннтация ошибки имени</comment>
+  </data>
+  <data name="MissingLastname" xml:space="preserve">
+    <value>Не указана фамилия</value>
+    <comment>Аннтация ошибки фамилии</comment>
+  </data>
   <data name="MoreDetails" xml:space="preserve">
     <value>Подробнее</value>
     <comment>Ссылка на заказы</comment>
@@ -432,6 +460,10 @@
   <data name="Name" xml:space="preserve">
     <value>Название</value>
     <comment>Надпись рядом с выводом названия </comment>
+  </data>
+  <data name="NameNotSpecified" xml:space="preserve">
+    <value>Не указано название</value>
+    <comment>Аннотация ошибки названия</comment>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Новый пароль</value>
@@ -457,6 +489,10 @@
     <value>на</value>
     <comment>Часть  строки</comment>
   </data>
+  <data name="OpeningTimeNotSpecified" xml:space="preserve">
+    <value>Не указано время открытия</value>
+    <comment>Аннотация ошибки  время открытия</comment>
+  </data>
   <data name="OrderInfo" xml:space="preserve">
     <value>Заказов не было</value>
     <comment>Информация о заказов</comment>
@@ -473,6 +509,18 @@
     <value>Пароль</value>
     <comment>Надпись рядом с вводом пароля</comment>
   </data>
+  <data name="PasswordConfirm" xml:space="preserve">
+    <value>Подтвердить пароль</value>
+    <comment>Аннотация подтверждения пароля</comment>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Пароли не совпадают</value>
+    <comment>Аннотация совпадения пароля</comment>
+  </data>
+  <data name="PasswordNotSpecified" xml:space="preserve">
+    <value>Не указан пароль</value>
+    <comment>Аннотация ошибки пароля</comment>
+  </data>
   <data name="Patronymic" xml:space="preserve">
     <value>Отчество</value>
     <comment>Надпись рядом с выводом отчества</comment>
@@ -488,6 +536,10 @@
   <data name="Price" xml:space="preserve">
     <value>Цена</value>
     <comment>Надпись рядом с выводом цены</comment>
+  </data>
+  <data name="PriceNotSpecified" xml:space="preserve">
+    <value>Не указана цена</value>
+    <comment>Аннотация ошибки цены</comment>
   </data>
   <data name="Privacypolicy" xml:space="preserve">
     <value>Политика конфиденциальности</value>
@@ -529,9 +581,17 @@
     <value>Поставщики</value>
     <comment>Заголовок (на) страницы(е) поставщики, ссылка на поставщиков</comment>
   </data>
+  <data name="RangeEMCart" xml:space="preserve">
+    <value>Количество должно быть положительным, но не более 1000</value>
+    <comment>Аннотация ошибки количества блюд в корзине</comment>
+  </data>
   <data name="Registration" xml:space="preserve">
     <value>Регистрация</value>
     <comment>Ссылка на регистрацию учётной записи</comment>
+  </data>
+  <data name="Remember" xml:space="preserve">
+    <value>Запомнить?</value>
+    <comment>Аннотация запоминания пользователя</comment>
   </data>
   <data name="Report" xml:space="preserve">
     <value>Отчёты</value>
@@ -700,6 +760,10 @@
   <data name="Weight" xml:space="preserve">
     <value>Вес</value>
     <comment>Надпись рядом с выводом веса</comment>
+  </data>
+  <data name="WeightNotSpecified" xml:space="preserve">
+    <value>Не указан вес</value>
+    <comment>Аннотация ошибки веса</comment>
   </data>
   <data name="With" xml:space="preserve">
     <value>с</value>

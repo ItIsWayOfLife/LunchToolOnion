@@ -7,11 +7,11 @@ namespace Web.Models.Menu
     {
         public int ProviderId { get; set; }
         public int Id { get; set; }
-        [Required(ErrorMessage = "Не указана информация")]
-        [Display(Name = "Мнформация")]
+        [Required(ErrorMessage = "InfoNotSpecified")]
+        [Display(Name = "Info")]
         public string Info { get; set; }
-        [Required(ErrorMessage = "Не указана дата")]
-        [Display(Name = "Дата")]
+        [Required(ErrorMessage = "DateNotSpecified")]
+        [Display(Name = "Date")]
         public DateTime Date { get; set; }
     }
 }

@@ -6,20 +6,20 @@ namespace Web.Models.Dish
     {
         public int CatalogId { get; set; }
 
-        [Required(ErrorMessage = "Не указано название")]
-        [Display(Name = "Название")]
+        [Required(ErrorMessage = "NameNotSpecified")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Не указана информация")]
-        [Display(Name = "Информация")]
+        [Required(ErrorMessage = "InfoNotSpecified")]
+        [Display(Name = "Info")]
         public string Info { get; set; }
 
-        [Required(ErrorMessage = "Не указан вес")]
-        [Display(Name = "Вес")]
+        [Required(ErrorMessage = "WeightNotSpecified")]
+        [Display(Name = "Weight")]
         public double Weight { get; set; }
 
-        [Required(ErrorMessage = "Не указана цена")]
-        [Display(Name = "Цена")]
+        [Required(ErrorMessage = "PriceNotSpecified")]
+        [Display(Name = "Price")]
         public decimal Price { get; set; }
         public string Path { get; set; }
     }

@@ -4,17 +4,17 @@ namespace Web.Models.Account
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Не указан email")]
+        [Required(ErrorMessage = "EmailNotSpecified")]
         [Display(Name = "Email")]
 
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Не указан пароль")]
+        [Required(ErrorMessage = "PasswordNotSpecified")]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Запомнить?")]
+        [Display(Name = "Remember")]
         public bool RememberMe { get; set; }
 
         public string ReturnUrl { get; set; }

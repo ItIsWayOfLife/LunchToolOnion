@@ -4,30 +4,30 @@ namespace Web.Models.Account
 {
     public class RegisterViewModel
     {
-        [Required(ErrorMessage = "Не указан email")]
+        [Required(ErrorMessage = "EmailNotSpecified")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Не указано имя")]
-        [Display(Name = "Имя")]
+        [Required(ErrorMessage = "MissingFirstname")]
+        [Display(Name = "Firstname")]
         public string Firstname { get; set; }
 
-        [Required(ErrorMessage = "Не указана фамилия")]
-        [Display(Name = "Фамилия")]
+        [Required(ErrorMessage = "MissingLastname")]
+        [Display(Name = "Lastname")]
         public string Lastname { get; set; }
 
-        [Display(Name = "Отчество")]
+        [Display(Name = "Patronymic")]
         public string Patronymic { get; set; }
 
-        [Required(ErrorMessage = "Не указан пароль")]
+        [Required(ErrorMessage = "EmailNotPassword")]
         [DataType(DataType.Password)]
-        [Display(Name = "Пароль")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Не указан пароль")]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [Required(ErrorMessage = "EmailNotPassword")]
+        [Compare("Password", ErrorMessage = "PasswordMismatch")]
         [DataType(DataType.Password)]
-        [Display(Name = "Подтвердить пароль")]
+        [Display(Name = "PasswordConfirm")]
         public string PasswordConfirm { get; set; }
     }
 }

@@ -5,17 +5,17 @@ namespace Web.Models.Provider
 {
     public class AddProviderViewModel
     {
-        [Required(ErrorMessage = "Не указано имя")]
-        [Display(Name = "Имя")]
+        [Required(ErrorMessage = "NameNotSpecified")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Не указан email")]
+        [Required(ErrorMessage = "EmailNotSpecified")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "Не указано время открытия")]
-        [Display(Name = "Время открытия")]
+        [Required(ErrorMessage = "OpeningTimeNotSpecified")]
+        [Display(Name = "TimeWorkWith")]
         public DateTime TimeWorkWith { get; set; }
-        [Required(ErrorMessage = "Не указано время закрытия")]
-        [Display(Name = "Время закрытия")]
+        [Required(ErrorMessage = "ClosingTimeNotSpecified")]
+        [Display(Name = "TimeWorkTo")]
         public DateTime TimeWorkTo { get; set; }
         public bool IsActive { get; set; }
         public string Path { get; set; }

@@ -7,8 +7,8 @@ namespace Web.Models.Cart
     {
         public int Id { get; set; }
         [Required]
-        [Display(Name = "Количество")]
-        [Range(1, 1000, ErrorMessage = "Количество должно быть положительным, но не более 1000")]
+        [Display(Name = "Amount")]
+        [Range(1, 1000, ErrorMessage = "RangeEMCart")]
         public int Count { get; set; }
         public int CartId { get; set; }
         public int DishId { get; set; }

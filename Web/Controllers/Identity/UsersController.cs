@@ -52,6 +52,9 @@ namespace Web.Controllers.Identity
 
             List<string> searchSelection = new List<string>() { _sharedLocalizer["SearchBy"], _sharedLocalizer["Id"], _sharedLocalizer["Email"], _sharedLocalizer["LFP"]};
 
+            if (name == null)
+                name = "";
+
             if (searchSelectionString == searchSelection[1])
             {
                 listViewUsers = listViewUsers.Where(e => e.Id.ToLower().Contains(name.ToLower())).ToList();

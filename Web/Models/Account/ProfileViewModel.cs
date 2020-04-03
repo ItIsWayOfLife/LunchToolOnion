@@ -9,7 +9,7 @@ namespace Web.Models.Account
         public string Lastname { get; set; }
         public string Patronymic { get; set; }
 
-        [Required(ErrorMessage = "Не указан email")]
+        [Required(ErrorMessage = "EmailNotSpecified")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }

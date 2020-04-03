@@ -7,11 +7,11 @@ namespace Web.Models.Catalog
     {
         public int ProviderId { get; set; }
         public int Id { get; set; }
-        [Required(ErrorMessage = "Не указано название")]
-        [Display(Name = "Название")]
+        [Required(ErrorMessage = "NameNotSpecified")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Не указана информация")]
-        [Display(Name = "Мнформация")]
+        [Required(ErrorMessage = "InfoNotSpecified")]
+        [Display(Name = "Info")]
         public string Info { get; set; }
     }
 }

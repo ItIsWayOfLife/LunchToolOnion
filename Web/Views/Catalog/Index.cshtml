@@ -6,7 +6,7 @@
 
 @if (User.IsInRole("admin"))
 {
-    <a class="btn btn-sm btn-success" asp-controller="Catalog" asp-action="Add" asp-route-providerId="@Model.ProviderId">@SharedLocalizer["ViewCatalogEdit_TitleAndHeader"]</a>
+    <a class="btn btn-sm btn-success" asp-controller="Catalog" asp-action="Add" asp-route-providerId="@Model.ProviderId">@SharedLocalizer["AddCatalog"]</a>
 }
 
 <h1 class="text-center">@SharedLocalizer["Catalog"]  "@ViewData["NameProvider"]"</h1>

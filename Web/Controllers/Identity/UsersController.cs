@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,15 @@ namespace Web.Controllers.Identity
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<UsersController> _logger;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        public UsersController(UserManager<ApplicationUser> userManager, ILogger<UsersController> logger)
+        public UsersController(UserManager<ApplicationUser> userManager,
+             IStringLocalizer<SharedResource> sharedLocalizer,
+             ILogger<UsersController> logger)
         {
             _userManager = userManager;
             _logger = logger;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [HttpGet]
@@ -45,19 +50,19 @@ namespace Web.Controllers.Identity
                     });
             }
 
-            IEnumerable<string> searchSelection = new List<string>() { "Поиск по","Id" ,"Email", "ФИО" };
+            List<string> searchSelection = new List<string>() { _sharedLocalizer["SearchBy"], _sharedLocalizer["Id"], _sharedLocalizer["Email"], _sharedLocalizer["LFP"]};
 
-            if (searchSelectionString == "Id")
+            if (searchSelectionString == searchSelection[1])
             {
                 listViewUsers = listViewUsers.Where(e => e.Id.ToLower().Contains(name.ToLower())).ToList();
             }
 
-            if (searchSelectionString == "Email")
+            if (searchSelectionString == searchSelection[2])
             {
                 listViewUsers = listViewUsers.Where(e => e.Email.ToLower().Contains(name.ToLower())).ToList();
             }
 
-            if (searchSelectionString == "ФИО")
+            if (searchSelectionString == searchSelection[3])
             {
                 listViewUsers = listViewUsers.Where(e => e.FLP.ToLower().Contains(name.ToLower())).ToList();
             }
@@ -222,7 +227,7 @@ namespace Web.Controllers.Identity
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Пользователь не найден");
+                        ModelState.AddModelError(string.Empty, _sharedLocalizer["UserNotFound"]);
                         _logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
                     }
                 }

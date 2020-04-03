@@ -5,6 +5,7 @@ using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,21 @@ namespace Web.Controllers
     {
         private readonly ICartService _cartService;
         private readonly ILogger<CartController> _logger;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         private readonly PathConstants _pathConstants;
 
         private readonly string _path;
 
-        public CartController(ICartService cartService, ILogger<CartController> logger)
+        public CartController(ICartService cartService,
+             IStringLocalizer<SharedResource> sharedLocalizer,
+             ILogger<CartController> logger)
         {
             _cartService = cartService;
             _logger = logger;
             _pathConstants = new PathConstants();
             _path = _pathConstants.pathDish;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [Authorize(Roles = "employee")]
@@ -63,7 +68,7 @@ namespace Web.Controllers
                     _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property} {ex.Message}");
                 }
 
-                return BadRequest("Некорректный запрос");
+                return BadRequest(_sharedLocalizer["BadRequest"]);
             }
 
             return RedirectToAction("Login","Account");
@@ -90,7 +95,7 @@ namespace Web.Controllers
                     _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property} {ex.Message}");
                 }
 
-                return BadRequest("Некорректный запрос");
+                return BadRequest(_sharedLocalizer["BadRequest"]);
             }
 
             return RedirectToAction("Login", "Account");
@@ -119,7 +124,7 @@ namespace Web.Controllers
                     _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property} {ex.Message}");
                 }
 
-                return BadRequest("Некорректный запрос");
+                return BadRequest(_sharedLocalizer["BadRequest"]);
             }
 
             return RedirectToAction("Login", "Account");
@@ -146,7 +151,7 @@ namespace Web.Controllers
                     _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property} {ex.Message}");
                 }
 
-                return BadRequest("Некорректный запрос");
+                return BadRequest(_sharedLocalizer["BadRequest"]);
             }
             return RedirectToAction("Login", "Account");
         }
@@ -172,7 +177,7 @@ namespace Web.Controllers
                     _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property} {ex.Message}");
                 }
 
-                return BadRequest("Некорректный запрос");
+                return BadRequest(_sharedLocalizer["BadRequest"]);
             }
 
             return RedirectToAction("Login", "Account");

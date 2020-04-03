@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,13 +21,16 @@ namespace Web.Controllers
         private readonly IMenuService _menuService;
         private readonly IProviderService _providerService;
         private readonly ILogger<MenuController> _logger;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public MenuController(IMenuService menuService, IProviderService providerService,
-            ILogger<MenuController> logger)
+            ILogger<MenuController> logger,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _menuService = menuService;
             _logger = logger;
             _providerService = providerService;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [AllowAnonymous]
@@ -44,26 +48,22 @@ namespace Web.Controllers
                 var provider = _providerService.GetProvider(providerId);
 
                 if (provider == null)
-                    throw new ValidationException("Поставщик не найден", "");
+                    throw new ValidationException(_sharedLocalizer["ProviderNoFind"], "");
 
                 ViewData["NameProvider"] = "" + provider.Name;
 
                 // элементы поиска
-                List<string> searchSelection = new List<string>() { "Поиск по", "Информации", "Дата добавления" };
+                List<string> searchSelection = new List<string>() { _sharedLocalizer["SearchBy"], _sharedLocalizer["SearchInfo"], _sharedLocalizer["SearchDateAdd"] };
 
                 if (name == null)
                     name = "";
 
                 // простой поиск
-                switch (searchSelectionString)
-                {
-                    case "Информации":
-                        menus = menus.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Дата добавления":
-                        menus = menus.Where(t => t.Date.ToShortDateString().Contains(name.ToLower())).ToList();
-                        break;
-                }
+
+                if (searchSelectionString== searchSelection[1])
+                    menus = menus.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
+                else if (searchSelectionString == searchSelection[2])
+                    menus = menus.Where(t => t.Date.ToShortDateString().Contains(name.ToLower())).ToList();
 
                 ViewData["DateSort"] = sortMenu == SortState.DateAsc ? SortState.DateDesc : SortState.DateAsc;
 
@@ -88,7 +88,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
 
         #region For admin
@@ -159,7 +159,7 @@ namespace Web.Controllers
             {
                 MenuDTO menuDTO = _menuService.GetMenu(id);
                 if (menuDTO == null)
-                    throw new ValidationException("Меню не найдено", "");
+                    throw new ValidationException(_sharedLocalizer["MenuNoFind"], "");
 
                 var provider = new EditMenuViewModel()
                 {

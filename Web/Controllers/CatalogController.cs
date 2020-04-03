@@ -5,6 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -20,13 +21,16 @@ namespace Web.Controllers
         private readonly ICatalogService _сatalogService;
         private readonly IProviderService _providerService;
         private readonly ILogger<CatalogController> _logger;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public CatalogController(ICatalogService сatalogService, IProviderService providerService,
+             IStringLocalizer<SharedResource> sharedLocalizer,
             ILogger<CatalogController> logger)
         {
             _сatalogService = сatalogService;
             _logger = logger;
             _providerService = providerService;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [AllowAnonymous]
@@ -44,26 +48,21 @@ namespace Web.Controllers
                 var provider = _providerService.GetProvider(providerId);
 
                 if (provider==null)
-                    throw new ValidationException("Поставщик не найден", "");
-
+                    throw new ValidationException(_sharedLocalizer["ProviderNoFind"], "");
+                
                 ViewData["NameProvider"] = "" + provider.Name;
 
                 // элементы поиска
-                List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации"};
+                List<string> searchSelection = new List<string>() { _sharedLocalizer["SearchBy"], _sharedLocalizer["SearchName"], _sharedLocalizer["SearchInfo"] };
 
                 if (name == null)
                     name = "";
-
                 // простой поиск
-                switch (searchSelectionString)
-                {
-                    case "Названию":
-                        catalogs = catalogs.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Информации":
-                        catalogs = catalogs.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                }
+
+                if (searchSelection[1]== searchSelectionString)
+                    catalogs = catalogs.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
+                else if (searchSelection[2] == searchSelectionString)
+                    catalogs = catalogs.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
 
                 ViewData["NameSort"] = sortCatalog == SortState.NameAsc ? SortState.NameDesc : SortState.NameAsc;
 
@@ -89,7 +88,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
 
         #region For admin
@@ -160,9 +159,9 @@ namespace Web.Controllers
             {
                 СatalogDTO сatalogDTO = _сatalogService.GetСatalog(id);
                 if (сatalogDTO == null)
-                throw new ValidationException("Каталог не найдено", "");
+                throw new ValidationException(_sharedLocalizer["CatalogNoFind"], ""); 
 
-                var provider = new EditCatalogViewModel()
+               var provider = new EditCatalogViewModel()
                 {
                     Id = сatalogDTO.Id,
                     Info = сatalogDTO.Info,

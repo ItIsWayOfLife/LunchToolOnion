@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace Web.Controllers
         private readonly ICatalogService _сatalogService;
         private readonly IWebHostEnvironment _appEnvironment;
         private readonly IMenuService _menuService;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         private readonly PathConstants _pathConstants;
 
@@ -36,6 +38,7 @@ namespace Web.Controllers
         public DishController(IDishService dishService, IWebHostEnvironment appEnvironment,
              ICatalogService сatalogService,
              IMenuService menuService,
+             IStringLocalizer<SharedResource> sharedLocalizer,
         ILogger<DishController> logger) 
         {
             _dishService = dishService;
@@ -45,6 +48,7 @@ namespace Web.Controllers
             _logger = logger;
             _pathConstants = new PathConstants();
             _path = _pathConstants.pathDish;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [AllowAnonymous]
@@ -58,7 +62,7 @@ namespace Web.Controllers
                 var catalog = _сatalogService.GetСatalog(catalogId);
 
                 if (catalog == null)
-                    throw new ValidationException($"Каталог {catalogId} не найдено", "");
+                    throw new ValidationException($"{_sharedLocalizer["Catalog"]} {catalogId} {_sharedLocalizer["NoFind"]}", "");
                 
                 ViewData["NameCatalog"] = "" + catalog.Name;
 
@@ -83,28 +87,21 @@ namespace Web.Controllers
                 }
 
                 // элементы поиска
-                List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации", "Весу", "Цене" };
+                List<string> searchSelection = new List<string>() { _sharedLocalizer["SearchBy"], _sharedLocalizer["SearchName"], _sharedLocalizer["SearchInfo"], _sharedLocalizer["SearchWeight"], _sharedLocalizer["SearchPrice"] };
 
                 if (name == null)
                     name = "";
 
                     // простой поиск
-                    switch (searchSelectionString)
-                    {
-                        case "Названию":
-                            dishes = dishes.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
-                            break;
-                        case "Информации":
-                            dishes = dishes.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
-                            break;
-                        case "Весу":
-                            dishes = dishes.Where(t => t.Weight.ToString() == name).ToList();
-                            break;
-                        case "Цене":
-                            dishes = dishes.Where(t => t.Price.ToString() == name).ToList();
-                            break;
-                    }
-
+                    if (searchSelectionString== searchSelection[1])
+                    dishes = dishes.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
+                 else if (searchSelectionString == searchSelection[2])
+                    dishes = dishes.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
+                else if (searchSelectionString == searchSelection[3])
+                    dishes = dishes.Where(t => t.Weight.ToString() == name).ToList();
+                else if (searchSelectionString == searchSelection[4])
+                    dishes = dishes.Where(t => t.Price.ToString() == name).ToList();
+               
                 ViewData["PriceSort"] = sortDish == SortState.PriceAsc ? SortState.PriceDesc : SortState.PriceAsc;
 
                 dishes = sortDish switch
@@ -130,7 +127,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
 
         #region For admin
@@ -175,7 +172,7 @@ namespace Web.Controllers
                     if (uploadedFile != null)
                     {
                         path = uploadedFile.FileName;
-                        // сохраняем файл в папку files/provider/ в каталоге wwwroot=
+                        // сохраняем файл в папку files/provider/ в каталоге wwwroot
                         using (var fileStream = new FileStream(_appEnvironment.WebRootPath +_path + path, FileMode.Create))
                         {
                             await uploadedFile.CopyToAsync(fileStream);

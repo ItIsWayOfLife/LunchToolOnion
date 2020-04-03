@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace Web.Controllers
     {
         private readonly IProviderService _providerService;
         private readonly IWebHostEnvironment _appEnvironment;
-
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
         private readonly PathConstants _pathConstants;
 
         private readonly ILogger<ProviderController> _logger;
@@ -32,6 +33,7 @@ namespace Web.Controllers
         private readonly string _path;
 
         public ProviderController(IProviderService providerService, IWebHostEnvironment appEnvironment,
+             IStringLocalizer<SharedResource> sharedLocalizer,
             ILogger<ProviderController> logger)
         {
             _providerService = providerService;
@@ -39,6 +41,7 @@ namespace Web.Controllers
             _logger = logger;
             _pathConstants = new PathConstants();
             _path = _pathConstants.pathProvider;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [AllowAnonymous]
@@ -58,41 +61,33 @@ namespace Web.Controllers
                     pr.Path = _path + pr.Path;
                 }
 
-                List<string> searchSelection = new List<string>() { "Поиск по" };
+                List<string> searchSelection = new List<string>() { _sharedLocalizer["SearchBy"] };
 
                 if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
                 {
-                    searchSelection.Add("Id");
+                    searchSelection.Add(_sharedLocalizer["Id"]);
                 }
-                searchSelection.AddRange(new string[] { "Названию", "Email", "Время работы с", "Время работы до", "Активный", "Неактивный" } );
+
+                searchSelection.AddRange(new string[] { _sharedLocalizer["Name"], _sharedLocalizer["Email"], _sharedLocalizer["TimeWorkWith"], _sharedLocalizer["TimeWorkTo"], _sharedLocalizer["IsActive"], _sharedLocalizer["Inactive"] } );
 
                 if (name == null)
                     name = "";
 
-                switch (searchSelectionString)
-                {
-                    case "Id":
-                        provider = provider.Where(n => n.Id.ToString().ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Названию":
-                        provider = provider.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Email":
-                        provider = provider.Where(e => e.Email.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Время работы с":
-                        provider = provider.Where(t => t.TimeWorkWith.ToShortTimeString().ToLower().Contains(name)).ToList();
-                        break;
-                    case "Время работы до":
-                        provider = provider.Where(t => t.TimeWorkTo.ToShortTimeString().ToLower().Contains(name)).ToList();
-                        break;
-                    case "Активный":
-                        provider = provider.Where(a => a.IsActive == true).ToList();
-                        break;
-                    case "Неактивный":
-                        provider = provider.Where(a => a.IsActive == false).ToList();
-                        break;
-                }
+
+                if (searchSelectionString==_sharedLocalizer["Id"])
+                    provider = provider.Where(n => n.Id.ToString().ToLower().Contains(name.ToLower())).ToList();
+                else if (searchSelectionString == _sharedLocalizer["Name"])
+                    provider = provider.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
+                else if (searchSelectionString == _sharedLocalizer["Email"])
+                    provider = provider.Where(e => e.Email.ToLower().Contains(name.ToLower())).ToList();
+                else if (searchSelectionString == _sharedLocalizer["TimeWorkWith"])
+                    provider = provider.Where(t => t.TimeWorkWith.ToShortTimeString().ToLower().Contains(name)).ToList();
+                else if (searchSelectionString == _sharedLocalizer["TimeWorkTo"])
+                    provider = provider.Where(t => t.TimeWorkTo.ToShortTimeString().ToLower().Contains(name)).ToList();
+                else if (searchSelectionString == _sharedLocalizer["IsActive"])
+                    provider = provider.Where(a => a.IsActive == true).ToList();
+                else if (searchSelectionString == _sharedLocalizer["Inactive"])
+                    provider = provider.Where(a => a.IsActive == false).ToList();
 
                 return View(new ProviderListViewModel()
                 {
@@ -108,7 +103,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
 
         [AllowAnonymous]
@@ -219,7 +214,7 @@ namespace Web.Controllers
                 ProviderDTO providerDto = _providerService.GetProvider(id);
 
                 if (providerDto==null)
-                    throw new ValidationException("Поставщик не найден", "");
+                    throw new ValidationException(_sharedLocalizer["ProviderNoFind"], "");
 
 
                 var provider = new EditProviderViewModel()

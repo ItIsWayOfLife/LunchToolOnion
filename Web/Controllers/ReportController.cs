@@ -1,12 +1,11 @@
-﻿using ApplicationCore.DTO;
-using ApplicationCore.Exceptions;
+﻿using ApplicationCore.Exceptions;
 using ApplicationCore.Identity;
 using ApplicationCore.Interfaces;
-using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -23,9 +22,11 @@ namespace Web.Controllers
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<ReportController> _logger;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public ReportController(IReportService reportService, IWebHostEnvironment webHostEnvironment,
             IProviderService providerService, UserManager<ApplicationUser> userManager,
+            IStringLocalizer<SharedResource> sharedLocalizer,
             ILogger<ReportController> logger)
         {
             _userManager = userManager;
@@ -33,6 +34,7 @@ namespace Web.Controllers
             _webHostEnvironment = webHostEnvironment;
             _providerService = providerService;
             _logger = logger;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [HttpGet]
@@ -53,7 +55,7 @@ namespace Web.Controllers
 
                 if (provider == null)
                 {
-                    throw new ValidationException("Поставщик не найден", "");
+                    throw new ValidationException(_sharedLocalizer["ProviderNoFind"], "");
                 }
 
                 List<List<string>> reportList;
@@ -62,17 +64,17 @@ namespace Web.Controllers
                 if (dateWith != null && dateTo == null)
                 {
                     reportList = _reportService.GetReportProvider(providerId, dateWith.Value);
-                    title = $"Отчёт по поставщику ({provider.Name}) за {dateWith.Value.ToString("dd.MM.yyyy")}";
+                    title = $"{_sharedLocalizer["ReportByProvider"]} ({provider.Name}) {_sharedLocalizer["Per"]} {dateWith.Value.ToString("dd.MM.yyyy")}";
                 }
                 else if (dateWith != null && dateTo != null)
                 {
                     reportList = _reportService.GetReportProvider(providerId, dateWith.Value, dateTo.Value);
-                    title = $"Отчёт по поставщику ({provider.Name}) с {dateWith.Value.ToString("dd.MM.yyyy")} \n по {dateTo.Value.ToString("dd.MM.yyyy")}";
+                    title = $"{_sharedLocalizer["ReportByProvider"]} ({provider.Name}) {_sharedLocalizer["With"]} {dateWith.Value.ToString("dd.MM.yyyy")} \n {_sharedLocalizer["By"]} {dateTo.Value.ToString("dd.MM.yyyy")}";
                 }
                 else
                 {
                     reportList = _reportService.GetReportProvider(providerId);
-                    title = $"Отчёт по поставщику ({provider.Name}) за всё время";
+                    title = $"{_sharedLocalizer["ReportByProvider"]} ({provider.Name}) {_sharedLocalizer["ForAllTime_"]} ";
                 }
 
                 ReportPDF reportProvider = new ReportPDF(_webHostEnvironment);
@@ -88,7 +90,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
 
         [HttpPost]
@@ -104,17 +106,17 @@ namespace Web.Controllers
                 if (dateWith != null && dateTo == null)
                 {
                     reportProvidersDTOs = _reportService.GetReportProviders(dateWith.Value);
-                    title = $"Отчёт по поставщикам за {dateWith.Value.ToString("dd.MM.yyyy")}";
+                    title = $"{_sharedLocalizer["ReportByProvidersPer"]} {dateWith.Value.ToString("dd.MM.yyyy")}";
                 }
                 else if (dateWith != null && dateTo != null)
                 {
                     reportProvidersDTOs = _reportService.GetReportProviders(dateWith.Value, dateTo.Value);
-                    title = $"Отчёт по поставщикам с {dateWith.Value.ToString("dd.MM.yyyy")} \n по {dateTo.Value.ToString("dd.MM.yyyy")}";
+                    title = $"{_sharedLocalizer["ReportByProvidersWith"]} {dateWith.Value.ToString("dd.MM.yyyy")} \n {_sharedLocalizer["By_"]} {dateTo.Value.ToString("dd.MM.yyyy")}";
                 }
                 else
                 {
                     reportProvidersDTOs = _reportService.GetReportProviders();
-                    title = $"Отчёт по поставщикам за все время";
+                    title = _sharedLocalizer["ReportByProviderForAllTime"];
                 }
 
                 ReportPDF reportProviders = new ReportPDF(_webHostEnvironment);
@@ -130,7 +132,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
 
         [HttpPost]
@@ -144,7 +146,7 @@ namespace Web.Controllers
 
                 if (user == null)
                 {
-                    throw new ValidationException("Пользователей не найден", "");
+                    throw new ValidationException(_sharedLocalizer["UserNotFound"], "");
                 }
                List<List<string>> reportUserDTOs = null;
                 string title = "";
@@ -152,17 +154,17 @@ namespace Web.Controllers
                 if (dateWith != null && dateTo == null)
                 {
                     reportUserDTOs = _reportService.GetReportUser(userId, dateWith.Value);
-                    title = $"Отчёт по пользователю ({user.Email}) за {dateWith.Value.ToString("dd.MM.yyyy")}";
+                    title = $"{_sharedLocalizer["ReportByUser"]} ({user.Email}) {_sharedLocalizer["Per"]} {dateWith.Value.ToString("dd.MM.yyyy")}";
                 }
                 else if (dateWith != null && dateTo != null)
                 {
                     reportUserDTOs = _reportService.GetReportUser(userId, dateWith.Value, dateTo.Value);
-                    title = $"Отчёт по пользователю ({user.Email}) с {dateWith.Value.ToString("dd.MM.yyyy")} \n по {dateTo.Value.ToString("dd.MM.yyyy")}";
+                    title = $"{_sharedLocalizer["ReportByUser"]} ({user.Email}) {_sharedLocalizer["With"]} {dateWith.Value.ToString("dd.MM.yyyy")} \n {_sharedLocalizer["By_"]} {dateTo.Value.ToString("dd.MM.yyyy")}";
                 }
                 else
                 {
                     reportUserDTOs = _reportService.GetReportUser(userId);
-                    title = $"Отчёт по пользователю ({user.Id}) за всё время";
+                    title = $"{_sharedLocalizer["ReportByUser"]} ({user.Id}) {_sharedLocalizer["ForAllTime_"]}";
                 }
             
                 ReportPDF reportUser = new ReportPDF(_webHostEnvironment);
@@ -177,7 +179,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
 
         [HttpPost]
@@ -193,17 +195,17 @@ namespace Web.Controllers
                 if (dateWith != null && dateTo == null)
                 {
                     reportUsersDTOs = _reportService.GetReportUsers(dateWith.Value);
-                    title = $"Отчёт по всем пользователям за {dateWith.Value.ToString("dd.MM.yyyy")}";
+                    title = $"{_sharedLocalizer["ReportByAllUsersPer"]} {dateWith.Value.ToString("dd.MM.yyyy")}";
                 }
                 else if (dateWith != null && dateTo != null)
                 {
                     reportUsersDTOs = _reportService.GetReportUsers(dateWith.Value, dateTo.Value);
-                    title = $"Отчётпо всем пользователям с {dateWith.Value.ToString("dd.MM.yyyy")} \n по {dateTo.Value.ToString("dd.MM.yyyy")}";
+                    title = $"{_sharedLocalizer["ReportByAllUsersWith"]} {dateWith.Value.ToString("dd.MM.yyyy")} \n {_sharedLocalizer["By_"]} {dateTo.Value.ToString("dd.MM.yyyy")}";
                 }
                 else
                 {
                     reportUsersDTOs = _reportService.GetReportUsers();
-                    title = $"Отчёт по по всем пользователям за всё время";
+                    title =  _sharedLocalizer["ReportByAllUsersPerAllTime"];
                 }
 
                 ReportPDF reportUsers = new ReportPDF(_webHostEnvironment);
@@ -218,7 +220,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
     }
 }

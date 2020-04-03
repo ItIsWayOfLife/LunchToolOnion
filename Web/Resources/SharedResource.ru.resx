@@ -161,6 +161,18 @@
     <value>Количество</value>
     <comment>Надпись рядом с выводом суммы</comment>
   </data>
+  <data name="BadRequest" xml:space="preserve">
+    <value>Некорректный запрос</value>
+    <comment>Информация о неудачном запросе к методам контроллера </comment>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>По</value>
+    <comment>Часть предложения</comment>
+  </data>
+  <data name="By_" xml:space="preserve">
+    <value>по</value>
+    <comment>Часть предложения</comment>
+  </data>
   <data name="Cart" xml:space="preserve">
     <value>Корзина</value>
     <comment>Ссылка на корзину</comment>
@@ -180,6 +192,10 @@
   <data name="CatalogDishes" xml:space="preserve">
     <value>Каталог блюд</value>
     <comment>Ссылка на блюда </comment>
+  </data>
+  <data name="CatalogNoFind" xml:space="preserve">
+    <value>Каталог не найден</value>
+    <comment>Информация о неудачном поиске каталога</comment>
   </data>
   <data name="Categories" xml:space="preserve">
     <value>Категории</value>
@@ -289,6 +305,10 @@
     <value>Фильтровать</value>
     <comment>Кнопка фильтрации</comment>
   </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>Все</value>
+    <comment>Элемент фильтра</comment>
+  </data>
   <data name="Firstname" xml:space="preserve">
     <value>Имя</value>
     <comment>Надпись рядом с выводом имени</comment>
@@ -308,6 +328,10 @@
   <data name="ForAllTime" xml:space="preserve">
     <value>За всё время</value>
     <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ForAllTime_" xml:space="preserve">
+    <value>за всё время</value>
+    <comment>Часть предложения</comment>
   </data>
   <data name="ForAllUsersForAllTime" xml:space="preserve">
     <value>По всем пользователям за всё время</value>
@@ -333,9 +357,17 @@
     <value>Id</value>
     <comment>Надпись возле ввода id</comment>
   </data>
+  <data name="Inactive" xml:space="preserve">
+    <value>Неактивен</value>
+    <comment>Информация о поставщике</comment>
+  </data>
   <data name="InCart" xml:space="preserve">
     <value>В корзину</value>
     <comment>Ссылка на добавление в корзину</comment>
+  </data>
+  <data name="IncorrectUsernameAnd/OrPassword" xml:space="preserve">
+    <value>Неправильный логин и (или) пароль</value>
+    <comment>Информация об ошибке</comment>
   </data>
   <data name="Info" xml:space="preserve">
     <value>Информация</value>
@@ -348,6 +380,10 @@
   <data name="IsActive" xml:space="preserve">
     <value>Активен</value>
     <comment>Надпись рядом с выбором активности поставщика</comment>
+  </data>
+  <data name="ItNoFind" xml:space="preserve">
+    <value>не найдено</value>
+    <comment>Информация о неудачном поиске</comment>
   </data>
   <data name="Lastname" xml:space="preserve">
     <value>Фамилия</value>
@@ -385,6 +421,10 @@
     <value>Составление меню</value>
     <comment>Ссылка на составление меню</comment>
   </data>
+  <data name="MenuNoFind" xml:space="preserve">
+    <value>Меню не найдено</value>
+    <comment>Информация о неудачном поиске меню</comment>
+  </data>
   <data name="MoreDetails" xml:space="preserve">
     <value>Подробнее</value>
     <comment>Ссылка на заказы</comment>
@@ -401,6 +441,10 @@
     <value>Каталог отсутствует</value>
     <comment>Информация о каталоге</comment>
   </data>
+  <data name="NoFind" xml:space="preserve">
+    <value>не найден</value>
+    <comment>Информация о неудачном поиске</comment>
+  </data>
   <data name="NumberOrder" xml:space="preserve">
     <value>Номер заказа</value>
     <comment>Ссылка на сортировку номер заказа</comment>
@@ -408,6 +452,10 @@
   <data name="OldPassword" xml:space="preserve">
     <value>Старый пароль</value>
     <comment>Надпись рядом с полем для ввода старого пароля</comment>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>на</value>
+    <comment>Часть  строки</comment>
   </data>
   <data name="OrderInfo" xml:space="preserve">
     <value>Заказов не было</value>
@@ -428,6 +476,10 @@
   <data name="Patronymic" xml:space="preserve">
     <value>Отчество</value>
     <comment>Надпись рядом с выводом отчества</comment>
+  </data>
+  <data name="Per" xml:space="preserve">
+    <value>за</value>
+    <comment>Часть предложения</comment>
   </data>
   <data name="PerDay" xml:space="preserve">
     <value>За день</value>
@@ -465,6 +517,14 @@
     <value>Укажите id пользователя</value>
     <comment>Надпись рядом с вводом id пользователя</comment>
   </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Поставщик</value>
+    <comment>Часть строки</comment>
+  </data>
+  <data name="ProviderNoFind" xml:space="preserve">
+    <value>Поставщик не найден</value>
+    <comment>Информация о неудачном поиске поставщика</comment>
+  </data>
   <data name="Providers" xml:space="preserve">
     <value>Поставщики</value>
     <comment>Заголовок (на) страницы(е) поставщики, ссылка на поставщиков</comment>
@@ -477,9 +537,37 @@
     <value>Отчёты</value>
     <comment>Заголовок на странице отчётов</comment>
   </data>
+  <data name="ReportByAllUsersPer" xml:space="preserve">
+    <value>Отчёт по всем пользователям за</value>
+    <comment>Часть предложения</comment>
+  </data>
+  <data name="ReportByAllUsersPerAllTime" xml:space="preserve">
+    <value>Отчёт по всем пользователям за всё время</value>
+    <comment>Заголовок отчёта</comment>
+  </data>
+  <data name="ReportByAllUsersWith" xml:space="preserve">
+    <value>Отчёт по всем пользователям с</value>
+    <comment>Часть предложения</comment>
+  </data>
   <data name="ReportByProvider" xml:space="preserve">
     <value>Отчёты по поставщикам</value>
     <comment>Заголовок на странице отчётов</comment>
+  </data>
+  <data name="ReportByProviderForAllTime" xml:space="preserve">
+    <value>Отчёт по поставщикам за все время</value>
+    <comment>Заголовок отчёта</comment>
+  </data>
+  <data name="ReportByProvidersPer" xml:space="preserve">
+    <value>Отчёт по поставщикам за</value>
+    <comment>Часть предложения</comment>
+  </data>
+  <data name="ReportByProvidersWith" xml:space="preserve">
+    <value>Отчёт по поставщикам с</value>
+    <comment>Часть предложения</comment>
+  </data>
+  <data name="ReportByUser" xml:space="preserve">
+    <value>Отчёт по пользователю</value>
+    <comment>Часть предложения</comment>
   </data>
   <data name="ReportByUsers" xml:space="preserve">
     <value>Отчёты по пользователям</value>
@@ -499,6 +587,26 @@
   </data>
   <data name="SearchBy" xml:space="preserve">
     <value>Поиск по</value>
+    <comment>Выбор поиска</comment>
+  </data>
+  <data name="SearchDateAdd" xml:space="preserve">
+    <value>Дате добавления</value>
+    <comment>Выбор поиска по дате добавления </comment>
+  </data>
+  <data name="SearchInfo" xml:space="preserve">
+    <value>Информации</value>
+    <comment>Выбор поиска (по информации)</comment>
+  </data>
+  <data name="SearchName" xml:space="preserve">
+    <value>Названию</value>
+    <comment>Выбор поиска (по названию)</comment>
+  </data>
+  <data name="SearchPrice" xml:space="preserve">
+    <value>Цене</value>
+    <comment>Выбор поиска по цене</comment>
+  </data>
+  <data name="SearchWeight" xml:space="preserve">
+    <value>Весу</value>
     <comment>Выбор поиска</comment>
   </data>
   <data name="SignUp" xml:space="preserve">
@@ -545,6 +653,10 @@
     <value>Обновить</value>
     <comment>Кнопка оновить</comment>
   </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Пользователь не найден</value>
+    <comment>Информация отражающая ошибку</comment>
+  </data>
   <data name="Users" xml:space="preserve">
     <value>Пользователи</value>
     <comment>Ссылка на пользователей</comment>
@@ -588,6 +700,10 @@
   <data name="Weight" xml:space="preserve">
     <value>Вес</value>
     <comment>Надпись рядом с выводом веса</comment>
+  </data>
+  <data name="With" xml:space="preserve">
+    <value>с</value>
+    <comment>Часть предложения</comment>
   </data>
   <data name="WorkingDays" xml:space="preserve">
     <value>Режим работы</value>

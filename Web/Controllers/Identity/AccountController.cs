@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
@@ -17,13 +18,16 @@ namespace Web.Controllers.Identity
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<AccountController> _logger;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [AllowAnonymous]
@@ -104,7 +108,7 @@ namespace Web.Controllers.Identity
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неправильный логин и (или) пароль");
+                    ModelState.AddModelError("", _sharedLocalizer["IncorrectUsernameAnd/OrPassword"]);
                 }
             }
             return View(model);
@@ -275,7 +279,7 @@ namespace Web.Controllers.Identity
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Пользователь не найден");
+                    ModelState.AddModelError(string.Empty, _sharedLocalizer["UserNotFound"]);
                     _logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
                 }
             }

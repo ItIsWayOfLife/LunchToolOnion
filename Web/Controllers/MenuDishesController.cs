@@ -5,6 +5,7 @@ using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace Web.Controllers
         private readonly IProviderService _providerService;
         private readonly ILogger<MenuController> _logger;
         private readonly ICatalogService _catalogService;
+        private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
         private readonly PathConstants _pathConstants;
 
@@ -26,6 +28,7 @@ namespace Web.Controllers
 
         public MenuDishesController(IMenuService menuService, IProviderService providerService,
             ICatalogService catalogService,
+            IStringLocalizer<SharedResource> sharedLocalizer,
             ILogger<MenuController> logger)
         {
             _menuService = menuService;
@@ -34,6 +37,7 @@ namespace Web.Controllers
             _pathConstants = new PathConstants();
             _path = _pathConstants.pathDish;
             _catalogService = catalogService;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [HttpGet]
@@ -48,24 +52,24 @@ namespace Web.Controllers
                 var menu = _menuService.GetMenu(menuId);
 
                 if (menu == null)
-                    throw new ValidationException($"Меню {menuId} не найдено", "");
+                    throw new ValidationException($"{_sharedLocalizer["Menu"]} {menuId} {_sharedLocalizer["ItNoFind"]}", "");
 
                 var provider = _providerService.GetProvider(menu.ProviderId);
 
                 if (provider == null)
-                    throw new ValidationException($"Поставщик {menu.ProviderId} не найдено", "");
+                    throw new ValidationException($"{_sharedLocalizer["Provider"]} {menu.ProviderId} {_sharedLocalizer["NoFind"]}", "");
 
-                ViewData["NameMeniDishes"] = $"Блюда {provider.Name} на " + menu.Date.ToShortDateString();
+                ViewData["NameMeniDishes"] = $"{_sharedLocalizer["Dishes"]} {provider.Name} {_sharedLocalizer["On"]} " + menu.Date.ToShortDateString();
 
                 IEnumerable<MenuDishesDTO> menuDishesDTOs = _menuService.GetMenuDishes(menuId);
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesViewModel>()).CreateMapper();
                 var menuDishes = mapper.Map<IEnumerable<MenuDishesDTO>, List<MenuDishesViewModel>>(menuDishesDTOs);
 
                 List<int> catalogFilterId = new List<int>() { -1};
-                List<string> catalogFilterName = new List<string>() { "Все"};
+                List<string> catalogFilterName = new List<string>() { _sharedLocalizer["FilterAll"] };
                
                 // элементы поиска
-                List<string> searchSelection = new List<string>() { "Поиск по", "Названию", "Информации", "Весу", "Цене" };
+                List<string> searchSelection = new List<string>() { _sharedLocalizer["SearchBy"], _sharedLocalizer["SearchName"], _sharedLocalizer["SearchInfo"], _sharedLocalizer["SearchWeight"], _sharedLocalizer["SearchPrice"] };
 
                 foreach (var mD in menuDishes)
                 {
@@ -89,21 +93,14 @@ namespace Web.Controllers
                     name = "";
                 
                 // простой поиск
-                switch (searchSelectionString)
-                {
-                    case "Названию":
-                        menuDishes = menuDishes.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Информации":
-                        menuDishes = menuDishes.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
-                        break;
-                    case "Весу":
-                        menuDishes = menuDishes.Where(t => t.Weight.ToString() == name).ToList();
-                        break;
-                    case "Цене":
-                        menuDishes = menuDishes.Where(t => t.Price.ToString() == name).ToList();
-                        break;
-                }
+                if (searchSelectionString== searchSelection[1])
+                    menuDishes = menuDishes.Where(n => n.Name.ToLower().Contains(name.ToLower())).ToList();
+                else if (searchSelectionString == searchSelection[2])
+                    menuDishes = menuDishes.Where(e => e.Info.ToLower().Contains(name.ToLower())).ToList();
+                else if (searchSelectionString == searchSelection[3])
+                    menuDishes = menuDishes.Where(t => t.Weight.ToString() == name).ToList();
+                else if (searchSelectionString == searchSelection[4])
+                    menuDishes = menuDishes.Where(t => t.Price.ToString() == name).ToList();
 
                 ViewData["PriceSort"] = sortMenuDish == SortStateMenuDishes.PriceAsc ? SortStateMenuDishes.PriceDesc : SortStateMenuDishes.PriceAsc;
 
@@ -131,7 +128,7 @@ namespace Web.Controllers
                 _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
             }
 
-            return BadRequest("Некорректный запрос");
+            return BadRequest(_sharedLocalizer["BadRequest"]);
         }
     }
 }

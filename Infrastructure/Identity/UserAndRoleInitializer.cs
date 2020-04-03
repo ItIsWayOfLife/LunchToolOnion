@@ -25,6 +25,7 @@ namespace Infrastructure.Identity
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, "admin");
+                    await userManager.AddToRoleAsync(admin, "employee");
                 }
             }
         }

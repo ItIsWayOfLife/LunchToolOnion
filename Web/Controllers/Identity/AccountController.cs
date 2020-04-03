@@ -165,7 +165,11 @@ namespace Web.Controllers.Identity
                 string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 user = _userManager.Users.ToList().FirstOrDefault(p => p.Id == currentUserId);
 
-                ProfileViewModel userView = new ProfileViewModel()
+
+                if (user == null)
+                    return BadRequest(_sharedLocalizer["BadRequest"]);
+
+                    ProfileViewModel userView = new ProfileViewModel()
                 {
                     Id = user.Id,
                     Firstname = user.Firstname,

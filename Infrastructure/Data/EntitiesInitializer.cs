@@ -113,7 +113,7 @@ namespace Infrastructure.Data
                {
                    CatalogId = context.Catalogs.Where(p => p.Name == "Блинчики").FirstOrDefault().Id,
                    Info = "Ветчина, сыр, маринованные огурцы, зелень",
-                   Name = "Блинчики фирменные",
+                   Name = "Блинчики Фирменные",
                    Weight = 150,
                    Price = 4.90M,
                    Path = "firm.jpeg",
@@ -246,6 +246,89 @@ namespace Infrastructure.Data
                                 });
 
                 context.SaveChanges();
+
+                context.Menus.AddRange(
+            new Menu
+            {
+                ProviderId = context.Providers.Where(p => p.Email == "holavkysno@gmail.com").FirstOrDefault().Id,
+                Date = DateTime.Now,
+                Info = "Вкусные блинчики и не только"
+            },
+             new Menu
+             {
+                 ProviderId = context.Providers.Where(p => p.Email == "shawarma777@gmail.com").FirstOrDefault().Id,
+                 Date = DateTime.Now,
+                 Info = "Шаурма и напитки"
+             },
+                new Menu
+                {
+                    ProviderId = context.Providers.Where(p => p.Email == "holavkysno@gmail.com").FirstOrDefault().Id,
+                    Date = DateTime.Now.AddDays(1),
+                    Info = "Сэндвичи и не только",
+                });
+
+                context.SaveChanges();
+
+                context.MenuDishes.AddRange(
+                    new MenuDishes
+                    { 
+                     MenuId = context.Menus.Where(p=>p.Info== "Вкусные блинчики и не только").FirstOrDefault().Id,
+                      DishId = context.Dishes.Where(p=>p.Name== "Блинчики Фирменные").FirstOrDefault().Id
+                    },
+                     new MenuDishes
+                     {
+                         MenuId = context.Menus.Where(p => p.Info == "Вкусные блинчики и не только").FirstOrDefault().Id,
+                         DishId = context.Dishes.Where(p => p.Name == "Блинчики Рыбные").FirstOrDefault().Id
+                     },
+                      new MenuDishes
+                      {
+                          MenuId = context.Menus.Where(p => p.Info == "Вкусные блинчики и не только").FirstOrDefault().Id,
+                          DishId = context.Dishes.Where(p => p.Name == "Блинчики Друзья").FirstOrDefault().Id
+                      },
+                       new MenuDishes
+                       {
+                           MenuId = context.Menus.Where(p => p.Info == "Вкусные блинчики и не только").FirstOrDefault().Id,
+                           DishId = context.Dishes.Where(p => p.Name == "Салат Оливье").FirstOrDefault().Id
+                       },
+                       new MenuDishes
+                       {
+                           MenuId = context.Menus.Where(p => p.Info == "Сэндвичи и не только").FirstOrDefault().Id,
+                           DishId = context.Dishes.Where(p => p.Name == "Салат Оливье").FirstOrDefault().Id
+                       },
+                        new MenuDishes
+                        {
+                            MenuId = context.Menus.Where(p => p.Info == "Сэндвичи и не только").FirstOrDefault().Id,
+                            DishId = context.Dishes.Where(p => p.Name == "Vegetarian").FirstOrDefault().Id
+                        },
+                         new MenuDishes
+                         {
+                             MenuId = context.Menus.Where(p => p.Info == "Сэндвичи и не только").FirstOrDefault().Id,
+                             DishId = context.Dishes.Where(p => p.Name == "Cheese friend").FirstOrDefault().Id
+                         },
+                          new MenuDishes
+                          {
+                              MenuId = context.Menus.Where(p => p.Info == "Шаурма и напитки").FirstOrDefault().Id,
+                              DishId = context.Dishes.Where(p => p.Name == "Кока Кола").FirstOrDefault().Id
+                          },
+                           new MenuDishes
+                           {
+                               MenuId = context.Menus.Where(p => p.Info == "Шаурма и напитки").FirstOrDefault().Id,
+                               DishId = context.Dishes.Where(p => p.Name == "Фанта").FirstOrDefault().Id
+                           },
+                            new MenuDishes
+                            {
+                                MenuId = context.Menus.Where(p => p.Info == "Шаурма и напитки").FirstOrDefault().Id,
+                                DishId = context.Dishes.Where(p => p.Name == "Шаурма большая").FirstOrDefault().Id
+                            },
+                             new MenuDishes
+                             {
+                                 MenuId = context.Menus.Where(p => p.Info == "Шаурма и напитки").FirstOrDefault().Id,
+                                 DishId = context.Dishes.Where(p => p.Name == "Шаурма в пите").FirstOrDefault().Id
+                             }
+                    );
+
+                context.SaveChanges();
+
             }
         }
     }

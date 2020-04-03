@@ -1,98 +1,272 @@
 Application started. Press Ctrl+C to shut down.
 Hosting environment: Development
 Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
-03.04.2020 14:57:15: Processing request Home/Index
-03.04.2020 14:57:15: Processing request Provider/ListFavoriteProvider
-03.04.2020 14:57:18: Processing request Account/Login
-03.04.2020 14:57:30: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 login
-03.04.2020 14:57:30: Processing request Home/Index
-03.04.2020 14:57:30: Processing request Provider/ListFavoriteProvider
-03.04.2020 14:57:34: Processing request Provider/Index
-03.04.2020 14:57:35: Processing request Provider/Add
-03.04.2020 14:58:01: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 added new provider
-03.04.2020 14:58:01: Processing request Provider/Index
+03.04.2020 17:02:34: Processing request Home/Index
+03.04.2020 17:02:34: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:08:04: Processing request Catalog/Index
+03.04.2020 17:08:06: Processing request Dish/Index
 Application started. Press Ctrl+C to shut down.
 Hosting environment: Development
 Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
-03.04.2020 15:00:47: Processing request Home/Index
-03.04.2020 15:00:47: Processing request Provider/ListFavoriteProvider
-03.04.2020 15:00:48: Processing request Provider/Index
-03.04.2020 15:00:48: Processing request Provider/Add
+03.04.2020 17:11:16: Processing request Home/Index
+03.04.2020 17:11:16: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:11:18: Processing request Catalog/Index
+03.04.2020 17:11:21: Processing request Dish/Index
 Application started. Press Ctrl+C to shut down.
 Hosting environment: Development
 Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
-03.04.2020 15:01:28: Processing request Home/Index
-03.04.2020 15:01:28: Processing request Provider/ListFavoriteProvider
-03.04.2020 15:01:31: Processing request Menu/Index
-03.04.2020 15:01:33: Processing request Home/Index
-03.04.2020 15:01:34: Processing request Provider/ListFavoriteProvider
-03.04.2020 15:01:34: Processing request Provider/Index
-03.04.2020 15:01:41: Processing request Provider/Index
-03.04.2020 15:01:45: Processing request Provider/Edit
-03.04.2020 15:01:47: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 edited provider 1
-03.04.2020 15:01:47: Processing request Provider/Index
-03.04.2020 15:01:48: Processing request Menu/Index
-03.04.2020 15:01:49: Processing request Home/Index
-03.04.2020 15:01:49: Processing request Provider/ListFavoriteProvider
-03.04.2020 15:01:49: Processing request Provider/Index
-03.04.2020 15:01:51: Processing request Account/Profile
-03.04.2020 15:01:52: Processing request Account/Edit
-03.04.2020 15:01:54: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 edited profile
-03.04.2020 15:01:54: Processing request Account/Profile
-03.04.2020 15:01:55: Processing request Account/ChangePassword
+03.04.2020 17:12:49: Processing request Home/Index
+03.04.2020 17:12:50: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:12:51: Processing request Menu/Index
+03.04.2020 17:12:54: Processing request Catalog/Index
+03.04.2020 17:12:57: Processing request Dish/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:18:44: Processing request Home/Index
+03.04.2020 17:18:44: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:18:45: Processing request Menu/Index
+03.04.2020 17:18:48: Processing request Catalog/Index
+03.04.2020 17:18:50: Processing request Dish/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:19:33: Processing request Home/Index
+03.04.2020 17:19:33: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:21:16: Processing request Menu/Index
+03.04.2020 17:21:21: Processing request MenuDishes/Index
+03.04.2020 17:21:26: Processing request MenuDishes/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:22:13: Processing request Home/Index
+03.04.2020 17:22:13: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:22:48: Processing request Menu/Index
+03.04.2020 17:22:49: Processing request MenuDishes/Index
+03.04.2020 17:22:52: Processing request MenuDishes/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:26:20: Processing request Home/Index
+03.04.2020 17:26:20: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:26:23: Processing request Menu/Index
+03.04.2020 17:26:24: Processing request MenuDishes/Index
+03.04.2020 17:26:26: Processing request MenuDishes/Index
+03.04.2020 17:26:31: Processing request MenuDishes/Index
+03.04.2020 17:26:33: Processing request Account/Login
+03.04.2020 17:26:34: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 login
+03.04.2020 17:26:34: Processing request Home/Index
+03.04.2020 17:26:34: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:26:36: Processing request Menu/Index
+03.04.2020 17:26:37: Processing request MenuDishes/Index
+03.04.2020 17:26:39: Processing request Catalog/Index
+03.04.2020 17:26:41: Processing request Dish/Index
+03.04.2020 17:26:44: Make menu for 3
+03.04.2020 17:26:44: Processing request MenuDishes/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:27:49: Processing request Home/Index
+03.04.2020 17:27:49: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:27:54: Processing request Menu/Index
+03.04.2020 17:27:55: Processing request MenuDishes/Index
+03.04.2020 17:27:57: Processing request Menu/Index
+03.04.2020 17:27:58: Processing request MenuDishes/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:31:36: Processing request Home/Index
+03.04.2020 17:31:36: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:32:17: Processing request Menu/Index
+03.04.2020 17:32:19: Processing request MenuDishes/Index
+03.04.2020 17:32:21: Processing request Menu/Index
+03.04.2020 17:32:22: Processing request MenuDishes/Index
+03.04.2020 17:32:29: Processing request Menu/Index
+03.04.2020 17:32:31: Processing request MenuDishes/Index
+03.04.2020 17:32:34: Processing request Catalog/Index
+03.04.2020 17:32:35: Processing request Dish/Index
+03.04.2020 17:32:44: Make menu for 3
+03.04.2020 17:32:44: Processing request MenuDishes/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:37:59: Processing request Home/Index
+03.04.2020 17:37:59: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:38:19: Processing request Menu/Index
+03.04.2020 17:38:21: Processing request MenuDishes/Index
+03.04.2020 17:38:22: Processing request Menu/Index
+03.04.2020 17:38:23: Processing request MenuDishes/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:41:46: Processing request Home/Index
+03.04.2020 17:41:46: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:41:48: Processing request Account/Profile
 An unhandled exception has occurred while executing the request.
-03.04.2020 15:01:59: Processing request Account/ChangePassword
-Change password failed for user 01ec5aff-3793-4c6a-8b04-8c5f988c6891.
-03.04.2020 15:02:02: PasswordMismatch Incorrect password.
-03.04.2020 15:02:04: Processing request Account/ChangePassword
-03.04.2020 15:02:05: Processing request Home/Index
-03.04.2020 15:02:05: Processing request Provider/ListFavoriteProvider
-03.04.2020 15:02:06: Processing request Provider/Index
-03.04.2020 15:02:09: Processing request Cart/Index
-03.04.2020 15:02:15: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 updated count dishCart 15
-03.04.2020 15:02:15: Processing request Cart/Index
-03.04.2020 15:02:17: Processing request Provider/Index
-03.04.2020 15:02:18: Processing request Cart/Index
-03.04.2020 15:02:22: Processing request Order/Index
-03.04.2020 15:02:23: Processing request Order/Index
-03.04.2020 15:02:24: Processing request Order/Index
-03.04.2020 15:02:25: Processing request Order/Index
-03.04.2020 15:02:25: Processing request Order/Index
-03.04.2020 15:02:26: Processing request Order/Index
-03.04.2020 15:02:26: Processing request Order/Index
-03.04.2020 15:02:27: Processing request Order/Index
-03.04.2020 15:02:27: Processing request Users/Index
-03.04.2020 15:02:30: Processing request Report/Index
-03.04.2020 15:02:31: Processing request Users/Index
-03.04.2020 15:02:33: Processing request Users/Index
+03.04.2020 17:42:17: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:42:26: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 logout
+03.04.2020 17:42:26: Processing request Home/Index
+03.04.2020 17:42:26: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:42:27: Processing request Account/Register
+03.04.2020 17:42:28: Processing request Account/Login
+03.04.2020 17:42:29: User c5b8d2e4-c440-49d6-aab5-ba162fcc6850 login
+03.04.2020 17:42:29: Processing request Home/Index
+03.04.2020 17:42:29: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:42:30: Processing request Account/Profile
+03.04.2020 17:42:31: Processing request Home/Index
+03.04.2020 17:42:31: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:42:33: Processing request Menu/Index
+03.04.2020 17:42:34: Processing request MenuDishes/Index
+03.04.2020 17:42:36: Processing request Menu/Index
+03.04.2020 17:42:37: Processing request MenuDishes/Index
+03.04.2020 17:42:39: Processing request Menu/Index
+03.04.2020 17:42:42: Processing request MenuDishes/Index
 Application started. Press Ctrl+C to shut down.
 Hosting environment: Development
 Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
-03.04.2020 15:03:24: Processing request Home/Index
-03.04.2020 15:03:24: Processing request Provider/ListFavoriteProvider
-03.04.2020 15:03:26: Processing request Provider/Index
-03.04.2020 15:03:27: Processing request Provider/Index
-03.04.2020 15:03:30: Processing request Menu/Index
-03.04.2020 15:03:33: Processing request Menu/Index
-03.04.2020 15:03:34: Processing request MenuDishes/Index
-03.04.2020 15:03:36: Processing request MenuDishes/Index
-03.04.2020 15:03:38: Processing request MenuDishes/Index
-03.04.2020 15:03:40: Processing request MenuDishes/Index
-03.04.2020 15:03:44: Processing request Users/Index
-03.04.2020 15:03:46: Processing request Users/Index
-03.04.2020 15:03:48: Processing request Users/Index
-03.04.2020 15:03:50: Processing request Users/Create
-User 0a632bda-f227-4674-883d-78c2dbb8f12f validation failed: DuplicateUserName.
-03.04.2020 15:03:51: DuplicateUserName User name 'admin@gmail.com' is already taken.
-03.04.2020 15:04:02: Processing request Provider/Index
-03.04.2020 15:04:03: Processing request Cart/Index
-03.04.2020 15:04:04: Processing request Order/Index
-03.04.2020 15:04:06: Processing request Order/Index
-03.04.2020 15:04:06: Processing request Order/Index
-03.04.2020 15:04:07: Processing request Order/Index
-03.04.2020 15:04:08: Processing request Order/Index
-03.04.2020 15:04:08: Processing request Users/Index
-03.04.2020 15:04:10: Processing request Report/Index
-03.04.2020 15:04:16: User 01ec5aff-3793-4c6a-8b04-8c5f988c6891 logout
-03.04.2020 15:04:16: Processing request Home/Index
-03.04.2020 15:04:16: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:48:36: Processing request Home/Index
+03.04.2020 17:48:36: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:48:51: Processing request Menu/Index
+03.04.2020 17:48:53: Processing request MenuDishes/Index
+03.04.2020 17:48:59: Processing request MenuDishes/Index
+03.04.2020 17:49:01: Processing request MenuDishes/Index
+03.04.2020 17:49:03: Processing request MenuDishes/Index
+03.04.2020 17:49:03: Processing request MenuDishes/Index
+03.04.2020 17:49:04: Processing request Home/Index
+03.04.2020 17:49:04: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:49:05: Processing request Menu/Index
+03.04.2020 17:49:07: Processing request MenuDishes/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:51:00: Processing request Home/Index
+03.04.2020 17:51:01: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:51:05: Processing request Menu/Index
+03.04.2020 17:51:07: Processing request MenuDishes/Index
+03.04.2020 17:51:10: Processing request MenuDishes/Index
+03.04.2020 17:51:12: Processing request MenuDishes/Index
+03.04.2020 17:51:13: Processing request Catalog/Index
+03.04.2020 17:51:14: Processing request Dish/Index
+03.04.2020 17:51:17: Make menu for 1
+03.04.2020 17:51:17: Processing request MenuDishes/Index
+03.04.2020 17:51:18: Processing request Catalog/Index
+03.04.2020 17:51:20: Processing request Dish/Index
+03.04.2020 17:51:22: Make menu for 1
+03.04.2020 17:51:22: Processing request MenuDishes/Index
+03.04.2020 17:51:24: Processing request Home/Index
+03.04.2020 17:51:24: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:51:25: Processing request Menu/Index
+03.04.2020 17:51:26: Processing request MenuDishes/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:53:18: Processing request Home/Index
+03.04.2020 17:53:18: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:53:20: Processing request Provider/Index
+03.04.2020 17:53:21: Processing request Menu/Index
+03.04.2020 17:53:23: Processing request Provider/Index
+03.04.2020 17:53:23: Processing request Menu/Index
+03.04.2020 17:53:25: Processing request MenuDishes/Index
+03.04.2020 17:53:26: Processing request Menu/Index
+03.04.2020 17:53:28: Processing request Provider/Index
+03.04.2020 17:53:29: Processing request Menu/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:53:57: Processing request Home/Index
+03.04.2020 17:53:57: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:53:58: Processing request Menu/Index
+03.04.2020 17:53:59: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:54:00: Processing request Menu/Index
+03.04.2020 17:54:01: Processing request MenuDishes/Index
+03.04.2020 17:54:08: Processing request MenuDishes/Index
+03.04.2020 17:54:10: Processing request MenuDishes/Index
+03.04.2020 17:54:13: Processing request MenuDishes/Index
+03.04.2020 17:54:13: Processing request Menu/Index
+03.04.2020 17:54:14: Processing request Home/Index
+03.04.2020 17:54:14: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:54:16: Processing request Menu/Index
+03.04.2020 17:54:17: Processing request MenuDishes/Index
+03.04.2020 17:54:21: Processing request MenuDishes/Index
+03.04.2020 17:54:31: Processing request MenuDishes/Index
+03.04.2020 17:54:37: Processing request Users/Index
+03.04.2020 17:54:40: Processing request Users/Edit
+03.04.2020 17:54:41: Processing request Users/Index
+03.04.2020 17:54:42: Processing request Roles/Edit
+03.04.2020 17:54:45: User c5b8d2e4-c440-49d6-aab5-ba162fcc6850 changed role for user c5b8d2e4-c440-49d6-aab5-ba162fcc6850
+03.04.2020 17:54:45: Processing request Users/Index
+03.04.2020 17:54:48: Processing request Home/Index
+03.04.2020 17:54:48: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:54:50: Processing request Provider/Index
+03.04.2020 17:54:51: Processing request Users/Index
+03.04.2020 17:54:51: Processing request Report/Index
+03.04.2020 17:54:53: User c5b8d2e4-c440-49d6-aab5-ba162fcc6850 logout
+03.04.2020 17:54:53: Processing request Home/Index
+03.04.2020 17:54:53: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:54:54: Processing request Account/Login
+03.04.2020 17:54:56: User c5b8d2e4-c440-49d6-aab5-ba162fcc6850 login
+03.04.2020 17:54:56: Processing request Home/Index
+03.04.2020 17:54:56: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:55:01: Processing request Menu/Index
+03.04.2020 17:55:02: Processing request MenuDishes/Index
+03.04.2020 17:55:04: Processing request Cart/Add
+03.04.2020 17:55:04: User c5b8d2e4-c440-49d6-aab5-ba162fcc6850 add dish 13
+03.04.2020 17:55:04: Processing request Cart/Index
+03.04.2020 17:55:06: User c5b8d2e4-c440-49d6-aab5-ba162fcc6850 updated count dishCart 1
+03.04.2020 17:55:07: Processing request Cart/Index
+03.04.2020 17:55:08: Processing request Home/Index
+03.04.2020 17:55:08: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:55:08: Processing request Provider/Index
+03.04.2020 17:55:09: Processing request Cart/Index
+03.04.2020 17:55:10: Processing request Order/Index
+03.04.2020 17:55:10: Processing request Users/Index
+03.04.2020 17:55:11: Processing request Report/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:56:40: Processing request Home/Index
+03.04.2020 17:56:40: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:56:43: Processing request Menu/Index
+03.04.2020 17:56:45: Processing request MenuDishes/Index
+03.04.2020 17:56:47: Processing request Order/Index
+03.04.2020 17:56:48: Processing request Users/Index
+03.04.2020 17:56:49: Processing request Report/Index
+03.04.2020 17:56:50: Processing request Users/Index
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\LunchToolOnion\Web
+03.04.2020 17:57:42: Processing request Home/Index
+03.04.2020 17:57:42: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:57:45: User c5b8d2e4-c440-49d6-aab5-ba162fcc6850 logout
+03.04.2020 17:57:45: Processing request Home/Index
+03.04.2020 17:57:45: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:57:46: Processing request Account/Login
+03.04.2020 17:57:47: User 6ae948b8-e4dc-4f34-a17b-304f39aa6ad0 login
+03.04.2020 17:57:47: Processing request Home/Index
+03.04.2020 17:57:47: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:57:50: Processing request Provider/Index
+03.04.2020 17:57:52: Processing request Cart/Index
+03.04.2020 17:57:53: Processing request Order/Index
+03.04.2020 17:57:53: Processing request Users/Index
+03.04.2020 17:57:54: Processing request Report/Index
+03.04.2020 17:57:54: Processing request Home/Index
+03.04.2020 17:57:54: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:57:55: Processing request Menu/Index
+03.04.2020 17:57:56: Processing request MenuDishes/Index
+03.04.2020 17:57:59: Processing request Provider/Index
+03.04.2020 17:57:59: Processing request Home/Index
+03.04.2020 17:57:59: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:58:01: Processing request Menu/Index
+03.04.2020 17:58:02: Processing request Provider/Index
+03.04.2020 17:58:03: Processing request Menu/Index
+03.04.2020 17:58:15: Processing request Home/Index
+03.04.2020 17:58:15: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:58:18: Processing request Provider/Edit
+03.04.2020 17:58:26: Processing request Provider/ListFavoriteProvider
+03.04.2020 17:58:27: Processing request Menu/Index
+03.04.2020 17:58:29: Processing request MenuDishes/Index
+03.04.2020 17:58:30: Processing request Provider/Index
+03.04.2020 17:58:30: Processing request Cart/Index
+03.04.2020 17:58:31: Processing request Order/Index
+03.04.2020 17:58:32: Processing request Users/Index
+03.04.2020 17:58:32: Processing request Report/Index

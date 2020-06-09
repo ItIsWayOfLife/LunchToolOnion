@@ -17,3 +17,16 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 08.06.2020 11:43:26: Processing request Provider/ListFavoriteProvider
 08.06.2020 11:43:31: Processing request Account/Register
 08.06.2020 11:43:32: Processing request Account/Login
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+08.06.2020 20:39:41: Processing request Home/Index
+08.06.2020 20:39:41: Processing request Provider/ListFavoriteProvider
+08.06.2020 20:39:43: Processing request Account/Login
+08.06.2020 20:39:43: Processing request Account/Register
+08.06.2020 20:40:23: New user 69efca21-1b21-4791-a1a6-6300b9557cb4 (gunko98@bk.ru) registered
+08.06.2020 20:40:23: Processing request Home/Index
+08.06.2020 20:40:23: Processing request Provider/ListFavoriteProvider
+08.06.2020 20:40:25: User 69efca21-1b21-4791-a1a6-6300b9557cb4 logout
+08.06.2020 20:40:25: Processing request Home/Index
+08.06.2020 20:40:25: Processing request Provider/ListFavoriteProvider

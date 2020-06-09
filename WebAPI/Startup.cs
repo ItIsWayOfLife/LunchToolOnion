@@ -1,28 +1,14 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.Extensions.Configuration;
-using Infrastructure.Data;
-using Infrastructure.Identity;
-using ApplicationCore.Identity;
-using ApplicationCore.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using Infrastructure.Repositories;
-using ApplicationCore.Services;
-using Microsoft.EntityFrameworkCore;
-using System.Text;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-
-
-using Microsoft.AspNetCore.SpaServices.AngularCli;
-
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace WebAPI
 {
-
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -32,6 +18,7 @@ namespace WebAPI
 
         public IConfiguration Configuration { get; }
 
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(options =>
@@ -57,36 +44,16 @@ namespace WebAPI
            ValidateLifetime = true,
            ValidateIssuerSigningKey = true,
 
-           ValidIssuer = "https://localhost:44330",
-           ValidAudience = "https://localhost:44330",
+           ValidIssuer = "https://localhost:44342",
+           ValidAudience = "https://localhost:44342",
            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
        };
    });
 
-            services.AddDbContext<ApplicationContext>(options =>
-           options.UseSqlServer(Configuration.GetConnectionString("CatalogConnection")));
-
-            services.AddDbContext<IdentityContext>(options =>
-             options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<IdentityContext>();
-
-            services.AddTransient<IUnitOfWork, EFUnitOfWork>();
-
-            services.AddTransient<IWorkServer, WorkServer>();
-
-            services.AddTransient<IProviderService, ProviderService>();
-            services.AddTransient<ICatalogService, ÑatalogService>();
-            services.AddTransient<IDishService, DishService>();
-            services.AddTransient<ICartService, CartService>();
-            services.AddTransient<IOrderService, OrderService>();
-            services.AddTransient<IMenuService, MenuService>();
-            services.AddTransient<IReportService, ReportService>();
-
             services.AddControllers();
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -119,17 +86,6 @@ namespace WebAPI
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
-
-            //app.UseSpa(spa =>
-            //{             
-
-            //    spa.Options.SourcePath = "ClientApp";
-
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.UseAngularCliServer(npmScript: "start");
-            //    }
-            //});
         }
     }
 }

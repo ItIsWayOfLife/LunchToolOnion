@@ -35,8 +35,8 @@ namespace WebAPI.Controllers
         };
 
                 var tokeOptions = new JwtSecurityToken(
-                    issuer: "https://localhost:44330",
-                    audience: "https://localhost:44330",
+                    issuer: "https://localhost:44342",
+                    audience: "https://localhost:44342",
                         claims: claims,
                     expires: DateTime.Now.AddMinutes(5),
                     signingCredentials: signinCredentials

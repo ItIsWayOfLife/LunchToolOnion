@@ -13,7 +13,7 @@ namespace WebAPI.Controllers
     {
         // GET api/values
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "admin")]
         public IEnumerable<string> Get()
         {
             return new string[] { "John Doe", "Jane Doe" };

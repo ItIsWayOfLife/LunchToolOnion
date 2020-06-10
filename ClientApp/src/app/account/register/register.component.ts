@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 
 export class RegisterModel{
         public email : string;
@@ -12,7 +10,6 @@ export class RegisterModel{
         public passwordConfirm :string;
 }
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,7 +17,9 @@ export class RegisterModel{
 })
 export class RegisterComponent implements OnInit {
 
-  statusMessage: string;
+  statusCode:number;
+  statusOk:boolean = false;
+  statusNotOk:boolean = false;
   registerModel:RegisterModel = new RegisterModel();
 
   ngOnInit(): void {
@@ -29,12 +28,27 @@ export class RegisterComponent implements OnInit {
   constructor(private http: HttpClient) { }
   register() {
     const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-    console.log(this.registerModel.email +" " +this.registerModel.password+" "+this.registerModel.patronymic);
-   return this.http.post("https://localhost:44342/api/account/register", JSON.stringify(this.registerModel),
-     {headers:myHeaders}).subscribe(data => {
-      this.statusMessage = '?'
-  });
    
-}
+   return this.http.post("https://localhost:44342/api/account/register", JSON.stringify(this.registerModel),
+     {headers:myHeaders, observe: 'response' })
+      .subscribe(response => {
 
+        this.statusCode = response.status;
+
+       if (response.status== 200){
+        this.statusOk = true;
+       }
+       else{
+        this.statusOk =  false;
+       }
+       
+        // Or any other header:
+        console.log("Code: "+response.status);
+      },
+      err => {
+        this.statusNotOk = true;
+        console.log("Code: "+err.status);
+        console.log(err.message);
+       } ); 
+    }
 }

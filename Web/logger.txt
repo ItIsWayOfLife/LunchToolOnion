@@ -35,3 +35,13 @@ Hosting environment: Development
 Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 09.06.2020 23:03:40: Processing request Home/Index
 09.06.2020 23:03:40: Processing request Provider/ListFavoriteProvider
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+10.06.2020 22:27:22: Processing request Home/Index
+10.06.2020 22:27:22: Processing request Provider/ListFavoriteProvider
+10.06.2020 22:27:24: Processing request Account/Login
+10.06.2020 22:27:25: User 69efca21-1b21-4791-a1a6-6300b9557cb4 login
+10.06.2020 22:27:25: Processing request Home/Index
+10.06.2020 22:27:25: Processing request Provider/ListFavoriteProvider
+10.06.2020 22:27:29: Processing request Account/Profile

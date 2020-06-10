@@ -1,9 +1,11 @@
 
     <h1 class="text-center">Регистрация</h1>
 <br />
-<div class="text-center">
+<div class="text-center" *ngIf="!statusOk">
     <form method="post" autocomplete="off" >
-        <div class="text-danger"></div>
+        <div *ngIf="statusNotOk" class="text-danger">
+            <h3>Ошибка регистрации.</h3>
+        </div>
         <div>
             <label for="firstname" class="control-label">Имя</label><br />
             <input id="firstname" class="form-control" name="firstname"   placeholder="Имя" [(ngModel)]="registerModel.firstname"/>
@@ -35,4 +37,9 @@
             <input type="submit" (click)="register()" value="Зарегистрироваться"  class="btn btn-sm btn-success"  />
         </div>
     </form>
+    </div>
+    <div class="text-center" *ngIf="statusOk">
+        <h2>
+            Поздравляем {{registerModel.firstname}}! Вы успешно зарегистрированы.
+        </h2>
     </div>

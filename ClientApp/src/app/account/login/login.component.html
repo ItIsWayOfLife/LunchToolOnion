@@ -1,21 +1,21 @@
   <h1 class="text-center">Вход</h1>
   <br />
   <div class="text-center">
-      <form method="post" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <form method="post">
           <div class="text-danger">
             <div *ngIf="invalidLogin" class="alert alert-danger">Неверное имя пользователя или пароль.</div>
             <br/>
           </div>
           <div>
               <label for="email" class="control-label">Логин</label><br />
-              <input type="email" id="username" name="username" ngModel class="form-control" placeholder="Имя пользователя" required autofocus />
+              <input type="email" id="username" name="username" [(ngModel)]="loginModel.userName" class="form-control" placeholder="Имя пользователя" required autofocus />
           </div>
           <div>
               <label for="password" class="control-label">Пароль</label><br />
-              <input type="password" id="password" name="password" ngModel class="form-control" placeholder="Пароль" required autocomplete="off"/> <br/>
+              <input type="password" id="password" name="password" [(ngModel)]="loginModel.password" class="form-control" placeholder="Пароль" required autocomplete="off"/> <br/>
           </div>
           <div>
-              <input type="submit" value="Войти"  class="btn btn-sm btn-success" />
+              <input type="submit"  (click)="login()" value="Войти"  class="btn btn-sm btn-success" />
           </div>
       </form>
   </div>

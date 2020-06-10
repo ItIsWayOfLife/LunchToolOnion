@@ -1,26 +1,27 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
 
+import {LoginModel} from './LoginModel';
+import {AccountService} from '../../service/account.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [AccountService]
 })
 export class LoginComponent {
   invalidLogin: boolean;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  loginModel:LoginModel;
+  
+  constructor(private router: Router, private serv: AccountService) { 
+    this.loginModel = new LoginModel();
+  }
 
-  login(form: NgForm) {
-    let credentials = JSON.stringify(form.value);
-    this.http.post("https://localhost:44342/api/account/login", credentials, {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json"
-      })
-    }).subscribe(response => {
+  login() {
+  this.serv.login(this.loginModel)
+    .subscribe(response => {
       let token = (<any>response).token;
       localStorage.setItem("jwt", token);
       this.invalidLogin = false;

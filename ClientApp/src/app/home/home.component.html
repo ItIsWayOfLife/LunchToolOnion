@@ -12,4 +12,5 @@
   <li><a routerLink="/customers">Customer</a></li>
   <li *ngIf="!isUserAuthenticated()"><a routerLink="/login">Login</a></li>
   <li *ngIf="isUserAuthenticated()"><a class="logout" (click)="logOut()">Logout</a></li>
+
 </ul>

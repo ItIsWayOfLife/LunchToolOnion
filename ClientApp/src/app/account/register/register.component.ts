@@ -1,42 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { Router } from "@angular/router";
 
-export class RegisterModel{
-        public email : string;
-        public firstname :string;
-        public lastname :string;
-        public patronymic :string;
-        public password :string;
-        public passwordConfirm :string;
-}
+import {RegisterModel} from './registerModel';
+import {AccountService} from '../../service/account.service';
+import {LoginModel} from '../login/LoginModel';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  providers: [AccountService]
 })
 export class RegisterComponent implements OnInit {
 
   statusCode:number;
-  statusOk:boolean = false;
-  statusNotOk:boolean = false;
-  registerModel:RegisterModel = new RegisterModel();
+  statusOk:boolean ;
+  statusNotOk:boolean ;
 
+  invalidLogin: boolean;
+  registerModel:RegisterModel;
+  newLogModel: LoginModel;
   ngOnInit(): void {
   }
 
-  constructor(private http: HttpClient) { }
-  register() {
-    const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-   
-   return this.http.post("https://localhost:44342/api/account/register", JSON.stringify(this.registerModel),
-     {headers:myHeaders, observe: 'response' })
+  constructor(private router: Router, private serv: AccountService) {
+    this.registerModel= new RegisterModel();
+    this.statusOk=false;
+    this.statusNotOk = false;
+   }
+
+  register() {   
+  this.serv.register(this.registerModel)
       .subscribe(response => {
 
         this.statusCode = response.status;
 
        if (response.status== 200){
         this.statusOk = true;
+
+        this.newLogModel = new LoginModel();
+        this.newLogModel.userName = this.registerModel.email;
+        this.newLogModel.password = this.registerModel.password;
+        this.serv.login(this.newLogModel).subscribe(response => {
+          let token = (<any>response).token;
+          localStorage.setItem("jwt", token);
+          this.invalidLogin = false;
+        }, err => {
+          this.invalidLogin = true;
+        });;
        }
        else{
         this.statusOk =  false;

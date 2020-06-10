@@ -1,11 +1,20 @@
+using ApplicationCore.Identity;
+using ApplicationCore.Interfaces;
+using ApplicationCore.Services;
+using Infrastructure.Data;
+using Infrastructure.Identity;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WebAPI.Controllers;
 
 namespace WebAPI
 {
@@ -21,6 +30,27 @@ namespace WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ApplicationContext>(options =>
+      options.UseSqlServer(Configuration.GetConnectionString("CatalogConnection")));
+
+            services.AddDbContext<IdentityContext>(options =>
+             options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
+            services.AddTransient<IUnitOfWork, EFUnitOfWork>();
+
+            services.AddTransient<IProviderService, ProviderService>();
+            services.AddTransient<ICatalogService, CatalogService>();
+            services.AddTransient<IDishService, DishService>();
+            services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IMenuService, MenuService>();
+            services.AddTransient<IReportService, ReportService>();
+
+            services.AddTransient<IJwtConfigurator, JwtConfigurator>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("EnableCORS", builder =>
@@ -35,25 +65,26 @@ namespace WebAPI
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
-   .AddJwtBearer(options =>
-   {
-       options.TokenValidationParameters = new TokenValidationParameters
-       {
-           ValidateIssuer = true,
-           ValidateAudience = true,
-           ValidateLifetime = true,
-           ValidateIssuerSigningKey = true,
+           .AddJwtBearer(options =>
+           {
+               options.TokenValidationParameters = new TokenValidationParameters
+               {
+                   ValidateIssuer = true,
+                   ValidateAudience = true,
+                   ValidateLifetime = true,
+                   ValidateIssuerSigningKey = true,
 
-           ValidIssuer = "https://localhost:44342",
-           ValidAudience = "https://localhost:44342",
-           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
-       };
-   });
+                   ValidIssuer = "https://localhost:44342",
+                   ValidAudience = "https://localhost:44342",
+                   IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+               };
+           });
+
+           
 
             services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

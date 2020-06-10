@@ -8,11 +8,11 @@ using System.Linq;
 
 namespace ApplicationCore.Services
 {
-    public class СatalogService : ICatalogService
+    public class CatalogService : ICatalogService
     {
         private IUnitOfWork Database { get; set; }
 
-        public СatalogService(IUnitOfWork uow)
+        public CatalogService(IUnitOfWork uow)
         {
             Database = uow;
         }

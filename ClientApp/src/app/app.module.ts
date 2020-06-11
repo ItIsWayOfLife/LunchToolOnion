@@ -17,6 +17,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { AuthGuard } from './account/guards/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { CustomersComponent } from './customers/customers.component';
+import { ProfileComponent } from './account/profile/profile.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   {   path: 'login', component: LoginComponent},
   {   path: 'register', component: RegisterComponent},
   {   path: 'customers', component: CustomersComponent },
+  {   path: 'account', component: ProfileComponent,  canActivate: [AuthGuard]}
 ]
 
 @NgModule({
@@ -37,7 +39,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    CustomersComponent
+    CustomersComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

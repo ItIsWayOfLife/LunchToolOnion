@@ -1,10 +1,12 @@
 ﻿using ApplicationCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,7 +59,7 @@ namespace WebAPI.Controllers
 
         // GET api/values
         [HttpPost, Route("register")]
-        public async Task<IActionResult> Register( RegisterModel model)
+        public async Task<IActionResult> Register(RegisterModel model)
         {
             if (model == null)
             {
@@ -79,7 +81,7 @@ namespace WebAPI.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return Ok();              
+                    return Ok();
                 }
                 else
                 {
@@ -91,6 +93,33 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        [HttpGet, Route("profile"), Authorize]
+        public IActionResult Profile()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                ApplicationUser user = null;
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
+
+                ProfileModel model = new ProfileModel()
+                {
+                    Firstname = user.Firstname,
+                    Lastname = user.Lastname,
+                    Patronymic = user.Patronomic,
+                    Email = user.Email
+                };
+
+                return new ObjectResult(model);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
 
     }
 }

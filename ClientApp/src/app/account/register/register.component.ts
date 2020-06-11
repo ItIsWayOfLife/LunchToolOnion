@@ -47,6 +47,7 @@ export class RegisterComponent implements OnInit {
           this.invalidLogin = false;
         }, err => {
           this.invalidLogin = true;
+          console.log(err.message);
         });;
        }
        else{

@@ -71,3 +71,17 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 11.06.2020 11:10:55: User 56b52c47-64d6-44cd-8a33-b9bd4bf83cb4 created order 1
 11.06.2020 11:10:55: Processing request Order/Index
 11.06.2020 11:10:57: Processing request Report/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+11.06.2020 15:58:57: Processing request Home/Index
+11.06.2020 15:58:57: Processing request Provider/ListFavoriteProvider
+11.06.2020 15:58:59: Processing request Account/Login
+11.06.2020 15:59:00: User 825d8d09-c52e-4011-b095-870a3e21825c login
+11.06.2020 15:59:00: Processing request Home/Index
+11.06.2020 15:59:00: Processing request Provider/ListFavoriteProvider
+11.06.2020 15:59:01: User 825d8d09-c52e-4011-b095-870a3e21825c logout
+11.06.2020 15:59:01: Processing request Home/Index
+11.06.2020 15:59:01: Processing request Provider/ListFavoriteProvider

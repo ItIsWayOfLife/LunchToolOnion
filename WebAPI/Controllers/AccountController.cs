@@ -120,6 +120,48 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPost, Route("editProfile"), Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Edit(ProfileModel model)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (ModelState.IsValid)
+                {
+                    ApplicationUser user = null;
 
+                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                    user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
+
+                    if (user != null)
+                    {
+                        user.Email = model.Email;
+                        user.UserName = model.Email;
+                        user.Firstname = model.Firstname;
+                        user.Lastname = model.Lastname;
+                        user.Patronomic = model.Patronymic;
+
+                        var result = await _userManager.UpdateAsync(user);
+
+                        if (result.Succeeded)
+                        {
+                            return Ok();
+                        }
+                        else
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
+                        }
+                    }
+                }
+                return BadRequest();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
 }

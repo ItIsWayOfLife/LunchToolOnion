@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 
 import {LoginModel} from '../account/login/LoginModel';
 import {RegisterModel} from '../account/register/registerModel';
-
+import {ProfileModel} from '../account/profile/profileModel';
 
 @Injectable()
 export class AccountService{
@@ -28,5 +28,13 @@ export class AccountService{
     
     getProfile(){
     return this.http.get("https://localhost:44342/api/account/profile");
+  }
+
+  editProfile(model:ProfileModel){
+    const myHeaders = new HttpHeaders().set("Content-Type", "application/json");  
+    let credentials = JSON.stringify(model);
+    
+    return this.http.post("https://localhost:44342/api/account/editProfile", credentials,
+    {headers:myHeaders, observe: 'response' });
   }
 }

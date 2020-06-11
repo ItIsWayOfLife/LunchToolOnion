@@ -5,6 +5,7 @@ import {ProfileModel} from './profileModel';
 import {ChangePasswordModel} from './changePasswordModel';
 import {AccountService} from '../../service/account.service';
 import { ThrowStmt } from '@angular/compiler';
+import { strict } from 'assert';
 
 @Component({
   selector: 'app-profile',
@@ -14,7 +15,11 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class ProfileComponent implements OnInit {
 
- profileModel:ProfileModel;
+   _firstname :string;
+   _lastname :string;
+   _patronymic :string;
+   _email : string;
+
  editProfileModel:ProfileModel;
 
  isEditProfile:boolean;
@@ -28,7 +33,7 @@ export class ProfileComponent implements OnInit {
  isStatusEditPassBad:boolean;
 
   constructor(private serv: AccountService) {
-    this.profileModel = new ProfileModel();
+    
     this.editProfileModel = new ProfileModel();
 
     this.isEditProfile = false;
@@ -42,12 +47,18 @@ export class ProfileComponent implements OnInit {
     this.isStatusEditPassBad = false;
    }
 
+
+   getData(data:ProfileModel){
+    this._email = data.email;
+    this._firstname=data.firstname;
+    this._lastname=data.lastname;
+    this._patronymic=data.patronymic;
+   }
+
   ngOnInit(): void {
-
-
     this.serv.getProfile().subscribe((data:ProfileModel) => {
-      this.profileModel = data;
-      this.editProfileModel =data;
+      this.getData(data);
+      this.editProfileModel = data;
     },
     err=>{
       console.log(err);
@@ -67,7 +78,9 @@ export class ProfileComponent implements OnInit {
      
       if (response.status==200){
         this.isStatusEditGood  = true;
-        this.profileModel=this.editProfileModel;
+       
+         this.getData( this.editProfileModel);
+
         this.isStatusEditBad = false;
       }
       else{
@@ -95,9 +108,6 @@ OkEditPass(){
 }
 
 editPass(){
-
-  console.log("ww "+this.changePasswordModel.newPassword +" "+ this.changePasswordModel.oldPassword);
-
   this.serv.editPass(this.changePasswordModel).subscribe(response=>{
     if (response.status==200){
       this.isStatusEditPassGood  = true;

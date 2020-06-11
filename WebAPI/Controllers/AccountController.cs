@@ -163,5 +163,45 @@ namespace WebAPI.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpPost, Route("changePassword"), Authorize]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                ApplicationUser user = null;
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
+
+                if (user != null)
+                {
+                    IdentityResult result =
+                        await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                    if (result.Succeeded)
+                    {
+                        return Ok();
+                    }
+                    else
+                    {
+                        //foreach (var error in result.Errors)
+                        //{
+                        //    ModelState.AddModelError(string.Empty, error.Description);
+                        //    _logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
+                        //}
+
+                        return BadRequest(result.Errors);
+                    }
+                }
+                else
+                {
+                    //ModelState.AddModelError(string.Empty, _sharedLocalizer["UserNotFound"]);
+                    //_logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
+                    return BadRequest("User not found");
+
+                }
+            }
+            return BadRequest("Model is not valid");
+        }
     }
 }

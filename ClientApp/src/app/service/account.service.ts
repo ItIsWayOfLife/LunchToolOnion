@@ -5,6 +5,8 @@ import { Router } from "@angular/router";
 import {LoginModel} from '../account/login/LoginModel';
 import {RegisterModel} from '../account/register/registerModel';
 import {ProfileModel} from '../account/profile/profileModel';
+import {ChangePasswordModel} from '../account/profile/changePasswordModel';
+import { chainedInstruction } from '@angular/compiler/src/render3/view/util';
 
 @Injectable()
 export class AccountService{
@@ -35,6 +37,14 @@ export class AccountService{
     let credentials = JSON.stringify(model);
     
     return this.http.post("https://localhost:44342/api/account/editProfile", credentials,
+    {headers:myHeaders, observe: 'response' });
+  }
+
+  editPass(model:ChangePasswordModel){
+    const myHeaders = new HttpHeaders().set("Content-Type", "application/json");  
+    let credentials = JSON.stringify(model);
+
+    return this.http.post("https://localhost:44342/api/account/changePassword", credentials,
     {headers:myHeaders, observe: 'response' });
   }
 }

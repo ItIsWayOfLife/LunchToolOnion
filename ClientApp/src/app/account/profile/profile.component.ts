@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Input} from '@angular/core'; 
 
 import {ProfileModel} from './profileModel';
+import {ChangePasswordModel} from './changePasswordModel';
 import {AccountService} from '../../service/account.service';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-profile',
@@ -19,11 +21,25 @@ export class ProfileComponent implements OnInit {
  isStatusEditGood:boolean;
  isStatusEditBad:boolean;
 
+ changePasswordModel:ChangePasswordModel;
+
+ isEditPass:boolean;
+ isStatusEditPassGood:boolean;
+ isStatusEditPassBad:boolean;
+
   constructor(private serv: AccountService) {
     this.profileModel = new ProfileModel();
     this.editProfileModel = new ProfileModel();
+
     this.isEditProfile = false;
+    this.isStatusEditGood=false;
     this.isStatusEditBad = false;
+
+    this.changePasswordModel = new ChangePasswordModel();
+
+    this.isEditPass =false;
+    this.isStatusEditPassGood= false;
+    this.isStatusEditPassBad = false;
    }
 
   ngOnInit(): void {
@@ -41,6 +57,9 @@ export class ProfileComponent implements OnInit {
 
   editProfileShow(){
     this.isEditProfile =!this.isEditProfile;
+    if (this.isEditPass){
+      this.isEditPass = false;
+    }
   }
 
   editProfile(){ 
@@ -48,10 +67,7 @@ export class ProfileComponent implements OnInit {
      
       if (response.status==200){
         this.isStatusEditGood  = true;
-        this.profileModel.email=this.editProfileModel.email;
-        this.profileModel.firstname=this.editProfileModel.firstname;
-        this.profileModel.lastname=this.editProfileModel.lastname;
-        this.profileModel.patronymic=this.editProfileModel.patronymic;
+        this.profileModel=this.editProfileModel;
         this.isStatusEditBad = false;
       }
       else{
@@ -68,4 +84,32 @@ export class ProfileComponent implements OnInit {
     this.isStatusEditGood = !this.isStatusEditGood;
   }
 
+  editPassShow(){
+this.isEditPass=!this.isEditPass;
+if (this.isEditProfile){
+  this.isEditProfile = false;
+}
+}
+OkEditPass(){
+  this.isStatusEditPassGood = !this.isStatusEditPassGood;
+}
+
+editPass(){
+
+  console.log("ww "+this.changePasswordModel.newPassword +" "+ this.changePasswordModel.oldPassword);
+
+  this.serv.editPass(this.changePasswordModel).subscribe(response=>{
+    if (response.status==200){
+      this.isStatusEditPassGood  = true;
+      this.isStatusEditPassBad = false;
+    }
+    else{
+      this.isStatusEditPassBad = true;
+    }
+  },err => {
+    console.log(err);
+    this.isStatusEditPassBad = true;
+  }
+  );
+}
 }

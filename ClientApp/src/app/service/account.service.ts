@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import {LoginModel} from '../account/login/LoginModel';
 import {RegisterModel} from '../account/register/registerModel';
 
+
 @Injectable()
 export class AccountService{
 
@@ -24,4 +25,8 @@ export class AccountService{
            return this.http.post("https://localhost:44342/api/account/register", credentials,
            {headers:myHeaders, observe: 'response' });
     }
+    
+    getProfile(){
+    return this.http.get("https://localhost:44342/api/account/profile");
+  }
 }

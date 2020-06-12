@@ -111,3 +111,23 @@ Hosting environment: Development
 Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 12.06.2020 16:30:26: Processing request Home/Index
 12.06.2020 16:30:26: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+12.06.2020 22:19:52: Processing request Home/Index
+12.06.2020 22:19:52: Processing request Provider/ListFavoriteProvider
+12.06.2020 22:19:55: Processing request Account/Login
+12.06.2020 22:19:56: User e3f7a118-d605-4839-9ff9-b708bf55da72 login
+12.06.2020 22:19:56: Processing request Home/Index
+12.06.2020 22:19:56: Processing request Provider/ListFavoriteProvider
+12.06.2020 22:19:57: Processing request Users/Index
+12.06.2020 22:20:09: Processing request Users/ChangePassword
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+12.06.2020 22:36:43: Processing request Home/Index
+12.06.2020 22:36:43: Processing request Provider/ListFavoriteProvider

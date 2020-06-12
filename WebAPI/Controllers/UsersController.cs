@@ -164,50 +164,56 @@ namespace WebAPI.Controllers
               return NotFound(); 
         }
 
-      
+        [HttpPost, Route("changePassword"), Authorize]
+        public async Task<IActionResult> ChangePassword(UserModelChangePasword model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var user = await _userManager.FindByIdAsync(model.Id);
+                    if (user != null)
+                    {
+                        IdentityResult result =
+                            await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                        if (result.Succeeded)
+                        {
+                            //string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                            //_logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} changed password user: {model.Id}");
 
-        //[HttpPost]
-        //public async Task<IActionResult> ChangePassword(Models.Users.ChangePasswordViewModel model)
-        //{
-        //    try
-        //    {
-        //        if (ModelState.IsValid)
-        //        {
-        //            var user = await _userManager.FindByIdAsync(model.Id);
-        //            if (user != null)
-        //            {
-        //                IdentityResult result =
-        //                    await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-        //                if (result.Succeeded)
-        //                {
-        //                    string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //                    _logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} changed password user: {model.Id}");
+                            return Ok(model);
+                        }
+                        else
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                //ModelState.AddModelError(string.Empty, error.Description);
+                                //_logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
 
-        //                    return RedirectToAction("Index");
-        //                }
-        //                else
-        //                {
-        //                    foreach (var error in result.Errors)
-        //                    {
-        //                        ModelState.AddModelError(string.Empty, error.Description);
-        //                        _logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
-        //                    }
-        //                }
-        //            }
-        //            else
-        //            {
-        //                ModelState.AddModelError(string.Empty, _sharedLocalizer["UserNotFound"]);
-        //                _logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
-        //            }
-        //        }
-        //    }
-        //    catch (ApplicationCore.Exceptions.ValidationException ex)
-        //    {
-        //        ModelState.AddModelError(ex.Property, ex.Message);
-        //        _logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
-        //    }
+                                return BadRequest(error);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //ModelState.AddModelError(string.Empty, _sharedLocalizer["UserNotFound"]);
+                        //_logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
+                        return BadRequest("User not found");
+                    }
+                }
+                else
+                {
+                    return BadRequest("No valid");
+                }
+            }
+            catch (ApplicationCore.Exceptions.ValidationException ex)
+            {
+                ModelState.AddModelError(ex.Property, ex.Message);
+                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                return BadRequest(ex);
+            }
 
-        //    return View(model);
-        //}
+            return BadRequest(model);
+        }
     }
 }

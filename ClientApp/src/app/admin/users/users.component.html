@@ -4,6 +4,7 @@
 
 <div *ngIf="isAmdim">
 
+    <!-- view users -->
     <div *ngIf="isShowStatusMessage">
         <p>{{statusMessage}}</p>
         <button (click)="showStatusMess()">Ok</button>
@@ -20,6 +21,7 @@
                 <td>ФИО</td>
                 <td></td>
                 <td></td>
+                <td></td>
             </tr>
         </thead>
         <tbody>
@@ -31,13 +33,18 @@
             <input type="button" value="Изменить" class="btn btn-danger" (click)="editUser(user)" />
         </td>
         <td>
+            <!-- delete user -->
             <input type="button" value="Удалить" (click)="deleteUser(user)" class="btn btn-danger" />
+        </td>
+        <td>
+            <input type="button" value="Сменить пароль" (click)="changePassUser(user.id)" class="btn btn-danger" />
         </td>
             </tr>
         </tbody>
     </table>
 </div>  
 
+<!-- add user -->
 <div *ngIf="isNewRecord">
     <form method="post" autocomplete="off" >
         <div>
@@ -65,13 +72,14 @@
         <br />
         <div>
             <input type="button" value="Сохранить" (click)="saveUser()" class="btn btn-success" />
-        </div>
+        </div><br/>
         <div>
-            <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+            <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
         </div>
     </form>
 </div>   
 
+<!--edit user -->
 <div *ngIf="isEdit">
     <form method="post" autocomplete="off" >
         <div>
@@ -99,16 +107,40 @@
         <br />
         <div>
             <input type="button" value="Изменить" (click)="saveUser()" class="btn btn-success" />
-        </div>
+        </div><br/>
         <div>
-            <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+            <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
         </div>
     </form>
 </div>   
 
+<!-- change password user -->
+
+<div *ngIf="isChangePasword">
+    <form method="post" autocomplete="off">
+        <div>
+            <input type="text"  name="id" id="id"  class="form-control" [(ngModel)]="userChangePassword.id" hidden />
+        </div>
+        <div class="form-group">
+            <label for="oldPassword" class="control-label">Старый пароль</label>
+            <input name="oldPassword" [(ngModel)]="userChangePassword.oldPassword" type="text" id="oldPassword" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="newPassword" class="control-label">Новый пароль</label>
+            <input name="newPassword" [(ngModel)]="userChangePassword.newPassword" type="text" id="newPassword" class="form-control" />
+        </div>
+        <div class="form-group">
+            <input type="submit" (click)="editPassUser()" value="Изменить" class="btn btn-sm btn-success" />
+        </div>
+        <div>
+            <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+        </div>
+    </form>
+</div>
 
 </div>
 <div *ngIf="!isAmdim">
     Войдите как Администратор.
     </div>
 </div>
+<br/>

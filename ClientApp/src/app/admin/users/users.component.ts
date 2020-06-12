@@ -2,8 +2,8 @@ import { Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 
 import {RolesService} from '../../service/roles.service';
 import {User} from './user';
-import { Router } from "@angular/router";
 import {UserService} from '../../service/user.service';
+import {UserChangePassword} from './userChangePassword';
 
 @Component({
   selector: 'app-users',
@@ -13,12 +13,8 @@ import {UserService} from '../../service/user.service';
 })
 export class UsersComponent implements OnInit {
 
-   //типы шаблонов
-   @ViewChild('readOnlyTemplate', {static: false}) readOnlyTemplate: TemplateRef<any>;
-   @ViewChild('editTemplate', {static: false}) editTemplate: TemplateRef<any>;
-
-  myRoles:Array<string>;
-  isAmdim:boolean;
+    myRoles:Array<string>;
+    isAmdim:boolean;
 
     editedUser: User;
     users: Array<User>;
@@ -28,13 +24,20 @@ export class UsersComponent implements OnInit {
     isShowStatusMessage:boolean;
     statusMessage: string;
 
+    userChangePassword:UserChangePassword;
+    isChangePasword:boolean;
+
+
   constructor(private rolesServ: RolesService, private usersServ: UserService) {
     this.users = new Array<User>();
     this.myRoles = new Array<string>();
     this.isView = true;
     this.isNewRecord = false;
     this.isShowStatusMessage = false;
-this.isEdit=false;
+    this.isEdit=false;
+
+    this.userChangePassword = new UserChangePassword();
+    this.isChangePasword = false;
    }
 
   ngOnInit(): void {
@@ -42,8 +45,8 @@ this.isEdit=false;
           this.loadUsers();
   }
 
-// получение ролей
-private getRoles(){
+// get roles
+ getRoles(){
   this.myRoles = this.rolesServ.MyGetRelos();
   if (this.myRoles!=null){
   if (this.myRoles.includes("admin")){
@@ -58,14 +61,14 @@ private getRoles(){
         }
 }
 
-  //загрузка пользователей
-  private loadUsers() {
+  // load users
+  loadUsers() {
     this.usersServ.getUsers().subscribe((data: User[]) => {
             this.users = data; 
         });
 }
 
-  // добавление пользователя
+  // add user
   addUser() {
     this.editedUser = new User();
     this.users.push(this.editedUser);
@@ -73,14 +76,14 @@ private getRoles(){
     this.isView = false;
 }
 
- // редактирование пользователя
+ // edit user
  editUser(user: User) {
    this.isEdit = true;
    this.isView = false;
   this.editedUser = user;
 }
 
-// сохраняем пользователя
+// save user
 saveUser() {
   this.isShowStatusMessage=true;
     if (this.isNewRecord) {
@@ -112,7 +115,8 @@ saveUser() {
     }
     // this.editedUser = null;
 }
-// отмена редактирования
+
+// cancel (back)
 cancel() {
     // если отмена при добавлении, удаляем последнюю запись
     if (this.isNewRecord) {
@@ -121,9 +125,10 @@ cancel() {
     this.isNewRecord = false;
     this.isView = true;
     this.isEdit= false;
+    this.isChangePasword=false;
     this.editedUser = null;
 }
-// удаление пользователя
+// delete user
 deleteUser(user: User) {
   this.isShowStatusMessage=true;
     this.usersServ.deleteUser(user.id).subscribe(response => {
@@ -142,10 +147,34 @@ this.statusMessage = 'Ошибка удаления';
 );
 }
 
+// show info
 showStatusMess(){
 this.isShowStatusMessage=!this.isShowStatusMessage;
 this.isNewRecord = false;
 this.isView = true;
 this.isEdit= false;
+this.isChangePasword = false;
 }
+
+// edit pass get data
+changePassUser(id:string){
+  this.userChangePassword = new UserChangePassword();
+  this.userChangePassword.id=id;
+  this.isView = false;
+ this.isChangePasword=true;
+}
+
+// edit pass
+editPassUser(){
+  this.isShowStatusMessage=true;
+  this.usersServ.changePass(this.userChangePassword).subscribe(response=>{
+    this.statusMessage = 'Пароль успешно изменен';     
+    console.log(response.status);
+  },
+  err=>{
+    this.statusMessage = 'Ошибка при изменении пароля';
+    console.log(err);
+  });
+}
+
 }

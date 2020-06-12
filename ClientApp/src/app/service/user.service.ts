@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../admin/users/user';
-
+import {UserChangePassword} from '../admin/users/userChangePassword';
 
 @Injectable()
 export class UserService{
@@ -24,5 +24,10 @@ export class UserService{
     deleteUser(id: string){
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
         return this.http.delete(this.url + '/' + id, {headers:myHeaders, observe: 'response'});
+    }
+
+    changePass(userChangePass:UserChangePassword){
+        const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
+        return this.http.post(this.url + '/changePassword', JSON.stringify(userChangePass) ,{headers:myHeaders, observe: 'response'});
     }
 }

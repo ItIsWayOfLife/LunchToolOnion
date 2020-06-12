@@ -24,6 +24,7 @@ export class UsersComponent implements OnInit {
     users: Array<User>;
     isView:boolean;
     isNewRecord: boolean;
+    isEdit:boolean;
     isShowStatusMessage:boolean;
     statusMessage: string;
 
@@ -33,7 +34,7 @@ export class UsersComponent implements OnInit {
     this.isView = true;
     this.isNewRecord = false;
     this.isShowStatusMessage = false;
-
+this.isEdit=false;
    }
 
   ngOnInit(): void {
@@ -74,15 +75,9 @@ private getRoles(){
 
  // редактирование пользователя
  editUser(user: User) {
-  this.editedUser = new User();
-}
-// загружаем один из двух шаблонов
-loadTemplate(user: User) {
-  if (this.editedUser && this.editedUser.id === user.id) {
-      return this.editTemplate;
-  } else {
-      return this.readOnlyTemplate;
-  }
+   this.isEdit = true;
+   this.isView = false;
+  this.editedUser = user;
 }
 
 // сохраняем пользователя
@@ -93,33 +88,39 @@ saveUser() {
         this.usersServ.createUser(this.editedUser).subscribe(response => {
                    
             this.loadUsers();  
-            this.statusMessage = 'Данные успешно добавлены',    
-            this.editedUser = null;  
+            this.statusMessage = 'Данные успешно добавлены';
+            
             console.log(response.status);
           }           
           ,err=>{
-          this.statusMessage = 'Ошибка при добавлении данных',
+          this.statusMessage = 'Ошибка при добавлении данных';
           console.log(err);
         }       
         );
-       
     } else {
         // изменяем пользователя
-        this.usersServ.updateUser(this.editedUser).subscribe(data => {
-            this.statusMessage = 'Данные успешно обновлены',
+        this.usersServ.updateUser(this.editedUser).subscribe(response => {
+          
             this.loadUsers();
-        });
-        this.editedUser = null;
+            this.statusMessage = 'Данные успешно изменены';
+            console.log(response.status);
+        },
+        err=>{
+          this.statusMessage = 'Ошибка при изменении данных';
+          console.log(err);
+        });      
     }
+    // this.editedUser = null;
 }
 // отмена редактирования
 cancel() {
     // если отмена при добавлении, удаляем последнюю запись
     if (this.isNewRecord) {
         this.users.pop();
-        this.isNewRecord = false;
-        this.isView = true;
     }
+    this.isNewRecord = false;
+    this.isView = true;
+    this.isEdit= false;
     this.editedUser = null;
 }
 // удаление пользователя
@@ -145,5 +146,6 @@ showStatusMess(){
 this.isShowStatusMessage=!this.isShowStatusMessage;
 this.isNewRecord = false;
 this.isView = true;
+this.isEdit= false;
 }
 }

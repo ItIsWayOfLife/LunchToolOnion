@@ -29,4 +29,27 @@ export class HomeComponent {
     
   }
 
+  test(){
+    let token: string = localStorage.getItem("jwt");
+
+    let jwtData = token.split('.')[1]
+    let decodedJwtJsonData = window.atob(jwtData)
+    let decodedJwtData = JSON.parse(decodedJwtJsonData)
+    
+    var splitted = decodedJwtJsonData.substring(decodedJwtJsonData.indexOf('['),decodedJwtJsonData.indexOf(']')).slice(1); 
+
+    var roles = splitted.split(','); 
+    console.log("wwws: "+roles[0])
+
+    console.log(splitted)
+
+    let isAdmin = decodedJwtData.admin
+    
+    console.log('jwtData: ' + jwtData)
+    console.log('decodedJwtJsonData: ' + decodedJwtJsonData)
+    console.log('decodedJwtData: ' + decodedJwtData)
+    console.log('Is admin: ' + isAdmin)
+
+  }
+
 }

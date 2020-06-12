@@ -85,3 +85,29 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 11.06.2020 15:59:01: User 825d8d09-c52e-4011-b095-870a3e21825c logout
 11.06.2020 15:59:01: Processing request Home/Index
 11.06.2020 15:59:01: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+12.06.2020 1:39:38: Processing request Home/Index
+12.06.2020 1:39:38: Processing request Provider/ListFavoriteProvider
+12.06.2020 1:39:40: Processing request Account/Login
+12.06.2020 1:39:42: User 825d8d09-c52e-4011-b095-870a3e21825c login
+12.06.2020 1:39:42: Processing request Home/Index
+12.06.2020 1:39:42: Processing request Provider/ListFavoriteProvider
+12.06.2020 1:39:44: Processing request Users/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+12.06.2020 10:17:04: Processing request Home/Index
+12.06.2020 10:17:04: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+12.06.2020 16:30:26: Processing request Home/Index
+12.06.2020 16:30:26: Processing request Provider/ListFavoriteProvider

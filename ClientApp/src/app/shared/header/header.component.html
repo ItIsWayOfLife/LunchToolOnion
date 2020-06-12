@@ -5,11 +5,10 @@
                 <li class="nav-item">
                     <a class="nav-link" href="">Поставщики</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Поставщики</a>
+                <li class="nav-item" *ngIf="isAmdim">
+                    <a class="nav-link" routerLink="users">Пользователи</a>
                 </li>
             </ul>
-       
                 <div class="navbar-collapse collapse justify-content-end">
                     <ul class="navbar-nav text-right">
                         <li class="nav-item" *ngIf="!isUserAuthenticated()">

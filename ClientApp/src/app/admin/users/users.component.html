@@ -1,0 +1,80 @@
+<div class="text-center">
+<h1 class="text-center">Пользователи</h1>
+<br />
+
+<div *ngIf="isAmdim">
+
+    <div *ngIf="isShowStatusMessage">
+        <p>{{statusMessage}}</p>
+        <button (click)="showStatusMess()">Ok</button>
+        <br/> <br/>
+    </div>
+    <div *ngIf="isView">
+    <input type="button" value="Добавить" class="btn btn-success" (click)="addUser()" />
+    <br/><br/>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>Id</td>
+                <td>Email</td>
+                <td>ФИО</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.id}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.lastname}} {{user.firstname}} {{user.patronymic}}</td>
+        <td>
+            <input type="button" value="Изменить" class="btn btn-default" (click)="editUser(user)" />
+        </td>
+        <td>
+            <input type="button" value="Удалить" (click)="deleteUser(user)" class="btn btn-danger" />
+        </td>
+            </tr>
+        </tbody>
+    </table>
+</div>  
+
+<div *ngIf="isNewRecord">
+    <form method="post" autocomplete="off" >
+        <div>
+            <label for="firstname" class="control-label">Имя</label><br />
+            <input name="firstname" id="firstname" class="form-control" placeholder="Имя" [(ngModel)]="editedUser.firstname"/>
+            <span></span>
+        </div>
+        <div>
+            <label for="lastname" class="control-label">Фамилия</label><br />
+            <input  name="lastname" id="lastname" class="form-control" [(ngModel)]="editedUser.lastname"  placeholder="Фамилия" />
+            <span></span>
+        </div>
+        <div>
+            <label for="patronymic" class="control-label">Отчество</label><br />
+            <input  name="patronymic" id="patronymic" class="form-control" [(ngModel)]="editedUser.patronymic" placeholder="Отчество"/>
+        </div>
+        <div>
+            <label for="email" class="control-label">Email</label><br />
+            <input  name="email" id="email" class="form-control" [(ngModel)]="editedUser.email" placeholder="Email"/>
+        </div>
+        <div>
+            <label for="password" class="control-label">Пароль</label><br />
+            <input  name="password" id="password" class="form-control"  [(ngModel)]="editedUser.password"  placeholder="Пароль"/>
+        </div>
+        <br />
+        <div>
+            <input type="button" value="Сохранить" (click)="saveUser()" class="btn btn-success" />
+        </div>
+        <div>
+            <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+        </div>
+    </form>
+</div>   
+
+
+</div>
+<div *ngIf="!isAmdim">
+    Войдите как Администратор.
+    </div>
+</div>

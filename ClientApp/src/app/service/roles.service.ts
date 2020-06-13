@@ -35,8 +35,6 @@ export class RolesService{
      }
 
      editRoles(userChangeRoles:UserChangeRoles){
-      console.log("id1: "+userChangeRoles.id);
-      console.log("roles2: "+userChangeRoles.roles);
       const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
       return this.http.put(this.url, JSON.stringify(userChangeRoles), {headers:myHeaders, observe: 'response'});
      }

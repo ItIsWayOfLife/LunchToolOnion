@@ -11,6 +11,20 @@
         <br/> <br/>
     </div>
     <div *ngIf="isView">
+        
+        <div class="form-inline form-group">
+            <form autocomplete="off">
+            <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control" style="margin-left: 5px;">
+                <option>Поиск по</option>
+                <option>Id</option>
+                <option>Email</option>
+                <option>ФИО</option>
+            </select>
+            <input type="text" name="name" class="form-control" [(ngModel)]="searchStr" style="margin-left: 5px;" placeholder="Поиск"/>
+            <input type="button" value="Обновить" (click)="refresh()" class="btn btn-sm btn-success" style="margin-left: 5px;"/>
+            </form>
+        </div>
+        <br/>
     <input type="button" value="Добавить" class="btn btn-success" (click)="addUser()" />
     <br/><br/>
     <table class="table table-striped">
@@ -26,7 +40,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users">
+            <tr *ngFor="let user of getViewUsers()">
                 <td>{{user.id}}</td>
         <td>{{user.email}}</td>
         <td>{{user.lastname}} {{user.firstname}} {{user.patronymic}}</td>

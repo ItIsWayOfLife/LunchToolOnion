@@ -5,4 +5,8 @@ export class User{
     public patronymic : string;
     public email : string;
     public password:string;
+
+ public getFLP():string{
+        return this.firstname +" "+this.lastname+" "+this.patronymic;
+    }
 }

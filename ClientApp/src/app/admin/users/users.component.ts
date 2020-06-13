@@ -5,6 +5,7 @@ import {User} from './user';
 import {UserService} from '../../service/user.service';
 import {UserChangePassword} from './userChangePassword';
 import {UserChangeRoles} from './userChangeRoles';
+import { strict } from 'assert';
 ;
 
 @Component({
@@ -36,6 +37,9 @@ export class UsersComponent implements OnInit {
 
     allRoles:Array<string>;
 
+    searchSelectionString:string;
+    searchStr:string;
+
   constructor(private rolesServ: RolesService, private usersServ: UserService) {
     this.users = new Array<User>();
     this.myRoles = new Array<string>();
@@ -51,6 +55,8 @@ export class UsersComponent implements OnInit {
     this.userChangeRoles = new UserChangeRoles();
     this.allRoles = new Array<string>();
 
+    this.searchSelectionString="Поиск по";
+    this.searchStr="";
    }
 
   ngOnInit(): void {
@@ -246,6 +252,33 @@ pressRole(role:string){
         this.userChangeRoles.roles.splice(index, 1);
     }
   }
+}
+
+getViewUsers():Array<User>{
+if (this.searchSelectionString=="Id"){
+  return this.users.filter(x=>x.id.toLowerCase().includes(this.searchStr.toLowerCase()));
+}
+else if (this.searchSelectionString=="Email"){
+  return this.users.filter(x=>x.email.toLowerCase().includes(this.searchStr.toLowerCase()));
+}
+else if (this.searchSelectionString=="ФИО"){
+  let selectUserByFLP : Array<User>   = new Array<User>();
+
+  for (let user of this.users){
+  let flp : string = user.firstname +" "+user.lastname+" "+user.patronymic;
+  if (flp.toLowerCase().includes(this.searchStr.toLowerCase())){
+    selectUserByFLP.push(user);
+  }
+}
+  return selectUserByFLP;
+}
+
+return this.users;
+}
+
+refresh(){
+ this.searchSelectionString="Поиск по";
+ this.searchStr ="";
 }
 
 }

@@ -131,3 +131,34 @@ Hosting environment: Development
 Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 12.06.2020 22:36:43: Processing request Home/Index
 12.06.2020 22:36:43: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+13.06.2020 0:32:04: Processing request Home/Index
+13.06.2020 0:32:04: Processing request Provider/ListFavoriteProvider
+13.06.2020 0:32:06: Processing request Account/Login
+Invalid password for user e3f7a118-d605-4839-9ff9-b708bf55da72.
+User e3f7a118-d605-4839-9ff9-b708bf55da72 failed to provide the correct password.
+13.06.2020 0:32:20: User e3f7a118-d605-4839-9ff9-b708bf55da72 login
+13.06.2020 0:32:20: Processing request Home/Index
+13.06.2020 0:32:20: Processing request Provider/ListFavoriteProvider
+13.06.2020 0:32:22: Processing request Users/Index
+13.06.2020 0:32:24: Processing request Roles/Edit
+13.06.2020 0:32:27: Processing request Users/Index
+13.06.2020 0:32:29: Processing request Roles/Edit
+13.06.2020 0:32:42: Processing request Users/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+13.06.2020 13:35:38: Processing request Home/Index
+13.06.2020 13:35:38: Processing request Provider/ListFavoriteProvider
+13.06.2020 13:35:42: Processing request Account/Login
+13.06.2020 13:35:43: User e3f7a118-d605-4839-9ff9-b708bf55da72 login
+13.06.2020 13:35:43: Processing request Home/Index
+13.06.2020 13:35:43: Processing request Provider/ListFavoriteProvider
+13.06.2020 13:35:44: Processing request Users/Index
+13.06.2020 13:35:45: Processing request Roles/Edit

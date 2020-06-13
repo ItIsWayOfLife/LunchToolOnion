@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
   isAmdim:boolean;
 
   constructor(private jwtHelper: JwtHelperService, private router: Router, private rolesServ: RolesService) {
-    this.myRoles = rolesServ.MyGetRelos();
+    this.myRoles = rolesServ.myGetRelos();
     if (this.myRoles!=null){
     if (this.myRoles.includes("admin")){
       this.isAmdim=true;

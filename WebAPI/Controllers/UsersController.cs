@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +15,7 @@ namespace WebAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-
+      
         public UsersController(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
@@ -164,7 +162,7 @@ namespace WebAPI.Controllers
               return NotFound(); 
         }
 
-        [HttpPost, Route("changePassword"), Authorize]
+        [HttpPost, Route("changePassword")]
         public async Task<IActionResult> ChangePassword(UserModelChangePasword model)
         {
             try
@@ -215,5 +213,7 @@ namespace WebAPI.Controllers
 
             return BadRequest(model);
         }
+
+       
     }
 }

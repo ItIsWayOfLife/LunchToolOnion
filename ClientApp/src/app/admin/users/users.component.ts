@@ -4,6 +4,8 @@ import {RolesService} from '../../service/roles.service';
 import {User} from './user';
 import {UserService} from '../../service/user.service';
 import {UserChangePassword} from './userChangePassword';
+import {UserChangeRoles} from './userChangeRoles';
+;
 
 @Component({
   selector: 'app-users',
@@ -21,12 +23,18 @@ export class UsersComponent implements OnInit {
     isView:boolean;
     isNewRecord: boolean;
     isEdit:boolean;
+  
     isShowStatusMessage:boolean;
+    
     statusMessage: string;
 
     userChangePassword:UserChangePassword;
     isChangePasword:boolean;
 
+    isChangeRoles:boolean;
+    userChangeRoles:UserChangeRoles;
+
+    allRoles:Array<string>;
 
   constructor(private rolesServ: RolesService, private usersServ: UserService) {
     this.users = new Array<User>();
@@ -38,6 +46,11 @@ export class UsersComponent implements OnInit {
 
     this.userChangePassword = new UserChangePassword();
     this.isChangePasword = false;
+
+    this.isChangeRoles = false;
+    this.userChangeRoles = new UserChangeRoles();
+    this.allRoles = new Array<string>();
+
    }
 
   ngOnInit(): void {
@@ -47,7 +60,7 @@ export class UsersComponent implements OnInit {
 
 // get roles
  getRoles(){
-  this.myRoles = this.rolesServ.MyGetRelos();
+  this.myRoles = this.rolesServ.myGetRelos();
   if (this.myRoles!=null){
   if (this.myRoles.includes("admin")){
     this.isAmdim=true;
@@ -127,6 +140,7 @@ cancel() {
     this.isEdit= false;
     this.isChangePasword=false;
     this.editedUser = null;
+    this.isChangeRoles = false;
 }
 // delete user
 deleteUser(user: User) {
@@ -153,6 +167,7 @@ this.isShowStatusMessage=!this.isShowStatusMessage;
 this.isNewRecord = false;
 this.isView = true;
 this.isEdit= false;
+this.isChangeRoles = false;
 this.isChangePasword = false;
 }
 
@@ -175,6 +190,38 @@ editPassUser(){
     this.statusMessage = 'Ошибка при изменении пароля';
     console.log(err);
   });
+}
+
+changeRolesUser(id:string){
+  this.userChangeRoles = new UserChangeRoles();
+
+  this.userChangeRoles.roles =  new Array<string>();
+  this.allRoles = new Array<string>();
+  this.userChangeRoles.id = id;
+  
+  this.isView = false;
+  this.isChangeRoles = true;
+  
+  this.rolesServ.getUserRoles(id).subscribe((data:string[])=>{
+    this.userChangeRoles.roles = data;
+  });
+  
+  this.rolesServ.getRoles().subscribe((data: string[])=> {
+    this.allRoles = data;
+});
+}
+
+checkRole(role:string):boolean{
+  if (this.userChangeRoles.roles.includes(role)){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+editUserRoles(){
+  console.log(this.userChangeRoles.roles);
 }
 
 }

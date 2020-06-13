@@ -37,7 +37,6 @@ namespace WebAPI.Controllers
             return result.Succeeded;
         }
 
-        // GET api/values
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody] LoginModel user)
         {
@@ -57,7 +56,6 @@ namespace WebAPI.Controllers
             }
         }
 
-        // GET api/values
         [HttpPost, Route("register")]
         public async Task<IActionResult> Register(RegisterModel model)
         {
@@ -165,6 +163,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost, Route("changePassword"), Authorize]
+
         public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
         {
             if (ModelState.IsValid)

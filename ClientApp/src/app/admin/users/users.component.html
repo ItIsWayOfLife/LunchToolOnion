@@ -148,10 +148,10 @@
             <div *ngFor="let role of allRoles; ; let i = index"> 
                 <span *ngIf="checkRole(role); then thenBlock else elseBlock"></span>   
                 <ng-template #thenBlock>           
-                <input id="id{{i}}" type="checkbox" name="role"  checked/>   
+                <input id="id{{i}}" type="checkbox" name="role"  checked (click)="pressRole(role)" />
             </ng-template>       
             <ng-template #elseBlock>
-                    <input id="id{{i}}" type="checkbox" name="role"/>
+                    <input id="id{{i}}" type="checkbox" name="role" (click)="pressRole(role)"/>
                 </ng-template>   
                 <label for="id{{i}}"> {{role}}</label><br/>             
        </div>

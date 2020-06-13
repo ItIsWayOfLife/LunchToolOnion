@@ -221,7 +221,31 @@ checkRole(role:string):boolean{
 }
 
 editUserRoles(){
-  console.log(this.userChangeRoles.roles);
+  this.isShowStatusMessage=true;
+
+  console.log("id: "+this.userChangeRoles.id);
+  console.log("roles: "+this.userChangeRoles.roles);
+
+  this.rolesServ.editRoles(this.userChangeRoles).subscribe(response=>{
+    this.statusMessage = 'Права доступа успешно изменен';     
+    console.log(response.status);
+  },
+  err=>{
+    this.statusMessage = 'Ошибка при изменении прав доступа';
+    console.log(err);
+  });
+}
+
+pressRole(role:string){
+  if (!this.userChangeRoles.roles.includes(role)){
+    this.userChangeRoles.roles.push(role);
+  }
+  else{
+    const index: number = this.userChangeRoles.roles.indexOf(role);
+    if (index !== -1) {
+        this.userChangeRoles.roles.splice(index, 1);
+    }
+  }
 }
 
 }

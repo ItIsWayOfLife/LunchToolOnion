@@ -135,6 +135,10 @@ namespace WebAPI.Controllers
                         }
                     }
                 }
+                else
+                {
+                    return BadRequest("User not found");
+                }
             }
             return BadRequest("No valid");
         }

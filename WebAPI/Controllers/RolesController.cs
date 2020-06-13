@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Models;
@@ -54,8 +55,12 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(UserChangeRoles model)
+        public async Task<IActionResult> Put([FromBody] UserChangeRoles model)
         {
+            StreamWriter stream = new StreamWriter("text.txt");
+            stream.Write(model.Id);
+            stream.Close();
+
             // получаем пользователя
             ApplicationUser user = await _userManager.FindByIdAsync(model.Id);
             if (user != null)
@@ -76,11 +81,10 @@ namespace WebAPI.Controllers
                 //string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 //_logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} changed role for user {userId}");
 
-                return RedirectToAction("Index", "Users");
+                return Ok(model);
             }
 
-            return NotFound();
+            return NotFound("User not found");
         }
-
     }
 }

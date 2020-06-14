@@ -1,0 +1,11 @@
+<!-- view provider -->
+<div class="row mt-5 mb-2">
+    <div *ngFor="let provider of providers;"> 
+      <div class=".col-sm-4 providerView"> 
+        <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" alt="provider.name" /></a>
+        <p>Id: {{provider.id}}</p>
+        <p>Название: {{provider.name}}</p>
+        <p>Email: {{provider.email}}</p>
+    </div>
+    </div>
+</div>

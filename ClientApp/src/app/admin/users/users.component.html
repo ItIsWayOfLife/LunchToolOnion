@@ -38,21 +38,21 @@
         <tbody>
             <tr *ngFor="let user of getViewUsers()">
                 <td>{{user.id}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.lastname}} {{user.firstname}} {{user.patronymic}}</td>
-        <td>
+                <td>{{user.email}}</td>
+                <td>{{user.lastname}} {{user.firstname}} {{user.patronymic}}</td>
+                <td>
             <input type="button" value="Изменить" class="btn btn-danger" (click)="editUser(user)" />
-        </td>
-        <td>
-            <!-- delete user -->
-            <input type="button" value="Удалить" (click)="deleteUser(user)" class="btn btn-danger" />
-        </td>
-        <td>
-            <input type="button" value="Сменить пароль" (click)="changePassUser(user.id)" class="btn btn-danger" />
-        </td>
-        <td>
-            <input type="button" value="Права доступа" (click)="changeRolesUser(user.id)" class="btn btn-danger" />
-        </td>
+                </td>
+                <td>
+                    <!-- delete user -->
+                    <input type="button" value="Удалить" (click)="deleteUser(user)" class="btn btn-danger" />
+                </td>
+                <td>
+                    <input type="button" value="Сменить пароль" (click)="changePassUser(user.id)" class="btn btn-danger" />
+                </td>
+                <td>
+                    <input type="button" value="Права доступа" (click)="changeRolesUser(user.id)" class="btn btn-danger" />
+                </td>
             </tr>
         </tbody>
     </table>
@@ -155,7 +155,7 @@
 <!-- give roles by users-->
 <div *ngIf="isChangeRoles">
     <form autocomplete="off">
-            <div *ngFor="let role of allRoles; ; let i = index"> 
+            <div *ngFor="let role of allRoles; let i = index"> 
                 <span *ngIf="checkRole(role); then thenBlock else elseBlock"></span>   
                 <ng-template #thenBlock>           
                 <input id="id{{i}}" type="checkbox" name="role"  checked (click)="pressRole(role)" />

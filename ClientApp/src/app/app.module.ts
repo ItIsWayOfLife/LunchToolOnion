@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { CustomersComponent } from './customers/customers.component';
 import { ProfileComponent } from './account/profile/profile.component';
 import { UsersComponent } from './admin/users/users.component';
+import { ProviderComponent } from './provider/provider.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -29,8 +30,9 @@ const appRoutes: Routes = [
   {   path: 'login', component: LoginComponent},
   {   path: 'register', component: RegisterComponent},
   {   path: 'customers', component: CustomersComponent },
-  {   path: 'account', component: ProfileComponent,  canActivate: [AuthGuard]},
-  {   path: 'users', component: UsersComponent,  canActivate: [AuthGuard]}
+  {   path: 'account', component: ProfileComponent, canActivate: [AuthGuard]},
+  {   path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
+  {   path: 'providers', component: ProviderComponent, canActivate: [AuthGuard]}
 ]
 
 @NgModule({
@@ -43,7 +45,8 @@ const appRoutes: Routes = [
     HomeComponent,
     CustomersComponent,
     ProfileComponent,
-    UsersComponent
+    UsersComponent,
+    ProviderComponent
   ],
   imports: [
     BrowserModule,

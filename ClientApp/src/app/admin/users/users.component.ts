@@ -232,7 +232,7 @@ editUserRoles(){
   console.log("roles: "+this.userChangeRoles.roles);
 
   this.rolesServ.editRoles(this.userChangeRoles).subscribe(response=>{
-    this.statusMessage = 'Права доступа успешно изменен';     
+    this.statusMessage = 'Права доступа успешно изменены';     
     console.log(response.status);
   },
   err=>{

@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebAPI.Identity.Controllers
+namespace WebAPI.Controllers.Identity
 {
     public class JwtConfigurator: IJwtConfigurator
     {

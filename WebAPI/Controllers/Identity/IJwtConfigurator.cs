@@ -1,5 +1,5 @@
 ﻿
-namespace WebAPI.Identity.Controllers
+namespace WebAPI.Controllers.Identity
 {
     public interface IJwtConfigurator
     {

@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using WebAPI.Identity.Models;
 
-namespace WebAPI.Identity.Controllers
+namespace WebAPI.Controllers.Identity
 {
     [Route("api/account")]
     [ApiController]
@@ -35,88 +36,115 @@ namespace WebAPI.Identity.Controllers
         [HttpPost, Route("login")]
         public IActionResult Login([FromBody] LoginModel user)
         {
-            if (user == null)
+            try
             {
-                return BadRequest("Invalid client request");
-            }
+                if (user == null)
+                {
+                    return BadRequest("Invalid client request");
+                }
 
-            if (CheckLogin(user).Result)
-            {
-                var tokenString = _jwtConfigurator.GetToken(user.UserName);
-                return Ok(new { Token = tokenString });
+                if (CheckLogin(user).Result)
+                {
+                    var tokenString = _jwtConfigurator.GetToken(user.UserName);
+                    return Ok(new { Token = tokenString });
+                }
+                else
+                {
+                    return Unauthorized();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return Unauthorized();
+                //ModelState.AddModelError(ex.Property, ex.Message);
+                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                return BadRequest(ex);
             }
         }
 
         [HttpPost, Route("register")]
         public async Task<IActionResult> Register(RegisterModel model)
         {
-            if (model == null)
+            try
             {
-                return BadRequest("Invalid client request");
-            }
-
-            if (ModelState.IsValid)
-            {
-                ApplicationUser user = new ApplicationUser
+                if (model == null)
                 {
-                    Email = model.Email,
-                    UserName = model.Email,
-                    Firstname = model.Firstname,
-                    Lastname = model.Lastname,
-                    Patronomic = model.Patronymic
-                };
+                    return BadRequest("Invalid client request");
+                }
 
-                // добавляем пользователя
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (ModelState.IsValid)
                 {
-                    return Ok(model);
+                    ApplicationUser user = new ApplicationUser
+                    {
+                        Email = model.Email,
+                        UserName = model.Email,
+                        Firstname = model.Firstname,
+                        Lastname = model.Lastname,
+                        Patronomic = model.Patronymic
+                    };
+
+                    // добавляем пользователя
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return Ok(model);
+                    }
+                    else
+                    {
+                        return BadRequest(result);
+                    }
                 }
                 else
                 {
-                    return BadRequest(result);
+                    return BadRequest(ModelState);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest(ModelState);
+                //ModelState.AddModelError(ex.Property, ex.Message);
+                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                return BadRequest(ex);
             }
         }
 
         [HttpGet, Route("profile"), Authorize]
         public IActionResult Profile()
         {
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                ApplicationUser user = null;
-
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-
-                if (user != null)
+                if (User.Identity.IsAuthenticated)
                 {
-                    ProfileModel model = new ProfileModel()
-                    {
-                        Firstname = user.Firstname,
-                        Lastname = user.Lastname,
-                        Patronymic = user.Patronomic,
-                        Email = user.Email
-                    };
+                    ApplicationUser user = null;
 
-                    return new ObjectResult(model);
+                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                    user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
+
+                    if (user != null)
+                    {
+                        ProfileModel model = new ProfileModel()
+                        {
+                            Firstname = user.Firstname,
+                            Lastname = user.Lastname,
+                            Patronymic = user.Patronomic,
+                            Email = user.Email
+                        };
+
+                        return new ObjectResult(model);
+                    }
+                    else
+                    {
+                        return BadRequest("User not found");
+                    }
                 }
                 else
                 {
-                    return BadRequest("User not found");
+                    return BadRequest("Not authenticated");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("Not authenticated");
+                //ModelState.AddModelError(ex.Property, ex.Message);
+                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                return BadRequest(ex);
             }
         }
 
@@ -124,7 +152,60 @@ namespace WebAPI.Identity.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(ProfileModel model)
         {
-            if (User.Identity.IsAuthenticated)
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    if (ModelState.IsValid)
+                    {
+                        ApplicationUser user = null;
+
+                        string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                        user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
+
+                        if (user != null)
+                        {
+                            user.Email = model.Email;
+                            user.UserName = model.Email;
+                            user.Firstname = model.Firstname;
+                            user.Lastname = model.Lastname;
+                            user.Patronomic = model.Patronymic;
+
+                            var result = await _userManager.UpdateAsync(user);
+
+                            if (result.Succeeded)
+                            {
+                                return Ok(model);
+                            }
+                            else
+                            {
+                                //foreach (var error in result.Errors)
+                                //{
+                                //    //ModelState.AddModelError(string.Empty, error.Description);
+                                //}
+                                return BadRequest(result.Errors);
+                            }
+                        }
+                    }
+                    return BadRequest("Model is not valid");
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
+            }
+            catch (Exception ex)
+            {
+                //ModelState.AddModelError(ex.Property, ex.Message);
+                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPost, Route("changePassword"), Authorize]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            try
             {
                 if (ModelState.IsValid)
                 {
@@ -135,14 +216,8 @@ namespace WebAPI.Identity.Controllers
 
                     if (user != null)
                     {
-                        user.Email = model.Email;
-                        user.UserName = model.Email;
-                        user.Firstname = model.Firstname;
-                        user.Lastname = model.Lastname;
-                        user.Patronomic = model.Patronymic;
-
-                        var result = await _userManager.UpdateAsync(user);
-
+                        IdentityResult result =
+                            await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
                         if (result.Succeeded)
                         {
                             return Ok(model);
@@ -151,56 +226,28 @@ namespace WebAPI.Identity.Controllers
                         {
                             //foreach (var error in result.Errors)
                             //{
-                            //    //ModelState.AddModelError(string.Empty, error.Description);
+                            //    ModelState.AddModelError(string.Empty, error.Description);
+                            //    _logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
                             //}
+
                             return BadRequest(result.Errors);
                         }
                     }
-                }
-                return BadRequest("Model is not valid");
-            }
-            else
-            {
-                return BadRequest(ModelState);
-            }
-        }
-
-        [HttpPost, Route("changePassword"), Authorize]
-        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                ApplicationUser user = null;
-
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-
-                if (user != null)
-                {
-                    IdentityResult result =
-                        await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-                    if (result.Succeeded)
-                    {
-                        return Ok(model);
-                    }
                     else
                     {
-                        //foreach (var error in result.Errors)
-                        //{
-                        //    ModelState.AddModelError(string.Empty, error.Description);
-                        //    _logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
-                        //}
+                        return BadRequest("User not found");
 
-                        return BadRequest(result.Errors);
                     }
                 }
-                else
-                {                   
-                    return BadRequest("User not found");
-
-                }
+                return BadRequest(ModelState);
             }
-            return BadRequest(ModelState);
+            catch (Exception ex)
+            {
+                //ModelState.AddModelError(ex.Property, ex.Message);
+                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                return BadRequest(ex);
+            }
         }
+
     }
 }

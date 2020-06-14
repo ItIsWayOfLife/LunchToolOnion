@@ -25,7 +25,7 @@ export function tokenGetter() {
 }
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
+  {   path: '', component: HomeComponent },
   {   path: 'login', component: LoginComponent},
   {   path: 'register', component: RegisterComponent},
   {   path: 'customers', component: CustomersComponent },

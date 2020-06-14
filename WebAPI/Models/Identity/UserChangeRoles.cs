@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace WebAPI.Models
+namespace WebAPI.Identity.Models
 {
     public class UserChangeRoles
     {
@@ -12,6 +11,5 @@ namespace WebAPI.Models
         {
             Roles = new List<string>();
         }
-
     }
 }

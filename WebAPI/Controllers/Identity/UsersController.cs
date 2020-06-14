@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAPI.Models;
+using WebAPI.Identity.Models;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Identity.Controllers
 {
     [Route("api/users")]
     [ApiController]
@@ -46,7 +46,6 @@ namespace WebAPI.Controllers
             return new ObjectResult(listViewUsers);
         }
 
-        // GET api/users/5
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
@@ -67,7 +66,6 @@ namespace WebAPI.Controllers
             return new ObjectResult(userViewModel);
         }
 
-        // POST api/users
         [HttpPost]
         public async Task<IActionResult> Post(UserModel model)
         {
@@ -92,18 +90,17 @@ namespace WebAPI.Controllers
                 }
                 else
                 {                   
-                   foreach (var error in result.Errors)
-                    {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                        //_logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
-                    }
+                   //foreach (var error in result.Errors)
+                   // {
+                   //     ModelState.AddModelError(string.Empty, error.Description);
+                   //     //_logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
+                   // }
                     return BadRequest(result);
                 }
             }
-            return BadRequest("No valid");
+            return BadRequest(ModelState);
         }
 
-        // PUT api/users/
         [HttpPut]
         public async Task<IActionResult> Put(UserModel model)
         {
@@ -143,19 +140,17 @@ namespace WebAPI.Controllers
             return BadRequest("No valid");
         }
 
-        // DELETE api/users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
             ApplicationUser user = await _userManager.FindByIdAsync(id);
 
-            if (user==null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-                IdentityResult result = await _userManager.DeleteAsync(user);
-
+            IdentityResult result = await _userManager.DeleteAsync(user);
 
             if (result.Succeeded)
             {
@@ -163,7 +158,7 @@ namespace WebAPI.Controllers
             }
             //string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             //_logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} deleted user: {id}");
-              return NotFound(); 
+            return NotFound();
         }
 
         [HttpPost, Route("changePassword")]
@@ -187,13 +182,12 @@ namespace WebAPI.Controllers
                         }
                         else
                         {
-                            foreach (var error in result.Errors)
-                            {
-                                //ModelState.AddModelError(string.Empty, error.Description);
-                                //_logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
-
-                                return BadRequest(error);
-                            }
+                            //foreach (var error in result.Errors)
+                            //{
+                            //    //ModelState.AddModelError(string.Empty, error.Description);
+                            //    //_logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");                            
+                            //}
+                            return BadRequest(result.Errors);
                         }
                     }
                     else
@@ -205,19 +199,16 @@ namespace WebAPI.Controllers
                 }
                 else
                 {
-                    return BadRequest("No valid");
+                    return BadRequest(ModelState);
                 }
             }
             catch (ApplicationCore.Exceptions.ValidationException ex)
             {
-                ModelState.AddModelError(ex.Property, ex.Message);
+                //ModelState.AddModelError(ex.Property, ex.Message);
                 //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
                 return BadRequest(ex);
             }
-
-            return BadRequest(model);
         }
-
        
     }
 }

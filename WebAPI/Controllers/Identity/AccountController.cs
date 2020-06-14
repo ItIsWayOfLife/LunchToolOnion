@@ -2,17 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
-using WebAPI.Models;
+using WebAPI.Identity.Models;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Identity.Controllers
 {
     [Route("api/account")]
     [ApiController]
@@ -79,7 +74,7 @@ namespace WebAPI.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return Ok();
+                    return Ok(model);
                 }
                 else
                 {
@@ -102,19 +97,26 @@ namespace WebAPI.Controllers
                 string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
                 user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
 
-                ProfileModel model = new ProfileModel()
+                if (user != null)
                 {
-                    Firstname = user.Firstname,
-                    Lastname = user.Lastname,
-                    Patronymic = user.Patronomic,
-                    Email = user.Email
-                };
+                    ProfileModel model = new ProfileModel()
+                    {
+                        Firstname = user.Firstname,
+                        Lastname = user.Lastname,
+                        Patronymic = user.Patronomic,
+                        Email = user.Email
+                    };
 
-                return new ObjectResult(model);
+                    return new ObjectResult(model);
+                }
+                else
+                {
+                    return BadRequest("User not found");
+                }
             }
             else
             {
-                return BadRequest();
+                return BadRequest("Not authenticated");
             }
         }
 
@@ -143,27 +145,27 @@ namespace WebAPI.Controllers
 
                         if (result.Succeeded)
                         {
-                            return Ok();
+                            return Ok(model);
                         }
                         else
                         {
-                            foreach (var error in result.Errors)
-                            {
-                                ModelState.AddModelError(string.Empty, error.Description);
-                            }
+                            //foreach (var error in result.Errors)
+                            //{
+                            //    //ModelState.AddModelError(string.Empty, error.Description);
+                            //}
+                            return BadRequest(result.Errors);
                         }
                     }
                 }
-                return BadRequest();
+                return BadRequest("Model is not valid");
             }
             else
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
         }
 
         [HttpPost, Route("changePassword"), Authorize]
-
         public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
         {
             if (ModelState.IsValid)
@@ -179,7 +181,7 @@ namespace WebAPI.Controllers
                         await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
                     if (result.Succeeded)
                     {
-                        return Ok();
+                        return Ok(model);
                     }
                     else
                     {
@@ -193,14 +195,12 @@ namespace WebAPI.Controllers
                     }
                 }
                 else
-                {
-                    //ModelState.AddModelError(string.Empty, _sharedLocalizer["UserNotFound"]);
-                    //_logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
+                {                   
                     return BadRequest("User not found");
 
                 }
             }
-            return BadRequest("Model is not valid");
+            return BadRequest(ModelState);
         }
     }
 }

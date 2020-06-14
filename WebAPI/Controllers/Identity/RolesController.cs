@@ -2,14 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAPI.Models;
+using WebAPI.Identity.Models;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Identity.Controllers
 {
     [Route("api/roles")]
     [ApiController]
@@ -57,10 +55,6 @@ namespace WebAPI.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UserChangeRoles model)
         {
-            StreamWriter stream = new StreamWriter("text.txt");
-            stream.Write(model.Id);
-            stream.Close();
-
             // получаем пользователя
             ApplicationUser user = await _userManager.FindByIdAsync(model.Id);
             if (user != null)

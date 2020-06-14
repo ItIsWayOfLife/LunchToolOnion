@@ -1,5 +1,5 @@
 ﻿
-namespace WebAPI.Models
+namespace WebAPI.Identity.Models
 {
     public class ChangePasswordModel
     {

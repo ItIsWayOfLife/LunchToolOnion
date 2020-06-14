@@ -1,12 +1,11 @@
-import { Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import {RolesService} from '../../service/roles.service';
-import {User} from './user';
 import {UserService} from '../../service/user.service';
+
+import {User} from './user';
 import {UserChangePassword} from './userChangePassword';
 import {UserChangeRoles} from './userChangeRoles';
-import { strict } from 'assert';
-;
 
 @Component({
   selector: 'app-users',

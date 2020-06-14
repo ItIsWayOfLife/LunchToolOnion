@@ -17,10 +17,12 @@ export class UserService{
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
         return this.http.post(this.url, JSON.stringify(user), {headers: myHeaders, observe: 'response'}); 
     }
+
     updateUser(user: User) {
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
         return this.http.put(this.url, JSON.stringify(user), {headers:myHeaders, observe: 'response'});
     }
+    
     deleteUser(id: string){
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
         return this.http.delete(this.url + '/' + id, {headers:myHeaders, observe: 'response'});

@@ -9,7 +9,7 @@ export class RolesService{
    private url = "https://localhost:44342/api/roles";
 
 
-    constructor(private router: Router, private http: HttpClient) {}
+    constructor(private http: HttpClient) {}
 
      getRoles(){
       return this.http.get(this.url);

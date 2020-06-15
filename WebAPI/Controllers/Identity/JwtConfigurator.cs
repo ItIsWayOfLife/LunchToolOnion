@@ -51,7 +51,7 @@ namespace WebAPI.Controllers.Identity
                 issuer: "https://localhost:44342",
                 audience: "https://localhost:44342",
                 claims: GetClaims(userName).Result,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: signinCredentials
             );
 

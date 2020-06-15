@@ -15,7 +15,6 @@ import {UserChangeRoles} from './userChangeRoles';
 })
 export class UsersComponent implements OnInit {
 
-    myRoles:Array<string>;
     isAmdim:boolean;
 
     editedUser: User;
@@ -41,7 +40,7 @@ export class UsersComponent implements OnInit {
 
   constructor(private rolesServ: RolesService, private usersServ: UserService) {
     this.users = new Array<User>();
-    this.myRoles = new Array<string>();
+    this.isAmdim = this.rolesServ.isAdminRole();
     this.isView = true;
     this.isNewRecord = false;
     this.isShowStatusMessage = false;
@@ -59,25 +58,8 @@ export class UsersComponent implements OnInit {
    }
 
   ngOnInit(): void {
-          this.getRoles();
           this.loadUsers();
   }
-
-// get roles
- getRoles(){
-  this.myRoles = this.rolesServ.myGetRelos();
-  if (this.myRoles!=null){
-  if (this.myRoles.includes("admin")){
-    this.isAmdim=true;
-        }
-        else{
-          this.isAmdim=false;
-        }
-      }
-        else{
-          this.isAmdim=false;
-        }
-}
 
   // load users
   loadUsers() {

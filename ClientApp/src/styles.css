@@ -70,3 +70,16 @@ a.navbar-brand {
     line-height: 60px; /* Vertically center the text there */
   }
   
+
+  .text-center {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.mr{
+    margin-right: 5px;
+}
+
+.inputSearch{
+    width: 300px;
+}

@@ -41,6 +41,8 @@ namespace WebAPI.Controllers
             foreach (var pr in providers)
             {
                 pr.Path = _path + pr.Path;
+                pr.TimeWorkTo = providersDtos.FirstOrDefault(p=>p.Id==pr.Id).TimeWorkTo.ToShortTimeString();
+                pr.TimeWorkWith = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkWith.ToShortTimeString();
             }
 
             return new ObjectResult(providers);

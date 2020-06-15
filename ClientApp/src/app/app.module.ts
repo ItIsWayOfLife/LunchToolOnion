@@ -32,7 +32,7 @@ const appRoutes: Routes = [
   {   path: 'customers', component: CustomersComponent },
   {   path: 'account', component: ProfileComponent, canActivate: [AuthGuard]},
   {   path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
-  {   path: 'providers', component: ProviderComponent, canActivate: [AuthGuard]}
+  {   path: 'providers', component: ProviderComponent}
 ]
 
 @NgModule({

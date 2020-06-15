@@ -1,11 +1,67 @@
 <!-- view provider -->
+<div *ngIf="isFavoriteProviders; then thenBlockTitle else elseBlockTitle"></div>
+<ng-template #thenBlockTitle>
+  <h1 class="text-center">{{titleFavoriteProviders}}</h1> 
+  <br />
+</ng-template>       
+<ng-template #elseBlockTitle>
+  <h1 class="text-center">{{titleProviders}}</h1>
+  <br />
+
+  <div class="form-inline form-group ">
+    <form autocomplete="off" class="text-center" >
+        <input type="button" value="Добавить" class="btn btn-success mr" (click)="addProvider()" />
+    <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
+        <option>Поиск по</option>
+        <option *ngIf="isAdminOrEmplooyeMyRole;">Id</option>
+        <option>Названию</option>
+        <option>Email</option>
+        <option>Рабочим дням</option>
+        <option>Времени работы с</option>
+        <option>Времени работы до</option>
+        <option>Статусу</option>
+        <option>Информации</option>
+    </select>
+    <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr" placeholder="Поиск"/>
+    <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
+    </form>
+</div>
+    </ng-template>
+
+
 <div class="row mt-5 mb-2">
-    <div *ngFor="let provider of providers;"> 
+    <div *ngFor="let provider of getProviders();"> 
       <div class=".col-sm-4 providerView"> 
         <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" alt="provider.name" /></a>
         <p>Id: {{provider.id}}</p>
+        <div *ngIf="provider.isFavorite;  then thenBlockFav else elseBlockFav"></div>
+        <ng-template #thenBlockFav>
+        <p>На главную: Да</p>  
+      </ng-template>       
+      <ng-template #elseBlockFav>
+          <p>На главную: Нет</p>  
+          </ng-template>
         <p>Название: {{provider.name}}</p>
         <p>Email: {{provider.email}}</p>
+        <p>Рабочие дни: {{provider.workingDays}}</p>
+        <p>Рабочее время: {{provider.timeWorkWith}}:{{provider.timeWorkTo}}</p>
+        <div *ngIf="provider.isActive;  then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+          <p>Статус: Работает</p>  
+        </ng-template>       
+        <ng-template #elseBlock>
+            <p>Статус: Не работает</p>  
+            </ng-template>
+        <p>Информация: {{provider.info}}</p>
+        <input type="button" class="btn btn-primary" (ckick)="getMenu(provider.id)" value="Меню" />
+        <input type="button" class="btn btn-primary" (ckick)="getCatalogDishes(provider.id)" value="Каталог блюд"/>
+        <div *ngIf="isAdminOrEmplooyeMyRole;">
+          <input type="button" class="btn btn-primary" (ckick)="getMenu(provider.id)" value="Добавить" />
+          <input type="button" class="btn btn-primary" (ckick)="getCatalogDishes(provider.id)" value="Изменить"/>
+        </div>
+<br/>
     </div>
     </div>
 </div>
+
+<br/>

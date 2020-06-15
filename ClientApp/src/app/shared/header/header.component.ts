@@ -12,10 +12,12 @@ import {RolesService} from '../../service/roles.service'
 })
 export class HeaderComponent implements OnInit {
 
-  myRoles:Array<string>;
+ 
   isAmdim:boolean;
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router, private rolesServ: RolesService) {}
+  constructor(private jwtHelper: JwtHelperService, private router: Router, private rolesServ: RolesService) {
+    this.isAmdim = this.rolesServ.isAdminRole();
+  }
 
   logOut() {
     localStorage.removeItem("jwt");
@@ -33,19 +35,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.myRoles = this.rolesServ.myGetRelos();
-    if (this.myRoles!=null){
-    if (this.myRoles.includes("admin")){
-      this.isAmdim=true;
-          }
-          else{
-            this.isAmdim=false;
-          }
-        }
-          else{
-            this.isAmdim=false;
-          }
-
+   
   }
 
 }

@@ -47,5 +47,20 @@ namespace WebAPI.Controllers
 
             return new ObjectResult(providers);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                _providerService.DeleteProvider(id);
+                return Ok(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
     }
 }

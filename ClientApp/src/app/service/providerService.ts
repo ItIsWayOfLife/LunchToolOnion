@@ -14,4 +14,9 @@ export class ProviderService{
     getProviders(){
         return this.http.get(this.url);
        }
+
+       deleteProvider(id: number){
+        const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
+        return this.http.delete(this.url + '/' + id, {headers:myHeaders, observe: 'response'});
+    }
 }

@@ -24,6 +24,9 @@ export class ProviderComponent implements OnInit {
   searchSelectionString:string;
   searchStr:string;
 
+  isShowStatusMessage:boolean;
+  statusMessage: string;
+
   constructor(private providerServ: ProviderService, private rolesServ: RolesService) {
     this.providers = new Array<Provider>();
 
@@ -33,6 +36,8 @@ export class ProviderComponent implements OnInit {
 
     this.searchSelectionString="Поиск по";
     this.searchStr="";
+
+    this.isShowStatusMessage = false;
    }
 
   ngOnInit(): void {
@@ -113,5 +118,26 @@ refresh(){
 addProvider(){
 
 }
+
+deleteProvider(id:number){
+  this.isShowStatusMessage = true;
+ this.providerServ.deleteProvider(id).subscribe(response=>{
+  if (response.status==200)
+  {
+    this.statusMessage = 'Данные успешно удалены';   
+    this.loadProviders();
+  }else{
+    this.statusMessage = 'Ошибка удаления';
+  }
+},err=>{
+console.log(err);
+this.statusMessage = 'Ошибка удаления';
+  });
+}
+
+// show info
+showStatusMess(){
+  this.isShowStatusMessage=!this.isShowStatusMessage;
+  }
 
 }

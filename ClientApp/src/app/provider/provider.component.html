@@ -7,7 +7,11 @@
 <ng-template #elseBlockTitle>
   <h1 class="text-center">{{titleProviders}}</h1>
   <br />
-
+  <div *ngIf="isShowStatusMessage"  class="text-center">
+    <p>{{statusMessage}}</p>
+    <button (click)="showStatusMess()">Ok</button>
+    <br/> <br/>
+  </div>
   <div class="form-inline form-group ">
     <form autocomplete="off" class="text-center" >
         <input type="button" value="Добавить" class="btn btn-success mr" (click)="addProvider()" />
@@ -26,6 +30,7 @@
     <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
     </form>
 </div>
+
     </ng-template>
 
 
@@ -53,11 +58,11 @@
             <p>Статус: Не работает</p>  
             </ng-template>
         <p>Информация: {{provider.info}}</p>
-        <input type="button" class="btn btn-primary" (ckick)="getMenu(provider.id)" value="Меню" />
-        <input type="button" class="btn btn-primary" (ckick)="getCatalogDishes(provider.id)" value="Каталог блюд"/>
+        <input type="button" class="btn btn-primary" (click)="getMenu(provider.id)" value="Меню" />
+        <input type="button" class="btn btn-primary" (click)="getCatalogDishes(provider.id)" value="Каталог блюд"/>
         <div *ngIf="isAdminOrEmplooyeMyRole;">
-          <input type="button" class="btn btn-primary" (ckick)="getMenu(provider.id)" value="Добавить" />
-          <input type="button" class="btn btn-primary" (ckick)="getCatalogDishes(provider.id)" value="Изменить"/>
+          <input type="button" class="btn btn-primary" (click)="getMenu(provider.id)" value="Изменить" />
+          <input type="button" class="btn btn-primary" (click)="deleteProvider(provider.id)" value="Удалить"/>
         </div>
 <br/>
     </div>

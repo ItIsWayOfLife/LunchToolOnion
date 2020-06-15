@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,7 +11,19 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class HomeComponent {
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router) {}
+
+  url="../../assets/images/providers/777.jpeg";
+
+  constructor(private jwtHelper: JwtHelperService, private router: Router, private http: HttpClient) {}
+
+  onselectFile(e){
+if (e.targer.files)
+var reader = new FileReader();
+reader.readAsDataURL(e.target.files[0]);  
+reader.onload=(event:any)=>{
+  this.url = event.target.result;
+}
+}
 
   logOut() {
     localStorage.removeItem("jwt");

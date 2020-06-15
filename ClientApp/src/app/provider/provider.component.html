@@ -1,4 +1,3 @@
-<!-- view provider -->
 <div *ngIf="isFavoriteProviders; then thenBlockTitle else elseBlockTitle"></div>
 <ng-template #thenBlockTitle>
   <h1 class="text-center">{{titleFavoriteProviders}}</h1> 
@@ -7,6 +6,13 @@
 <ng-template #elseBlockTitle>
   <h1 class="text-center">{{titleProviders}}</h1>
   <br />
+</ng-template>
+
+
+<!-- view provider -->
+<div *ngIf="isView">
+<div *ngIf="!isFavoriteProviders;">
+  
   <div *ngIf="isShowStatusMessage"  class="text-center">
     <p>{{statusMessage}}</p>
     <button (click)="showStatusMess()">Ok</button>
@@ -17,7 +23,7 @@
         <input type="button" value="Добавить" class="btn btn-success mr" (click)="addProvider()" />
     <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
         <option>Поиск по</option>
-        <option *ngIf="isAdminOrEmplooyeMyRole;">Id</option>
+        <option *ngIf="isAdminMyRole;">Id</option>
         <option>Названию</option>
         <option>Email</option>
         <option>Рабочим дням</option>
@@ -30,14 +36,13 @@
     <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
     </form>
 </div>
-
-    </ng-template>
+</div>
 
 
 <div class="row mt-5 mb-2">
     <div *ngFor="let provider of getProviders();"> 
       <div class=".col-sm-4 providerView"> 
-        <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" alt="provider.name" /></a>
+        <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" [alt]="provider.name" /></a>
         <p>Id: {{provider.id}}</p>
         <div *ngIf="provider.isFavorite;  then thenBlockFav else elseBlockFav"></div>
         <ng-template #thenBlockFav>
@@ -60,7 +65,7 @@
         <p>Информация: {{provider.info}}</p>
         <input type="button" class="btn btn-primary" (click)="getMenu(provider.id)" value="Меню" />
         <input type="button" class="btn btn-primary" (click)="getCatalogDishes(provider.id)" value="Каталог блюд"/>
-        <div *ngIf="isAdminOrEmplooyeMyRole;">
+        <div *ngIf="isAdminMyRole;">
           <input type="button" class="btn btn-primary" (click)="getMenu(provider.id)" value="Изменить" />
           <input type="button" class="btn btn-primary" (click)="deleteProvider(provider.id)" value="Удалить"/>
         </div>
@@ -68,5 +73,51 @@
     </div>
     </div>
 </div>
+</div>
 
+<!-- add provider -->
+<div *ngIf="isNewRecord" class="text-center">
+  <form autocomplete="off" >
+      <div>
+          <label for="name" class="control-label">Название</label><br />
+          <input name="name" id="name" class="form-control" [(ngModel)]="editedProvider.name" placeholder="Название"/>
+          <span></span>
+      </div>
+      <div>
+          <label for="email" class="control-label">Email</label><br />
+          <input  name="email" id="email" class="form-control" [(ngModel)]="editedProvider.email"  placeholder="Email" />
+      </div>
+      <div>
+        <label for="workingDays" class="control-label">Рабочие дни</label><br />
+        <input  name="workingDays" id="workingDays" class="form-control" [(ngModel)]="editedProvider.workingDays"  placeholder="Рабочие дни" />
+    </div>
+      <div>
+          <label for="timeWorkWith" class="control-label">Время работы с</label><br />
+          <input  name="timeWorkWith" id="timeWorkWith" class="form-control" [(ngModel)]="editedProvider.timeWorkWith" placeholder="Время работы с"/>
+      </div>
+      <div>
+          <label for="timeWorkTo" class="control-label">Время работы до</label><br />
+          <input  name="timeWorkTo" id="timeWorkTo" class="form-control" [(ngModel)]="editedProvider.timeWorkTo" placeholder="Время работы до"/>
+      </div>
+      <div>
+          <label for="info" class="control-label">Информация</label><br />
+          <input  name="info" id="info" class="form-control"  [(ngModel)]="editedProvider.info"  placeholder="Информация"/>
+      </div>
+      <div>
+        <label for="isActive" class="control-label">Активный (Работает)</label><br />
+        <input type="checkbox"  name="isActive" id="isActive" class="form-control"  [(ngModel)]="editedProvider.isActive"  placeholder="Активный (Работает)"/>
+    </div>
+    <div>
+      <label for="isFavorite" class="control-label">На главную</label><br />
+      <input type="checkbox"  name="isFavorite" id="isFavorite" class="form-control"  [(ngModel)]="editedProvider.isFavorite"  placeholder="На главную"/>
+  </div>
+      <br />
+      <div>
+          <input type="button" value="Сохранить" (click)="saveProvider()" class="btn btn-success" />
+      </div><br/>
+      <div>
+          <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+      </div>
+  </form>
+</div>   
 <br/>

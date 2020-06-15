@@ -19,7 +19,12 @@ export class ProviderComponent implements OnInit {
   titleFavoriteProviders:string;;
   isFavoriteProviders:boolean;
 
-  isAdminOrEmplooyeMyRole:boolean;
+  isView:boolean;
+
+  editedProvider: Provider;
+  isNewRecord: boolean;
+
+  isAdminMyRole:boolean;
 
   searchSelectionString:string;
   searchStr:string;
@@ -28,7 +33,13 @@ export class ProviderComponent implements OnInit {
   statusMessage: string;
 
   constructor(private providerServ: ProviderService, private rolesServ: RolesService) {
+
     this.providers = new Array<Provider>();
+
+    this.isNewRecord = false;
+    this.editedProvider = new Provider();
+
+    this.isView = true;
 
     this.titleProviders = "Поставщики";
     this.titleFavoriteProviders  = "Популярные поставщики"
@@ -38,11 +49,12 @@ export class ProviderComponent implements OnInit {
     this.searchStr="";
 
     this.isShowStatusMessage = false;
+    
    }
 
   ngOnInit(): void {
     this.loadProviders();
-    this.isAdminOrEmplooyeMyRole = this.rolesServ.isAdminOrEmployeeRole();
+    this.isAdminMyRole = this.rolesServ.isAdminOrEmployeeRole();
   }
 
 
@@ -50,7 +62,7 @@ export class ProviderComponent implements OnInit {
 loadProviders() {
   this.providerServ.getProviders().subscribe((data: Provider[]) => {
           this.providers = data; 
-      });
+      });   
 }
 
 getMenu(providerId:number){
@@ -116,7 +128,10 @@ refresh(){
 }
 
 addProvider(){
-
+  this.editedProvider = new Provider();
+  this.providers.push(this.editedProvider);
+  this.isNewRecord = true;
+  this.isView = false;
 }
 
 deleteProvider(id:number){
@@ -138,6 +153,21 @@ this.statusMessage = 'Ошибка удаления';
 // show info
 showStatusMess(){
   this.isShowStatusMessage=!this.isShowStatusMessage;
+  }
+
+  saveProvider(){
+
+  }
+
+  cancel(){
+    // если отмена при добавлении, удаляем последнюю запись
+    if (this.isNewRecord) {
+      this.providers.pop();
+  }
+  this.isNewRecord = false;
+  this.isView = true;
+  this.editedProvider = null;
+  // this.isEdit= false;
   }
 
 }

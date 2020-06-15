@@ -3,9 +3,11 @@ using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAPI.Models.Provider;
@@ -21,6 +23,7 @@ namespace WebAPI.Controllers
         private readonly PathConstants _pathConstants;
 
         private readonly string _path;
+        private readonly string _APIURL;
 
         public ProviderController(IProviderService providerService,
             IWebHostEnvironment appEnvironment)
@@ -28,7 +31,8 @@ namespace WebAPI.Controllers
             _providerService = providerService;
             _appEnvironment = appEnvironment;
             _pathConstants = new PathConstants();
-            _path = _pathConstants.pathProviderAPIAngular;
+            _path = _pathConstants.pathProvider;
+            _APIURL = _pathConstants.APIURL;
         }
 
         [HttpGet]
@@ -40,7 +44,7 @@ namespace WebAPI.Controllers
 
             foreach (var pr in providers)
             {
-                pr.Path = _path + pr.Path;
+                pr.Path = _APIURL +_path + pr.Path;
                 pr.TimeWorkTo = providersDtos.FirstOrDefault(p=>p.Id==pr.Id).TimeWorkTo.ToShortTimeString();
                 pr.TimeWorkWith = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkWith.ToShortTimeString();
             }
@@ -61,6 +65,5 @@ namespace WebAPI.Controllers
                 return BadRequest(ex);
             }
         }
-
     }
 }

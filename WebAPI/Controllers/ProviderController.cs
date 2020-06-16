@@ -1,16 +1,12 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.DTO;
-using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using WebAPI.Models.Provider;
 
 namespace WebAPI.Controllers
@@ -39,6 +35,8 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IActionResult Get()
         {
+            try
+            { 
             IEnumerable<ProviderDTO> providersDtos = _providerService.GetProviders();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderModel>()).CreateMapper();
             var providers = mapper.Map<IEnumerable<ProviderDTO>, List<ProviderModel>>(providersDtos);
@@ -51,11 +49,18 @@ namespace WebAPI.Controllers
             }
 
             return new ObjectResult(providers);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
+            try
+            { 
             var provider = _providerService.GetProvider(id);
 
             if (provider != null)
@@ -64,6 +69,11 @@ namespace WebAPI.Controllers
             }
 
             return NotFound();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpDelete("{id}")]
@@ -83,20 +93,36 @@ namespace WebAPI.Controllers
         [HttpPut]
         public  IActionResult Put(ProviderModel model)
         {
+            try
+            { 
             var provider = ConvertProviderModelToProviderDTO(model);
             _providerService.EditProvider(provider);
             return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         [HttpPost]
         public IActionResult Post(ProviderModel model)
         {
+            try
+            { 
             _providerService.AddProvider(ConvertProviderModelToProviderDTO(model));
             return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         private ProviderDTO ConvertProviderModelToProviderDTO(ProviderModel model)
         {
+            try
+            { 
             ProviderDTO providerDto = new ProviderDTO()
             {
                 Id = model.Id,
@@ -112,6 +138,11 @@ namespace WebAPI.Controllers
             };
 
             return providerDto;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

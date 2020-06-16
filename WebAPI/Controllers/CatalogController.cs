@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ApplicationCore.Constants;
@@ -52,6 +53,20 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet, Route("provider/{providerId}")]
+        public IActionResult GetByProviderId(int providerId)
+        {
+            try
+            {
+                var catalog = _сatalogService.GetСatalogs(providerId);
+                return new ObjectResult(catalog);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -76,6 +91,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
+
                 return BadRequest(ex);
             }
         }

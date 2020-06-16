@@ -1,3 +1,4 @@
+<div class="main">
 <div *ngIf="isFavoriteProviders; then thenBlockTitle else elseBlockTitle"></div>
 <ng-template #thenBlockTitle>
   <h1 class="text-center">{{titleFavoriteProviders}}</h1> 
@@ -41,7 +42,7 @@
 
 
 <div class="row mt-5 mb-2">
-    <div *ngFor="let provider of getProviders();"> 
+    <div class="divWithFor" *ngFor="let provider of getProviders()"> 
       <div class=".col-sm-4 providerView"> 
         <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" [alt]="provider.name" /></a>
         <p *ngIf="isAdminMyRole;">Id: {{provider.id}}</p>
@@ -64,8 +65,8 @@
             <p>Статус: Не работает</p>  
             </ng-template>
         <p>Информация: {{provider.info}}</p>
-        <input type="button" class="btn btn-primary" (click)="getMenu(provider.id)" value="Меню" />
-        <input type="button" class="btn btn-primary" (click)="getCatalogDishes(provider.id)" value="Каталог блюд"/>
+        <a  class="btn btn-primary" >Меню</a>
+        <a  class="btn btn-primary" [routerLink]="['/catalog/', provider.id]" >Каталог блюд</a>
         <div *ngIf="isAdminMyRole;">
           <input type="button" class="btn btn-danger" (click)="editProvider(provider)" value="Изменить" />
           <input type="button" class="btn btn-danger" (click)="deleteProvider(provider.id)" value="Удалить"/>
@@ -179,3 +180,5 @@
 </div>   
 
 <br/>
+
+</div>

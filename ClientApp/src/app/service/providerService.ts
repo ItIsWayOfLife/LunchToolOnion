@@ -11,6 +11,11 @@ export class ProviderService{
 
     constructor(private http: HttpClient) {}
 
+
+    getPrivoder(id:number){
+        return this.http.get(this.url+"/"+id);
+    }
+
     getProviders(){
         return this.http.get(this.url);
        }

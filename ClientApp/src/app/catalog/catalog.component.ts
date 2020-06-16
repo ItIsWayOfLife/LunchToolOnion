@@ -20,7 +20,7 @@ export class CatalogComponent implements OnInit {
 
   providerId: number;
 
-  isAmdim:boolean;
+  isAdminMyRole:boolean;
 
   editedCatalog: Catalog;
   catalogs: Array<Catalog>;
@@ -30,6 +30,9 @@ export class CatalogComponent implements OnInit {
 
   nameProvider:string;
 
+  searchSelectionString:string;
+  searchStr:string;
+
   constructor(private activateRoute: ActivatedRoute,
      private catalogServ :CatalogService,
      private rolesServ:RolesService,
@@ -38,11 +41,17 @@ export class CatalogComponent implements OnInit {
 
       this.catalogs = new Array<Catalog>();
       this.editedCatalog = new Catalog();
+
+      this.isShowStatusMessage = false;
+
+      this.searchSelectionString="Поиск по";
+      this.searchStr="";
   }
 
   ngOnInit(): void {
     this.loadCatalog();
     this.getNameProvider();
+    this.isAdminMyRole = this.rolesServ.isAdminOrEmployeeRole();
   }
 
   getNameProvider(){
@@ -85,5 +94,27 @@ showStatusMess(){
   // this.isView = true;
   // this.isEdit= false;
   }
+  addCatalog(){
+
+  }
+
+  refresh(){
+    this.searchSelectionString="Поиск по";
+    this.searchStr ="";
+  }
+
+  getCatalogs():Array<Catalog>{
+      if (this.searchSelectionString=="Id"){
+        return this.catalogs.filter(x=>x.id.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+      }
+      else if (this.searchSelectionString=="Названию"){
+        return this.catalogs.filter(x=>x.name.toLowerCase().includes(this.searchStr.toLowerCase()));
+      }
+      else if (this.searchSelectionString=="Информации"){
+        return this.catalogs.filter(x=>x.info.toLowerCase().includes(this.searchStr.toLowerCase()));
+      }
+    
+    return this.catalogs;
+    }
 
 }

@@ -88,3 +88,20 @@ User baaabc97-c89c-47fd-876f-8cf0eb5705f3 failed to provide the correct password
 16.06.2020 21:45:48: Processing request Menu/Index
 16.06.2020 21:45:50: Processing request Provider/ListFavoriteProvider
 16.06.2020 21:45:51: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 0:56:32: Processing request Home/Index
+17.06.2020 0:56:33: Processing request Provider/ListFavoriteProvider
+17.06.2020 0:56:36: Processing request Catalog/Index
+17.06.2020 0:56:39: Processing request Catalog/Add
+17.06.2020 0:56:49: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 added new catalog
+17.06.2020 0:56:49: Processing request Catalog/Index
+17.06.2020 0:56:51: Processing request Catalog/Add
+17.06.2020 0:57:06: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 added new catalog
+17.06.2020 0:57:06: Processing request Catalog/Index
+17.06.2020 0:57:07: Processing request Catalog/Add
+17.06.2020 0:57:18: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 added new catalog
+17.06.2020 0:57:18: Processing request Catalog/Index

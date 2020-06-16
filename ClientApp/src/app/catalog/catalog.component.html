@@ -9,24 +9,40 @@
     <br/> <br/>
 </div>
 
+<div class="form-inline form-group ">
+    <form autocomplete="off" class="text-center" >
+        <input type="button" value="Добавить" class="btn btn-success mr" (click)="addCatalog()" />
+    <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
+        <option>Поиск по</option>
+        <option *ngIf="isAdminMyRole;">Id</option>
+        <option>Названию</option>
+        <option>Информации</option>
+    </select>
+    <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr" placeholder="Поиск"/>
+    <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
+    </form>
+</div>
+
 <table class="table">
     <tr>
+        <th *ngIf="isAdminMyRole;">Id</th>
         <th>Каталог</th>
         <th>Информация</th>
         <th></th>
-        <th></th>
+        <th *ngIf="isAdminMyRole"></th>
  
     </tr>
-        <tr *ngFor="let catalog of catalogs">
+        <tr *ngFor="let catalog of getCatalogs()">
+            <td *ngIf="isAdminMyRole;">{{catalog.id}}</td>
             <td>{{catalog.name}}</td>
             <td>{{catalog.info}}</td>
             <!-- <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id" asp-route-menuId="@Model.MenuId">  @SharedLocalizer["Dishes"]</a></td> -->
-            <td><a class="btn btn-sm btn-primary">Блюда</a></td>
+            <td><a class="btn btn-primary">Блюда</a></td>
             <!-- @if (User.IsInRole("admin"))
             { -->
-                <td>               
-                        <button class="btn btn-sm btn-danger admB">Изменить</button>                   
-                        <button class="btn btn-sm btn-danger admB" (click)="deleteCatalog(catalog.id)">Удалить</button>
+                <td *ngIf="isAdminMyRole">               
+                        <button class="btn btn-danger admB">Изменить</button>                   
+                        <button class="btn btn-danger admB" (click)="deleteCatalog(catalog.id)">Удалить</button>
                 </td>
 
             <!-- } -->

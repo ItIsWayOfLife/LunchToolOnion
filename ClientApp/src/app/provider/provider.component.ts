@@ -126,7 +126,7 @@ return this.providers.filter(p=>p.isFavorite);
       }
     }
     else if (this.searchSelectionString=="Информации"){
-      return this.providers.filter(x=>x.email.toLowerCase().includes(this.searchStr.toLowerCase()));
+      return this.providers.filter(x=>x.info.toLowerCase().includes(this.searchStr.toLowerCase()));
     }
 
   return this.providers;

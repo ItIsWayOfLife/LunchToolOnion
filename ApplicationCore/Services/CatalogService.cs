@@ -17,6 +17,16 @@ namespace ApplicationCore.Services
             Database = uow;
         }
 
+
+        public IEnumerable<СatalogDTO> GetСatalogs()
+        {
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Catalog, СatalogDTO>()).CreateMapper();
+            var сatalogs = mapper.Map<IEnumerable<Catalog>, List<СatalogDTO>>(Database.Catalog.GetAll());
+
+            return сatalogs;
+        }
+
         public IEnumerable<СatalogDTO> GetСatalogs(int? providerId)
         {
             if (providerId == null)
@@ -25,11 +35,7 @@ namespace ApplicationCore.Services
             if (provider == null)
                 throw new ValidationException("Поставщик не найден", "");
 
-            // применяем автомаппер для проекции одной коллекции на другую
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Catalog, СatalogDTO>()).CreateMapper();
-            var сatalogs = mapper.Map<IEnumerable<Catalog>, List<СatalogDTO>>(Database.Catalog.GetAll());
-
-            return сatalogs.Where(p => p.ProviderId == providerId).ToList();
+            return GetСatalogs().Where(p => p.ProviderId == providerId).ToList();
         }
 
         public void AddСatalog(СatalogDTO сatalogDTO)

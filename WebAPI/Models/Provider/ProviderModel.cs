@@ -14,6 +14,5 @@ namespace WebAPI.Models.Provider
         public string Path { get; set; }
         public string WorkingDays { get; set; }
         public string Info { get; set; }
-        public string Img { get; set; }
     }
 }

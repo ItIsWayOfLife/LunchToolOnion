@@ -18,6 +18,7 @@ export class ProviderComponent implements OnInit {
   titleProviders:string;
   titleFavoriteProviders:string;;
   isFavoriteProviders:boolean;
+  isEdit:boolean;
 
   isView:boolean;
 
@@ -55,6 +56,8 @@ export class ProviderComponent implements OnInit {
     this.searchStr="";
 
     this.isShowStatusMessage = false;
+
+    this.isEdit = false;
    }
 
   ngOnInit(): void {
@@ -70,6 +73,8 @@ loadProviders() {
       });   
 }
 
+//
+/////// 
 getMenu(providerId:number){
 
 }
@@ -77,6 +82,7 @@ getMenu(providerId:number){
 getCatalogDishes(providerId:number){
 
 }
+//
 
 getFavoriteProviders(){
   this.isFavoriteProviders = true;
@@ -159,12 +165,23 @@ this.statusMessage = 'Ошибка удаления';
 // show info
 showStatusMess(){
   this.isShowStatusMessage=!this.isShowStatusMessage;
+  this.isNewRecord = false;
+  this.isView = true;
+  this.isEdit= false;
   }
+
+// edit provider
+editProvider(provider: Provider) {
+  this.isEdit = true;
+  this.isView = false;
+ this.editedProvider = provider;
+}
 
   saveProvider(){
     this.isShowStatusMessage=true;
-    this.editedProvider.path =this.fileName;
+   
     if (this.isNewRecord) {
+      this.editedProvider.path =this.fileName;
     this.providerServ.createProvider(this.editedProvider).subscribe(response => {
                    
       this.loadProviders();  
@@ -178,17 +195,20 @@ showStatusMess(){
   }       
   );
 } else {
-  // изменяем пользователя
-  // this.providerServ(this.editedProvider).subscribe(response => {
+    if (this.fileName!=""){
+      this.editedProvider.path =this.fileName;
+    }
+ // изменяем поставщика
+  this.providerServ.updateProvider(this.editedProvider).subscribe(response => {
     
-  //     this.loadProviders();
-  //     this.statusMessage = 'Данные успешно изменены';
-  //     console.log(response.status);
-  // },
-  // err=>{
-  //   this.statusMessage = 'Ошибка при изменении данных';
-  //   console.log(err);
-  // });      
+      this.loadProviders();
+      this.statusMessage = 'Данные успешно изменены';
+      console.log(response.status);
+  },
+  err=>{
+    this.statusMessage = 'Ошибка при изменении данных';
+    console.log(err);
+  });  
 }
   }
 
@@ -201,7 +221,7 @@ showStatusMess(){
   this.isView = true;
   this.editedProvider = null;
     this.fileName ="";
-  // this.isEdit= false;
+   this.isEdit= false;
   }
 
   onNotify(message:string):void {
@@ -209,7 +229,4 @@ showStatusMess(){
    
     this.fileName= message;
   }
-
- 
-
 }

@@ -67,7 +67,7 @@
         <input type="button" class="btn btn-primary" (click)="getMenu(provider.id)" value="Меню" />
         <input type="button" class="btn btn-primary" (click)="getCatalogDishes(provider.id)" value="Каталог блюд"/>
         <div *ngIf="isAdminMyRole;">
-          <input type="button" class="btn btn-danger" (click)="getMenu(provider.id)" value="Изменить" />
+          <input type="button" class="btn btn-danger" (click)="editProvider(provider)" value="Изменить" />
           <input type="button" class="btn btn-danger" (click)="deleteProvider(provider.id)" value="Удалить"/>
         </div>
 <br/>
@@ -123,5 +123,59 @@
           <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
       </div>
   </form>
+</div>  
+
+<!--edit user -->
+<div *ngIf="isEdit">
+  <form autocomplete="off" >
+    <div class="text-center">
+      <app-upload [fileNameR]="editedProvider.path" (notify)='onNotify($event)'></app-upload>
+  
+    <div>
+      <input type="number" name="id" id="id" class="form-control" [(ngModel)]="editedProvider.id" placeholder="id" hidden/>
+    </div>
+      <div>
+          <label for="name" class="control-label">Название</label><br />
+          <input name="name" id="name" class="form-control" [(ngModel)]="editedProvider.name" placeholder="Название"/>
+          <span></span>
+      </div>
+      <div>
+          <label for="email" class="control-label">Email</label><br />
+          <input  name="email" id="email" class="form-control" [(ngModel)]="editedProvider.email"  placeholder="Email" />
+      </div>
+      <div>
+        <label for="workingDays" class="control-label">Рабочие дни</label><br />
+        <input  name="workingDays" id="workingDays" class="form-control" [(ngModel)]="editedProvider.workingDays"  placeholder="Рабочие дни" />
+    </div>
+      <div>
+          <label for="timeWorkWith" class="control-label">Время работы с</label><br />
+          <input type="time"  name="timeWorkWith" id="timeWorkWith" class="form-control" [(ngModel)]="editedProvider.timeWorkWith" placeholder="Время работы с"/>
+      </div>
+      <div>
+          <label for="timeWorkTo" class="control-label">Время работы до</label><br />
+          <input type="time"  name="timeWorkTo" id="timeWorkTo" class="form-control" [(ngModel)]="editedProvider.timeWorkTo" placeholder="Время работы до"/>
+      </div>
+      <div>
+          <label for="info" class="control-label">Информация</label><br />
+          <input  name="info" id="info" class="form-control"  [(ngModel)]="editedProvider.info"  placeholder="Информация"/>
+      </div>
+      <div>
+        <label for="isActive" class="control-label">Активный (Работает)</label><br />
+        <input type="checkbox"  name="isActive" id="isActive" class="form-control"  [(ngModel)]="editedProvider.isActive"  placeholder="Активный (Работает)"/>
+    </div>
+    <div>
+      <label for="isFavorite" class="control-label">На главную</label><br />
+      <input type="checkbox"  name="isFavorite" id="isFavorite" class="form-control"  [(ngModel)]="editedProvider.isFavorite"  placeholder="На главную"/>
+  </div>
+      <br />
+      <div>
+          <input type="button" value="Сохранить" (click)="saveProvider()" class="btn btn-success" />
+      </div><br/>
+      <div>
+          <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+      </div>
+    </div>
+  </form>
 </div>   
+
 <br/>

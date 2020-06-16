@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.DTO;
+using ApplicationCore.Entities;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
@@ -36,7 +37,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public IActionResult Get()
         {
             IEnumerable<ProviderDTO> providersDtos = _providerService.GetProviders();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderModel>()).CreateMapper();
@@ -52,8 +53,21 @@ namespace WebAPI.Controllers
             return new ObjectResult(providers);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var provider = _providerService.GetProvider(id);
+
+            if (provider != null)
+            {
+                return new ObjectResult(provider);
+            }
+
+            return NotFound();
+        }
+
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             try
             {
@@ -66,25 +80,38 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpPut]
+        public  IActionResult Put(ProviderModel model)
+        {
+            var provider = ConvertProviderModelToProviderDTO(model);
+            _providerService.EditProvider(provider);
+            return Ok(model);
+        }
+
         [HttpPost]
         public IActionResult Post(ProviderModel model)
         {
+            _providerService.AddProvider(ConvertProviderModelToProviderDTO(model));
+            return Ok(model);
+        }
+
+        private ProviderDTO ConvertProviderModelToProviderDTO(ProviderModel model)
+        {
             ProviderDTO providerDto = new ProviderDTO()
             {
+                Id = model.Id,
                 Email = model.Email,
                 Info = model.Info,
                 IsActive = model.IsActive,
                 IsFavorite = model.IsFavorite,
                 Name = model.Name,
-                Path = model.Path,
+                Path = model.Path.Replace(_APIURL+_path, ""),
                 TimeWorkTo = Convert.ToDateTime(model.TimeWorkTo),
                 TimeWorkWith = Convert.ToDateTime(model.TimeWorkWith),
                 WorkingDays = model.WorkingDays
             };
 
-            _providerService.AddProvider(providerDto);
-
-            return Ok(model);
+            return providerDto;
         }
     }
 }

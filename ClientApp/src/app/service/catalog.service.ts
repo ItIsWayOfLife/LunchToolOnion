@@ -13,4 +13,9 @@ export class CatalogService{
     getCatalogsByProviderId(providerId:number){
         return this.http.get(this.url + '/provider/' + providerId);
     }
+
+    deleteCatalog(id: number){
+        const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
+        return this.http.delete(this.url + '/' + id, {headers:myHeaders, observe: 'response'});
+    }
 }

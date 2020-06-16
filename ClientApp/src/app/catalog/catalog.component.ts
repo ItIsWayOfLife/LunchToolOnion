@@ -25,6 +25,9 @@ export class CatalogComponent implements OnInit {
   editedCatalog: Catalog;
   catalogs: Array<Catalog>;
 
+  isShowStatusMessage:boolean;
+  statusMessage: string;
+
   nameProvider:string;
 
   constructor(private activateRoute: ActivatedRoute,
@@ -55,5 +58,32 @@ export class CatalogComponent implements OnInit {
             this.catalogs = data; 
         });
 }
+
+// delete catalog
+deleteCatalog(id: number) {
+  this.isShowStatusMessage=true;
+    this.catalogServ.deleteCatalog(id).subscribe(response => {
+
+      if (response.status==200)
+      {
+        this.statusMessage = 'Данные успешно удалены';   
+        this.loadCatalog();
+      }else{
+        this.statusMessage = 'Ошибка удаления';
+      }
+    },err=>{
+console.log(err);
+this.statusMessage = 'Ошибка удаления';
+      }
+);
+}
+
+// show info
+showStatusMess(){
+  this.isShowStatusMessage=!this.isShowStatusMessage;
+  // this.isNewRecord = false;
+  // this.isView = true;
+  // this.isEdit= false;
+  }
 
 }

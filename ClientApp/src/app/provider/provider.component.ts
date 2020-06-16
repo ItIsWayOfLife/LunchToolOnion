@@ -32,7 +32,13 @@ export class ProviderComponent implements OnInit {
   isShowStatusMessage:boolean;
   statusMessage: string;
 
+
+  fileName:string;
+ 
+
   constructor(private providerServ: ProviderService, private rolesServ: RolesService) {
+
+    this.fileName ="";
 
     this.providers = new Array<Provider>();
 
@@ -49,7 +55,6 @@ export class ProviderComponent implements OnInit {
     this.searchStr="";
 
     this.isShowStatusMessage = false;
-    
    }
 
   ngOnInit(): void {
@@ -130,8 +135,9 @@ refresh(){
 addProvider(){
   this.editedProvider = new Provider();
   this.providers.push(this.editedProvider);
-  this.isNewRecord = true;
   this.isView = false;
+  this.isNewRecord = true;
+  
 }
 
 deleteProvider(id:number){
@@ -156,7 +162,34 @@ showStatusMess(){
   }
 
   saveProvider(){
-
+    this.isShowStatusMessage=true;
+    this.editedProvider.path =this.fileName;
+    if (this.isNewRecord) {
+    this.providerServ.createProvider(this.editedProvider).subscribe(response => {
+                   
+      this.loadProviders();  
+      this.statusMessage = 'Данные успешно добавлены';
+      
+      console.log(response.status);
+    }           
+    ,err=>{
+    this.statusMessage = 'Ошибка при добавлении данных';
+    console.log(err);
+  }       
+  );
+} else {
+  // изменяем пользователя
+  // this.providerServ(this.editedProvider).subscribe(response => {
+    
+  //     this.loadProviders();
+  //     this.statusMessage = 'Данные успешно изменены';
+  //     console.log(response.status);
+  // },
+  // err=>{
+  //   this.statusMessage = 'Ошибка при изменении данных';
+  //   console.log(err);
+  // });      
+}
   }
 
   cancel(){
@@ -167,7 +200,16 @@ showStatusMess(){
   this.isNewRecord = false;
   this.isView = true;
   this.editedProvider = null;
+    this.fileName ="";
   // this.isEdit= false;
   }
+
+  onNotify(message:string):void {
+    console.log(message);
+   
+    this.fileName= message;
+  }
+
+ 
 
 }

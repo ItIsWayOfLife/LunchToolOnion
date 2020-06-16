@@ -12,18 +12,15 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent {
 
 
-  url="../../assets/images/providers/777.jpeg";
+  url="https://localhost:44342/files/images/";
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router, private http: HttpClient) {}
+isAddImg:boolean;
 
-  onselectFile(e){
-if (e.targer.files)
-var reader = new FileReader();
-reader.readAsDataURL(e.target.files[0]);  
-reader.onload=(event:any)=>{
-  this.url = event.target.result;
-}
-}
+  constructor(private jwtHelper: JwtHelperService, private router: Router, private http: HttpClient) {
+    this.isAddImg=false;
+  }
+
+  
 
   logOut() {
     localStorage.removeItem("jwt");
@@ -41,6 +38,13 @@ reader.onload=(event:any)=>{
 
   myRedirect(){
     
+  }
+
+  onNotify(message:string):void {
+    this.isAddImg = true;
+    this.url+=message;
+    alert(message);
+    console.log(message);
   }
 
   test(){

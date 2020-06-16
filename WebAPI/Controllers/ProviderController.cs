@@ -31,7 +31,7 @@ namespace WebAPI.Controllers
             _providerService = providerService;
             _appEnvironment = appEnvironment;
             _pathConstants = new PathConstants();
-            _path = _pathConstants.pathProvider;
+            _path = _pathConstants.pathForAPI;
             _APIURL = _pathConstants.APIURL;
         }
 
@@ -44,8 +44,8 @@ namespace WebAPI.Controllers
 
             foreach (var pr in providers)
             {
-                pr.Path = _APIURL +_path + pr.Path;
-                pr.TimeWorkTo = providersDtos.FirstOrDefault(p=>p.Id==pr.Id).TimeWorkTo.ToShortTimeString();
+                pr.Path = _APIURL + _path + pr.Path;
+                pr.TimeWorkTo = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkTo.ToShortTimeString();
                 pr.TimeWorkWith = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkWith.ToShortTimeString();
             }
 
@@ -64,6 +64,27 @@ namespace WebAPI.Controllers
             {
                 return BadRequest(ex);
             }
+        }
+
+        [HttpPost]
+        public IActionResult Post(ProviderModel model)
+        {
+            ProviderDTO providerDto = new ProviderDTO()
+            {
+                Email = model.Email,
+                Info = model.Info,
+                IsActive = model.IsActive,
+                IsFavorite = model.IsFavorite,
+                Name = model.Name,
+                Path = model.Path,
+                TimeWorkTo = Convert.ToDateTime(model.TimeWorkTo),
+                TimeWorkWith = Convert.ToDateTime(model.TimeWorkWith),
+                WorkingDays = model.WorkingDays
+            };
+
+            _providerService.AddProvider(providerDto);
+
+            return Ok(model);
         }
     }
 }

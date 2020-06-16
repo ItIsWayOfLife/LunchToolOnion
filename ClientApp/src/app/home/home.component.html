@@ -1,14 +1,10 @@
 <h1>Home Page</h1>
 
 <br>
+<app-upload (notify)='onNotify($event)'></app-upload>
 
 
-<img src="https://localhost:44342/files/provider/dnObza4_-372jjd4Y2VyeA=s800.jpg" />
 
-<img src="https://localhost:44342/files/provider/hola.jpeg"/>
-
-<div class="container text-center">
+<div class="container text-center"  *ngIf="isAddImg">
   <img [src]="url"/><br/>
-
-  <input type="file"  (change)="onselectFile($event)"/>
 </div>

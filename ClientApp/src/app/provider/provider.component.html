@@ -8,16 +8,17 @@
   <br />
 </ng-template>
 
+<div *ngIf="isShowStatusMessage"  class="text-center">
+  <p>{{statusMessage}}</p>
+  <button (click)="showStatusMess()">Ok</button>
+  <br/> <br/>
+</div>
 
 <!-- view provider -->
 <div *ngIf="isView">
 <div *ngIf="!isFavoriteProviders;">
   
-  <div *ngIf="isShowStatusMessage"  class="text-center">
-    <p>{{statusMessage}}</p>
-    <button (click)="showStatusMess()">Ok</button>
-    <br/> <br/>
-  </div>
+  
   <div class="form-inline form-group ">
     <form autocomplete="off" class="text-center" >
         <input type="button" value="Добавить" class="btn btn-success mr" (click)="addProvider()" />
@@ -43,7 +44,7 @@
     <div *ngFor="let provider of getProviders();"> 
       <div class=".col-sm-4 providerView"> 
         <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" [alt]="provider.name" /></a>
-        <p>Id: {{provider.id}}</p>
+        <p *ngIf="isAdminMyRole;">Id: {{provider.id}}</p>
         <div *ngIf="provider.isFavorite;  then thenBlockFav else elseBlockFav"></div>
         <ng-template #thenBlockFav>
         <p>На главную: Да</p>  
@@ -66,8 +67,8 @@
         <input type="button" class="btn btn-primary" (click)="getMenu(provider.id)" value="Меню" />
         <input type="button" class="btn btn-primary" (click)="getCatalogDishes(provider.id)" value="Каталог блюд"/>
         <div *ngIf="isAdminMyRole;">
-          <input type="button" class="btn btn-primary" (click)="getMenu(provider.id)" value="Изменить" />
-          <input type="button" class="btn btn-primary" (click)="deleteProvider(provider.id)" value="Удалить"/>
+          <input type="button" class="btn btn-danger" (click)="getMenu(provider.id)" value="Изменить" />
+          <input type="button" class="btn btn-danger" (click)="deleteProvider(provider.id)" value="Удалить"/>
         </div>
 <br/>
     </div>
@@ -78,6 +79,9 @@
 <!-- add provider -->
 <div *ngIf="isNewRecord" class="text-center">
   <form autocomplete="off" >
+    <div class="text-center">
+      <app-upload (notify)='onNotify($event)'></app-upload>
+    </div>
       <div>
           <label for="name" class="control-label">Название</label><br />
           <input name="name" id="name" class="form-control" [(ngModel)]="editedProvider.name" placeholder="Название"/>
@@ -93,11 +97,11 @@
     </div>
       <div>
           <label for="timeWorkWith" class="control-label">Время работы с</label><br />
-          <input  name="timeWorkWith" id="timeWorkWith" class="form-control" [(ngModel)]="editedProvider.timeWorkWith" placeholder="Время работы с"/>
+          <input type="time"  name="timeWorkWith" id="timeWorkWith" class="form-control" [(ngModel)]="editedProvider.timeWorkWith" placeholder="Время работы с"/>
       </div>
       <div>
           <label for="timeWorkTo" class="control-label">Время работы до</label><br />
-          <input  name="timeWorkTo" id="timeWorkTo" class="form-control" [(ngModel)]="editedProvider.timeWorkTo" placeholder="Время работы до"/>
+          <input type="time"  name="timeWorkTo" id="timeWorkTo" class="form-control" [(ngModel)]="editedProvider.timeWorkTo" placeholder="Время работы до"/>
       </div>
       <div>
           <label for="info" class="control-label">Информация</label><br />

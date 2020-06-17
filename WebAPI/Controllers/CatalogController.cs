@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using ApplicationCore.Constants;
 using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Models.Catalog;
-using WebAPI.Models.Provider;
+
 
 namespace WebAPI.Controllers
 {

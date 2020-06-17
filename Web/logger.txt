@@ -105,3 +105,27 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 17.06.2020 0:57:07: Processing request Catalog/Add
 17.06.2020 0:57:18: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 added new catalog
 17.06.2020 0:57:18: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 12:13:54: Processing request Home/Index
+17.06.2020 12:13:54: Processing request Provider/ListFavoriteProvider
+17.06.2020 12:14:01: Processing request Account/Login
+17.06.2020 12:14:02: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+17.06.2020 12:14:02: Processing request Home/Index
+17.06.2020 12:14:02: Processing request Provider/ListFavoriteProvider
+17.06.2020 12:14:03: Processing request Provider/Index
+17.06.2020 12:14:06: Processing request Menu/Index
+17.06.2020 12:14:31: Processing request MenuDishes/Index
+17.06.2020 12:14:40: Processing request Menu/Index
+17.06.2020 12:14:55: Processing request MenuDishes/Index
+17.06.2020 12:14:57: Processing request Menu/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 12:33:44: Processing request Home/Index
+17.06.2020 12:33:44: Processing request Provider/ListFavoriteProvider

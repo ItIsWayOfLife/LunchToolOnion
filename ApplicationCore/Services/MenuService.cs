@@ -18,6 +18,15 @@ namespace ApplicationCore.Services
             Database = uow;
         }
 
+       public  IEnumerable<MenuDTO> GetAllMenus()
+        {
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Menu, MenuDTO>()).CreateMapper();
+            var menus = mapper.Map<IEnumerable<Menu>, List<MenuDTO>>(Database.Menu.GetAll());
+
+            return menus;
+        }
+
         public List<int> GetMenuIdDishes(int? menuId)
         {
             if (menuId == null)

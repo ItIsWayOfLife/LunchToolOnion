@@ -207,7 +207,7 @@ namespace WebAPI.Controllers.Identity
             }
         }
 
-        [HttpPost, Route("changePassword")]
+        [HttpPost, Route("changepassword")]
         public async Task<IActionResult> ChangePassword(UserModelChangePasword model)
         {
             try

@@ -30,6 +30,6 @@ export class UserService{
 
     changePass(userChangePass:UserChangePassword){
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-        return this.http.post(this.url + '/changePassword', JSON.stringify(userChangePass) ,{headers:myHeaders, observe: 'response'});
+        return this.http.post(this.url + '/changepassword', JSON.stringify(userChangePass) ,{headers:myHeaders, observe: 'response'});
     }
 }

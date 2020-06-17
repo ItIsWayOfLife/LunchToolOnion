@@ -65,12 +65,12 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet, Route("catalog/{catalogId}")]
-        public IActionResult GetByCatalogId(int catalogId)
+        [HttpGet, Route("catalog/{catalogid}")]
+        public IActionResult GetByCatalogId(int catalogid)
         {
             try
             {
-                IEnumerable<DishDTO> dishDTOs = _dishService.GetDishes(catalogId);
+                IEnumerable<DishDTO> dishDTOs = _dishService.GetDishes(catalogid);
                 List<DishModel> dishModels = new List<DishModel>();
 
                 foreach (var d in dishDTOs)
@@ -159,7 +159,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet, Route("menuDishes/{menuId}")]
+        [HttpGet, Route("menudishes/{menuId}")]
         public IActionResult GetDishesByMenuId(int menuId)
         {
             try

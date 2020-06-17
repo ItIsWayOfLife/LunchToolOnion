@@ -54,12 +54,12 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet, Route("provider/{providerId}")]
-        public IActionResult GetByProviderId(int providerId)
+        [HttpGet, Route("provider/{providerid}")]
+        public IActionResult GetByProviderId(int providerid)
         {
             try
             {
-                IEnumerable<MenuDTO> menuDTOs = _menuService.GetMenus(providerId);
+                IEnumerable<MenuDTO> menuDTOs = _menuService.GetMenus(providerid);
                 List<MenuModel> menuModels = new List<MenuModel>();
 
                 foreach (var m in menuDTOs)

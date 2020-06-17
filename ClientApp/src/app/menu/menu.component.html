@@ -38,8 +38,7 @@
                 <td *ngIf="isAdminMyRole;">{{menu.id}}</td>
                 <td>{{menu.date}}</td>
                 <td>{{menu.info}}</td>
-                <!-- <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id" asp-route-menuId="@Model.MenuId">  @SharedLocalizer["Dishes"]</a></td> -->
-                <td><a class="btn btn-primary">Блюда</a></td>
+                <td><a class="btn btn-primary" [routerLink]="['/menudishes/', menu.id]" >Блюда</a></td>
                
                     <td *ngIf="isAdminMyRole">               
                             <button class="btn btn-danger admB" (click)="editMenu(menu)">Изменить</button>                   

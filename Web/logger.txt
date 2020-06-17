@@ -319,3 +319,10 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 17.06.2020 20:26:01: Processing request Provider/ListFavoriteProvider
 17.06.2020 20:26:03: Processing request Menu/Index
 17.06.2020 20:26:06: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 23:38:44: Processing request Home/Index
+17.06.2020 23:38:44: Processing request Provider/ListFavoriteProvider

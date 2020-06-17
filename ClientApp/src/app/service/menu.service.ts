@@ -11,8 +11,8 @@ export class MenuService{
 
     constructor(private http: HttpClient) {}
 
-    getMenuByProviderId(providerId:number){
-        return this.http.get(this.url + '/provider/' + providerId);
+    getMenuByProviderId(providerid:number){
+        return this.http.get(this.url + '/provider/' + providerid);
     }
 
     deleteMenu(id: number){
@@ -28,5 +28,9 @@ export class MenuService{
     updateMenu(menu: Menu) {
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
         return this.http.put(this.url, JSON.stringify(menu), {headers:myHeaders, observe: 'response'});
+    }
+
+    getMenu(id:number){
+        return this.http.get(this.url+"/"+id);
     }
 }

@@ -25,6 +25,7 @@ import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { MenuComponent } from './menu/menu.component';
 import { DishComponent } from './dish/dish.component';
+import { MenuDishesComponent } from './menu-dishes/menu-dishes.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
   {   path: 'catalog/:providerId', component: CatalogComponent},
   {   path: 'menu/:providerId', component: MenuComponent},
   {   path: 'dish/:catalogId', component: DishComponent},
+  {   path: 'menudishes/:menuId', component: MenuDishesComponent},
   {   path: '**', component: NotFoundComponent }
 
 ]
@@ -61,7 +63,8 @@ const appRoutes: Routes = [
     NotFoundComponent,
     CatalogComponent,
     MenuComponent,
-    DishComponent
+    DishComponent,
+    MenuDishesComponent
   ],
   imports: [
     BrowserModule,

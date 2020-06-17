@@ -48,12 +48,12 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet, Route("provider/{providerId}")]
-        public IActionResult GetByProviderId(int providerId)
+        [HttpGet, Route("provider/{providerid}")]
+        public IActionResult GetByProviderId(int providerid)
         {
             try
             {
-                var catalog = _сatalogService.GetСatalogs(providerId);
+                var catalog = _сatalogService.GetСatalogs(providerid);
                 return new ObjectResult(catalog);
             }
             catch (Exception ex)

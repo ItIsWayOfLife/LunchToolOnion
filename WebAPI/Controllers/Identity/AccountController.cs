@@ -148,7 +148,7 @@ namespace WebAPI.Controllers.Identity
             }
         }
 
-        [HttpPost, Route("editProfile"), Authorize]
+        [HttpPost, Route("editprofile"), Authorize]
         [HttpPost]
         public async Task<IActionResult> Edit(ProfileModel model)
         {
@@ -202,7 +202,7 @@ namespace WebAPI.Controllers.Identity
             }
         }
 
-        [HttpPost, Route("changePassword"), Authorize]
+        [HttpPost, Route("changepassword"), Authorize]
         public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
         {
             try

@@ -11,8 +11,8 @@ export class DishService{
 
     constructor(private http: HttpClient) {}
 
-    getDishByCatalogId(catalogId:number){
-        return this.http.get(this.url + '/catalog/' + catalogId);
+    getDishByCatalogId(catalogid:number){
+        return this.http.get(this.url + '/catalog/' + catalogid);
     }
 
     deleteDish(id: number){
@@ -28,5 +28,9 @@ export class DishService{
     updateMenu(dish: Dish) {
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
         return this.http.put(this.url, JSON.stringify(dish), {headers:myHeaders, observe: 'response'});
+    }
+
+    getDishesByMenuId(menuId:number){
+        return this.http.get(this.url + '/menudishes/' + menuId);
     }
 }

@@ -35,7 +35,7 @@ export class AccountService{
     const myHeaders = new HttpHeaders().set("Content-Type", "application/json");  
     let credentials = JSON.stringify(model);
     
-    return this.http.post("https://localhost:44342/api/account/editProfile", credentials,
+    return this.http.post("https://localhost:44342/api/account/editprofile", credentials,
     {headers:myHeaders, observe: 'response' });
   }
 
@@ -43,7 +43,7 @@ export class AccountService{
     const myHeaders = new HttpHeaders().set("Content-Type", "application/json");  
     let credentials = JSON.stringify(model);
 
-    return this.http.post("https://localhost:44342/api/account/changePassword", credentials,
+    return this.http.post("https://localhost:44342/api/account/changepassword", credentials,
     {headers:myHeaders, observe: 'response' });
   }
 }

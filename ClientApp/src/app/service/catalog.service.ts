@@ -15,8 +15,8 @@ export class CatalogService{
         return this.http.get(this.url+"/"+id);
     }
 
-    getCatalogsByProviderId(providerId:number){
-        return this.http.get(this.url + '/provider/' + providerId);
+    getCatalogsByProviderId(providerid:number){
+        return this.http.get(this.url + '/provider/' + providerid);
     }
 
     deleteCatalog(id: number){

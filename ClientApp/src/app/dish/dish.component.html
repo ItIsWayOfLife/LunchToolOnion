@@ -2,7 +2,7 @@
     <h1 class="text-center">Блюда {{nameCatalog}}</h1>
     <br />
         
-        <div *ngIf="isShowStatusMessage">
+        <div class="text-center" *ngIf="isShowStatusMessage">
             <p>{{statusMessage}}</p>
             <button (click)="showStatusMess()">Ok</button>
             <br/> <br/>
@@ -44,8 +44,39 @@
         </div>      
     </div>
     </div>
+
+<!-- add provider -->
+<div *ngIf="isNewRecord" class="text-center">
+    <form autocomplete="off" >
+      <div class="text-center">
+        <app-upload (notify)='onNotify($event)'></app-upload>
+      </div>
+        <div>
+            <label for="name" class="control-label">Название</label><br />
+            <input name="name" id="name" class="form-control" [(ngModel)]="editedDish.name" placeholder="Название"/>
+            <span></span>
+        </div>
+        <div>
+            <label for="weight" class="control-label">Вес</label><br />
+            <input  type="number" name="weight" id="weight" class="form-control" [(ngModel)]="editedDish.weight"  placeholder="Вес" />
+        </div>
+        <div>
+          <label for="price" class="control-label">Цена</label><br />
+          <input type="number" name="price" id="price" class="form-control" [(ngModel)]="editedDish.price"  placeholder="Цена" />
+      </div>
+      <div>
+            <label for="info" class="control-label">Информация</label><br />
+            <input  name="info" id="info" class="form-control"  [(ngModel)]="editedDish.info"  placeholder="Информация"/>
+        </div>
+        <br />
+        <div>
+            <input type="button" value="Сохранить" (click)="saveDish()" class="btn btn-success" />
+        </div><br/>
+        <div>
+            <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+        </div>
+    </form>
+  </div>  
+
     <br/>  
-     
-        
-        
 </div>

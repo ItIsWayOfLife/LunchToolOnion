@@ -2,7 +2,7 @@
     <div class="col-md-3">
       <input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;">
       <button type="button" class="btn btn-success" (click)="file.click()">Загрузить файл</button>
-      <button type="button" class="btn btn-success" (click)="showImg()">Показать файл</button>
+      <button type="button" class="btn btn-success showImg" (click)="showImg()">Показать файл</button>
     </div>
     <div class="col-md-4">
       <span class="upload" *ngIf="progress > 0">
@@ -13,7 +13,7 @@
       </span>
     </div>
   </div>
-    <div class="container text-center" *ngIf="isAddImg"> <br/> 
-      <img [src]="urlImage" class="imgUp" [alt]="_fileName"/><br/>
+    <div class="container text-center" *ngIf="isAddImg"> 
+      <img [src]="urlImage" class="imgUp" [alt]="_fileName"/><br/><br/>
     </div>
   

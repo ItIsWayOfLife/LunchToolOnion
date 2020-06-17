@@ -36,7 +36,7 @@ export class UploadComponent implements OnInit {
     this.isAddImg = !this.isAddImg;
     if (this.urlImage==""){
      this.urlImage = this.fileNameR;
-     this._fileName = "Поставщик";
+     this._fileName = "Картинка";
     }
   }
 

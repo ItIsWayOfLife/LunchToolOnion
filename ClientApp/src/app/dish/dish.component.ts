@@ -37,10 +37,15 @@ export class DishComponent implements OnInit {
   isView:boolean;
   isNewRecord: boolean;
 
+  fileName:string;
+
   constructor(private activateRoute: ActivatedRoute,
     private dishServ :DishService,
     private rolesServ:RolesService,
     private catalogServ:CatalogService) { 
+
+      
+    this.fileName ="";
     this.catalogId = activateRoute.snapshot.params['catalogId'];
 
     this.dishes = new Array<Dish>();
@@ -148,6 +153,7 @@ saveDish(){
   this.editedDish.catalogId =Number(this.catalogId);
  
   if (this.isNewRecord) {
+    this.editedDish.path =this.fileName;
   this.dishServ.createMenu(this.editedDish).subscribe(response => {
                  
     this.loadDishes();  
@@ -162,6 +168,10 @@ saveDish(){
 }       
 );
 } else {
+
+  if (this.fileName!=""){
+    this.editedDish.path =this.fileName;
+  }
  
 // edit catalog
 this.dishServ.updateMenu(this.editedDish).subscribe(response => {
@@ -187,4 +197,13 @@ this.isView = true;
 this.editedDish = null;
  this.isEdit= false;
 }
+
+onNotify(message:string):void {
+  console.log(message);
+ 
+  this.fileName= message;
 }
+
+}
+
+

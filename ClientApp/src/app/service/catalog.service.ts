@@ -11,6 +11,10 @@ export class CatalogService{
 
     constructor(private http: HttpClient) {}
 
+    getCatalog(id:number){
+        return this.http.get(this.url+"/"+id);
+    }
+
     getCatalogsByProviderId(providerId:number){
         return this.http.get(this.url + '/provider/' + providerId);
     }

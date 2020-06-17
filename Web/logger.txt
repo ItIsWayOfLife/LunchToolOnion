@@ -207,3 +207,24 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 17.06.2020 15:07:08: Processing request Dish/Index
 17.06.2020 15:07:28: Processing request Dish/Index
 17.06.2020 15:07:35: Processing request Dish/Edit
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 17:35:52: Processing request Home/Index
+17.06.2020 17:35:53: Processing request Provider/ListFavoriteProvider
+17.06.2020 17:35:56: Processing request Catalog/Index
+17.06.2020 17:35:59: Processing request Dish/Index
+17.06.2020 17:36:01: Processing request Catalog/Index
+17.06.2020 17:36:02: Processing request Dish/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 17:37:44: Processing request Home/Index
+17.06.2020 17:37:44: Processing request Provider/ListFavoriteProvider
+17.06.2020 17:37:56: Processing request Catalog/Index
+17.06.2020 17:37:57: Processing request Dish/Index
+17.06.2020 17:37:59: Processing request Catalog/Index

@@ -43,7 +43,7 @@
 
 <div class="row mt-5 mb-2">
     <div class="divWithFor" *ngFor="let provider of getProviders()"> 
-      <div class=".col-sm-4 providerView"> 
+      <div class="providerView"> 
         <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" [alt]="provider.name" /></a>
         <p *ngIf="isAdminMyRole;">Id: {{provider.id}}</p>
         <div *ngIf="provider.isFavorite;  then thenBlockFav else elseBlockFav"></div>

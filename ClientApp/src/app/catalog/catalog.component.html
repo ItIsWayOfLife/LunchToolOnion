@@ -39,7 +39,7 @@
             <td>{{catalog.name}}</td>
             <td>{{catalog.info}}</td>
             <!-- <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id" asp-route-menuId="@Model.MenuId">  @SharedLocalizer["Dishes"]</a></td> -->
-            <td><a class="btn btn-primary">Блюда</a></td>
+            <td><a class="btn btn-primary" [routerLink]="['/dish/', catalog.id]">Блюда</a></td>
            
                 <td *ngIf="isAdminMyRole">               
                         <button class="btn btn-danger admB" (click)="editCatalog(catalog)">Изменить</button>                   

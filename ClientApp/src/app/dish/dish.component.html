@@ -78,5 +78,43 @@
     </form>
   </div>  
 
+<!--edit dish -->
+<div *ngIf="isEdit">
+    <form autocomplete="off" >
+      <div class="text-center">
+        <app-upload [fileNameR]="editedDish.path" (notify)='onNotify($event)'></app-upload>
+    
+      <div>
+        <input type="number" name="id" id="id" class="form-control" [(ngModel)]="editedDish.id" placeholder="id" hidden/>
+      </div>
+      <div>
+        <label for="name" class="control-label">Название</label><br />
+        <input name="name" id="name" class="form-control" [(ngModel)]="editedDish.name" placeholder="Название"/>
+        <span></span>
+    </div>
+    <div>
+        <label for="weight" class="control-label">Вес</label><br />
+        <input  type="number" name="weight" id="weight" class="form-control" [(ngModel)]="editedDish.weight"  placeholder="Вес" />
+    </div>
+    <div>
+      <label for="price" class="control-label">Цена</label><br />
+      <input type="number" name="price" id="price" class="form-control" [(ngModel)]="editedDish.price"  placeholder="Цена" />
+  </div>
+  <div>
+        <label for="info" class="control-label">Информация</label><br />
+        <input  name="info" id="info" class="form-control"  [(ngModel)]="editedDish.info"  placeholder="Информация"/>
+    </div>
+        <br />
+        <div>
+            <input type="button" value="Изменить" (click)="saveDish()" class="btn btn-success" />
+        </div><br/>
+        <div>
+            <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+        </div>
+      </div>
+    </form>
+  </div>   
+  
+
     <br/>  
 </div>

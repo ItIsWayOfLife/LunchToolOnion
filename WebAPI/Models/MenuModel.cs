@@ -1,5 +1,5 @@
 ﻿
-namespace WebAPI.Models.Menu
+namespace WebAPI.Models
 {
     public class MenuModel
     {

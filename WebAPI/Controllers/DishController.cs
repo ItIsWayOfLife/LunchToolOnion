@@ -1,12 +1,13 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebAPI.Models.Dish;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -15,15 +16,18 @@ namespace WebAPI.Controllers
     public class DishController : ControllerBase
     {
         private readonly IDishService _dishService;
+        private readonly IMenuService _menuService;
         private readonly PathConstants _pathConstants;
 
         private readonly string _path;
 
-        public DishController(IDishService dishService)
+        public DishController(IDishService dishService,
+            IMenuService menuService)
         {
             _dishService = dishService;
             _pathConstants = new PathConstants();
             _path = _pathConstants.APIURL+ _pathConstants.pathForAPI;
+            _menuService = menuService;
         }
 
         [HttpGet]
@@ -152,6 +156,29 @@ namespace WebAPI.Controllers
                 Price = dto.Price,
                 Weight = dto.Weight
             };
+        }
+
+
+        [HttpGet, Route("menuDishes/{menuId}")]
+        public IActionResult GetDishesByMenuId(int menuId)
+        {
+            try
+            {
+                IEnumerable<MenuDishesDTO> menuDishesDTOs = _menuService.GetMenuDishes(menuId);
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesModel>()).CreateMapper();
+                var menuDishes = mapper.Map<IEnumerable<MenuDishesDTO>, List<MenuDishesModel>>(menuDishesDTOs);
+
+                foreach (var m in menuDishes)
+                {
+                    m.Path = _path+m.Path;
+                }
+
+                return new ObjectResult(menuDishes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
     }
 }

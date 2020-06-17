@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using WebAPI.Models.Catalog;
+using WebAPI.Models;
 
 
 namespace WebAPI.Controllers

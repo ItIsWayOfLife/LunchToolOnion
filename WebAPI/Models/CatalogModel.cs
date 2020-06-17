@@ -1,5 +1,5 @@
 ﻿
-namespace WebAPI.Models.Catalog
+namespace WebAPI.Models
 {
     public class CatalogModel
     {

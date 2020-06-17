@@ -3,7 +3,7 @@ using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using WebAPI.Models.Menu;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
@@ -116,6 +116,7 @@ namespace WebAPI.Controllers
                 return BadRequest(ex);
             }
         }
+
 
         private MenuDTO ConvertMenuModelToMenuDTO(MenuModel model)
         {

@@ -1,5 +1,5 @@
 ﻿
-namespace WebAPI.Models.Provider
+namespace WebAPI.Models
 {
     public class ProviderModel
     {

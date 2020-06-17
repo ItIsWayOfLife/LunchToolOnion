@@ -9,6 +9,7 @@ using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Models.Catalog;
 using WebAPI.Models.Provider;
 
 namespace WebAPI.Controllers
@@ -30,7 +31,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                IEnumerable<СatalogDTO> сatalogDTOs = _сatalogService.GetСatalogs();           
+                IEnumerable<CatalogDTO> сatalogDTOs = _сatalogService.GetСatalogs();           
                 return new ObjectResult(сatalogDTOs);
             }
             catch (Exception ex)
@@ -82,11 +83,11 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public IActionResult Put(СatalogDTO model)
+        public IActionResult Put(CatalogModel model)
         {
             try
             {
-                _сatalogService.EditСatalog(model);
+                _сatalogService.EditСatalog(ConvertCatalogModelToCatalogDTO(model));
                 return Ok(model);
             }
             catch (Exception ex)
@@ -97,17 +98,28 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(СatalogDTO model)
+        public IActionResult Post(CatalogModel model)
         {
             try
             {
-                _сatalogService.AddСatalog(model);
+                _сatalogService.AddСatalog(ConvertCatalogModelToCatalogDTO(model));
                 return Ok(model);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex);
             }
+        }
+
+        private CatalogDTO ConvertCatalogModelToCatalogDTO(CatalogModel model)
+        {
+            return new CatalogDTO()
+            {
+                Id = model.Id,
+                Info = model.Info,
+                Name = model.Name,
+                ProviderId = model.ProviderId
+            };
         }
     }
 }

@@ -33,10 +33,8 @@ export class ProviderComponent implements OnInit {
   isShowStatusMessage:boolean;
   statusMessage: string;
 
-
   fileName:string;
  
-
   constructor(private providerServ: ProviderService, private rolesServ: RolesService) {
 
     this.fileName ="";
@@ -191,6 +189,7 @@ editProvider(provider: Provider) {
     }           
     ,err=>{
     this.statusMessage = 'Ошибка при добавлении данных';
+    this.providers.pop();
     console.log(err);
   }       
   );

@@ -2,7 +2,7 @@
 
 namespace ApplicationCore.DTO
 {
-   public class СatalogDTO : BaseEntityDTO
+   public class CatalogDTO : BaseEntityDTO
     {
         public string Name { get; set; }
         public string Info { get; set; }

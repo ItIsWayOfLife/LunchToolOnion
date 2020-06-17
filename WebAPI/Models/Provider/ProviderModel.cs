@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace WebAPI.Models.Provider
 {
     public class ProviderModel

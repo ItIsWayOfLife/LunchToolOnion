@@ -18,16 +18,16 @@ namespace ApplicationCore.Services
         }
 
 
-        public IEnumerable<СatalogDTO> GetСatalogs()
+        public IEnumerable<CatalogDTO> GetСatalogs()
         {
             // применяем автомаппер для проекции одной коллекции на другую
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Catalog, СatalogDTO>()).CreateMapper();
-            var сatalogs = mapper.Map<IEnumerable<Catalog>, List<СatalogDTO>>(Database.Catalog.GetAll());
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Catalog, CatalogDTO>()).CreateMapper();
+            var сatalogs = mapper.Map<IEnumerable<Catalog>, List<CatalogDTO>>(Database.Catalog.GetAll());
 
             return сatalogs;
         }
 
-        public IEnumerable<СatalogDTO> GetСatalogs(int? providerId)
+        public IEnumerable<CatalogDTO> GetСatalogs(int? providerId)
         {
             if (providerId == null)
                 throw new ValidationException("Не установлено id поставщика", "");
@@ -38,7 +38,7 @@ namespace ApplicationCore.Services
             return GetСatalogs().Where(p => p.ProviderId == providerId).ToList();
         }
 
-        public void AddСatalog(СatalogDTO сatalogDTO)
+        public void AddСatalog(CatalogDTO сatalogDTO)
         {
             if (сatalogDTO.Name == null)
                 throw new ValidationException("Название не установлено", "");
@@ -73,7 +73,7 @@ namespace ApplicationCore.Services
             Database.Save();
         }
 
-        public СatalogDTO GetСatalog(int? id)
+        public CatalogDTO GetСatalog(int? id)
         {
             if (id == null)
                 throw new ValidationException("Не установлено id каталога", "");
@@ -81,7 +81,7 @@ namespace ApplicationCore.Services
             if (сatalog == null)
                 throw new ValidationException("Каталог не найдено", "");
 
-            СatalogDTO сatalogDTO = new СatalogDTO()
+            CatalogDTO сatalogDTO = new CatalogDTO()
             {
                 Id = сatalog.Id,
                 Info = сatalog.Info,
@@ -92,7 +92,7 @@ namespace ApplicationCore.Services
             return сatalogDTO;
         }
 
-        public void EditСatalog(СatalogDTO сatalogDTO)
+        public void EditСatalog(CatalogDTO сatalogDTO)
         {
             if (сatalogDTO.Name == null)
                 throw new ValidationException("Название не установлено", "");           

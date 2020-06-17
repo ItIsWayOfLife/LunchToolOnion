@@ -33,6 +33,10 @@ export class CatalogComponent implements OnInit {
   searchSelectionString:string;
   searchStr:string;
 
+  isEdit:boolean;
+  isView:boolean;
+  isNewRecord: boolean;
+
   constructor(private activateRoute: ActivatedRoute,
      private catalogServ :CatalogService,
      private rolesServ:RolesService,
@@ -46,6 +50,10 @@ export class CatalogComponent implements OnInit {
 
       this.searchSelectionString="Поиск по";
       this.searchStr="";
+
+      this.isView=true;
+      this.isEdit = false;
+      this.isNewRecord = false;
   }
 
   ngOnInit(): void {
@@ -90,13 +98,23 @@ this.statusMessage = 'Ошибка удаления';
 // show info
 showStatusMess(){
   this.isShowStatusMessage=!this.isShowStatusMessage;
-  // this.isNewRecord = false;
-  // this.isView = true;
-  // this.isEdit= false;
+  this.isNewRecord = false;
+  this.isView = true;
+  this.isEdit= false;
   }
   addCatalog(){
-
+    this.editedCatalog = new Catalog();
+    this.catalogs.push(this.editedCatalog);
+    this.isView = false;
+    this.isNewRecord = true;
   }
+
+// edit provider
+editCatalog(catalog: Catalog) {
+  this.isEdit = true;
+  this.isView = false;
+ this.editedCatalog = catalog;
+}
 
   refresh(){
     this.searchSelectionString="Поиск по";
@@ -115,6 +133,52 @@ showStatusMess(){
       }
     
     return this.catalogs;
+    }
+
+    
+    saveCatalog(){
+      this.isShowStatusMessage=true;
+      this.editedCatalog.providerId =Number(this.providerId);
+     
+      if (this.isNewRecord) {
+      this.catalogServ.createCatalog(this.editedCatalog).subscribe(response => {
+                     
+        this.loadCatalog();  
+        this.statusMessage = 'Данные успешно добавлены';
+        
+        console.log(response.status);
+      }           
+      ,err=>{
+      this.statusMessage = 'Ошибка при добавлении данных';
+      this.catalogs.pop();
+      console.log(err);
+    }       
+    );
+  } else {
+     
+   // edit catalog
+    this.catalogServ.updateCatalog(this.editedCatalog).subscribe(response => {
+      
+        this.loadCatalog();
+        this.statusMessage = 'Данные успешно изменены';
+        console.log(response.status);
+    },
+    err=>{
+      this.statusMessage = 'Ошибка при изменении данных';
+      console.log(err);
+    });  
+  }
+    }
+  
+    cancel(){
+      // если отмена при добавлении, удаляем последнюю запись
+      if (this.isNewRecord) {
+        this.catalogs.pop();
+    }
+    this.isNewRecord = false;
+    this.isView = true;
+    this.editedCatalog = null;
+     this.isEdit= false;
     }
 
 }

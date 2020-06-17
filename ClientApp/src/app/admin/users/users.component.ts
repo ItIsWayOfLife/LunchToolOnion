@@ -97,6 +97,7 @@ saveUser() {
           }           
           ,err=>{
           this.statusMessage = 'Ошибка при добавлении данных';
+          this.users.pop();
           console.log(err);
         }       
         );

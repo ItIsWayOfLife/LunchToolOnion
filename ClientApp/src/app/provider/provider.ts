@@ -1,4 +1,3 @@
-import { Data } from '@angular/router';
 
 export class Provider{
     public id:number;

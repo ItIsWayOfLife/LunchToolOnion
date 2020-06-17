@@ -65,7 +65,7 @@
             <p>Статус: Не работает</p>  
             </ng-template>
         <p>Информация: {{provider.info}}</p>
-        <a  class="btn btn-primary" >Меню</a>
+        <a  class="btn btn-primary" [routerLink]="['/menu/', provider.id]" >Меню</a>
         <a  class="btn btn-primary" [routerLink]="['/catalog/', provider.id]" >Каталог блюд</a>
         <div *ngIf="isAdminMyRole;">
           <input type="button" class="btn btn-danger" (click)="editProvider(provider)" value="Изменить" />

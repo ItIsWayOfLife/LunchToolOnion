@@ -23,6 +23,7 @@ import { ProviderComponent } from './provider/provider.component';
 import { UploadComponent } from './upload/upload.component';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
 import { CatalogComponent } from './catalog/catalog.component';
+import { MenuComponent } from './menu/menu.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
   {   path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
   {   path: 'providers', component: ProviderComponent},
   {   path: 'catalog/:providerId', component: CatalogComponent},
+  {   path: 'menu/:providerId', component: MenuComponent},
   {   path: '**', component: NotFoundComponent }
 
 ]
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
     ProviderComponent,
     UploadComponent,
     NotFoundComponent,
-    CatalogComponent
+    CatalogComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,

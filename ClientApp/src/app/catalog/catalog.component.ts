@@ -59,7 +59,7 @@ export class CatalogComponent implements OnInit {
   ngOnInit(): void {
     this.loadCatalog();
     this.getNameProvider();
-    this.isAdminMyRole = this.rolesServ.isAdminOrEmployeeRole();
+    this.isAdminMyRole = this.rolesServ.isAdminRole();
   }
 
   getNameProvider(){
@@ -69,7 +69,7 @@ export class CatalogComponent implements OnInit {
     });
   }
 
-  // load users
+  // load catalog
   loadCatalog() {
     this.catalogServ.getCatalogsByProviderId(this.providerId).subscribe((data: Catalog[]) => {
             this.catalogs = data; 

@@ -1,32 +1,32 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
-import {Catalog} from '../catalog/catalog';
+import {Menu} from '../menu/menu';
 
 
 @Injectable()
-export class CatalogService{
+export class MenuService{
 
-    private url = "https://localhost:44342/api/catalog";
+    private url = "https://localhost:44342/api/menu";
 
     constructor(private http: HttpClient) {}
 
-    getCatalogsByProviderId(providerId:number){
+    getMenuByProviderId(providerId:number){
         return this.http.get(this.url + '/provider/' + providerId);
     }
 
-    deleteCatalog(id: number){
+    deleteMenu(id: number){
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
         return this.http.delete(this.url + '/' + id, {headers:myHeaders, observe: 'response'});
     }
 
-    createCatalog(catalog: Catalog){
+    createMenu(menu: Menu){
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-        return this.http.post(this.url, JSON.stringify(catalog), {headers: myHeaders, observe: 'response'}); 
+        return this.http.post(this.url, JSON.stringify(menu), {headers: myHeaders, observe: 'response'}); 
     }
 
-    updateCatalog(catalog: Catalog) {
+    updateMenu(menu: Menu) {
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-        return this.http.put(this.url, JSON.stringify(catalog), {headers:myHeaders, observe: 'response'});
+        return this.http.put(this.url, JSON.stringify(menu), {headers:myHeaders, observe: 'response'});
     }
 }

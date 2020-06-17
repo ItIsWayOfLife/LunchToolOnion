@@ -1,0 +1,97 @@
+<div class="text-center">
+    <h1 >Меню {{nameProvider}}</h1>
+    <br />
+    
+    
+    <div *ngIf="isShowStatusMessage">
+        <p>{{statusMessage}}</p>
+        <button (click)="showStatusMess()">Ok</button>
+        <br/> <br/>
+    </div>
+    
+    
+    <!-- view catalogs -->
+    <div *ngIf="isView">
+    <div class="form-inline form-group ">
+        <form autocomplete="off" class="text-center" >
+            <input type="button" value="Добавить" class="btn btn-success mr" (click)="addMenu()" />
+        <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
+            <option>Поиск по</option>
+            <option *ngIf="isAdminMyRole;">Id</option>
+            <option>Дате</option>
+            <option>Информации</option>
+        </select>
+        <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr" placeholder="Поиск"/>
+        <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+            <th *ngIf="isAdminMyRole;">Id</th>
+            <th>Дата</th>
+            <th>Информация</th>
+            <th></th>
+            <th *ngIf="isAdminMyRole"></th>
+     
+        </tr>
+            <tr *ngFor="let menu of getMenus()">
+                <td *ngIf="isAdminMyRole;">{{menu.id}}</td>
+                <td>{{menu.date}}</td>
+                <td>{{menu.info}}</td>
+                <!-- <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id" asp-route-menuId="@Model.MenuId">  @SharedLocalizer["Dishes"]</a></td> -->
+                <td><a class="btn btn-primary">Блюда</a></td>
+               
+                    <td *ngIf="isAdminMyRole">               
+                            <button class="btn btn-danger admB" (click)="editMenu(menu)">Изменить</button>                   
+                            <button class="btn btn-danger admB" (click)="deleteMenu(menu.id)">Удалить</button>
+                    </td>
+            </tr>
+    </table>
+    </div>
+    
+    <!-- add catalog -->
+    <div *ngIf="isNewRecord" class="text-center">
+        <form autocomplete="off" >
+            <div>
+                <label for="date" class="control-label">Название</label><br />
+                <input type="date" name="date" id="date" class="form-control" [(ngModel)]="editedMenu.date" placeholder="дата"/>
+            </div>   
+            <div>   
+                <label for="info" class="control-label">Информация</label><br />
+                <input  name="info" id="info" class="form-control"  [(ngModel)]="editedMenu.info"  placeholder="Информация"/>
+            </div>
+            <br />
+            <div>
+                <input type="button" value="Сохранить" (click)="saveMenu()" class="btn btn-success" />
+            </div><br/>
+            <div>
+                <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+            </div>
+        </form>
+      </div>  
+    
+    
+      <!--edit vatalog -->
+    <div *ngIf="isEdit">
+        <form autocomplete="off" >   
+            <input type="number" name="id" id="id" class="form-control" [(ngModel)]="editedMenu.id" placeholder="id" hidden/>
+            <div>
+                <label for="date" class="control-label">Название</label><br />
+                <input type="date" name="date" id="date" class="form-control" [(ngModel)]="editedMenu.date" placeholder="Дата"/>
+                <span></span>
+            </div>    
+            <div>
+                <label for="info" class="control-label">Информация</label><br />
+                <input  name="info" id="info" class="form-control"  [(ngModel)]="editedMenu.info"  placeholder="Информация"/>
+            </div><br/>      
+            <div>
+                <input type="button" value="Изменить" (click)="saveMenu()" class="btn btn-success" />
+            </div><br/>
+            <div>
+                <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+            </div>
+        </form>
+      </div>   
+    
+    
+    </div>

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 import {DishService} from '../service/dish.service';
 import {RolesService} from '../service/roles.service';
 import {MenuService} from '../service/menu.service';
+import {CartService} from '../service/cart.service';
 
 import {MenuDishes} from './menuDishes';
 import {Menu} from '../menu/menu';
@@ -14,7 +15,8 @@ import {Menu} from '../menu/menu';
   styleUrls: ['./menu-dishes.component.css'],
   providers:[RolesService,
     DishService,
-    MenuService]
+    MenuService,
+    CartService]
 })
 export class MenuDishesComponent implements OnInit {
 
@@ -30,10 +32,12 @@ export class MenuDishesComponent implements OnInit {
   searchSelectionString:string;
   searchStr:string;
 
-  constructor(private activateRoute: ActivatedRoute,
+  constructor(private router: Router,
+    private activateRoute: ActivatedRoute,
     private dishServ :DishService,
     private rolesServ:RolesService,
-    private menuServ:MenuService) {
+    private menuServ:MenuService,
+    private cartServ:CartService) {
     this.menuId = activateRoute.snapshot.params['menuId'];
 
     this.menuDishes = new Array<MenuDishes>();
@@ -61,12 +65,13 @@ export class MenuDishesComponent implements OnInit {
       this.dishServ.getDishesByMenuId(this.menuId).subscribe((data: MenuDishes[]) => {
               this.menuDishes = data; 
           });
-
-       
   }
 
   getMenuDishes():Array<MenuDishes>{
-    if (this.searchSelectionString=="Id каталога"){
+    if (this.searchSelectionString=="Id блюда"){
+      return this.menuDishes.filter(x=>x.dishId.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    }
+    else if (this.searchSelectionString=="Id каталога"){
       return this.menuDishes.filter(x=>x.catalogId.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
     }
     else if (this.searchSelectionString=="Названию"){
@@ -90,5 +95,15 @@ export class MenuDishesComponent implements OnInit {
     this.searchStr ="";
   }
 
+
+  addToCart(idDish:number){
+    this.cartServ.addDishToCart(idDish).subscribe(response => {
+      console.log(response);
+      this.router.navigate(["cart"]);
+    }           
+    ,err=>{
+    console.log(err);
+  });
+}
 
 }

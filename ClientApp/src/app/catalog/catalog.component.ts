@@ -109,7 +109,7 @@ showStatusMess(){
     this.isNewRecord = true;
   }
 
-// edit provider
+// edit catalog
 editCatalog(catalog: Catalog) {
   this.isEdit = true;
   this.isView = false;

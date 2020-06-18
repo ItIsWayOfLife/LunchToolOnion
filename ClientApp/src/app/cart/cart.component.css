@@ -1,0 +1,16 @@
+table tr th{
+    text-align: center;
+}
+
+table tr td{
+    text-align: center;
+}
+
+
+.countDish{
+    widows: 100px;
+}
+
+.btn{
+    margin-right: 5px;
+}

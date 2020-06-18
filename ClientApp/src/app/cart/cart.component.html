@@ -1,0 +1,58 @@
+<div class="text-center">
+    <h1 >Корзина</h1>
+    <br />
+
+    <div *ngIf="isShowStatusMessage">
+        <p>{{statusMessage}}</p>
+        <button (click)="showStatusMess()">Ok</button>
+        <br/> <br/>
+    </div>
+
+</div>
+<div *ngIf="getInfoForView(); then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+       
+        <table class="table">
+            <tr>
+                <th>Бдюдо</th>
+                <th>Название</th>
+                <th>Информация</th>
+                <th>Вес</th>
+                <th>Цена</th>
+                <th>Количество</th>
+                <th>Цена за количество</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr *ngFor="let cartD of cartDishes">
+                <td> <img class="esh-basket-image" [src]="cartD.path" [alt]="cartD.name" /></td>
+                <td>{{cartD.name}}</td>
+                <td>{{cartD.info}}</td>
+                <td>{{cartD.weight}}</td>
+                <td>{{cartD.price}}</td>
+                <td>               
+                        <input type="hidden" name="dishCartId" value="cartD.id" />
+                        <input style="width: 55px;" class="countDish" type="number" min="1" max="100"  [(ngModel)]="cartD.count" name="count" />
+                </td>
+
+                <td>{{getTotalPrice(cartD)}} BYN</td>
+                <td>
+                    <button class="btn btn-danger" (click)="deleteCartDish(cartD.id)">Удалить</button>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+        <div>
+                <button class="btn btn-danger" (click)="deleteAllDishesInCart()">Очистить корзину</button>
+                <button class="btn btn-primary" (click)="updateData()">Обновить</button>
+                <button class="btn btn-success">Заказать</button>
+                <h3 class="float-right">Общая цена: {{getFullPrice()}} "BYN"</h3>
+        </div>
+
+      </ng-template>       
+      <ng-template #elseBlock>
+        <h3 class="text-center" style="color:red;">Корзина пуста</h3>
+          </ng-template>
+          
+<br/>

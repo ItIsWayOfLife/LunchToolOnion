@@ -1,9 +1,11 @@
 ﻿
 namespace WebAPI.Models
 {
-    public class MenuDishesModel
+    public class CartDishesModel
     {
-        public int CatalogId { get; set; }
+        public int Id { get; set; }
+        public int Count { get; set; }
+        public int CartId { get; set; }
         public int DishId { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }

@@ -164,13 +164,14 @@ namespace WebAPI.Controllers
         {
             try
             {
-                IEnumerable<MenuDishesDTO> menuDishesDTOs = _menuService.GetMenuDishes(menuId);
+                var menuDishesDTOs = _menuService.GetMenuDishes(menuId).ToList();
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesModel>()).CreateMapper();
                 var menuDishes = mapper.Map<IEnumerable<MenuDishesDTO>, List<MenuDishesModel>>(menuDishesDTOs);
 
-                foreach (var m in menuDishes)
+                for (int i = 0;i< menuDishesDTOs.Count(); i++)
                 {
-                    m.Path = _path+m.Path;
+                    menuDishes[i].Path = _path + menuDishesDTOs[i].Path;
+                    menuDishes[i].DishId = menuDishesDTOs[i].DishId.Value;
                 }
 
                 return new ObjectResult(menuDishes);

@@ -1,4 +1,5 @@
 export class MenuDishes{
+    public dishId: number;
     public catalogId:number; 
     public name:string; 
     public info:string; 

@@ -26,6 +26,7 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { MenuComponent } from './menu/menu.component';
 import { DishComponent } from './dish/dish.component';
 import { MenuDishesComponent } from './menu-dishes/menu-dishes.component';
+import { CartComponent } from './cart/cart.component';
 
 export function tokenGetter() {
   return localStorage.getItem("jwt");
@@ -43,6 +44,7 @@ const appRoutes: Routes = [
   {   path: 'menu/:providerId', component: MenuComponent},
   {   path: 'dish/:catalogId', component: DishComponent},
   {   path: 'menudishes/:menuId', component: MenuDishesComponent},
+  {   path: 'cart', component: CartComponent, canActivate: [AuthGuard]},
   {   path: '**', component: NotFoundComponent }
 
 ]
@@ -64,7 +66,8 @@ const appRoutes: Routes = [
     CatalogComponent,
     MenuComponent,
     DishComponent,
-    MenuDishesComponent
+    MenuDishesComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

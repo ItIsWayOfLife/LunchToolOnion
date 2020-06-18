@@ -447,3 +447,104 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 18.06.2020 13:02:36: Processing request MenuDishes/Index
 18.06.2020 13:02:44: Processing request Menu/Index
 18.06.2020 13:02:51: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 14:27:20: Processing request Home/Index
+18.06.2020 14:27:20: Processing request Provider/ListFavoriteProvider
+18.06.2020 14:27:43: Processing request Account/Login
+18.06.2020 14:27:44: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+18.06.2020 14:27:44: Processing request Home/Index
+18.06.2020 14:27:44: Processing request Provider/ListFavoriteProvider
+18.06.2020 14:27:46: Processing request Cart/Index
+18.06.2020 14:27:47: Processing request Order/Index
+18.06.2020 14:27:48: Processing request Cart/Index
+18.06.2020 14:27:48: Processing request Users/Index
+18.06.2020 14:27:51: Processing request Report/Index
+18.06.2020 14:27:56: Processing request Order/Index
+18.06.2020 14:27:57: Processing request Users/Index
+18.06.2020 14:27:58: Processing request Cart/Index
+18.06.2020 14:27:58: Processing request Order/Index
+18.06.2020 14:27:59: Processing request Provider/Index
+18.06.2020 14:28:04: Processing request Menu/Index
+18.06.2020 14:28:06: Processing request MenuDishes/Index
+18.06.2020 14:28:07: Processing request Cart/Add
+18.06.2020 14:28:07: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 14
+18.06.2020 14:28:07: Processing request Cart/Index
+18.06.2020 14:28:10: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 1
+18.06.2020 14:28:10: Processing request Cart/Index
+18.06.2020 14:28:15: Processing request Order/Create
+18.06.2020 14:28:15: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 created order 1
+18.06.2020 14:28:15: Processing request Order/Index
+18.06.2020 14:28:17: Processing request Cart/Index
+18.06.2020 14:28:18: Processing request Home/Index
+18.06.2020 14:28:18: Processing request Provider/ListFavoriteProvider
+18.06.2020 14:28:19: Processing request Catalog/Index
+18.06.2020 14:28:20: Processing request Dish/Index
+18.06.2020 14:28:26: Processing request Catalog/Index
+18.06.2020 14:28:26: Processing request Provider/ListFavoriteProvider
+18.06.2020 14:28:27: Processing request Menu/Index
+18.06.2020 14:28:28: Processing request MenuDishes/Index
+18.06.2020 14:28:30: Processing request Cart/Add
+18.06.2020 14:28:30: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 11
+18.06.2020 14:28:30: Processing request Cart/Index
+18.06.2020 14:28:33: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 2
+18.06.2020 14:28:33: Processing request Cart/Index
+18.06.2020 14:28:36: Processing request Cart/Index
+18.06.2020 14:28:37: Processing request Order/Index
+18.06.2020 14:28:38: Processing request Users/Index
+18.06.2020 14:28:39: Processing request Report/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 16:56:18: Processing request Home/Index
+18.06.2020 16:56:18: Processing request Provider/ListFavoriteProvider
+18.06.2020 16:56:21: Processing request Account/Login
+18.06.2020 16:56:22: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+18.06.2020 16:56:22: Processing request Home/Index
+18.06.2020 16:56:22: Processing request Provider/ListFavoriteProvider
+18.06.2020 16:56:24: Processing request Cart/Index
+18.06.2020 16:56:30: Processing request Home/Index
+18.06.2020 16:56:30: Processing request Provider/ListFavoriteProvider
+18.06.2020 16:56:32: Processing request Menu/Index
+18.06.2020 16:56:34: Processing request MenuDishes/Index
+18.06.2020 16:56:35: Processing request Cart/Add
+18.06.2020 16:56:36: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 11
+18.06.2020 16:56:36: Processing request Cart/Index
+18.06.2020 16:56:38: Processing request MenuDishes/Index
+18.06.2020 16:56:39: Processing request Cart/Add
+18.06.2020 16:56:40: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 12
+18.06.2020 16:56:40: Processing request Cart/Index
+18.06.2020 16:56:42: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 3
+18.06.2020 16:56:42: Processing request Cart/Index
+18.06.2020 16:56:42: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 2
+18.06.2020 16:56:42: Processing request Cart/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 17:00:39: Processing request Home/Index
+18.06.2020 17:00:39: Processing request Provider/ListFavoriteProvider
+18.06.2020 17:00:41: Processing request Cart/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 17:20:58: Processing request Home/Index
+18.06.2020 17:20:58: Processing request Provider/ListFavoriteProvider
+18.06.2020 17:21:05: Processing request Cart/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 17:35:28: Processing request Home/Index
+18.06.2020 17:35:28: Processing request Provider/ListFavoriteProvider
+18.06.2020 17:35:30: Processing request Order/Index
+18.06.2020 17:35:31: Processing request Cart/Index

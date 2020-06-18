@@ -58,14 +58,16 @@ export class MenuDishesComponent implements OnInit {
 
     // load menuDishes
     loadMenuDishes() {
-      this.dishServ.getDishByCatalogId(this.menuId).subscribe((data: MenuDishes[]) => {
+      this.dishServ.getDishesByMenuId(this.menuId).subscribe((data: MenuDishes[]) => {
               this.menuDishes = data; 
           });
+
+       
   }
 
   getMenuDishes():Array<MenuDishes>{
-    if (this.searchSelectionString=="Id блюда"){
-      return this.menuDishes.filter(x=>x.dishId.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    if (this.searchSelectionString=="Id каталога"){
+      return this.menuDishes.filter(x=>x.catalogId.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
     }
     else if (this.searchSelectionString=="Названию"){
       return this.menuDishes.filter(x=>x.name.toString().toLowerCase().includes(this.searchStr.toLowerCase()));

@@ -30,7 +30,7 @@ export class DishService{
         return this.http.put(this.url, JSON.stringify(dish), {headers:myHeaders, observe: 'response'});
     }
 
-    getDishesByMenuId(menuId:number){
-        return this.http.get(this.url + '/menudishes/' + menuId);
+    getDishesByMenuId(menuid:number){
+        return this.http.get(this.url + '/menudishes/' + menuid);
     }
 }

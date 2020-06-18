@@ -165,13 +165,13 @@ namespace ApplicationCore.Services
             {
                 menuDishesDTOs.Add(new MenuDishesDTO()
                 {
-                     DishId = menuDish.DishId,
+                     DishId = menuDish.DishId.Value,
                      Info = menuDish.Dish.Info,
                      Name = menuDish.Dish.Name,
                      Path = menuDish.Dish.Path,
                      Price = menuDish.Dish.Price,
                      Weight = menuDish.Dish.Weight,
-                     MenuId = menuDish.MenuId,
+                     MenuId = menuDish.MenuId.Value,
                      CatalogId = menuDish.Dish.CatalogId
                 });
             }

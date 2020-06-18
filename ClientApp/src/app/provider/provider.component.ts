@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 import {ProviderService} from '../service/providerService';
 import {RolesService} from '../service/roles.service';
@@ -18,6 +20,10 @@ export class ProviderComponent implements OnInit {
   titleProviders:string;
   titleFavoriteProviders:string;;
   isFavoriteProviders:boolean;
+  favoriteorall:string;
+  backFavoriteorall:string;
+  private subscription: Subscription;
+
   isEdit:boolean;
 
   isView:boolean;
@@ -35,8 +41,13 @@ export class ProviderComponent implements OnInit {
 
   fileName:string;
  
-  constructor(private providerServ: ProviderService, private rolesServ: RolesService) {
+  constructor(private router: Router,
+    private activateRoute: ActivatedRoute, 
+    private providerServ: ProviderService, 
+    private rolesServ: RolesService) {
 
+      this.subscription = activateRoute.params.subscribe(params=>this.favoriteorall=params['favoriteorall']);
+   
     this.fileName ="";
 
     this.providers = new Array<Provider>();
@@ -63,6 +74,29 @@ export class ProviderComponent implements OnInit {
     this.isAdminMyRole = this.rolesServ.isAdminOrEmployeeRole();
   }
 
+  getFarOrNotProvider(){ 
+        switch(this.favoriteorall) { 
+          case "favorite": { 
+            this.isFavoriteProviders = true;
+            if (this.backFavoriteorall!=this.favoriteorall){
+              this.router.navigate(["providers/favorite"]);
+            }
+             break; 
+          } 
+          case "all": { 
+            this.isFavoriteProviders = false;
+            if (this.backFavoriteorall!=this.favoriteorall){
+             this.router.navigate(["providers/all"]);
+           }
+             break; 
+          } 
+          default: { 
+            this.router.navigate(["**"]);
+             break; 
+          }        
+       } 
+       this.backFavoriteorall = this.favoriteorall;
+  }
 
 // load users
 loadProviders() {
@@ -70,17 +104,6 @@ loadProviders() {
           this.providers = data; 
       });   
 }
-
-//
-/////// 
-getMenu(providerId:number){
-
-}
-
-getCatalogDishes(providerId:number){
-
-}
-//
 
 getFavoriteProviders(){
   this.isFavoriteProviders = true;
@@ -91,6 +114,9 @@ getAllProviders(){
 }
 
 getProviders():Array<Provider>{
+
+  this.getFarOrNotProvider();
+
   if ( this.isFavoriteProviders){
 return this.providers.filter(p=>p.isFavorite);
   }

@@ -7,7 +7,6 @@
                 <!-- <input type="button" value="Добавить" class="btn btn-success mr" (click)="addDish()" /> -->
             <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
                 <option>Поиск по</option>
-                <option *ngIf="isAdminMyRole;">Id блюда</option>
                 <option *ngIf="isAdminMyRole;">Id каталога</option>
                 <option>Названию</option>
                 <option>Информации</option>
@@ -23,7 +22,6 @@
         <div  class="col-lg-4" *ngFor="let menuDish of getMenuDishes()">
             <div>
                 <img width="360" height="180" class="img-thumbnail" [src]="menuDish.path" [alt]="menuDish.name" />
-                <p *ngIf="isAdminMyRole;">Id блюда: {{menuDish.dishId}}</p>
                 <p *ngIf="isAdminMyRole;">Id каталога: {{menuDish.catalogId}}</p>
                 <p>Название: {{menuDish.name}}</p>
                 <p>Вес: {{menuDish.weight}}</p>

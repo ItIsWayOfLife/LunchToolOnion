@@ -3,8 +3,6 @@ namespace WebAPI.Models
 {
     public class MenuDishesModel
     {
-        public int? MenuId { get; set; }
-        public int? DishId { get; set; }
         public int CatalogId { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }

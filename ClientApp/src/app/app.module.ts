@@ -40,7 +40,7 @@ const appRoutes: Routes = [
   {   path: 'customers', component: CustomersComponent },
   {   path: 'account', component: ProfileComponent, canActivate: [AuthGuard]},
   {   path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
-  {   path: 'providers/:favoriteorall', component: ProviderComponent},
+  {   path: 'providers', component: ProviderComponent},
   {   path: 'catalog/:providerId', component: CatalogComponent},
   {   path: 'menu/:providerId', component: MenuComponent},
   {   path: 'dish/:catalogId', component: DishComponent},

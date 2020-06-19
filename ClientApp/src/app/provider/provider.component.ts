@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
 
 import {ProviderService} from '../service/providerService';
 import {RolesService} from '../service/roles.service';
@@ -17,15 +16,7 @@ export class ProviderComponent implements OnInit {
 
   providers: Array<Provider>;
 
-  titleProviders:string;
-  titleFavoriteProviders:string;;
-  isFavoriteProviders:boolean;
-  favoriteorall:string;
-  backFavoriteorall:string;
-  private subscription: Subscription;
-
   isEdit:boolean;
-
   isView:boolean;
 
   editedProvider: Provider;
@@ -45,9 +36,7 @@ export class ProviderComponent implements OnInit {
     private activateRoute: ActivatedRoute, 
     private providerServ: ProviderService, 
     private rolesServ: RolesService) {
-
-      this.subscription = activateRoute.params.subscribe(params=>this.favoriteorall=params['favoriteorall']);
-   
+ 
     this.fileName ="";
 
     this.providers = new Array<Provider>();
@@ -57,9 +46,6 @@ export class ProviderComponent implements OnInit {
 
     this.isView = true;
 
-    this.titleProviders = "Поставщики";
-    this.titleFavoriteProviders  = "Популярные поставщики"
-    this.isFavoriteProviders = false;
 
     this.searchSelectionString="Поиск по";
     this.searchStr="";
@@ -74,30 +60,6 @@ export class ProviderComponent implements OnInit {
     this.isAdminMyRole = this.rolesServ.isAdminOrEmployeeRole();
   }
 
-  getFarOrNotProvider(){ 
-        switch(this.favoriteorall) { 
-          case "favorite": { 
-            this.isFavoriteProviders = true;
-            if (this.backFavoriteorall!=this.favoriteorall){
-              this.router.navigate(["providers/favorite"]);
-            }
-             break; 
-          } 
-          case "all": { 
-            this.isFavoriteProviders = false;
-            if (this.backFavoriteorall!=this.favoriteorall){
-             this.router.navigate(["providers/all"]);
-           }
-             break; 
-          } 
-          default: { 
-            this.router.navigate(["**"]);
-             break; 
-          }        
-       } 
-       this.backFavoriteorall = this.favoriteorall;
-  }
-
 // load providers
 loadProviders() {
   this.providerServ.getProviders().subscribe((data: Provider[]) => {
@@ -105,22 +67,7 @@ loadProviders() {
       });   
 }
 
-getFavoriteProviders(){
-  this.isFavoriteProviders = true;
-}
-
-getAllProviders(){
-  this.isFavoriteProviders = false;
-}
-
 getProviders():Array<Provider>{
-
-  this.getFarOrNotProvider();
-
-  if ( this.isFavoriteProviders){
-return this.providers.filter(p=>p.isFavorite);
-  }
-  else{
     if (this.searchSelectionString=="Id"){
       return this.providers.filter(x=>x.id.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
     }
@@ -155,7 +102,6 @@ return this.providers.filter(p=>p.isFavorite);
 
   return this.providers;
   }
-}
 
 refresh(){
   this.searchSelectionString="Поиск по";

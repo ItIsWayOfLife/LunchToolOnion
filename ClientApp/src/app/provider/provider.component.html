@@ -1,13 +1,7 @@
 <div class="main">
-<div *ngIf="isFavoriteProviders; then thenBlockTitle else elseBlockTitle"></div>
-<ng-template #thenBlockTitle>
-  <h1 class="text-center">{{titleFavoriteProviders}}</h1> 
+  <h1 class="text-center">Поставщики</h1> 
   <br />
-</ng-template>       
-<ng-template #elseBlockTitle>
-  <h1 class="text-center">{{titleProviders}}</h1>
-  <br />
-</ng-template>
+
 
 <div *ngIf="isShowStatusMessage"  class="text-center">
   <p>{{statusMessage}}</p>
@@ -17,9 +11,6 @@
 
 <!-- view provider -->
 <div *ngIf="isView">
-<div *ngIf="!isFavoriteProviders;">
-  
-  
   <div class="form-inline form-group ">
     <form autocomplete="off" class="text-center" >
         <input type="button" value="Добавить" class="btn btn-success mr" (click)="addProvider()" />
@@ -37,7 +28,6 @@
     <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr" placeholder="Поиск"/>
     <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
     </form>
-</div>
 </div>
 
 

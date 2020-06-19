@@ -31,7 +31,7 @@
                     <td>{{order.dateOrder}}</td>
                     <td>{{order.countDish}}</td>
                     <td>{{order.fullPrice}}</td>
-                    <td><button class="btn btn-sm btn-success"(click)="getInfoDish(order.id)" >Подробнее</button>
+                    <td><button class="btn btn-sm btn-success"(click)="getInfoDish(order.id, order.fullPrice)" >Подробнее</button>
                 </tr>
         </table>
 
@@ -65,11 +65,12 @@
             
                 <div >
                     <button class="btn btn-warning"  (click)="back()">Назад</button>
-                    <span class="float-right"><h3> Общая цена: {{getFullPrice()}} BYN</h3></span>
+                    <span class="float-right"><h3> Общая цена: {{allPrice}} BYN</h3></span>
                 </div>
                 <br/>
 
     </div>
+
         <br />
 
     

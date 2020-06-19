@@ -41,7 +41,7 @@ namespace ApplicationCore.Services
 
             var cartDishes = Database.CartDishes.Find(p => p.CartId == cart.Id).ToList();
 
-            if (cartDishes == null)
+            if (cartDishes == null || cartDishes.Count()==0)
                 throw new ValidationException("Корзина пуста", "");
 
             // созд заказ

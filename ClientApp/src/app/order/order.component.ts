@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import {Location} from '@angular/common';
 
 import {OrderService} from '../service/order.service';
@@ -23,6 +23,8 @@ export class OrderComponent implements OnInit{
 
   searchSelectionString:string;
   searchStr:string;
+
+  allPrice:number;
 
   constructor(private orderServ:OrderService,
     private _location: Location) {
@@ -52,21 +54,18 @@ export class OrderComponent implements OnInit{
           });
   }
 
-  getInfoDish(id:number){
+  getInfoDish(id:number, fullPrice:number){
+    this.allPrice = fullPrice;
     this.orderDishes = new Array<OrderDishes>();
   this.orderServ.getOrderDishById(id).subscribe((data: OrderDishes[]) => {
     this.orderDishes = data; 
-    this.idOrderViewDishes = data[0].orderId;
+
 });
     this.isViewOrdersList = false;
   }
 
   getTotalPrice(orderD:OrderDishes){
     return (orderD.count * orderD.price).toFixed(2);
-  }
-
-  getFullPrice():number{
-    return this.orders.find(p=>p.id== this.idOrderViewDishes).fullPrice;
   }
 
   back(){

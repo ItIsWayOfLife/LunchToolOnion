@@ -23,6 +23,7 @@
             </select>
             <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr" placeholder="Поиск"/>
             <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
+            <input type="button" value="Назад" class="btn btn-warning mr" (click)="backClicked()" />
             </form>
         </div>
 

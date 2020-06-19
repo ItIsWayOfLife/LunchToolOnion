@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 import {DishService} from '../service/dish.service';
 import {RolesService} from '../service/roles.service';
@@ -42,7 +43,8 @@ export class DishComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
     private dishServ :DishService,
     private rolesServ:RolesService,
-    private catalogServ:CatalogService) { 
+    private catalogServ:CatalogService,
+    private _location: Location) { 
 
       
     this.fileName ="";
@@ -60,6 +62,10 @@ export class DishComponent implements OnInit {
     this.isEdit = false;
     this.isNewRecord = false;
   }
+
+  backClicked() {
+    this._location.back();
+}
 
   ngOnInit(): void {
     this.loadDishes();

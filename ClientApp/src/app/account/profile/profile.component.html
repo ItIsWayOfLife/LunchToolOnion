@@ -6,7 +6,8 @@
         <span>Отчество:{{_patronymic}}</span><br/>
         <span>Email: {{_email}}</span><br/><br/>
         <button id="a1" class="btn btn-sm btn-success" (click)="editProfileShow()">Изменить</button>
-        <button id="a2"  class="btn btn-sm btn-success" (click)="editPassShow()">Сменить пароль</button><br/>
+        <button id="a2"  class="btn btn-sm btn-success" (click)="editPassShow()">Сменить пароль</button>
+        <button id="a2"  class="btn btn-sm btn-success" (click)="viewRole()">Мои роли</button><br/>
 
         
         <div *ngIf="isEditProfile">
@@ -72,5 +73,15 @@
         </form>
         <br/>
 </div>
+
+
+
+<div *ngIf="isViewMyRole">
+    <br/>
+    <h4 class="text-center">Мои роли</h4>
+    <div *ngFor="let role of getMyRoles(); let i =index;">
+        <h5>{{i+1}}. {{role}}</h5>
+    </div>
     </div>
 
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 import {CatalogService} from '../service/catalog.service';
 import {RolesService} from '../service/roles.service';
@@ -40,7 +41,8 @@ export class CatalogComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
      private catalogServ :CatalogService,
      private rolesServ:RolesService,
-     private providerServ:ProviderService){
+     private providerServ:ProviderService,
+     private _location: Location){
       this.providerId = activateRoute.snapshot.params['providerId'];
 
       this.catalogs = new Array<Catalog>();
@@ -61,6 +63,10 @@ export class CatalogComponent implements OnInit {
     this.getNameProvider();
     this.isAdminMyRole = this.rolesServ.isAdminRole();
   }
+
+  backClicked() {
+    this._location.back();
+}
 
   getNameProvider(){
     this.providerServ.getPrivoder(this.providerId).subscribe((data:Provider)=>

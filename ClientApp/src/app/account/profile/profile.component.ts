@@ -4,14 +4,16 @@ import { Input} from '@angular/core';
 import {ProfileModel} from './profileModel';
 import {ChangePasswordModel} from './changePasswordModel';
 import {AccountService} from '../../service/account.service';
-import { ThrowStmt } from '@angular/compiler';
+import {RolesService} from '../../service/roles.service';
 import { strict } from 'assert';
+
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
-  providers: [AccountService]
+  providers: [AccountService,
+    RolesService]
 })
 export class ProfileComponent implements OnInit {
 
@@ -32,7 +34,10 @@ export class ProfileComponent implements OnInit {
  isStatusEditPassGood:boolean;
  isStatusEditPassBad:boolean;
 
-  constructor(private serv: AccountService) {
+ isViewMyRole:boolean;
+
+  constructor(private serv: AccountService,
+    private rolesServ:RolesService) {
     
     this.editProfileModel = new ProfileModel();
 
@@ -45,6 +50,8 @@ export class ProfileComponent implements OnInit {
     this.isEditPass =false;
     this.isStatusEditPassGood= false;
     this.isStatusEditPassBad = false;
+
+    this.isViewMyRole = false;
    }
 
 
@@ -66,11 +73,16 @@ export class ProfileComponent implements OnInit {
     );
   }
 
+getMyRoles(){
+  return  this.rolesServ.myGetRelos();
+}
+
   editProfileShow(){
     this.isEditProfile =!this.isEditProfile;
-    if (this.isEditPass){
+    
       this.isEditPass = false;
-    }
+      this.isViewMyRole = false;
+
   }
 
   editProfile(){ 
@@ -99,9 +111,9 @@ export class ProfileComponent implements OnInit {
 
   editPassShow(){
 this.isEditPass=!this.isEditPass;
-if (this.isEditProfile){
+
   this.isEditProfile = false;
-}
+  this.isViewMyRole = false;
 }
 OkEditPass(){
   this.isStatusEditPassGood = !this.isStatusEditPassGood;
@@ -122,4 +134,12 @@ editPass(){
   }
   );
 }
+
+viewRole(){
+  this.isViewMyRole=!this.isViewMyRole;
+
+  this.isEditProfile = false;
+  this.isEditPass = false;
+}
+
 }

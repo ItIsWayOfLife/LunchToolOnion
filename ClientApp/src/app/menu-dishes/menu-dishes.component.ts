@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 import {DishService} from '../service/dish.service';
 import {RolesService} from '../service/roles.service';
@@ -37,7 +38,8 @@ export class MenuDishesComponent implements OnInit {
     private dishServ :DishService,
     private rolesServ:RolesService,
     private menuServ:MenuService,
-    private cartServ:CartService) {
+    private cartServ:CartService,
+    private _location: Location) {
     this.menuId = activateRoute.snapshot.params['menuId'];
 
     this.menuDishes = new Array<MenuDishes>();
@@ -52,6 +54,10 @@ export class MenuDishesComponent implements OnInit {
     this.isAdminMyRole = this.rolesServ.isAdminRole();
     this.isAdminOrEmployeeMyRole = this.rolesServ.isAdminOrEmployeeRole();
   }
+
+  backClicked() {
+    this._location.back();
+}
 
   getDateMenu(){
     this.menuServ.getMenu(this.menuId).subscribe((data:Menu)=>

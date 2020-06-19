@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
+import {Location} from '@angular/common';
 
 import {MenuService} from '../service/menu.service';
 import {RolesService} from '../service/roles.service';
@@ -43,7 +44,8 @@ export class MenuComponent implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
      private menuServ :MenuService,
      private rolesServ:RolesService,
-     private providerServ:ProviderService) {
+     private providerServ:ProviderService,
+     private _location: Location) {
 
     this.providerId = activateRoute.snapshot.params['providerId'];
 
@@ -61,6 +63,10 @@ export class MenuComponent implements OnInit {
 
     this.editedDate = "";
    }
+
+   backClicked() {
+    this._location.back();
+}
 
 getEditDate(){
   let eDateMenu:string = this.editedMenu.date;

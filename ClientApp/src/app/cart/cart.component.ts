@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from '@angular/common';
 
 import {CartService} from '../service/cart.service';
 
@@ -19,11 +20,16 @@ export class CartComponent implements OnInit {
   cartDishes:Array<CartDishes>;
   updateCart:Array<CartDishesUpdate>;
 
-  constructor(private cartServ:CartService) {
+  constructor(private cartServ:CartService,
+    private _location: Location) {
    this.cartDishes = new Array<CartDishes>();
   this.updateCart =new Array<CartDishesUpdate>();
   this.isShowStatusMessage = false;
    }
+
+   backClicked() {
+    this._location.back();
+}
 
   ngOnInit(): void {
     this.loadCart();
@@ -81,9 +87,9 @@ getFullPrice(){
 
  for (let c of this.cartDishes){
  fullPrice += Number(this.getTotalPrice(c));
-
- return fullPrice;
  }
+
+ return fullPrice.toFixed(2);
 }
 
 // show info

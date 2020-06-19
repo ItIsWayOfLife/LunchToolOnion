@@ -1,0 +1,32 @@
+
+    
+        <h1 class="text-center">Заказы</h1>
+    <br />
+    
+  <div *ngIf="checkOrderView(); then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+        <table class="table">
+            <tr>
+                <th>Номер заказа</th>
+                <th>Дата и время заказа</th>
+                <th>Количество блюд</th>
+                <th>Цена</th>
+                <th></th>
+            </tr>
+                <tr *ngFor ="let order of orders">
+                    <td>{{order.id}}</td>
+                    <td>{{order.dateOrder}}</td>
+                    <td>{{order.countDish}}</td>
+                    <td>{{order.fullPrice}}</td>
+                    <td><button class="btn btn-sm btn-success">Подробнее</button>
+                </tr>
+        </table>
+    </ng-template>  
+    <ng-template #elseBlock>
+    <h3 class="text-center" style="color:red;">Список заказов пуст</h3>
+</ng-template>  
+        <br />
+
+    
+   
+    

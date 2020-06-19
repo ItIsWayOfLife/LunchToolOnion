@@ -11,14 +11,12 @@ namespace Web.Reports
      public class ReportPDF
     {
         private readonly IWebHostEnvironment _webHostEnvironment;
-        private readonly PathConstants _pathConstants;
         private readonly string _pathFont;
 
         public ReportPDF(IWebHostEnvironment webHostEnvironment)
         {
             _webHostEnvironment = webHostEnvironment;
-            _pathConstants = new PathConstants();
-            _pathFont = _pathConstants.pathFontForReport;
+            _pathFont = PathConstants.pathFontForReport;
         }
 
         private int _maxColumn;

@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.DTO;
+using ApplicationCore.Entities;
 using ApplicationCore.Identity;
 using ApplicationCore.Interfaces;
 using AutoMapper;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using WebAPI.Controllers.Identity;
 using WebAPI.Models;
@@ -48,9 +50,14 @@ namespace WebAPI.Controllers
                     return NotFound("User not found");
                 }
 
-                IEnumerable<OrderDTO> orderDTOs = _orderService.GetOrders(userId);
+                var orderDTOs = _orderService.GetOrders(userId).ToList();
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrderDTO, OrderModel>()).CreateMapper();
                 var orders = mapper.Map<IEnumerable<OrderDTO>, List<OrderModel>>(orderDTOs);
+
+                for (int i=0;i>orderDTOs.Count();i++)
+                {
+                    orders[i].DateOrder = orderDTOs[i].DateOrder.ToString();
+                }
 
                 return new ObjectResult(orders);
             }

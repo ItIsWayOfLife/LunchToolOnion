@@ -614,3 +614,35 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 19.06.2020 11:06:45: Processing request Order/Index
 19.06.2020 11:06:52: Processing request Order/GetOrderDishes
 19.06.2020 11:06:52: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 get order dishes 1
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+19.06.2020 15:19:57: Processing request Home/Index
+19.06.2020 15:19:57: Processing request Provider/ListFavoriteProvider
+19.06.2020 15:19:59: Processing request Order/Index
+19.06.2020 15:20:01: Processing request Home/Index
+19.06.2020 15:20:01: Processing request Provider/ListFavoriteProvider
+19.06.2020 15:20:01: Processing request Provider/Index
+19.06.2020 15:20:02: Processing request Cart/Index
+19.06.2020 15:20:06: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 7
+19.06.2020 15:20:06: Processing request Cart/Index
+19.06.2020 15:20:08: Processing request Order/Create
+19.06.2020 15:20:08: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 created order 2
+19.06.2020 15:20:08: Processing request Order/Index
+19.06.2020 15:20:10: Processing request Provider/Index
+19.06.2020 15:20:11: Processing request Catalog/Index
+19.06.2020 15:20:13: Processing request Dish/Index
+19.06.2020 15:20:15: Processing request Home/Index
+19.06.2020 15:20:15: Processing request Provider/ListFavoriteProvider
+19.06.2020 15:20:16: Processing request Menu/Index
+19.06.2020 15:20:18: Processing request MenuDishes/Index
+19.06.2020 15:20:19: Processing request Cart/Add
+19.06.2020 15:20:19: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 11
+19.06.2020 15:20:20: Processing request Cart/Index
+19.06.2020 15:20:22: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 18
+19.06.2020 15:20:22: Processing request Cart/Index
+19.06.2020 15:20:24: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 logout
+19.06.2020 15:20:24: Processing request Home/Index
+19.06.2020 15:20:24: Processing request Provider/ListFavoriteProvider

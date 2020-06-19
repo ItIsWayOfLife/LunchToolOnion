@@ -26,7 +26,6 @@ namespace Web.Controllers
         private readonly IProviderService _providerService;
         private readonly IWebHostEnvironment _appEnvironment;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
-        private readonly PathConstants _pathConstants;
 
         private readonly ILogger<ProviderController> _logger;
 
@@ -39,8 +38,7 @@ namespace Web.Controllers
             _providerService = providerService;
             _appEnvironment = appEnvironment;
             _logger = logger;
-            _pathConstants = new PathConstants();
-            _path = _pathConstants.pathProvider;
+            _path = PathConstants.pathProvider;
             _sharedLocalizer = sharedLocalizer;
         }
 

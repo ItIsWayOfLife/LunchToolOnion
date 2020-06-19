@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
+using WebAPI.Controllers.Identity;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -21,127 +20,98 @@ namespace WebAPI.Controllers
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
-        private readonly PathConstants _pathConstants;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IUserHelper _userHelper;
 
         private readonly string _path;
 
         public CartController(ICartService cartService,
-               UserManager<ApplicationUser> userManager)
+               UserManager<ApplicationUser> userManager,
+                IUserHelper userHelper)
         {
             _cartService = cartService;
-            _userManager = userManager;
+            _userHelper = userHelper;
 
-            _pathConstants = new PathConstants();
-            _path = _pathConstants.APIURL + _pathConstants.pathForAPI;
+            _path = PathConstants.APIURL + PathConstants.pathForAPI;
         }
 
         [HttpGet, Route("dishes")]
         public IActionResult GetDishes()
         {
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                try
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
                 {
-                    ApplicationUser user = null;
-
-                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                     user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-
-                    if (user == null)
-                    {
-                        return NotFound();
-                    }
-
-                    CartDTO cartDTO = _cartService.GetCart(user.Id);
-
-                    IEnumerable<CartDishesDTO> cartDishDTO = _cartService.GetCartDishes(user.Id);
-                    var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CartDishesDTO, CartDishesModel>()).CreateMapper();
-                    var cartDishes = mapper.Map<IEnumerable<CartDishesDTO>, List<CartDishesModel>>(cartDishDTO);
-
-                    foreach (var cD in cartDishes)
-                    {
-                        cD.Path = _path + cD.Path;
-                    }
-
-
-                    return new ObjectResult(cartDishes);
+                    return NotFound("User not found");
                 }
-                catch (Exception ex)
+
+                CartDTO cartDTO = _cartService.GetCart(userId);
+
+                IEnumerable<CartDishesDTO> cartDishDTO = _cartService.GetCartDishes(userId);
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CartDishesDTO, CartDishesModel>()).CreateMapper();
+                var cartDishes = mapper.Map<IEnumerable<CartDishesDTO>, List<CartDishesModel>>(cartDishDTO);
+
+                foreach (var cD in cartDishes)
                 {
-                    return BadRequest(ex);
+                    cD.Path = _path + cD.Path;
                 }
-            }else
+
+                return new ObjectResult(cartDishes);
+            }
+            catch (Exception ex)
             {
-                return BadRequest("No Authenticated");
+                return BadRequest(ex);
             }
         }
-
 
         [HttpGet, Route("fullprice")]
         public IActionResult GetFullPrice()
         {
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                try
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
                 {
-                    ApplicationUser user = null;
-
-                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                    user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-
-                    if (user == null)
-                    {
-                        return NotFound();
-                    }
-
-                    string fullPrice = _cartService.FullPriceCart(user.Id).ToString();
-
-                    return new ObjectResult(fullPrice);
+                    return NotFound("User not found");
                 }
-                catch (Exception ex)
-                {
-                    return BadRequest(ex);
-                }
+
+                string fullPrice = _cartService.FullPriceCart(userId).ToString();
+
+                return new ObjectResult(fullPrice);
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("No Authenticated");
+                return BadRequest(ex);
             }
         }
 
-        [HttpPut, Route("updatecart")]
+        [HttpPut]
         public IActionResult UpdateCartDishes(List<CartDishesUpdateModel> models)
         {
-            if (User.Identity.IsAuthenticated)
+            try
             {
-                try
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
                 {
-                    ApplicationUser user = null;
-
-                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                    user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-
-                    if (user == null)
-                    {
-                        return NotFound();
-                    }
-
-                    foreach (var m in models)
-                    {
-                        _cartService.UpdateCountDishInCart(user.Id, m.Id, m.Count);
-                    }
-
-                    return  Ok();
+                    return NotFound("User not found");
                 }
-                catch (Exception ex)
+
+                foreach (var m in models)
                 {
-                    return BadRequest(ex);
+                    _cartService.UpdateCountDishInCart(userId, m.Id, m.Count);
                 }
+
+                return Ok();
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest("No Authenticated");
+                return BadRequest(ex);
             }
         }
 
@@ -150,11 +120,15 @@ namespace WebAPI.Controllers
         {
             try
             {
-                ApplicationUser user = null;
-
                 string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-                _cartService.DeleteCartDish(id, user.Id);
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _cartService.DeleteCartDish(id, userId);
 
                 return Ok(id);
             }
@@ -169,11 +143,15 @@ namespace WebAPI.Controllers
         {
             try
             {
-                ApplicationUser user = null;
-
                 string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-                _cartService.AddDishToCart(id, user.Id);
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _cartService.AddDishToCart(id, userId);
 
                 return Ok(id);
             }
@@ -183,16 +161,20 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpDelete, Route("deleteall")]
+        [HttpDelete, Route("all/delete")]
         public IActionResult DeleteAllDishesInCart(int id)
         {
             try
             {
-                ApplicationUser user = null;
-
                 string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-                _cartService.AllDeleteDishesToCart(user.Id);
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _cartService.AllDeleteDishesToCart(userId);
 
                 return Ok(id);
             }
@@ -201,5 +183,6 @@ namespace WebAPI.Controllers
                 return BadRequest(ex);
             }
         }
+
     }
 }

@@ -58,6 +58,8 @@ namespace WebAPI
             services.AddTransient<IMenuService, MenuService>();
             services.AddTransient<IReportService, ReportService>();
 
+            services.AddTransient<IUserHelper, UserHelper>();
+
             services.AddTransient<IJwtConfigurator, JwtConfigurator>();
 
             services.AddCors(options =>

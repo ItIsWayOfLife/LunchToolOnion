@@ -8,12 +8,12 @@
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/providers/', 'all']">Поставщики</a>
                 </li>
-                <li class="nav-item" *ngIf="isAmdim">
-                    <a class="nav-link" routerLink="users">Пользователи</a>
-                </li>
-                <li class="nav-item" *ngIf="isAmdim">
+                <li class="nav-item" *ngIf="isAdminOrEmployeeMyRole">
                     <a class="nav-link" routerLink="cart">Корзина</a>
                 </li>
+                <li class="nav-item" *ngIf="isAmdim">
+                    <a class="nav-link" routerLink="users">Пользователи</a>
+                </li>       
                  <li class="nav-item">
                     <a class="nav-link" routerLink="">Home</a>
                 </li>

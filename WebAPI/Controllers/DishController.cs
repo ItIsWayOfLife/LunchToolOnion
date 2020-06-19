@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -17,7 +16,6 @@ namespace WebAPI.Controllers
     {
         private readonly IDishService _dishService;
         private readonly IMenuService _menuService;
-        private readonly PathConstants _pathConstants;
        
         private readonly string _path;
 
@@ -25,8 +23,7 @@ namespace WebAPI.Controllers
             IMenuService menuService)
         {
             _dishService = dishService;
-            _pathConstants = new PathConstants();
-            _path = _pathConstants.APIURL+ _pathConstants.pathForAPI;
+            _path = PathConstants.APIURL+ PathConstants.pathForAPI;
             _menuService = menuService;
         }
 

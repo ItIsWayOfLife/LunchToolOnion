@@ -17,7 +17,7 @@ export class CartService{
 
     updateCart(cartUpdate: Array<CartDishesUpdate>) {
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-        return this.http.put(this.url +'/updatecart', JSON.stringify(cartUpdate), {responseType: 'text', headers:myHeaders, observe: 'response'});
+        return this.http.put(this.url, JSON.stringify(cartUpdate), {responseType: 'text', headers:myHeaders, observe: 'response'});
     }
 
     deleteDishInCart(id: number){
@@ -32,7 +32,7 @@ export class CartService{
 
     deleteAllDishesInCart(){
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-        return this.http.delete(this.url + '/deleteall', {headers:myHeaders, observe: 'response'});
+        return this.http.delete(this.url + '/all/delete', {headers:myHeaders, observe: 'response'});
     }
 }
 

@@ -1,12 +1,12 @@
 ﻿
 namespace ApplicationCore.Constants
 {
-   public class PathConstants
+   public static class PathConstants
     {
-        public readonly string pathProvider = "/files/provider/";
-        public readonly string pathDish = "/files/dishes/";
-        public readonly string APIURL = "https://localhost:44342/";
-        public readonly string pathForAPI = "files/images/";
-        public readonly string pathFontForReport = "/fonts/ArialBold/ArialBold.ttf";
+        public const string pathProvider = "/files/provider/";
+        public const string pathDish = "/files/dishes/";
+        public const string APIURL = "https://localhost:44342/";
+        public const string pathForAPI = "files/images/";
+        public const string pathFontForReport = "/fonts/ArialBold/ArialBold.ttf";
     }
 }

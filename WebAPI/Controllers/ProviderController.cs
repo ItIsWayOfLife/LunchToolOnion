@@ -17,38 +17,34 @@ namespace WebAPI.Controllers
     {
         private readonly IProviderService _providerService;
         private readonly IWebHostEnvironment _appEnvironment;
-        private readonly PathConstants _pathConstants;
 
         private readonly string _path;
-        private readonly string _APIURL;
 
         public ProviderController(IProviderService providerService,
             IWebHostEnvironment appEnvironment)
         {
             _providerService = providerService;
             _appEnvironment = appEnvironment;
-            _pathConstants = new PathConstants();
-            _path = _pathConstants.pathForAPI;
-            _APIURL = _pathConstants.APIURL;
+            _path = _path = PathConstants.APIURL + PathConstants.pathForAPI;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
             try
-            { 
-            IEnumerable<ProviderDTO> providersDtos = _providerService.GetProviders();
-            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderModel>()).CreateMapper();
-            var providers = mapper.Map<IEnumerable<ProviderDTO>, List<ProviderModel>>(providersDtos);
-
-            foreach (var pr in providers)
             {
-                pr.Path = _APIURL + _path + pr.Path;
-                pr.TimeWorkTo = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkTo.ToShortTimeString();
-                pr.TimeWorkWith = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkWith.ToShortTimeString();
-            }
+                IEnumerable<ProviderDTO> providersDtos = _providerService.GetProviders();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<ProviderDTO, ProviderModel>()).CreateMapper();
+                var providers = mapper.Map<IEnumerable<ProviderDTO>, List<ProviderModel>>(providersDtos);
 
-            return new ObjectResult(providers);
+                foreach (var pr in providers)
+                {
+                    pr.Path = _path + pr.Path;
+                    pr.TimeWorkTo = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkTo.ToShortTimeString();
+                    pr.TimeWorkWith = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkWith.ToShortTimeString();
+                }
+
+                return new ObjectResult(providers);
             }
             catch (Exception ex)
             {
@@ -60,15 +56,15 @@ namespace WebAPI.Controllers
         public IActionResult Get(int id)
         {
             try
-            { 
-            var provider = _providerService.GetProvider(id);
-
-            if (provider != null)
             {
-                return new ObjectResult(provider);
-            }
+                var provider = _providerService.GetProvider(id);
 
-            return NotFound();
+                if (provider != null)
+                {
+                    return new ObjectResult(provider);
+                }
+
+                return NotFound();
             }
             catch (Exception ex)
             {
@@ -91,13 +87,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut]
-        public  IActionResult Put(ProviderModel model)
+        public IActionResult Put(ProviderModel model)
         {
             try
-            { 
-            var provider = ConvertProviderModelToProviderDTO(model);
-            _providerService.EditProvider(provider);
-            return Ok(model);
+            {
+                var provider = ConvertProviderModelToProviderDTO(model);
+                _providerService.EditProvider(provider);
+                return Ok(model);
             }
             catch (Exception ex)
             {
@@ -109,9 +105,9 @@ namespace WebAPI.Controllers
         public IActionResult Post(ProviderModel model)
         {
             try
-            { 
-            _providerService.AddProvider(ConvertProviderModelToProviderDTO(model));
-            return Ok(model);
+            {
+                _providerService.AddProvider(ConvertProviderModelToProviderDTO(model));
+                return Ok(model);
             }
             catch (Exception ex)
             {
@@ -122,22 +118,22 @@ namespace WebAPI.Controllers
         private ProviderDTO ConvertProviderModelToProviderDTO(ProviderModel model)
         {
             try
-            { 
-            ProviderDTO providerDto = new ProviderDTO()
             {
-                Id = model.Id,
-                Email = model.Email,
-                Info = model.Info,
-                IsActive = model.IsActive,
-                IsFavorite = model.IsFavorite,
-                Name = model.Name,
-                Path = model.Path.Replace(_APIURL+_path, ""),
-                TimeWorkTo = Convert.ToDateTime(model.TimeWorkTo),
-                TimeWorkWith = Convert.ToDateTime(model.TimeWorkWith),
-                WorkingDays = model.WorkingDays
-            };
+                ProviderDTO providerDto = new ProviderDTO()
+                {
+                    Id = model.Id,
+                    Email = model.Email,
+                    Info = model.Info,
+                    IsActive = model.IsActive,
+                    IsFavorite = model.IsFavorite,
+                    Name = model.Name,
+                    Path = model.Path.Replace(_path, ""),
+                    TimeWorkTo = Convert.ToDateTime(model.TimeWorkTo),
+                    TimeWorkWith = Convert.ToDateTime(model.TimeWorkWith),
+                    WorkingDays = model.WorkingDays
+                };
 
-            return providerDto;
+                return providerDto;
             }
             catch (Exception ex)
             {

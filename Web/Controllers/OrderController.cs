@@ -23,8 +23,6 @@ namespace Web.Controllers
         private readonly ILogger<OrderController> _logger;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        private readonly PathConstants _pathConstants;
-
         private readonly string _path;
 
         public OrderController(IOrderService orderService, ICartService cartService,
@@ -34,8 +32,7 @@ namespace Web.Controllers
             _orderService = orderService;
             _cartService = cartService;
                 _logger = logger;
-            _pathConstants = new PathConstants();
-            _path = _pathConstants.pathDish;
+            _path = PathConstants.pathDish;
             _sharedLocalizer = sharedLocalizer;
         }
 

@@ -14,9 +14,9 @@ export class HeaderComponent implements OnInit {
 
  
   isAmdim:boolean;
+  isAdminOrEmployeeMyRole:boolean;
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router, private rolesServ: RolesService) {
-    this.isAmdim = this.rolesServ.isAdminRole();
+  constructor(private jwtHelper: JwtHelperService, private router: Router, private rolesServ: RolesService) {  
   }
 
   logOut() {
@@ -35,7 +35,8 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
+    this.isAdminOrEmployeeMyRole = this.rolesServ.isAdminOrEmployeeRole();
+    this.isAmdim = this.rolesServ.isAdminRole();
   }
 
 }

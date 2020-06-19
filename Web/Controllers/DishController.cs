@@ -29,8 +29,6 @@ namespace Web.Controllers
         private readonly IMenuService _menuService;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        private readonly PathConstants _pathConstants;
-
         private readonly string _path;
 
         private readonly ILogger<DishController> _logger;
@@ -46,8 +44,7 @@ namespace Web.Controllers
             _сatalogService = сatalogService;
             _menuService = menuService;
             _logger = logger;
-            _pathConstants = new PathConstants();
-            _path = _pathConstants.pathDish;
+            _path = PathConstants.pathDish;
             _sharedLocalizer = sharedLocalizer;
         }
 

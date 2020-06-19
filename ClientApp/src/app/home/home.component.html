@@ -1,10 +1,31 @@
-<h1>Home Page</h1>
-
-<br>
-<app-upload (notify)='onNotify($event)'></app-upload>
-
-
-
-<div class="container text-center"  *ngIf="isAddImg">
-  <img [src]="url"/><br/>
+<h1 class="text-center">Популярные поставщики</h1> 
+<br />
+<div class="row mt-5 mb-2">
+  <div class="divWithFor" *ngFor="let provider of providers"> 
+    <div class="providerView"> 
+      <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" [alt]="provider.name" /></a>
+      <div *ngIf="provider.isFavorite;  then thenBlockFav else elseBlockFav"></div>
+      <ng-template #thenBlockFav>
+      <p>На главную: Да</p>  
+    </ng-template>       
+    <ng-template #elseBlockFav>
+        <p>На главную: Нет</p>  
+        </ng-template>
+      <p>Название: {{provider.name}}</p>
+      <p>Email: {{provider.email}}</p>
+      <p>Рабочие дни: {{provider.workingDays}}</p>
+      <p>Рабочее время: {{provider.timeWorkWith}}:{{provider.timeWorkTo}}</p>
+      <div *ngIf="provider.isActive;  then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+        <p>Статус: Работает</p>  
+      </ng-template>       
+      <ng-template #elseBlock>
+          <p>Статус: Не работает</p>  
+          </ng-template>
+      <p>Информация: {{provider.info}}</p>
+      <a  class="btn btn-primary" [routerLink]="['/menu/', provider.id]" >Меню</a>
+      <a  class="btn btn-primary" [routerLink]="['/catalog/', provider.id]" >Каталог блюд</a>
+<br/>
+  </div>
+  </div>
 </div>

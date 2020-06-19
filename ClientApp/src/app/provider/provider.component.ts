@@ -98,7 +98,7 @@ export class ProviderComponent implements OnInit {
        this.backFavoriteorall = this.favoriteorall;
   }
 
-// load users
+// load providers
 loadProviders() {
   this.providerServ.getProviders().subscribe((data: Provider[]) => {
           this.providers = data; 

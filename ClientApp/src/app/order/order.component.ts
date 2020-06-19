@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
 
 import {OrderService} from '../service/order.service';
@@ -12,13 +12,11 @@ import {OrderDishes} from './OrderDishes';
   styleUrls: ['./order.component.css'],
   providers:[OrderService]
 })
-export class OrderComponent implements OnInit,
-DoCheck{
+export class OrderComponent implements OnInit{
 
   orders:Array<Order>;
   orderDishes:Array<OrderDishes>;
 
-  isViewOrders:boolean;
   isViewOrdersList:boolean;
 
   idOrderViewDishes:number;
@@ -30,7 +28,6 @@ DoCheck{
     private _location: Location) {
     this.orders = new Array<Order>();
   
-    this.isViewOrders  = true;
     this.isViewOrdersList = true;
     
     this.orderDishes = new Array<OrderDishes>();
@@ -43,8 +40,6 @@ DoCheck{
    this.loadOrders();
   }
 
-  ngDoCheck() {
-  }
 
   backClicked() {
     this._location.back();
@@ -64,15 +59,6 @@ DoCheck{
     this.idOrderViewDishes = data[0].orderId;
 });
     this.isViewOrdersList = false;
-  }
-
-  checkOrderView():boolean{
-    if (this.orders.length>0){
-      return true;
-    }
-    else{
-      return false;
-    }
   }
 
   getTotalPrice(orderD:OrderDishes){

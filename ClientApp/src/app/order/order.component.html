@@ -1,10 +1,6 @@
-
-    
-        <h1 class="text-center">Заказы</h1>
+    <h1 class="text-center">Заказы</h1>
     <br />
-    
-  <div *ngIf="isViewOrders;">
- 
+       
       <div *ngIf="isViewOrdersList">
 
         <div class="form-inline form-group ">
@@ -38,8 +34,8 @@
                     <td><button class="btn btn-sm btn-success"(click)="getInfoDish(order.id)" >Подробнее</button>
                 </tr>
         </table>
-    </div>
 
+    </div>
 
     <div *ngIf="!isViewOrdersList">
           
@@ -74,10 +70,6 @@
                 <br/>
 
     </div>
-</div>
-<div *ngIf="!isViewOrders;">
-    <h3 class="text-center" style="color:red;">Список заказов пуст</h3>
-<div>
         <br />
 
     

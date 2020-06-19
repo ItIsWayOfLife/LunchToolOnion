@@ -49,14 +49,6 @@ export class CartComponent implements OnInit {
         });
 }
 
-getInfoForView():boolean{
-  if (this.cartDishes.length>0){
-    return true;
-  }
-  else{
-    return false;
-  }
-}
 
 updateData(){
   this.updateCart =new Array<CartDishesUpdate>();

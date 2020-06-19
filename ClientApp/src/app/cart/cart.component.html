@@ -9,9 +9,7 @@
     </div>
 
 </div>
-<div *ngIf="getInfoForView(); then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock>
-       
+<div >     
         <table class="table">
             <tr>
                 <th>Блюдо</th>
@@ -51,9 +49,5 @@
                 <h3 class="float-right">Общая цена: {{getFullPrice()}} "BYN"</h3>
         </div>
 
-      </ng-template>       
-      <ng-template #elseBlock>
-        <h3 class="text-center" style="color:red;">Корзина пуста</h3>
-          </ng-template>
-          
+    </div>       
 <br/>

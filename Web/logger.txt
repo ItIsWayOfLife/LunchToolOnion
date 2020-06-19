@@ -548,3 +548,69 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 18.06.2020 17:35:28: Processing request Provider/ListFavoriteProvider
 18.06.2020 17:35:30: Processing request Order/Index
 18.06.2020 17:35:31: Processing request Cart/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+19.06.2020 11:06:03: Processing request Home/Index
+19.06.2020 11:06:03: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:05: Processing request Provider/Index
+19.06.2020 11:06:06: Processing request Home/Index
+19.06.2020 11:06:06: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:06: Processing request Provider/Index
+19.06.2020 11:06:07: Processing request Home/Index
+19.06.2020 11:06:07: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:10: Processing request Provider/Index
+19.06.2020 11:06:11: Processing request Home/Index
+19.06.2020 11:06:11: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:11: Processing request Provider/Index
+19.06.2020 11:06:12: Processing request Home/Index
+19.06.2020 11:06:12: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:13: Processing request Provider/Index
+19.06.2020 11:06:15: Processing request Home/Index
+19.06.2020 11:06:15: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:16: Processing request Provider/Index
+19.06.2020 11:06:16: Processing request Home/Index
+19.06.2020 11:06:16: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:17: Processing request Provider/Index
+19.06.2020 11:06:18: Processing request Home/Index
+19.06.2020 11:06:18: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:18: Processing request Provider/Index
+19.06.2020 11:06:19: Processing request Home/Index
+19.06.2020 11:06:19: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:20: Processing request Provider/Index
+19.06.2020 11:06:21: Processing request Home/Index
+19.06.2020 11:06:21: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:22: Processing request Provider/Index
+19.06.2020 11:06:24: Processing request Home/Index
+19.06.2020 11:06:24: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:25: Processing request Provider/Index
+19.06.2020 11:06:25: Processing request Home/Index
+19.06.2020 11:06:26: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:26: Processing request Provider/Index
+19.06.2020 11:06:26: Processing request Home/Index
+19.06.2020 11:06:26: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:27: Processing request Provider/Index
+19.06.2020 11:06:27: Processing request Home/Index
+19.06.2020 11:06:27: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:28: Processing request Provider/Index
+19.06.2020 11:06:29: Processing request Home/Index
+19.06.2020 11:06:29: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:30: Processing request Provider/Index
+19.06.2020 11:06:30: Processing request Home/Index
+19.06.2020 11:06:30: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:32: Processing request Provider/Index
+19.06.2020 11:06:34: Processing request Home/Index
+19.06.2020 11:06:34: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:35: Processing request Provider/Index
+19.06.2020 11:06:37: Processing request Account/Login
+19.06.2020 11:06:38: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+19.06.2020 11:06:38: Processing request Home/Index
+19.06.2020 11:06:38: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:40: Processing request Order/Index
+19.06.2020 11:06:42: Processing request Order/GetOrderDishes
+19.06.2020 11:06:42: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 get order dishes 1
+19.06.2020 11:06:45: Processing request Order/Index
+19.06.2020 11:06:52: Processing request Order/GetOrderDishes
+19.06.2020 11:06:52: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 get order dishes 1

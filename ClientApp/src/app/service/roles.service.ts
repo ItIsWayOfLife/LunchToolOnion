@@ -7,6 +7,8 @@ import {UserChangeRoles} from '../admin/users/userChangeRoles';
 export class RolesService implements OnInit{
    private url = "https://localhost:44342/api/roles";
 
+ 
+
     constructor(private http: HttpClient) {
     }
 
@@ -57,12 +59,20 @@ export class RolesService implements OnInit{
         if (token==null)
         return null;
 
-        let jwtData = token.split('.')[1]
-        let decodedJwtJsonData = window.atob(jwtData)     
-        var splitted = decodedJwtJsonData.substring(decodedJwtJsonData.indexOf('['),decodedJwtJsonData.indexOf(']')).slice(1); 
-        splitted = splitted.replace(/"/g,'');
-        var roles = splitted.split(',');
-        return roles;
+       let arrayRoles:Array<string> = new Array<string>();
+
+        let jwtData = token.split('.')[1];
+        let decodedJwtJsonData = window.atob(jwtData);
+
+
+        if (decodedJwtJsonData.includes("admin")){
+         arrayRoles.push("admin");
+        }
+
+        if (decodedJwtJsonData.includes("employee")){
+         arrayRoles.push("employee");
+        }
+        return arrayRoles;
      }
 
      getRoles(){

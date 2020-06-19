@@ -29,7 +29,7 @@
                 <p>Вес: {{menuDish.weight}}</p>
                 <p>Цена: {{menuDish.price}}</p>
                 <p>Информация: {{menuDish.info}}</p>
-                <div *ngIf="isAdminMyRole;">
+                <div *ngIf="isAdminOrEmployeeMyRole;">
                   <input type="button" class="btn btn-primary" (click)="addToCart(menuDish.dishId)" value="Добавить в корзину" />
                 </div>
             </div>

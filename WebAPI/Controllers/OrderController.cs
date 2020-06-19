@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
                     return NotFound("User not found");
                 }
 
-                var orderDTOs = _orderService.GetOrders(userId).ToList();
+                var orderDTOs = _orderService.GetOrders(userId).OrderByDescending(p=>p.DateOrder).ToList();
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrderDTO, OrderModel>()).CreateMapper();
                 var orders = mapper.Map<IEnumerable<OrderDTO>, List<OrderModel>>(orderDTOs);
 

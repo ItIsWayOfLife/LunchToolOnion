@@ -1,4 +1,5 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
+import {Location} from '@angular/common';
 
 import {OrderService} from '../service/order.service';
 
@@ -22,13 +23,20 @@ DoCheck{
 
   idOrderViewDishes:number;
 
-  constructor(private orderServ:OrderService) {
+  searchSelectionString:string;
+  searchStr:string;
+
+  constructor(private orderServ:OrderService,
+    private _location: Location) {
     this.orders = new Array<Order>();
   
     this.isViewOrders  = true;
     this.isViewOrdersList = true;
     
     this.orderDishes = new Array<OrderDishes>();
+
+    this.searchSelectionString="Поиск по";
+    this.searchStr="";
    }
 
   ngOnInit(): void {
@@ -37,6 +45,10 @@ DoCheck{
 
   ngDoCheck() {
   }
+
+  backClicked() {
+    this._location.back();
+}
 
     // load menus
     loadOrders() {
@@ -75,4 +87,25 @@ DoCheck{
     this.isViewOrdersList = true;
   }
 
+  getOrders():Array<Order>{
+    if (this.searchSelectionString=="Номеру заказа"){
+      return this.orders.filter(x=>x.id.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    }
+    else if (this.searchSelectionString=="Дате и времени"){
+      return this.orders.filter(x=>x.dateOrder.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    }
+    else if (this.searchSelectionString=="Количеству блюд"){
+      return this.orders.filter(x=>x.countDish.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    }
+    else if (this.searchSelectionString=="Полной цене"){
+      return this.orders.filter(x=>x.fullPrice.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    }
+  
+  return this.orders;
+  }
+
+  refresh(){
+    this.searchSelectionString="Поиск по";
+    this.searchStr ="";
+  }
 }

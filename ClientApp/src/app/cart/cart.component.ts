@@ -1,16 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
+import { Router } from "@angular/router";
 
 import {CartService} from '../service/cart.service';
+import {OrderService} from '../service/order.service';
 
 import {CartDishes} from './cartDishes';
 import {CartDishesUpdate} from './cartDishesUpdate';
+
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  providers:[CartService]
+  providers:[CartService,
+    OrderService]
 })
 export class CartComponent implements OnInit {
 
@@ -21,7 +25,9 @@ export class CartComponent implements OnInit {
   updateCart:Array<CartDishesUpdate>;
 
   constructor(private cartServ:CartService,
-    private _location: Location) {
+    private _location: Location,
+    private orderServ:OrderService,
+    private router: Router,) {
    this.cartDishes = new Array<CartDishes>();
   this.updateCart =new Array<CartDishesUpdate>();
   this.isShowStatusMessage = false;
@@ -131,7 +137,21 @@ console.log(err);
 this.statusMessage = 'Ошибка при очистке корзины';
     }
   );
+
+  this.isShowStatusMessage = true; 
 }
-  
+
+createOrder(){
+this.orderServ.createOrder().subscribe(response=>
+  {
+    this.router.navigate(["/order"]);
+  },err=>
+  {
+    console.log(err);
+
+    this.statusMessage = 'Ошибка при создании заказа';
+    this.isShowStatusMessage = true; 
+  });
+}
 
 }

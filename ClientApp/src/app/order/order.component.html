@@ -6,6 +6,22 @@
   <div *ngIf="isViewOrders;">
  
       <div *ngIf="isViewOrdersList">
+
+        <div class="form-inline form-group ">
+            <form autocomplete="off" class="text-center" >            
+            <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
+                <option>Поиск по</option>
+                <option>Номеру заказа</option>
+                <option>Дате и времени</option>
+                <option>Количеству блюд</option>
+                <option>Полной цене</option>
+            </select>
+            <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr" placeholder="Поиск"/>
+            <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
+            <input type="button" value="Назад" class="btn btn-warning mr" (click)="backClicked()" />
+            </form>
+        </div>
+
         <table class="table">
             <tr>
                 <th>Номер заказа</th>
@@ -14,7 +30,7 @@
                 <th>Цена</th>
                 <th></th>
             </tr>
-                <tr *ngFor ="let order of orders">
+                <tr *ngFor ="let order of getOrders()">
                     <td>{{order.id}}</td>
                     <td>{{order.dateOrder}}</td>
                     <td>{{order.countDish}}</td>

@@ -646,3 +646,17 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 19.06.2020 15:20:24: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 logout
 19.06.2020 15:20:24: Processing request Home/Index
 19.06.2020 15:20:24: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+19.06.2020 23:32:45: Processing request Home/Index
+19.06.2020 23:32:45: Processing request Provider/ListFavoriteProvider
+19.06.2020 23:32:47: Processing request Account/Login
+19.06.2020 23:32:49: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+19.06.2020 23:32:49: Processing request Home/Index
+19.06.2020 23:32:49: Processing request Provider/ListFavoriteProvider
+19.06.2020 23:32:50: Processing request Report/Index
+19.06.2020 23:32:54: Processing request Report/GetReportProvider
+19.06.2020 23:32:54: Created report by provider 1

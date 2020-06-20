@@ -1,0 +1,14 @@
+<h1 class="text-center">Отчёты</h1>
+<br />
+
+<h3>Отчёт по поставщикам</h3>
+<div class="container">
+    <form>
+        <h5>За всё время</h5>
+        <label>Id поставщика</label>
+        <input type="number" name="providerId" [(ngModel)]="providerId" />
+        <input type="submit" value="Составить" (click)="getReportProvider()" />
+    </form>
+    
+
+

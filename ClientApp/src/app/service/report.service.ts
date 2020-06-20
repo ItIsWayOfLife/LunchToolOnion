@@ -10,17 +10,7 @@ export class ReportService{
 
     constructor(private http: HttpClient) {}
 
-    
-    getReportProvider(providerid:number): any {
-        return this.http.get(this.url + '/provider/' + providerid, {
-          responseType: 'blob'
-        })
-        .pipe(
-          map((res: any) => {
-            return new Blob([res.body], { type: 'application/pdf' });
-          })
-        );
-      }
-  
-  
+    getReportProvider(providerid:number){
+     return this.http.get(this.url + '/provider/' + providerid, { responseType: 'arraybuffer'});
+    }  
 }

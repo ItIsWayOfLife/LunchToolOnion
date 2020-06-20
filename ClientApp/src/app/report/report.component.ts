@@ -23,13 +23,13 @@ export class ReportComponent implements OnInit {
   }
 
   getReportProvider(){
-   
-    this.reportServ.getReportProvider(this.providerId).subscribe(res => {
-      const fileURL = URL.createObjectURL(res);
-      window.open(fileURL, '_blank');
-    });
-
-   // (window as any).open("https://localhost:44342/api/report/provider/" + this.providerId, "_blank");
+    this.reportServ.getReportProvider(this.providerId).subscribe(
+      (res) => {
+        const blob = new Blob([res], {type: "application/pdf"});
+        var fileURL = URL.createObjectURL(blob);
+        window.open(fileURL);
+      }
+  );
   }
 
 }

@@ -6,16 +6,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Security.Claims;
 using WebAPI.Reports;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-  //  [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public class ReportController : ControllerBase
     {
         private readonly IReportService _reportService;
@@ -36,34 +34,7 @@ namespace WebAPI.Controllers
         [HttpGet("provider/{providerId}/{dateWith?}/{dateTo?}")]
         public IActionResult GetReportProvider(int providerId, DateTime? dateWith = null, DateTime? dateTo = null)
         {
-           
-
-            if (User.Identity.IsAuthenticated)
-            {
-                ApplicationUser user = null;
-
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                user = _userManager.Users.FirstOrDefault(p => p.Email == currentEmail);
-
-                if (user != null)
-                {
-                    StreamWriter streamWriter = new StreamWriter("text.txt");
-                    streamWriter.WriteLine(user.Id);
-                    streamWriter.Close();
-                }
-                else
-                {
-                   
-                }
-            }
-            else
-            {
-                Console.Beep();
-            }
-
-
-
-                    var provider = _providerService.GetProvider(providerId);
+            var provider = _providerService.GetProvider(providerId);
 
             if (provider == null)
             {

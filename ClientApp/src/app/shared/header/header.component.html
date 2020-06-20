@@ -2,38 +2,47 @@
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
         <div class="container">
             <ul class="navbar-nav flex-grow-1">
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="">Главная</a>
+                <li>
+                    <a routerLink="" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Главная</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="providers">Поставщики</a>
+                <li>
+                    <a routerLink="providers" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Поставщики</a>
                 </li>
-                <li class="nav-item" *ngIf="isAdminOrEmployeeMyRole">
-                    <a class="nav-link" routerLink="cart">Корзина</a>
+                <li  *ngIf="isAdminOrEmployeeMyRole">
+                    <a routerLink="cart" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Корзина</a>
                 </li>
-                <li class="nav-item" *ngIf="isAdminOrEmployeeMyRole">
-                    <a class="nav-link" routerLink="order">Заказы</a>
+                <li *ngIf="isAdminOrEmployeeMyRole" >
+                    <a routerLink="order" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Заказы</a>
                 </li>
-                <li class="nav-item" *ngIf="isAmdim">
-                    <a class="nav-link" routerLink="users">Пользователи</a>
+                <li  *ngIf="isAmdim">
+                    <a  routerLink="users" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Пользователи</a>
                 </li>
-                <li class="nav-item" *ngIf="isAmdim">
-                    <a class="nav-link" routerLink="report">Отчёты</a>
+                <li *ngIf="isAmdim">
+                    <a routerLink="report" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Отчёты</a>
                 </li>           
             </ul>
                 <div class="navbar-collapse collapse justify-content-end">
                     <ul class="navbar-nav text-right">
-                        <li class="nav-item" *ngIf="!isUserAuthenticated()">
-                            <a class="nav-link text-black-50" routerLink="login">Войти</a>
+                        <li *ngIf="!isUserAuthenticated()">
+                            <a routerLink="login" routerLinkActive="isColorHA"
+                            [routerLinkActiveOptions]="{exact:true}">Войти</a>
                         </li>
-                        <li class="nav-item" *ngIf="isUserAuthenticated()">
-                            <a class="nav-link text-black-50" (click)="logOut()">Выход</a>
+                        <li *ngIf="isUserAuthenticated()">
+                            <a routerLink="" (click)="logOut()">Выход</a>
                         </li>
-                        <li class="nav-item"  *ngIf="!isUserAuthenticated()">
-                            <a class="nav-link text-black-50" routerLink="register">Зарегистрироваться</a>
+                        <li  *ngIf="!isUserAuthenticated()">
+                            <a routerLink="register" routerLinkActive="isColorHA"
+                            [routerLinkActiveOptions]="{exact:true}">Зарегистрироваться</a>
                         </li>
-                        <li class="nav-item" *ngIf="isUserAuthenticated()">
-                            <a class="nav-link text-black-50" routerLink="account">Личный кабинет</a>
+                        <li  *ngIf="isUserAuthenticated()">
+                            <a  routerLink="account" routerLinkActive="isColorHA"
+                            [routerLinkActiveOptions]="{exact:true}">Личный кабинет</a>
                         </li>
                     </ul>
                 </div>

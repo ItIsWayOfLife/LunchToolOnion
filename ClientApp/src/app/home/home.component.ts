@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {ProviderService} from '../service/providerService';
+import {ProviderService} from '../service/provider.service';
 
 import {Provider} from '../provider/provider';
 

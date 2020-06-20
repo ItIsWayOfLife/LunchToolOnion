@@ -4,7 +4,7 @@ import {Location} from '@angular/common';
 
 import {MenuService} from '../service/menu.service';
 import {RolesService} from '../service/roles.service';
-import {ProviderService} from '../service/providerService';
+import {ProviderService} from '../service/provider.service';
 
 import {Provider} from '../provider/provider';
 import {Menu} from './menu';

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 
-import {ProviderService} from '../service/providerService';
+import {ProviderService} from '../service/provider.service';
 import {RolesService} from '../service/roles.service';
 
 import {Provider} from './provider';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-provider',

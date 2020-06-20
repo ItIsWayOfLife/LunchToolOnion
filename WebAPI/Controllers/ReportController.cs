@@ -93,7 +93,7 @@ namespace WebAPI.Controllers
             return File(reportProviders.Report(reportProvidersDTOs, title), "application/pdf");
         }
 
-        [HttpGet("user/{userId}/{dateWith?}/{dateTo?}")]
+        [HttpGet(" /{userId}/{dateWith?}/{dateTo?}")]
         public IActionResult GetReportUser(string userId, DateTime? dateWith = null, DateTime? dateTo = null)
         {
             var user = _userManager.Users.Where(p => p.Id == userId).FirstOrDefault();

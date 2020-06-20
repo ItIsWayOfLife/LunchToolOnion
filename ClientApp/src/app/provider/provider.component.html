@@ -43,10 +43,17 @@
       <ng-template #elseBlockFav>
           <p>На главную: Нет</p>  
           </ng-template>
+      
+
+          <!-- this probl -->
+
         <p>Название: {{provider.name}}</p>
         <p>Email: {{provider.email}}</p>
         <p>Рабочие дни: {{provider.workingDays}}</p>
         <p>Рабочее время: {{provider.timeWorkWith}}:{{provider.timeWorkTo}}</p>
+
+      
+      
         <div *ngIf="provider.isActive;  then thenBlock else elseBlock"></div>
           <ng-template #thenBlock>
           <p>Статус: Работает</p>  

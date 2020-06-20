@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { JwtModule } from "@auth0/angular-jwt";
 
+import {MenuCompilationService} from '../app/service/menu-compilation.service';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './account/login/login.component';
@@ -89,7 +91,7 @@ const appRoutes: Routes = [
       }
     })
 ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, MenuCompilationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

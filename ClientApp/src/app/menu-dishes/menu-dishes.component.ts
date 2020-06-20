@@ -6,6 +6,8 @@ import {DishService} from '../service/dish.service';
 import {RolesService} from '../service/roles.service';
 import {MenuService} from '../service/menu.service';
 import {CartService} from '../service/cart.service';
+import {MenuCompilationService} from '../service/menu-compilation.service';
+
 
 import {MenuDishes} from './menuDishes';
 import {Menu} from '../menu/menu';
@@ -33,13 +35,16 @@ export class MenuDishesComponent implements OnInit {
   searchSelectionString:string;
   searchStr:string;
 
+  idProvider:number;
+
   constructor(private router: Router,
     private activateRoute: ActivatedRoute,
     private dishServ :DishService,
     private rolesServ:RolesService,
     private menuServ:MenuService,
     private cartServ:CartService,
-    private _location: Location) {
+    private _location: Location,
+    private menuCompilationServ:MenuCompilationService) {
     this.menuId = activateRoute.snapshot.params['menuId'];
 
     this.menuDishes = new Array<MenuDishes>();
@@ -53,6 +58,7 @@ export class MenuDishesComponent implements OnInit {
     this.getDateMenu();
     this.isAdminMyRole = this.rolesServ.isAdminRole();
     this.isAdminOrEmployeeMyRole = this.rolesServ.isAdminOrEmployeeRole();
+    this.getProviderId();
   }
 
   backClicked() {
@@ -101,7 +107,6 @@ export class MenuDishesComponent implements OnInit {
     this.searchStr ="";
   }
 
-
   addToCart(idDish:number){
     this.cartServ.addDishToCart(idDish).subscribe(response => {
       console.log(response);
@@ -110,6 +115,21 @@ export class MenuDishesComponent implements OnInit {
     ,err=>{
     console.log(err);
   });
+}
+
+
+getProviderId(){
+  this.menuServ.getMenu(this.menuId).subscribe((data:Menu)=>
+  {
+    this.idProvider = data.providerId;
+  });
+}
+
+menuCompilation(){
+  this.getProviderId();
+    console.log(this.idProvider);
+    this.menuCompilationServ.appointMenuId(this.menuId);
+    this.router.navigate(["/catalog/" +this.idProvider]);
 }
 
 }

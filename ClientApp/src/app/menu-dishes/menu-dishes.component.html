@@ -4,7 +4,7 @@
                        
         <div class="form-inline form-group ">
             <form autocomplete="off" class="text-center" >
-                <!-- <input type="button" value="Добавить" class="btn btn-success mr" (click)="addDish()" /> -->
+                <input type="button" value="Составление меню" (click)="menuCompilation()"  class="btn btn-success mr" />
             <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
                 <option>Поиск по</option>
                 <option *ngIf="isAdminMyRole;">Id блюда</option>

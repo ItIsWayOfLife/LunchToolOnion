@@ -6,6 +6,8 @@ import {DishService} from '../service/dish.service';
 import {RolesService} from '../service/roles.service';
 import {CatalogService} from '../service/catalog.service';
 
+import {MenuCompilationService} from '../service/menu-compilation.service';
+
 import {Dish} from './dish';
 import { Catalog } from '../catalog/catalog';
 
@@ -38,15 +40,17 @@ export class DishComponent implements OnInit {
   isView:boolean;
   isNewRecord: boolean;
 
+  isCompilation:boolean;
+
   fileName:string;
 
   constructor(private activateRoute: ActivatedRoute,
     private dishServ :DishService,
     private rolesServ:RolesService,
     private catalogServ:CatalogService,
-    private _location: Location) { 
+    private _location: Location,
+    private menuCompilationServ:MenuCompilationService) { 
 
-      
     this.fileName ="";
     this.catalogId = activateRoute.snapshot.params['catalogId'];
 
@@ -55,12 +59,19 @@ export class DishComponent implements OnInit {
 
     this.isShowStatusMessage = false;
 
+    
+
     this.searchSelectionString="Поиск по";
     this.searchStr="";
 
     this.isView=true;
     this.isEdit = false;
     this.isNewRecord = false;
+    this.isCompilation = false;
+
+    this.isCompilation = this.menuCompilationServ.isComplition();
+    console.log(this.menuCompilationServ.menuId);
+    console.log(this.isCompilation);
   }
 
   backClicked() {
@@ -71,6 +82,7 @@ export class DishComponent implements OnInit {
     this.loadDishes();
     this.getNameCatalog();
     this.isAdminMyRole = this.rolesServ.isAdminRole();
+   
   }
 
   getNameCatalog(){

@@ -1,14 +1,51 @@
 <h1 class="text-center">Отчёты</h1>
-<br />
+<br/>
+<div class="text-center">
+<h5>Отчёт по</h5>
+<button class="btn btn-sm btn-success mr" [class.isheightbut]="isViewProviders" (click)="viewProviders()">Поставщикам</button>
+<button class="btn btn-sm btn-success mr" [class.isheightbut]="isViewUsers" (click)="viewUsers()">Пользователям</button>
+<br/><br/>
 
-<h3>Отчёт по поставщикам</h3>
-<div class="container">
-    <form>
-        <h5>За всё время</h5>
-        <label>Id поставщика</label>
-        <input type="number" name="providerId" [(ngModel)]="providerId" />
-        <input type="submit" value="Составить" (click)="getReportProvider()" />
-    </form>
-    
+<div *ngIf="isViewProviders">
+    <label class="mr" for="providerId">Id поставщика</label>
+    <input class="mr" type="number" name="providerId" id="providerId" [(ngModel)]="providerId" />
+    <label class="mr" for="dateWith">Дата с</label>
+    <input class="mr" type="date" name="dateWith"  id="dateWith" [(ngModel)]="dateWith"/>
+    <label class="mr" for="dateTo">Дата по</label>
+    <input class="mr" type="date" name="dateTo"  id="dateTo" [(ngModel)]="dateTo"/><br/><br/>
+    За всё время поставщика
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportProviderAllTime()" /><br/><br/>
+    За день поставщика
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportProviderDate()" /><br/><br/>
+    За период поставщика
+    <input class="btn btn-sm btn-success" type="button" value="Составить"  (click)="getReportProviderWithToDate()" /><br/><br/><br/>
+    По всем поставщикам за все время
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportProvidersAllTime()"/><br/><br/>
+    По всем поставщикам за день
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportProvidersDate()"/><br/><br/>
+    По всем поставщикам за период
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportProvidersWithToDate()"/><br/><br/>
+</div>
 
+<div *ngIf="isViewUsers">
+    <label class="mr" for="userId">Id пользователя</label>
+    <input class="mr userIdSize" type="text" name="userId" id="userId" [(ngModel)]="userId" />
+    <label class="mr" for="dateWith">Дата с</label>
+    <input class="mr" type="date" name="dateWith"  id="dateWith" [(ngModel)]="dateWith"/>
+    <label class="mr" for="dateTo">Дата по</label>
+    <input class="mr" type="date" name="dateTo"  id="dateTo" [(ngModel)]="dateTo"/><br/><br/>
+    За всё время пользователя
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportUserAllTime()" /><br/><br/>
+    За день пользователя
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportUserDate()" /><br/><br/>
+    За период пользователя
+    <input class="btn btn-sm btn-success" type="button" value="Составить"  (click)="getReportUserWithToDate()" /><br/><br/><br/>
+    По всем пользователям за все время
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportUsersAllTime()"/><br/><br/>
+    По всем пользователям за день
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportUsersDate()"/><br/><br/>
+    По всем пользователям за период
+    <input class="btn btn-sm btn-success" type="button" value="Составить" (click)="getReportUsersWithToDate()"/><br/><br/>
+</div>
 
+</div>

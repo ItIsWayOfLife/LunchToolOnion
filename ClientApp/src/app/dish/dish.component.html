@@ -12,6 +12,7 @@
         <div *ngIf="isView">
         <div class="form-inline form-group ">
             <form autocomplete="off" class="text-center" >
+              <input *ngIf="isAdminMyRole && isCompilation" type="button" value="Составить меню" class="btn btn-success mr" (click)="addDishToMenu()" />
                 <input type="button" value="Добавить" class="btn btn-success mr" (click)="addDish()" />
             <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
                 <option>Поиск по</option>
@@ -31,7 +32,7 @@
         <div  class="col-lg-4" *ngFor="let dish of getDishes()">
             <div>
                 <img width="360" height="180" class="img-thumbnail" [src]="dish.path" [alt]="dish.name" />
-                <p *ngIf="isAdminMyRole;">Id: {{dish.id}}</p>
+                <p *ngIf="isAdminMyRole && isAdminMyRole;">Id: {{dish.id}}</p>
                 <p>Название: {{dish.name}}</p>
                 <p>Вес: {{dish.weight}}</p>
                 <p>Цена: {{dish.price}}</p>
@@ -39,13 +40,10 @@
                 <div *ngIf="isAdminMyRole;">
                   <input type="button" class="btn btn-danger admB" (click)="editDish(dish)" value="Изменить" />
                   <input type="button" class="btn btn-danger admB" (click)="deleteDish(dish.id)" value="Удалить"/>
-                  <div *ngIf="isCompilation">
-                    <label for="{{dish.id}}">Добавить в меню</label>
-                  <input id="{{dish.id}}" type="checkbox" />
-                  </div>
-                  
-                  <!-- <input id="@Model.Id" type="checkbox" name="newAddedDishes" value="@Model.Id"
-                  @(Model.AddMenu ? "checked=\"checked\"" : "") /> -->
+                  <div *ngIf="isCompilation && isAdminMyRole">
+                    <label for="addMenu_{{dish.id}}">Добавить в меню</label>
+                    <input name="addMenu"  id="addMenu_{{dish.id}}" type="checkbox" [(ngModel)]="dish.addMenu">   
+                      </div>
                 </div>
             </div>
             <br/>

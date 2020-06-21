@@ -3,6 +3,7 @@ using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -59,7 +60,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                IEnumerable<MenuDTO> menuDTOs = _menuService.GetMenus(providerid);
+                IEnumerable<MenuDTO> menuDTOs = _menuService.GetMenus(providerid).OrderByDescending(p=>p.Date);
                 List<MenuModel> menuModels = new List<MenuModel>();
 
                 foreach (var m in menuDTOs)
@@ -117,6 +118,35 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("dishes/{menuid}")]
+        public IActionResult GetDishesInMenu(int menuid)
+        {
+            try
+            {
+                List<int> arrayIdDishes = new List<int>();
+
+                arrayIdDishes = _menuService.GetMenuIdDishes(menuid);
+                return new ObjectResult(arrayIdDishes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
+
+        [HttpPost, Route("makemenu")]
+        public IActionResult MakeMenu(MakeMenuModel model)
+        {
+            try
+            {
+                _menuService.MakeMenu(model.MenuId, model.NewAddedDishes, model.AllSelect);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
 
         private MenuDTO ConvertMenuModelToMenuDTO(MenuModel model)
         {

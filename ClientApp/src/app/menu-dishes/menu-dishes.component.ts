@@ -37,6 +37,8 @@ export class MenuDishesComponent implements OnInit {
 
   idProvider:number;
 
+  isCompilation:boolean;
+
   constructor(private router: Router,
     private activateRoute: ActivatedRoute,
     private dishServ :DishService,
@@ -51,12 +53,15 @@ export class MenuDishesComponent implements OnInit {
 
     this.searchSelectionString="Поиск по";
     this.searchStr="";
+
+    this.isCompilation = this.menuCompilationServ.isComplition();
    }
 
   ngOnInit(): void {
     this.loadMenuDishes();
     this.getDateMenu();
     this.isAdminMyRole = this.rolesServ.isAdminRole();
+    console.log("admin:" +this.rolesServ.isAdminRole());
     this.isAdminOrEmployeeMyRole = this.rolesServ.isAdminOrEmployeeRole();
     this.getProviderId();
   }
@@ -118,6 +123,12 @@ export class MenuDishesComponent implements OnInit {
 }
 
 
+
+menuCompilationCancel(){
+  this.menuCompilationServ.appointMenuId(0);
+  this.isCompilation = false;
+}
+
 getProviderId(){
   this.menuServ.getMenu(this.menuId).subscribe((data:Menu)=>
   {
@@ -129,7 +140,9 @@ menuCompilation(){
   this.getProviderId();
     console.log(this.idProvider);
     this.menuCompilationServ.appointMenuId(this.menuId);
+    this.isCompilation = this.menuCompilationServ.isComplition();
     this.router.navigate(["/catalog/" +this.idProvider]);
+    
 }
 
 }

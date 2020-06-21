@@ -132,7 +132,7 @@ showStatusMess(){
 
   addMenu(){
     this.editedMenu = new Menu();
-    this.menus.push(this.editedMenu);
+    this.menus.unshift(this.editedMenu);
     this.isView = false;
     this.isNewRecord = true;
   }

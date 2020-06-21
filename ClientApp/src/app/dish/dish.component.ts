@@ -10,6 +10,8 @@ import {MenuCompilationService} from '../service/menu-compilation.service';
 
 import {Dish} from './dish';
 import { Catalog } from '../catalog/catalog';
+import {MakeMenu} from '../menu/makeMenu';
+
 
 @Component({
   selector: 'app-dish',
@@ -44,6 +46,8 @@ export class DishComponent implements OnInit {
 
   fileName:string;
 
+  listDishesInMenu:Array<number>;
+
   constructor(private activateRoute: ActivatedRoute,
     private dishServ :DishService,
     private rolesServ:RolesService,
@@ -59,8 +63,6 @@ export class DishComponent implements OnInit {
 
     this.isShowStatusMessage = false;
 
-    
-
     this.searchSelectionString="Поиск по";
     this.searchStr="";
 
@@ -70,6 +72,9 @@ export class DishComponent implements OnInit {
     this.isCompilation = false;
 
     this.isCompilation = this.menuCompilationServ.isComplition();
+
+    this.listDishesInMenu = new Array<number>();
+
     console.log(this.menuCompilationServ.menuId);
     console.log(this.isCompilation);
   }
@@ -82,8 +87,34 @@ export class DishComponent implements OnInit {
     this.loadDishes();
     this.getNameCatalog();
     this.isAdminMyRole = this.rolesServ.isAdminRole();
-   
   }
+
+  
+
+loadtDishesInMenu(){
+  this.menuCompilationServ.getDishesInMenu().subscribe((data:number[])=>
+  {
+    this.listDishesInMenu = data;
+    
+    for (let d of this.dishes){
+      let bl:boolean;
+
+      if (data.includes(d.id)){
+        bl= true;
+      }
+      else{
+        bl= false;
+      }
+
+      if (bl){
+      d.addMenu = true;
+      }
+      else{
+        d.addMenu = false;
+      }
+    }
+  });
+}
 
   getNameCatalog(){
     this.catalogServ.getCatalog(this.catalogId).subscribe((data:Catalog)=>
@@ -96,6 +127,10 @@ export class DishComponent implements OnInit {
     loadDishes() {
       this.dishServ.getDishByCatalogId(this.catalogId).subscribe((data: Dish[]) => {
               this.dishes = data; 
+
+              if ( this.isCompilation ?? this.isAdminMyRole){
+                this.loadtDishesInMenu();
+              }
           });
   }
 
@@ -165,7 +200,6 @@ getDishes():Array<Dish>{
 return this.dishes;
 }
 
-
 saveDish(){
   this.isShowStatusMessage=true;
   this.editedDish.catalogId =Number(this.catalogId);
@@ -220,6 +254,33 @@ onNotify(message:string):void {
   console.log(message);
  
   this.fileName= message;
+}
+
+addDishToMenu(){
+let allSelect:Array<number> = new Array<number>();
+let newAddSelect:Array<number> = new Array<number>();
+
+let makeMenu:MakeMenu = new MakeMenu();
+
+for (let d of this.dishes){
+  allSelect.push(d.id);
+  if (d.addMenu){
+    newAddSelect.push(d.id);
+  }
+}
+
+makeMenu.allSelect = allSelect;
+makeMenu.newAddedDishes = newAddSelect;
+
+this.menuCompilationServ.createMenu(makeMenu).subscribe(response=>{
+  console.log(response);
+  this.statusMessage = "Меню успешно составлено";
+},err=>
+{
+  console.log(err);
+  this.statusMessage = "Ошибка составления меню";
+});
+this.isShowStatusMessage = true;
 }
 
 }

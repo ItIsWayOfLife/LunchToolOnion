@@ -34,123 +34,150 @@ namespace WebAPI.Controllers
         [HttpGet("provider/{providerId}/{dateWith?}/{dateTo?}")]
         public IActionResult GetReportProvider(int providerId, DateTime? dateWith = null, DateTime? dateTo = null)
         {
-            var provider = _providerService.GetProvider(providerId);
-
-            if (provider == null)
+            try
             {
-                return NotFound("Provider not found");
-            }
+                var provider = _providerService.GetProvider(providerId);
 
-            List<List<string>> reportList;
-            string title = "";
+                if (provider == null)
+                {
+                    return NotFound("Provider not found");
+                }
 
-            if (dateWith != null && dateTo == null)
-            {
-                reportList = _reportService.GetReportProvider(providerId, dateWith.Value);
-                title = $"Отчёт по поставщику ({provider.Name}) за {dateWith.Value.ToString("dd.MM.yyyy")}";
-            }
-            else if (dateWith != null && dateTo != null)
-            {
-                reportList = _reportService.GetReportProvider(providerId, dateWith.Value, dateTo.Value);
-                title = $"Отчёт по поставщику ({provider.Name}) с {dateWith.Value.ToString("dd.MM.yyyy")} \nпо {dateTo.Value.ToString("dd.MM.yyyy")}";
-            }
-            else
-            {
-                reportList = _reportService.GetReportProvider(providerId);
-                title = $"Отчёт по поставщику ({provider.Name}) за всё время";
-            }
+                List<List<string>> reportList;
+                string title = "";
 
-            ReportPDF reportProvider = new ReportPDF(_webHostEnvironment);
-            
-            return File(reportProvider.Report(reportList, title), "application/pdf");
+                if (dateWith != null && dateTo == null)
+                {
+                    reportList = _reportService.GetReportProvider(providerId, dateWith.Value);
+                    title = $"Отчёт по поставщику ({provider.Name}) за {dateWith.Value.ToString("dd.MM.yyyy")}";
+                }
+                else if (dateWith != null && dateTo != null)
+                {
+                    reportList = _reportService.GetReportProvider(providerId, dateWith.Value, dateTo.Value);
+                    title = $"Отчёт по поставщику ({provider.Name}) с {dateWith.Value.ToString("dd.MM.yyyy")} \nпо {dateTo.Value.ToString("dd.MM.yyyy")}";
+                }
+                else
+                {
+                    reportList = _reportService.GetReportProvider(providerId);
+                    title = $"Отчёт по поставщику ({provider.Name}) за всё время";
+                }
+
+                ReportPDF reportProvider = new ReportPDF(_webHostEnvironment);
+
+                return File(reportProvider.Report(reportList, title), "application/pdf");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("providers/{dateWith?}/{dateTo?}")]
         public IActionResult GetReportProviders(DateTime? dateWith = null, DateTime? dateTo = null)
         {
-
-            List<List<string>> reportProvidersDTOs;
-            string title = "";
-
-            if (dateWith != null && dateTo == null)
+            try
             {
-                reportProvidersDTOs = _reportService.GetReportProviders(dateWith.Value);
-                title = $"Отчёт по поставщикам за {dateWith.Value.ToString("dd.MM.yyyy")}";
-            }
-            else if (dateWith != null && dateTo != null)
-            {
-                reportProvidersDTOs = _reportService.GetReportProviders(dateWith.Value, dateTo.Value);
-                title = $"Отчёт по поставщикам с {dateWith.Value.ToString("dd.MM.yyyy")} \nпо {dateTo.Value.ToString("dd.MM.yyyy")}";
-            }
-            else
-            {
-                reportProvidersDTOs = _reportService.GetReportProviders();
-                title = "Отчёт по поставщикам за всё время";
-            }
+                List<List<string>> reportProvidersDTOs;
+                string title = "";
 
-            ReportPDF reportProviders = new ReportPDF(_webHostEnvironment);
+                if (dateWith != null && dateTo == null)
+                {
+                    reportProvidersDTOs = _reportService.GetReportProviders(dateWith.Value);
+                    title = $"Отчёт по поставщикам за {dateWith.Value.ToString("dd.MM.yyyy")}";
+                }
+                else if (dateWith != null && dateTo != null)
+                {
+                    reportProvidersDTOs = _reportService.GetReportProviders(dateWith.Value, dateTo.Value);
+                    title = $"Отчёт по поставщикам с {dateWith.Value.ToString("dd.MM.yyyy")} \nпо {dateTo.Value.ToString("dd.MM.yyyy")}";
+                }
+                else
+                {
+                    reportProvidersDTOs = _reportService.GetReportProviders();
+                    title = "Отчёт по поставщикам за всё время";
+                }
 
-            return File(reportProviders.Report(reportProvidersDTOs, title), "application/pdf");
+                ReportPDF reportProviders = new ReportPDF(_webHostEnvironment);
+
+                return File(reportProviders.Report(reportProvidersDTOs, title), "application/pdf");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet(" /{userId}/{dateWith?}/{dateTo?}")]
         public IActionResult GetReportUser(string userId, DateTime? dateWith = null, DateTime? dateTo = null)
         {
-            var user = _userManager.Users.Where(p => p.Id == userId).FirstOrDefault();
-
-            if (user == null)
+            try
             {
-                return NotFound("user not found");
-            }
-            List<List<string>> reportUserDTOs = null;
-            string title = "";
+                var user = _userManager.Users.Where(p => p.Id == userId).FirstOrDefault();
 
-            if (dateWith != null && dateTo == null)
-            {
-                reportUserDTOs = _reportService.GetReportUser(userId, dateWith.Value);
-                title = $"Отчёт пользователя ({user.Email}) за {dateWith.Value.ToString("dd.MM.yyyy")}";
-            }
-            else if (dateWith != null && dateTo != null)
-            {
-                reportUserDTOs = _reportService.GetReportUser(userId, dateWith.Value, dateTo.Value);
-                title = $"Отчёт пользователя ({user.Email}) с {dateWith.Value.ToString("dd.MM.yyyy")} \nпо {dateTo.Value.ToString("dd.MM.yyyy")}";
-            }
-            else
-            {
-                reportUserDTOs = _reportService.GetReportUser(userId);
-                title = $"Отчёт пользователя ({user.Email}) за всё время";
-            }
+                if (user == null)
+                {
+                    return NotFound("user not found");
+                }
+                List<List<string>> reportUserDTOs = null;
+                string title = "";
 
-            ReportPDF reportUser = new ReportPDF(_webHostEnvironment);
+                if (dateWith != null && dateTo == null)
+                {
+                    reportUserDTOs = _reportService.GetReportUser(userId, dateWith.Value);
+                    title = $"Отчёт пользователя ({user.Email}) за {dateWith.Value.ToString("dd.MM.yyyy")}";
+                }
+                else if (dateWith != null && dateTo != null)
+                {
+                    reportUserDTOs = _reportService.GetReportUser(userId, dateWith.Value, dateTo.Value);
+                    title = $"Отчёт пользователя ({user.Email}) с {dateWith.Value.ToString("dd.MM.yyyy")} \nпо {dateTo.Value.ToString("dd.MM.yyyy")}";
+                }
+                else
+                {
+                    reportUserDTOs = _reportService.GetReportUser(userId);
+                    title = $"Отчёт пользователя ({user.Email}) за всё время";
+                }
 
-            return File(reportUser.Report(reportUserDTOs, title), "application/pdf");
+                ReportPDF reportUser = new ReportPDF(_webHostEnvironment);
+
+                return File(reportUser.Report(reportUserDTOs, title), "application/pdf");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
         [HttpGet("users/{dateWith?}/{dateTo?}")]
         public IActionResult GetReportUsers(DateTime? dateWith = null, DateTime? dateTo = null)
         {
-            List<List<string>> reportUsersDTOs = null;
-            string title = "";
-
-            if (dateWith != null && dateTo == null)
+            try
             {
-                reportUsersDTOs = _reportService.GetReportUsers(dateWith.Value);
-                title = $"Отчёт по всем пользователям за {dateWith.Value.ToString("dd.MM.yyyy")}";
-            }
-            else if (dateWith != null && dateTo != null)
-            {
-                reportUsersDTOs = _reportService.GetReportUsers(dateWith.Value, dateTo.Value);
-                title = $"Отчёт по всем пользователям с {dateWith.Value.ToString("dd.MM.yyyy")} \nпо {dateTo.Value.ToString("dd.MM.yyyy")}";
-            }
-            else
-            {
-                reportUsersDTOs = _reportService.GetReportUsers();
-                title = "Отчёт по всем пользователям за всё время";
-            }
+                List<List<string>> reportUsersDTOs = null;
+                string title = "";
 
-            ReportPDF reportUsers = new ReportPDF(_webHostEnvironment);
+                if (dateWith != null && dateTo == null)
+                {
+                    reportUsersDTOs = _reportService.GetReportUsers(dateWith.Value);
+                    title = $"Отчёт по всем пользователям за {dateWith.Value.ToString("dd.MM.yyyy")}";
+                }
+                else if (dateWith != null && dateTo != null)
+                {
+                    reportUsersDTOs = _reportService.GetReportUsers(dateWith.Value, dateTo.Value);
+                    title = $"Отчёт по всем пользователям с {dateWith.Value.ToString("dd.MM.yyyy")} \nпо {dateTo.Value.ToString("dd.MM.yyyy")}";
+                }
+                else
+                {
+                    reportUsersDTOs = _reportService.GetReportUsers();
+                    title = "Отчёт по всем пользователям за всё время";
+                }
 
-            return File(reportUsers.Report(reportUsersDTOs, title), "application/pdf");
+                ReportPDF reportUsers = new ReportPDF(_webHostEnvironment);
+
+                return File(reportUsers.Report(reportUsersDTOs, title), "application/pdf");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -17,14 +17,17 @@ namespace WebAPI.Controllers.Identity
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IJwtConfigurator _jwtConfigurator;
+        private readonly IUserHelper _userHelper;
 
         public AccountController(SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager,
-            IJwtConfigurator jwtConfigurator)
+            IJwtConfigurator jwtConfigurator,
+            IUserHelper userHelper)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _jwtConfigurator = jwtConfigurator;
+            _userHelper = userHelper;
         }
 
         private async Task<bool> CheckLogin(LoginModel model)
@@ -57,7 +60,7 @@ namespace WebAPI.Controllers.Identity
             {
                 //ModelState.AddModelError(ex.Property, ex.Message);
                 //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -102,7 +105,7 @@ namespace WebAPI.Controllers.Identity
             {
                 //ModelState.AddModelError(ex.Property, ex.Message);
                 //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 

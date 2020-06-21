@@ -81,7 +81,7 @@ namespace WebAPI.Controllers.Identity
             {
                 //ModelState.AddModelError(ex.Property, ex.Message);
                 //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -125,7 +125,7 @@ namespace WebAPI.Controllers.Identity
             {
                 //ModelState.AddModelError(ex.Property, ex.Message);
                 //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -173,7 +173,7 @@ namespace WebAPI.Controllers.Identity
             {
                 //ModelState.AddModelError(ex.Property, ex.Message);
                 //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -203,7 +203,7 @@ namespace WebAPI.Controllers.Identity
             {
                 //ModelState.AddModelError(ex.Property, ex.Message);
                 //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -252,7 +252,7 @@ namespace WebAPI.Controllers.Identity
             {
                 //ModelState.AddModelError(ex.Property, ex.Message);
                 //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
     }

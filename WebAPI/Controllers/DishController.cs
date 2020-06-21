@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -79,7 +79,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -93,7 +93,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -107,8 +107,7 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
 
@@ -122,9 +121,34 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex);
+                return BadRequest();
             }
         }
+
+
+        [HttpGet, Route("menudishes/{menuId}")]
+        public IActionResult GetDishesByMenuId(int menuId)
+        {
+            try
+            {
+                var menuDishesDTOs = _menuService.GetMenuDishes(menuId).ToList();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesModel>()).CreateMapper();
+                var menuDishes = mapper.Map<IEnumerable<MenuDishesDTO>, List<MenuDishesModel>>(menuDishesDTOs);
+
+                for (int i = 0; i < menuDishesDTOs.Count(); i++)
+                {
+                    menuDishes[i].Path = _path + menuDishesDTOs[i].Path;
+                    menuDishes[i].DishId = menuDishesDTOs[i].DishId.Value;
+                }
+
+                return new ObjectResult(menuDishes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
+        }
+
 
         private DishDTO ConvertDishModelToDishDTO(DishModel model)
         {
@@ -154,29 +178,6 @@ namespace WebAPI.Controllers
                 Weight = dto.Weight
             };
         }
-
-
-        [HttpGet, Route("menudishes/{menuId}")]
-        public IActionResult GetDishesByMenuId(int menuId)
-        {
-            try
-            {
-                var menuDishesDTOs = _menuService.GetMenuDishes(menuId).ToList();
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesModel>()).CreateMapper();
-                var menuDishes = mapper.Map<IEnumerable<MenuDishesDTO>, List<MenuDishesModel>>(menuDishesDTOs);
-
-                for (int i = 0;i< menuDishesDTOs.Count(); i++)
-                {
-                    menuDishes[i].Path = _path + menuDishesDTOs[i].Path;
-                    menuDishes[i].DishId = menuDishesDTOs[i].DishId.Value;
-                }
-
-                return new ObjectResult(menuDishes);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex);
-            }
-        }
+     
     }
 }

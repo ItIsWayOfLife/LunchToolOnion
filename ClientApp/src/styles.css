@@ -84,3 +84,11 @@ a.navbar-brand {
 .inputSearch{
   width: 300px;
 }
+
+.showInfo{
+  color:green;
+}
+
+.showError{
+  color:red;
+}

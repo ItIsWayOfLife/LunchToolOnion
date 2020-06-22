@@ -9,79 +9,81 @@
         <button id="a2"  class="btn btn-sm btn-success" [class.isheightbut]="isEditPass" (click)="editPassShow()">Сменить пароль</button>
         <button id="a2"  class="btn btn-sm btn-success" [class.isheightbut]="isViewMyRole" (click)="viewRole()">Мои роли</button><br/>
 
-        
+    <!-- for edit prodile -->
         <div *ngIf="isEditProfile">
-            <br/>
+            <br />
             <h4 class="text-center">Изменение профиля</h4>
             <div class="text-success" *ngIf="isStatusEditGood">
                 <p>Данные успешно изменены</p>
-                <button (click)="OkEdit()">Ok</button>
-            </div>
-
+                <button (click)="okEdit()">Ok</button>
+            </div>     
             <div class="text-danger" *ngIf="isStatusEditBad">
                 <p>Ошибка изменения</p>
             </div>
             <form method="post" autocomplete="off" *ngIf="!isStatusEditGood">
-                     
                 <div>
                     <label for="firstname" class="control-label">Имя</label>
-                    <input name="firstname"  [(ngModel)]="editProfileModel.firstname" type="text" id="firstname" class="form-control" placeholder="Имя" />
+                    <input name="firstname" [(ngModel)]="editProfileModel.firstname" type="text" id="firstname"
+                        class="form-control" placeholder="Имя" />
                 </div>
                 <div>
                     <label for="lastname" class="control-label">Фамилия</label>
-                    <input name="lastname" [(ngModel)]="editProfileModel.lastname" type="text" id="lastname" class="form-control" placeholder="Фамилия" />
+                    <input name="lastname" [(ngModel)]="editProfileModel.lastname" type="text" id="lastname"
+                        class="form-control" placeholder="Фамилия" />
                 </div>
                 <div>
                     <label for="patronymic" class="control-label">Отчество</label>
-                    <input name="patronymic" [(ngModel)]="editProfileModel.patronymic" type="text" id="patronymic" class="form-control" placeholder="Отчество" />
+                    <input name="patronymic" [(ngModel)]="editProfileModel.patronymic" type="text" id="patronymic"
+                        class="form-control" placeholder="Отчество" />
                 </div>
                 <div>
                     <label for="email" class="control-label">Email</label>
-                    <input name="email" type="text" [(ngModel)]="editProfileModel.email"  id="email" class="form-control" placeholder="Email" />
-                </div><br/>
+                    <input name="email" type="text" [(ngModel)]="editProfileModel.email" id="email" class="form-control"
+                        placeholder="Email" />
+                </div><br />
                 <div>
                     <input type="submit" (click)="editProfile()" value="Изменить" class="btn btn-sm btn-success" />
                 </div>
-                <br/>
+                <br />
             </form>
         </div>
 
+        <!-- for edit pass -->
         <div *ngIf="isEditPass">
-            <br/>
-        <h4 class="text-center">Смена пароля</h4>
-        <br />
-        <div class="text-success" *ngIf="isStatusEditPassGood">
-            <p>Пароль успешно изменен</p>
-            <button (click)="OkEditPass()">Ok</button>
+            <br />
+            <h4 class="text-center">Смена пароля</h4>
+            <br />
+            <div class="text-success" *ngIf="isStatusEditPassGood">
+                <p>Пароль успешно изменен</p>
+                <button (click)="okEditPass()">Ok</button>
+            </div>      
+            <div class="text-danger" *ngIf="isStatusEditPassBad">
+                <p>Ошибка изменения</p>
+            </div>
+            <form method="post" autocomplete="off" *ngIf="!isStatusEditPassGood">
+                <div class="form-group">
+                    <label for="oldPassword" class="control-label">Старый пароль</label>
+                    <input name="oldPassword" [(ngModel)]="changePasswordModel.oldPassword" type="text" id="oldPassword"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="newPassword" class="control-label">Новый пароль</label>
+                    <input name="newPassword" [(ngModel)]="changePasswordModel.newPassword" type="text" id="newPassword"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" (click)="editPass()" value="Изменить" class="btn btn-sm btn-success" />
+                </div>
+            </form>
+            <br />
         </div>
 
-        <div class="text-danger" *ngIf="isStatusEditPassBad">
-            <p>Ошибка изменения</p>
+        <!-- for view roles -->
+        <div *ngIf="isViewMyRole">
+            <br />
+            <h4 class="text-center">Мои роли</h4>
+            <div *ngFor="let role of getMyRoles(); let i =index;">
+                <h5>{{i+1}}. {{role}}</h5>
+            </div>
         </div>
-        <form method="post" autocomplete="off" *ngIf="!isStatusEditPassGood">
-            <div class="form-group">
-                <label for="oldPassword" class="control-label">Старый пароль</label>
-                <input name="oldPassword" [(ngModel)]="changePasswordModel.oldPassword" type="text" id="oldPassword" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label for="newPassword" class="control-label">Новый пароль</label>
-                <input name="newPassword" [(ngModel)]="changePasswordModel.newPassword" type="text" id="newPassword" class="form-control" />
-            </div>
-            <div class="form-group">
-                <input type="submit" (click)="editPass()" value="Изменить" class="btn btn-sm btn-success" />
-            </div>
-        </form>
-        <br/>
-</div>
-
-
-
-<div *ngIf="isViewMyRole">
-    <br/>
-    <h4 class="text-center">Мои роли</h4>
-    <div *ngFor="let role of getMyRoles(); let i =index;">
-        <h5>{{i+1}}. {{role}}</h5>
-    </div>
-    </div>
-
 </div>

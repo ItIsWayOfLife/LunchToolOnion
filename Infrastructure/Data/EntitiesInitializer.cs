@@ -19,8 +19,8 @@ namespace Infrastructure.Data
                         IsFavorite = true,
                         Name = "HOLA",
                         Path = "hola.jpeg",
-                        TimeWorkTo = new DateTime(2020, 03, 19, 08, 00, 00),
-                        TimeWorkWith = new DateTime(2020, 03, 19, 23, 00, 00),
+                        TimeWorkTo = new DateTime(2020, 03, 19, 23, 00, 00),
+                        TimeWorkWith = new DateTime(2020, 03, 19, 08, 00, 00),
                         WorkingDays = "Понедельник - Суббота"
                     },
                     new Provider
@@ -31,8 +31,8 @@ namespace Infrastructure.Data
                         IsFavorite = true,
                         Name = "777",
                         Path = "777.jpeg",
-                        TimeWorkTo = new DateTime(2020, 03, 19, 08, 30, 00),
-                        TimeWorkWith = new DateTime(2020, 03, 19, 22, 00, 00),
+                        TimeWorkTo = new DateTime(2020, 03, 19, 22, 30, 00),
+                        TimeWorkWith = new DateTime(2020, 03, 19, 08, 00, 00),
                         WorkingDays = "Понедельник - Воскресенье"
                     },
                     new Provider
@@ -43,8 +43,8 @@ namespace Infrastructure.Data
                         IsFavorite = false,
                         Name = "Суши ВЕСЛА",
                         Path = "TAKE_AWAY.jpeg",
-                        TimeWorkTo = new DateTime(2020, 03, 19, 10, 00, 00),
-                        TimeWorkWith = new DateTime(2020, 03, 19, 22, 00, 00),
+                        TimeWorkTo = new DateTime(2020, 03, 19, 22, 00, 00),
+                        TimeWorkWith = new DateTime(2020, 03, 19, 10, 00, 00),
                         WorkingDays = "Понедельник - Суббота"
                     }
                 );

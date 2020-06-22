@@ -2,11 +2,13 @@
     <h1 class="text-center">Блюда {{nameCatalog}}</h1>
     <br />
         
-        <div class="text-center" *ngIf="isShowStatusMessage">
-            <p>{{statusMessage}}</p>
-            <button (click)="showStatusMess()">Ok</button>
-            <br/> <br/>
-        </div>
+    <div class="text-center" *ngIf="isShowStatusMessage" 	
+    [class.showInfo]="isMessInfo"
+    [class.showError]="!isMessInfo">
+        <h3>{{statusMessage}}</h3>
+        <button (click)="showStatusMess()">Ok</button>
+        <br/> <br/>
+    </div>
             
         <!-- view catalogs -->
         <div *ngIf="isView">

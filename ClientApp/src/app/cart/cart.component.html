@@ -2,8 +2,10 @@
     <h1 >Корзина</h1>
     <br />
 
-    <div *ngIf="isShowStatusMessage">
-        <p>{{statusMessage}}</p>
+    <div *ngIf="isShowStatusMessage" 	
+    [class.showInfo]="isMessInfo"
+    [class.showError]="!isMessInfo">
+        <h3>{{statusMessage}}</h3>
         <button (click)="showStatusMess()">Ok</button>
         <br/> <br/>
     </div>

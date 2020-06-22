@@ -3,11 +3,13 @@
 <br />
 
 
-<div *ngIf="isShowStatusMessage">
-    <p>{{statusMessage}}</p>
-    <button (click)="showStatusMess()">Ok</button>
-    <br/> <br/>
-</div>
+<div *ngIf="isShowStatusMessage" 	
+    [class.showInfo]="isMessInfo"
+    [class.showError]="!isMessInfo">
+        <h3>{{statusMessage}}</h3>
+        <button (click)="showStatusMess()">Ok</button>
+        <br/> <br/>
+    </div>
 
 
 <!-- view catalogs -->

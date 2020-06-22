@@ -3,7 +3,7 @@
 <div class="row mt-5 mb-2">
   <div class="divWithFor" *ngFor="let provider of providers"> 
     <div class="providerView"> 
-      <a> <img width="360" height="180" class="img-thumbnail" [src]="provider.path" [alt]="provider.name" /></a>
+      <a> <img width="360" height="180" [src]="provider.path" [alt]="provider.name" /></a>
       <div *ngIf="provider.isFavorite;  then thenBlockFav else elseBlockFav"></div>
       <ng-template #thenBlockFav>
       <p>На главную: Да</p>  

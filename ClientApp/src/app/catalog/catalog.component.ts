@@ -28,6 +28,7 @@ export class CatalogComponent implements OnInit {
 
   isShowStatusMessage:boolean;
   statusMessage: string;
+  isMessInfo: boolean;
 
   nameProvider:string;
 
@@ -82,24 +83,31 @@ export class CatalogComponent implements OnInit {
         });
 }
 
-// delete catalog
-deleteCatalog(id: number) {
-  this.isShowStatusMessage=true;
+  // delete catalog
+  deleteCatalog(id: number) {
     this.catalogServ.deleteCatalog(id).subscribe(response => {
 
-      if (response.status==200)
-      {
-        this.statusMessage = 'Данные успешно удалены';   
-        this.loadCatalog();
-      }else{
+
+      this.statusMessage = 'Данные успешно удалены';
+      this.loadCatalog();
+
+      this.isMessInfo = true;
+    },
+      err => {
+        console.log(err);
         this.statusMessage = 'Ошибка удаления';
+
+        if (typeof err.error == 'string') {
+          this.statusMessage += '. ' + err.error;
+        }
+
+        this.isMessInfo = false;
       }
-    },err=>{
-console.log(err);
-this.statusMessage = 'Ошибка удаления';
-      }
-);
-}
+    );
+
+    this.isShowStatusMessage = true;
+
+  }
 
 // show info
 showStatusMess(){
@@ -142,38 +150,55 @@ editCatalog(catalog: Catalog) {
     }
 
     
-    saveCatalog(){
-      this.isShowStatusMessage=true;
-      this.editedCatalog.providerId =Number(this.providerId);
-     
-      if (this.isNewRecord) {
+  saveCatalog() {
+
+    this.editedCatalog.providerId = Number(this.providerId);
+
+    if (this.isNewRecord) {
       this.catalogServ.createCatalog(this.editedCatalog).subscribe(response => {
-                     
-        this.loadCatalog();  
+
+        this.loadCatalog();
         this.statusMessage = 'Данные успешно добавлены';
-        
+
         console.log(response.status);
-      }           
-      ,err=>{
-      this.statusMessage = 'Ошибка при добавлении данных';
-      this.catalogs.pop();
-      console.log(err);
-    }       
-    );
-  } else {
-     
-   // edit catalog
-    this.catalogServ.updateCatalog(this.editedCatalog).subscribe(response => {
-      
+
+        this.isMessInfo = true;
+      },
+        err => {
+          this.statusMessage = 'Ошибка при добавлении данных';
+
+          if (typeof err.error == 'string') {
+            this.statusMessage += '. ' + err.error;
+          }
+
+          this.catalogs.pop();
+          console.log(err);
+
+          this.isMessInfo = false;
+        }
+      );
+    } else {
+
+      // edit catalog
+      this.catalogServ.updateCatalog(this.editedCatalog).subscribe(response => {
+
         this.loadCatalog();
         this.statusMessage = 'Данные успешно изменены';
         console.log(response.status);
-    },
-    err=>{
-      this.statusMessage = 'Ошибка при изменении данных';
-      console.log(err);
-    });  
-  }
+        this.isMessInfo = true;
+      },
+        err => {
+          this.statusMessage = 'Ошибка при изменении данных';
+
+          if (typeof err.error == 'string') {
+            this.statusMessage += '. ' + err.error;
+          }
+          this.isMessInfo = false;
+          console.log(err);
+        });
+    }
+
+  this.isShowStatusMessage=true;
     }
   
     cancel(){

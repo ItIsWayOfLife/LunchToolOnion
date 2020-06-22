@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Input} from '@angular/core'; 
 
-import {ProfileModel} from './profileModel';
-import {ChangePasswordModel} from './changePasswordModel';
-import {AccountService} from '../../service/account.service';
-import {RolesService} from '../../service/roles.service';
-import { strict } from 'assert';
+import { AccountService } from '../../service/account.service';
+import { RolesService } from '../../service/roles.service';
 
+import { ProfileModel } from './profileModel';
+import { ChangePasswordModel } from './changePasswordModel';
 
 @Component({
   selector: 'app-profile',
@@ -17,129 +15,125 @@ import { strict } from 'assert';
 })
 export class ProfileComponent implements OnInit {
 
-   _firstname :string;
-   _lastname :string;
-   _patronymic :string;
-   _email : string;
+  _firstname: string;
+  _lastname: string;
+  _patronymic: string;
+  _email: string;
 
- editProfileModel:ProfileModel;
+  editProfileModel: ProfileModel;
 
- isEditProfile:boolean;
- isStatusEditGood:boolean;
- isStatusEditBad:boolean;
+  isEditProfile: boolean;
+  isStatusEditGood: boolean;
+  isStatusEditBad: boolean;
 
- changePasswordModel:ChangePasswordModel;
+  changePasswordModel: ChangePasswordModel;
 
- isEditPass:boolean;
- isStatusEditPassGood:boolean;
- isStatusEditPassBad:boolean;
+  isEditPass: boolean;
+  isStatusEditPassGood: boolean;
+  isStatusEditPassBad: boolean;
 
- isViewMyRole:boolean;
+  isViewMyRole: boolean;
 
   constructor(private serv: AccountService,
-    private rolesServ:RolesService) {
-    
+    private rolesServ: RolesService) {
+
     this.editProfileModel = new ProfileModel();
 
     this.isEditProfile = false;
-    this.isStatusEditGood=false;
+    this.isStatusEditGood = false;
     this.isStatusEditBad = false;
 
     this.changePasswordModel = new ChangePasswordModel();
 
-    this.isEditPass =false;
-    this.isStatusEditPassGood= false;
+    this.isEditPass = false;
+    this.isStatusEditPassGood = false;
     this.isStatusEditPassBad = false;
 
     this.isViewMyRole = false;
-   }
+  }
 
-
-   getData(data:ProfileModel){
+  getData(data: ProfileModel) {
     this._email = data.email;
-    this._firstname=data.firstname;
-    this._lastname=data.lastname;
-    this._patronymic=data.patronymic;
-   }
+    this._firstname = data.firstname;
+    this._lastname = data.lastname;
+    this._patronymic = data.patronymic;
+  }
 
   ngOnInit(): void {
-    this.serv.getProfile().subscribe((data:ProfileModel) => {
+    this.serv.getProfile().subscribe((data: ProfileModel) => {
       this.getData(data);
       this.editProfileModel = data;
     },
-    err=>{
-      console.log(err);
-    }
-    );
+      err => {
+        console.log(err);
+      });
   }
 
-getMyRoles(){
-  return  this.rolesServ.myGetRelos();
-}
-
-  editProfileShow(){
-    this.isEditProfile =!this.isEditProfile;
-    
-      this.isEditPass = false;
-      this.isViewMyRole = false;
-
+  getMyRoles() {
+    return this.rolesServ.myGetRelos();
   }
 
-  editProfile(){ 
+  editProfileShow() {
+    this.isEditProfile = !this.isEditProfile;
+
+    this.isEditPass = false;
+    this.isViewMyRole = false;
+  }
+
+  editProfile() {
     this.serv.editProfile(this.editProfileModel).subscribe(response => {
-     
-      if (response.status==200){
-        this.isStatusEditGood  = true;
-       
-         this.getData( this.editProfileModel);
+
+      if (response.status == 200) {
+        this.isStatusEditGood = true;
+
+        this.getData(this.editProfileModel);
 
         this.isStatusEditBad = false;
       }
-      else{
+      else {
         this.isStatusEditBad = true;
       }
-    },  err => {
+    }, err => {
       console.log(err);
       this.isStatusEditBad = true;
-    }
-    );
+    });
   }
 
-  OkEdit(){
+  okEdit() {
     this.isStatusEditGood = !this.isStatusEditGood;
   }
 
-  editPassShow(){
-this.isEditPass=!this.isEditPass;
+  editPassShow() {
+    this.isEditPass = !this.isEditPass;
 
-  this.isEditProfile = false;
-  this.isViewMyRole = false;
-}
-OkEditPass(){
-  this.isStatusEditPassGood = !this.isStatusEditPassGood;
-}
-
-editPass(){
-  this.serv.editPass(this.changePasswordModel).subscribe(response=>{
-    if (response.status==200){
-      this.isStatusEditPassGood  = true;
-      this.isStatusEditPassBad = false;
-    }
-    else{
-      this.isStatusEditPassBad = true;
-    }
-  },err => {
-    console.log(err);
-    this.isStatusEditPassBad = true;
+    this.isEditProfile = false;
+    this.isViewMyRole = false;
   }
-  );
-}
 
-viewRole(){
-  this.isViewMyRole=!this.isViewMyRole;
+  okEditPass() {
+    this.isStatusEditPassGood = !this.isStatusEditPassGood;
+  }
 
-  this.isEditProfile = false;
-  this.isEditPass = false;
-}
+  editPass() {
+    this.serv.editPass(this.changePasswordModel).subscribe(response => {
+      if (response.status == 200) {
+        this.isStatusEditPassGood = true;
+        this.isStatusEditPassBad = false;
+      }
+      else {
+        this.isStatusEditPassBad = true;
+      }
+    }, err => {
+      console.log(err);
+      this.isStatusEditPassBad = true;
+    });
+  }
+
+  viewRole() {
+    this.isViewMyRole = !this.isViewMyRole;
+
+    this.isEditProfile = false;
+    this.isEditPass = false;
+  }
 
 }

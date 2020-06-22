@@ -51,8 +51,8 @@ namespace WebAPI.Controllers
                 foreach (var pr in providers)
                 {
                     pr.Path = _path + pr.Path;
-                    pr.TimeWorkTo = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkTo.ToShortTimeString();
-                    pr.TimeWorkWith = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkWith.ToShortTimeString();
+                    pr.TimeWorkTo = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkTo.ToString("HH:mm");
+                    pr.TimeWorkWith = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkWith.ToString("HH:mm");
                 }
 
                 _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/get]:[info:get providers]");

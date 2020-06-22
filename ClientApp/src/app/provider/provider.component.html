@@ -3,11 +3,14 @@
   <br />
 
 
-<div *ngIf="isShowStatusMessage"  class="text-center">
-  <p>{{statusMessage}}</p>
-  <button (click)="showStatusMess()">Ok</button>
-  <br/> <br/>
-</div>
+  <div class="text-center" *ngIf="isShowStatusMessage" 	
+  [class.showInfo]="isMessInfo"
+  [class.showError]="!isMessInfo">
+      <h3>{{statusMessage}}</h3>
+      <button (click)="showStatusMess()">Ok</button>
+      <br/> <br/>
+  </div>
+
 
 <!-- view provider -->
 <div *ngIf="isView">

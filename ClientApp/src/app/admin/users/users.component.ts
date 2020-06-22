@@ -85,7 +85,7 @@ export class UsersComponent implements OnInit {
 
 // save user
 saveUser() {
-  this.isShowStatusMessage=true;
+  
     if (this.isNewRecord) {
         // добавляем пользователя
         this.usersServ.createUser(this.editedUser).subscribe(response => {
@@ -114,7 +114,7 @@ saveUser() {
           console.log(err);
         });      
     }
-    // this.editedUser = null;
+    this.isShowStatusMessage=true;
 }
 
 // cancel (back)
@@ -132,7 +132,7 @@ cancel() {
 }
 // delete user
 deleteUser(user: User) {
-  this.isShowStatusMessage=true;
+
     this.usersServ.deleteUser(user.id).subscribe(response => {
 
       if (response.status==200)
@@ -147,6 +147,8 @@ console.log(err);
 this.statusMessage = 'Ошибка удаления';
       }
 );
+
+this.isShowStatusMessage=true;
 }
 
 // show info
@@ -169,7 +171,6 @@ changePassUser(id:string){
 
 // edit pass
 editPassUser(){
-  this.isShowStatusMessage=true;
   this.usersServ.changePass(this.userChangePassword).subscribe(response=>{
     this.statusMessage = 'Пароль успешно изменен';     
     console.log(response.status);
@@ -178,6 +179,8 @@ editPassUser(){
     this.statusMessage = 'Ошибка при изменении пароля';
     console.log(err);
   });
+
+  this.isShowStatusMessage=true;
 }
 
 changeRolesUser(id:string){
@@ -209,8 +212,6 @@ checkRole(role:string):boolean{
 }
 
 editUserRoles(){
-  this.isShowStatusMessage=true;
-
   console.log("id: "+this.userChangeRoles.id);
   console.log("roles: "+this.userChangeRoles.roles);
 
@@ -222,6 +223,8 @@ editUserRoles(){
     this.statusMessage = 'Ошибка при изменении прав доступа';
     console.log(err);
   });
+
+  this.isShowStatusMessage=true;
 }
 
 pressRole(role:string){

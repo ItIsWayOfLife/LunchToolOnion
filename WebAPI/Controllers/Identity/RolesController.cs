@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebAPI.Identity.Models;
 
@@ -17,12 +19,18 @@ namespace WebAPI.Controllers.Identity
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<RolesController> _logger;
+        private readonly IUserHelper _userHelper;
 
         public RolesController(RoleManager<IdentityRole> roleManager,
-              UserManager<ApplicationUser> userManager)
+              UserManager<ApplicationUser> userManager,
+              ILogger<RolesController> logger,
+              IUserHelper userHelper)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _logger = logger;
+            _userHelper = userHelper;
         }
 
         [HttpGet]
@@ -36,12 +44,23 @@ namespace WebAPI.Controllers.Identity
                 {
                     allRolesStr.Add(role.Name);
                 }
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[roles/get]:[info:get all roles]:[[user:{userId}]");
+
                 return new ObjectResult(allRolesStr);
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[roles/get]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -58,6 +77,16 @@ namespace WebAPI.Controllers.Identity
                     // получем список ролей пользователя
                     var userRoles = await _userManager.GetRolesAsync(user);
 
+                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                    string userId = _userHelper.GetUserId(currentEmail);
+
+                    if (userId == null)
+                    {
+                        return NotFound("User not found");
+                    }
+
+                    _logger.LogInformation($"[{DateTime.Now.ToString()}]:[roles/get/{id}]:[info:get roles user {id}]:[[user:{userId}]");
+
                     return new ObjectResult(userRoles);
                 }
 
@@ -65,8 +94,8 @@ namespace WebAPI.Controllers.Identity
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[roles/get/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -93,8 +122,15 @@ namespace WebAPI.Controllers.Identity
 
                     await _userManager.RemoveFromRolesAsync(user, removedRoles);
 
-                    //string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                    //_logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} changed role for user {userId}");
+                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                    string userId = _userHelper.GetUserId(currentEmail);
+
+                    if (userId == null)
+                    {
+                        return NotFound("User not found");
+                    }
+
+                    _logger.LogInformation($"[{DateTime.Now.ToString()}]:[roles/put]:[info:user {userId} changed role for user {user.Id}]:[[user:{userId}]");
 
                     return Ok(model);
                 }
@@ -103,8 +139,8 @@ namespace WebAPI.Controllers.Identity
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[roles/put]:[error:{ex}]");
+
                 return BadRequest();
             }
         }

@@ -1,14 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 using System.Net.Http.Headers;
+using System.Security.Claims;
+using WebAPI.Controllers.Identity;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class UploadController:ControllerBase
     {
+        private readonly ILogger<UploadController> _logger;
+        private readonly IUserHelper _userHelper;
+
+        public UploadController(ILogger<UploadController> logger,
+            IUserHelper userHelper)
+        {
+            _logger = logger;
+            _userHelper = userHelper;
+        }
+
         [HttpPost, DisableRequestSizeLimit]
         public IActionResult Upload()
         {
@@ -28,6 +43,16 @@ namespace WebAPI.Controllers
                         file.CopyTo(stream);
                     }
 
+                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                    string userId = _userHelper.GetUserId(currentEmail);
+
+                    if (userId == null)
+                    {
+                        return NotFound("User not found");
+                    }
+
+                    _logger.LogInformation($"[{DateTime.Now.ToString()}]:[upload/post]:[info:upload file {fileName}]:[user:{userId}]");
+
                     return Ok(new { fileName });
                 }
                 else
@@ -37,6 +62,8 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[upload/post]:[error:{ex}]");
+
                 return StatusCode(500, $"Internal server error: {ex}");
             }
         }

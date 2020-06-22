@@ -4,6 +4,7 @@ using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,16 +22,19 @@ namespace WebAPI.Controllers
         private readonly IOrderService _orderService;
         private readonly ICartService _cartService;
         private readonly IUserHelper _userHelper;
+        private readonly ILogger<OrderController> _logger;
 
         private readonly string _path;
 
         public OrderController(IOrderService orderService,
             ICartService cartService,
-             IUserHelper userHelper)
+             IUserHelper userHelper,
+             ILogger<OrderController> logger)
         {
             _orderService = orderService;
             _cartService = cartService;
             _userHelper = userHelper;
+            _logger = logger;
 
             _path = PathConstants.APIURL + PathConstants.pathForAPI;        
         }
@@ -57,10 +61,14 @@ namespace WebAPI.Controllers
                     orders[i].DateOrder = orderDTOs[i].DateOrder.ToString();
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[order/get]:[info:get orders]:[user:{userId}]");
+
                 return new ObjectResult(orders);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[order/get]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -81,10 +89,14 @@ namespace WebAPI.Controllers
                 OrderDTO orderDTO = _orderService.Create(userId);
                 _cartService.AllDeleteDishesToCart(userId);
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[order/post]:[info:create order]:[user:{userId}]");
+
                 return Ok();
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[order/post]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -111,10 +123,14 @@ namespace WebAPI.Controllers
                     oD.Path = _path + oD.Path;
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[order/get/{id}]:[info:get dishes in order {id}]:[user:{userId}]");
+
                 return new ObjectResult(orderDishes);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[order/get/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }

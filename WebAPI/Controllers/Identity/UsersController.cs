@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using WebAPI.Identity.Models;
 
@@ -16,10 +18,16 @@ namespace WebAPI.Controllers.Identity
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ILogger<UsersController> _logger;
+        private readonly IUserHelper _userHelper;
 
-        public UsersController(UserManager<ApplicationUser> userManager)
+        public UsersController(UserManager<ApplicationUser> userManager,
+            ILogger<UsersController> logger,
+              IUserHelper userHelper)
         {
             _userManager = userManager;
+            _logger = logger;
+            _userHelper = userHelper;
         }
 
         [HttpGet]
@@ -27,8 +35,6 @@ namespace WebAPI.Controllers.Identity
         {
             try
             {
-                //_logger.LogInformation($"{DateTime.Now.ToString()}: Processing request Users/Index");
-
                 var listUsers = _userManager.Users;
                 var listViewUsers = new List<UserModel>();
 
@@ -50,8 +56,8 @@ namespace WebAPI.Controllers.Identity
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[users/get]:[error:{ex}]");
+
                 return BadRequest(ex);
             }
         }
@@ -79,8 +85,8 @@ namespace WebAPI.Controllers.Identity
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[users/get/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -104,18 +110,24 @@ namespace WebAPI.Controllers.Identity
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
-                        //string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                        //_logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} created new user: {model.Email}");
+                        string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                        string userId = _userHelper.GetUserId(currentEmail);
+
+                        if (userId == null)
+                        {
+                            return NotFound("User not found");
+                        }
+
+                        _logger.LogInformation($"[{DateTime.Now.ToString()}]:[users/post]:[info:add user {model.Email}]:[[user:{userId}]");
 
                         return Ok(model);
                     }
                     else
                     {
-                        //foreach (var error in result.Errors)
-                        // {
-                        //     ModelState.AddModelError(string.Empty, error.Description);
-                        //     //_logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
-                        // }
+                        foreach (var error in result.Errors)
+                         {
+                            _logger.LogError($"[{DateTime.Now.ToString()}]:[users/post]:[error:{error.Code}|{error.Description}]");
+                        }
                         return BadRequest(result);
                     }
                 }
@@ -123,8 +135,8 @@ namespace WebAPI.Controllers.Identity
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[users/post]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -148,8 +160,15 @@ namespace WebAPI.Controllers.Identity
                         var result = await _userManager.UpdateAsync(user);
                         if (result.Succeeded)
                         {
-                            //string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                            //_logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} edited user: {model.Id}");
+                            string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                            string userId = _userHelper.GetUserId(currentEmail);
+
+                            if (userId == null)
+                            {
+                                return NotFound("User not found");
+                            }
+
+                            _logger.LogInformation($"[{DateTime.Now.ToString()}]:[users/put]:[info:edit user {model.Email}]:[[user:{userId}]");
 
                             return Ok(model);
                         }
@@ -157,8 +176,7 @@ namespace WebAPI.Controllers.Identity
                         {
                             foreach (var error in result.Errors)
                             {
-                                ModelState.AddModelError(string.Empty, error.Description);
-                                //_logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");
+                                _logger.LogError($"[{DateTime.Now.ToString()}]:[users/put]:[error:{error.Code}|{error.Description}]");
                             }
                         }
                     }
@@ -171,8 +189,8 @@ namespace WebAPI.Controllers.Identity
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[users/put]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -193,16 +211,32 @@ namespace WebAPI.Controllers.Identity
 
                 if (result.Succeeded)
                 {
+                    string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                    string userId = _userHelper.GetUserId(currentEmail);
+
+                    if (userId == null)
+                    {
+                        return NotFound("User not found");
+                    }
+
+                    _logger.LogInformation($"[{DateTime.Now.ToString()}]:[users/delete/{id}]:[info:delete user {id}]:[[user:{userId}]");
+
+
                     return Ok(user);
                 }
-                //string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                //_logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} deleted user: {id}");
-                return NotFound();
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        _logger.LogError($"[{DateTime.Now.ToString()}]:[users/delete/{id}]:[error:{error.Code}|{error.Description}]");
+                    }
+                    return BadRequest(result.Errors);
+                }
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[users/delete/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -221,25 +255,29 @@ namespace WebAPI.Controllers.Identity
                             await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
                         if (result.Succeeded)
                         {
-                            //string currentUserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-                            //_logger.LogInformation($"{DateTime.Now.ToString()}: User {currentUserId} changed password user: {model.Id}");
+                            string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                            string userId = _userHelper.GetUserId(currentEmail);
+
+                            if (userId == null)
+                            {
+                                return NotFound("User not found");
+                            }
+
+                            _logger.LogInformation($"[{DateTime.Now.ToString()}]:[users/changepassword]:[info:change password user {model.Id}]:[[user:{userId}]");
 
                             return Ok(model);
                         }
                         else
                         {
-                            //foreach (var error in result.Errors)
-                            //{
-                            //    //ModelState.AddModelError(string.Empty, error.Description);
-                            //    //_logger.LogError($"{DateTime.Now.ToString()}: {error.Code} {error.Description}");                            
-                            //}
+                            foreach (var error in result.Errors)
+                            {
+                                _logger.LogError($"[{DateTime.Now.ToString()}]:[users/changepassword]:[error:{error.Code}|{error.Description}]");
+                            }
                             return BadRequest(result.Errors);
                         }
                     }
                     else
                     {
-                        //ModelState.AddModelError(string.Empty, _sharedLocalizer["UserNotFound"]);
-                        //_logger.LogWarning($"{DateTime.Now.ToString()}: User not found");
                         return BadRequest("User not found");
                     }
                 }
@@ -250,8 +288,8 @@ namespace WebAPI.Controllers.Identity
             }
             catch (Exception ex)
             {
-                //ModelState.AddModelError(ex.Property, ex.Message);
-                //_logger.LogError($"{DateTime.Now.ToString()}: {ex.Property}, {ex.Message}");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[users/changepassword]:[error:{ex}]");
+
                 return BadRequest();
             }
         }

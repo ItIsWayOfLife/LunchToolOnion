@@ -6,6 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -21,15 +22,17 @@ namespace WebAPI.Controllers
     {
         private readonly ICartService _cartService;
         private readonly IUserHelper _userHelper;
+        private readonly ILogger<CartController> _logger;
 
         private readonly string _path;
 
         public CartController(ICartService cartService,
-               UserManager<ApplicationUser> userManager,
-                IUserHelper userHelper)
+                IUserHelper userHelper,
+             ILogger<CartController> logger)
         {
             _cartService = cartService;
             _userHelper = userHelper;
+            _logger = logger;
 
             _path = PathConstants.APIURL + PathConstants.pathForAPI;
         }
@@ -58,10 +61,14 @@ namespace WebAPI.Controllers
                     cD.Path = _path + cD.Path;
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/dishes]:[info:get dishes in cart]:[user:{userId}]");
+
                 return new ObjectResult(cartDishes);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/dishes]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -81,10 +88,14 @@ namespace WebAPI.Controllers
 
                 string fullPrice = _cartService.FullPriceCart(userId).ToString();
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/fullprice]:[info:get full price]:[user:{userId}]");
+
                 return new ObjectResult(fullPrice);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/fullprice]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -107,10 +118,14 @@ namespace WebAPI.Controllers
                     _cartService.UpdateCountDishInCart(userId, m.Id, m.Count);
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/put]:[info:update cart]:[user:{userId}]");
+
                 return Ok();
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/put]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -130,10 +145,14 @@ namespace WebAPI.Controllers
 
                 _cartService.DeleteCartDish(id, userId);
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/delete/{id}]:[info:delete dish {id} with cart]:[user:{userId}]");
+
                 return Ok(id);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/delete/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -153,10 +172,14 @@ namespace WebAPI.Controllers
 
                 _cartService.AddDishToCart(id, userId);
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/post/{id}]:[info:add dish {id} to cart]:[user:{userId}]");
+
                 return Ok(id);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/post/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -174,12 +197,16 @@ namespace WebAPI.Controllers
                     return NotFound("User not found");
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/all/delete]:[info:emptied cart]:[user:{userId}]");
+
                 _cartService.AllDeleteDishesToCart(userId);
 
                 return Ok(id);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/all/delete]:[error:{ex}]");
+
                 return BadRequest();
             }
         }

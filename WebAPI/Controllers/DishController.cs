@@ -2,10 +2,14 @@
 using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using WebAPI.Controllers.Identity;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -16,15 +20,22 @@ namespace WebAPI.Controllers
     {
         private readonly IDishService _dishService;
         private readonly IMenuService _menuService;
-       
+        private readonly IUserHelper _userHelper;
+        private readonly ILogger<DishController> _logger;
+
         private readonly string _path;
 
         public DishController(IDishService dishService,
-            IMenuService menuService)
+            IMenuService menuService,
+            IUserHelper userHelper,
+            ILogger<DishController> logger)
         {
-            _dishService = dishService;
-            _path = PathConstants.APIURL+ PathConstants.pathForAPI;
+            _dishService = dishService;        
             _menuService = menuService;
+            _userHelper = userHelper;
+            _logger = logger;
+
+            _path = PathConstants.APIURL + PathConstants.pathForAPI;
         }
 
         [HttpGet]
@@ -40,10 +51,14 @@ namespace WebAPI.Controllers
                     dishModels.Add(ConvertDishDTOToDishModel(d));
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/get]:[info:get dishes]");
+
                 return new ObjectResult(dishModels);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/get]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -54,10 +69,15 @@ namespace WebAPI.Controllers
             try
             {
                 var dish = _dishService.GetDish(id);
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/get/{id}]:[info:get dish {id}]");
+
                 return new ObjectResult(ConvertDishDTOToDishModel(dish));
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/get/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -75,52 +95,98 @@ namespace WebAPI.Controllers
                     dishModels.Add(ConvertDishDTOToDishModel(d));
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/catalog/{catalogid}]:[info:get dishes by catalog {catalogid}]");
+
                 return new ObjectResult(dishModels);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/catalog/{catalogid}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try
             {
                 _dishService.DeleteDish(id);
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/delete/{id}]:[info:delete dish {id}]:[user:{userId}]");
+
                 return Ok(id);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/delete/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
 
         [HttpPut]
+        [Authorize(Roles = "admin")]
         public IActionResult Put(DishModel model)
         {
             try
             {
                 _dishService.EditDish(ConvertDishModelToDishDTO(model));
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/put]:[info:edit dish {model.Id}]:[user:{userId}]");
+
                 return Ok(model);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/put]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post(DishModel model)
         {
             try
             {
                 _dishService.AddDish(ConvertDishModelToDishDTO(model));
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/put]:[info:create dish {model.Name}]:[user:{userId}]");
+
                 return Ok(model);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/post]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -141,10 +207,14 @@ namespace WebAPI.Controllers
                     menuDishes[i].DishId = menuDishesDTOs[i].DishId.Value;
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/menudishes/{menuId}]:[info:get menu dishes by menu {menuId}]");
+
                 return new ObjectResult(menuDishes);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/menudishes/{menuId}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }

@@ -2,11 +2,15 @@
 using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using WebAPI.Controllers.Identity;
 using WebAPI.Models;
 
 namespace WebAPI.Controllers
@@ -17,14 +21,20 @@ namespace WebAPI.Controllers
     {
         private readonly IProviderService _providerService;
         private readonly IWebHostEnvironment _appEnvironment;
+        private readonly ILogger<ProviderController> _logger;
+        private readonly IUserHelper _userHelper;
 
         private readonly string _path;
 
         public ProviderController(IProviderService providerService,
-            IWebHostEnvironment appEnvironment)
+            IWebHostEnvironment appEnvironment,
+            ILogger<ProviderController> logger,
+            IUserHelper userHelper)
         {
             _providerService = providerService;
             _appEnvironment = appEnvironment;
+            _logger = logger;
+            _userHelper = userHelper;
             _path = _path = PathConstants.APIURL + PathConstants.pathForAPI;
         }
 
@@ -44,10 +54,14 @@ namespace WebAPI.Controllers
                     pr.TimeWorkWith = providersDtos.FirstOrDefault(p => p.Id == pr.Id).TimeWorkWith.ToShortTimeString();
                 }
 
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/get]:[info:get providers]");
+
                 return new ObjectResult(providers);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/get]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
@@ -61,6 +75,8 @@ namespace WebAPI.Controllers
 
                 if (provider != null)
                 {
+                    _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/get/{id}]:[info:get provider {id}]");
+
                     return new ObjectResult(provider);
                 }
 
@@ -68,49 +84,93 @@ namespace WebAPI.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/get/{id}]:[error:{ex}]");
+
                 return BadRequest(ex);
             }
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(int id)
         {
             try
             {
                 _providerService.DeleteProvider(id);
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/delete/{id}]:[info:delete provider {id}]:[user:{userId}]");
+
                 return Ok(id);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/delete/{id}]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
 
         [HttpPut]
+        [Authorize(Roles = "admin")]
         public IActionResult Put(ProviderModel model)
         {
             try
             {
                 var provider = ConvertProviderModelToProviderDTO(model);
                 _providerService.EditProvider(provider);
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/put]:[info:edit provider {model.Id}]:[user:{userId}]");
+
                 return Ok(model);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/put]:[error:{ex}]");
+
                 return BadRequest();
             }
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Post(ProviderModel model)
         {
             try
             {
                 _providerService.AddProvider(ConvertProviderModelToProviderDTO(model));
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/post]:[info:add provider]:[user:{userId}]");
+
                 return Ok(model);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/post]:[error:{ex}]");
+
                 return BadRequest();
             }
         }

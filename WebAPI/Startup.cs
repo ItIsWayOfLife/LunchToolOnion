@@ -13,11 +13,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.IO;
 using System.Text;
 using WebAPI.Controllers;
 using WebAPI.Controllers.Identity;
+using WebAPI.Logger;
 
 namespace WebAPI
 {
@@ -96,7 +99,7 @@ namespace WebAPI
             services.AddControllers();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -107,6 +110,8 @@ namespace WebAPI
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            loggerFactory.AddFile(Path.Combine(Directory.GetCurrentDirectory(), "logger.txt"));
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

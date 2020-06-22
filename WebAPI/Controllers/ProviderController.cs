@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.DTO;
+using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -58,6 +59,12 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(providers);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/get]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/get]:[error:{ex}]");
@@ -82,6 +89,12 @@ namespace WebAPI.Controllers
 
                 return NotFound();
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/get/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/get/{id}]:[error:{ex}]");
@@ -90,13 +103,13 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost]
         [Authorize(Roles = "admin")]
-        public IActionResult Delete(int id)
+        public IActionResult Post(ProviderModel model)
         {
             try
             {
-                _providerService.DeleteProvider(id);
+                _providerService.AddProvider(ConvertProviderModelToProviderDTO(model));
 
                 string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
                 string userId = _userHelper.GetUserId(currentEmail);
@@ -106,13 +119,19 @@ namespace WebAPI.Controllers
                     return NotFound("User not found");
                 }
 
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/delete/{id}]:[info:delete provider {id}]:[user:{userId}]");
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/post]:[info:add provider]:[user:{userId}]");
 
-                return Ok(id);
+                return Ok(model);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/post]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/delete/{id}]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/post]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -139,6 +158,12 @@ namespace WebAPI.Controllers
 
                 return Ok(model);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/put]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/put]:[error:{ex}]");
@@ -147,13 +172,13 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public IActionResult Post(ProviderModel model)
+        public IActionResult Delete(int id)
         {
             try
             {
-                _providerService.AddProvider(ConvertProviderModelToProviderDTO(model));
+                _providerService.DeleteProvider(id);
 
                 string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
                 string userId = _userHelper.GetUserId(currentEmail);
@@ -163,13 +188,19 @@ namespace WebAPI.Controllers
                     return NotFound("User not found");
                 }
 
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/post]:[info:add provider]:[user:{userId}]");
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[provider/delete/{id}]:[info:delete provider {id}]:[user:{userId}]");
 
-                return Ok(model);
+                return Ok(id);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/delete/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/post]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/delete/{id}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -200,5 +231,6 @@ namespace WebAPI.Controllers
                 return null;
             }
         }
+
     }
 }

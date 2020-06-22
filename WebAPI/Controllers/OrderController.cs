@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.DTO;
+using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -36,7 +37,7 @@ namespace WebAPI.Controllers
             _userHelper = userHelper;
             _logger = logger;
 
-            _path = PathConstants.APIURL + PathConstants.pathForAPI;        
+            _path = PathConstants.APIURL + PathConstants.pathForAPI;
         }
 
         [HttpGet]
@@ -52,11 +53,11 @@ namespace WebAPI.Controllers
                     return NotFound("User not found");
                 }
 
-                var orderDTOs = _orderService.GetOrders(userId).OrderByDescending(p=>p.DateOrder).ToList();
+                var orderDTOs = _orderService.GetOrders(userId).OrderByDescending(p => p.DateOrder).ToList();
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<OrderDTO, OrderModel>()).CreateMapper();
                 var orders = mapper.Map<IEnumerable<OrderDTO>, List<OrderModel>>(orderDTOs);
 
-                for (int i=0;i>orderDTOs.Count();i++)
+                for (int i = 0; i > orderDTOs.Count(); i++)
                 {
                     orders[i].DateOrder = orderDTOs[i].DateOrder.ToString();
                 }
@@ -65,37 +66,15 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(orders);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[order/get]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[order/get]:[error:{ex}]");
-
-                return BadRequest();
-            }
-        }
-
-        [HttpPost]
-        public IActionResult Post()
-        {
-            try
-            {
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                string userId = _userHelper.GetUserId(currentEmail);
-
-                if (userId == null)
-                {
-                    return NotFound("User not found");
-                }
-
-                OrderDTO orderDTO = _orderService.Create(userId);
-                _cartService.AllDeleteDishesToCart(userId);
-
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[order/post]:[info:create order]:[user:{userId}]");
-
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[order/post]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -127,9 +106,49 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(orderDishes);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[order/get/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[order/get/{id}]:[error:{ex}]");
+
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Post()
+        {
+            try
+            {
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                OrderDTO orderDTO = _orderService.Create(userId);
+                _cartService.AllDeleteDishesToCart(userId);
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[order/post]:[info:create order]:[user:{userId}]");
+
+                return Ok();
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[order/post]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[order/post]:[error:{ex}]");
 
                 return BadRequest();
             }

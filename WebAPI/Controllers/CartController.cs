@@ -1,10 +1,9 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.DTO;
-using ApplicationCore.Identity;
+using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -65,6 +64,12 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(cartDishes);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/dishes]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/dishes]:[error:{ex}]");
@@ -92,9 +97,48 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(fullPrice);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/fullprice]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/fullprice]:[error:{ex}]");
+
+                return BadRequest();
+            }
+        }
+
+        [HttpPost("{id}")]
+        public IActionResult Post(int id)
+        {
+            try
+            {
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _cartService.AddDishToCart(id, userId);
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/post/{id}]:[info:add dish {id} to cart]:[user:{userId}]");
+
+                return Ok(id);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/post/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/post/{id}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -121,6 +165,12 @@ namespace WebAPI.Controllers
                 _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/put]:[info:update cart]:[user:{userId}]");
 
                 return Ok();
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/put]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
@@ -149,36 +199,15 @@ namespace WebAPI.Controllers
 
                 return Ok(id);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/delete/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/delete/{id}]:[error:{ex}]");
-
-                return BadRequest();
-            }
-        }
-
-        [HttpPost("{id}")]
-        public IActionResult Post(int id)
-        {
-            try
-            {
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                string userId = _userHelper.GetUserId(currentEmail);
-
-                if (userId == null)
-                {
-                    return NotFound("User not found");
-                }
-
-                _cartService.AddDishToCart(id, userId);
-
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[cart/post/{id}]:[info:add dish {id} to cart]:[user:{userId}]");
-
-                return Ok(id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/post/{id}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -202,6 +231,12 @@ namespace WebAPI.Controllers
                 _cartService.AllDeleteDishesToCart(userId);
 
                 return Ok(id);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[cart/all/delete]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {

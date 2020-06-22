@@ -1,5 +1,6 @@
 ﻿using ApplicationCore.Constants;
 using ApplicationCore.DTO;
+using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -30,7 +31,7 @@ namespace WebAPI.Controllers
             IUserHelper userHelper,
             ILogger<DishController> logger)
         {
-            _dishService = dishService;        
+            _dishService = dishService;
             _menuService = menuService;
             _userHelper = userHelper;
             _logger = logger;
@@ -55,6 +56,12 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(dishModels);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/get]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/get]:[error:{ex}]");
@@ -73,6 +80,12 @@ namespace WebAPI.Controllers
                 _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/get/{id}]:[info:get dish {id}]");
 
                 return new ObjectResult(ConvertDishDTOToDishModel(dish));
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/get/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
@@ -99,6 +112,12 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(dishModels);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/catalog/{catalogid}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/catalog/{catalogid}]:[error:{ex}]");
@@ -107,57 +126,34 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
-        public IActionResult Delete(int id)
+        [HttpGet, Route("menudishes/{menuId}")]
+        public IActionResult GetDishesByMenuId(int menuId)
         {
             try
             {
-                _dishService.DeleteDish(id);
+                var menuDishesDTOs = _menuService.GetMenuDishes(menuId).ToList();
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesModel>()).CreateMapper();
+                var menuDishes = mapper.Map<IEnumerable<MenuDishesDTO>, List<MenuDishesModel>>(menuDishesDTOs);
 
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                string userId = _userHelper.GetUserId(currentEmail);
-
-                if (userId == null)
+                for (int i = 0; i < menuDishesDTOs.Count(); i++)
                 {
-                    return NotFound("User not found");
+                    menuDishes[i].Path = _path + menuDishesDTOs[i].Path;
+                    menuDishes[i].DishId = menuDishesDTOs[i].DishId.Value;
                 }
 
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/delete/{id}]:[info:delete dish {id}]:[user:{userId}]");
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/menudishes/{menuId}]:[info:get menu dishes by menu {menuId}]");
 
-                return Ok(id);
+                return new ObjectResult(menuDishes);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/menudishes/{menuId}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/delete/{id}]:[error:{ex}]");
-
-                return BadRequest();
-            }
-        }
-
-        [HttpPut]
-        [Authorize(Roles = "admin")]
-        public IActionResult Put(DishModel model)
-        {
-            try
-            {
-                _dishService.EditDish(ConvertDishModelToDishDTO(model));
-
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                string userId = _userHelper.GetUserId(currentEmail);
-
-                if (userId == null)
-                {
-                    return NotFound("User not found");
-                }
-
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/put]:[info:edit dish {model.Id}]:[user:{userId}]");
-
-                return Ok(model);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/put]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/menudishes/{menuId}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -183,6 +179,12 @@ namespace WebAPI.Controllers
 
                 return Ok(model);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/post]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/post]:[error:{ex}]");
@@ -191,34 +193,73 @@ namespace WebAPI.Controllers
             }
         }
 
-
-        [HttpGet, Route("menudishes/{menuId}")]
-        public IActionResult GetDishesByMenuId(int menuId)
+        [HttpPut]
+        [Authorize(Roles = "admin")]
+        public IActionResult Put(DishModel model)
         {
             try
             {
-                var menuDishesDTOs = _menuService.GetMenuDishes(menuId).ToList();
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<MenuDishesDTO, MenuDishesModel>()).CreateMapper();
-                var menuDishes = mapper.Map<IEnumerable<MenuDishesDTO>, List<MenuDishesModel>>(menuDishesDTOs);
+                _dishService.EditDish(ConvertDishModelToDishDTO(model));
 
-                for (int i = 0; i < menuDishesDTOs.Count(); i++)
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
                 {
-                    menuDishes[i].Path = _path + menuDishesDTOs[i].Path;
-                    menuDishes[i].DishId = menuDishesDTOs[i].DishId.Value;
+                    return NotFound("User not found");
                 }
 
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/menudishes/{menuId}]:[info:get menu dishes by menu {menuId}]");
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/put]:[info:edit dish {model.Id}]:[user:{userId}]");
 
-                return new ObjectResult(menuDishes);
+                return Ok(model);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/put]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/menudishes/{menuId}]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/put]:[error:{ex}]");
 
                 return BadRequest();
             }
         }
 
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _dishService.DeleteDish(id);
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[dish/delete/{id}]:[info:delete dish {id}]:[user:{userId}]");
+
+                return Ok(id);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/delete/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[dish/delete/{id}]:[error:{ex}]");
+
+                return BadRequest();
+            }
+        }
 
         private DishDTO ConvertDishModelToDishDTO(DishModel model)
         {
@@ -243,11 +284,11 @@ namespace WebAPI.Controllers
                 AddMenu = dto.AddMenu,
                 CatalogId = dto.CatalogId,
                 Name = dto.Name,
-                Path = _path +dto.Path,
+                Path = _path + dto.Path,
                 Price = dto.Price,
                 Weight = dto.Weight
             };
         }
-     
+
     }
 }

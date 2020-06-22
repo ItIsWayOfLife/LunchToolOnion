@@ -1,4 +1,5 @@
-﻿using ApplicationCore.Identity;
+﻿using ApplicationCore.Exceptions;
+using ApplicationCore.Identity;
 using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -89,9 +90,16 @@ namespace WebAPI.Controllers
 
                 return File(reportProvider.Report(reportList, title), "application/pdf");
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[report/provider/{providerId}/{dateWith}/{dateTo}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[provider/{providerId}/{dateWith}/{dateTo}]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[report/provider/{providerId}/{dateWith}/{dateTo}]:[error:{ex}]");
+
 
                 return BadRequest();
             }
@@ -141,9 +149,15 @@ namespace WebAPI.Controllers
 
                 return File(reportProviders.Report(reportProvidersDTOs, title), "application/pdf");
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[report/providers/{dateWith}/{dateTo}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[providers/{dateWith}/{dateTo}]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[report/providers/{dateWith}/{dateTo}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -200,9 +214,15 @@ namespace WebAPI.Controllers
 
                 return File(reportUser.Report(reportUserDTOs, title), "application/pdf");
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[[report/user/{userId}/{dateWith}/{dateTo}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:user/{userId}/{dateWith}/{dateTo}]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[report/user/{userId}/{dateWith}/{dateTo}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -254,9 +274,15 @@ namespace WebAPI.Controllers
 
                 return File(reportUsers.Report(reportUsersDTOs, title), "application/pdf");
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[[report/users/{dateWith}/{dateTo}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:users/{dateWith}/{dateTo}]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[report/users/{dateWith}/{dateTo}]:[error:{ex}]");
 
                 return BadRequest();
             }

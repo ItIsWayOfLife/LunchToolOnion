@@ -177,7 +177,7 @@ editMenu(menu: Menu) {
       console.log(response.status);
     }           
     ,err=>{
-    this.statusMessage = 'Ошибка при добавлении данных';
+    this.statusMessage = 'Ошибка при добавлении данных. '+err.error;
     this.menus.pop();
     console.log(err);
   }       

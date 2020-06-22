@@ -1,4 +1,5 @@
 ﻿using ApplicationCore.DTO;
+using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,12 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(menuModels);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/get]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/get]:[error:{ex}]");
@@ -66,6 +73,12 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(ConvertMenuDTOToMenuModel(menu));
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/get/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/get/{id}]:[error:{ex}]");
@@ -79,7 +92,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                IEnumerable<MenuDTO> menuDTOs = _menuService.GetMenus(providerid).OrderByDescending(p=>p.Date);
+                IEnumerable<MenuDTO> menuDTOs = _menuService.GetMenus(providerid).OrderByDescending(p => p.Date);
                 List<MenuModel> menuModels = new List<MenuModel>();
 
                 foreach (var m in menuDTOs)
@@ -91,6 +104,12 @@ namespace WebAPI.Controllers
 
                 return new ObjectResult(menuModels);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/provider/{providerid}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/provider/{providerid}]:[error:{ex}]");
@@ -99,57 +118,28 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
-        public IActionResult Delete(int id)
+        [HttpGet("dishes/{menuid}")]
+        public IActionResult GetDishesInMenu(int menuid)
         {
             try
             {
-                _menuService.DeleteMenu(id);
+                List<int> arrayIdDishes = new List<int>();
 
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                string userId = _userHelper.GetUserId(currentEmail);
+                arrayIdDishes = _menuService.GetMenuIdDishes(menuid);
 
-                if (userId == null)
-                {
-                    return NotFound("User not found");
-                }
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[menu/dishes/{menuid}]:[info:get dishes by menu {menuid}]");
 
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[menu/delete/{id}]:[info:delete menu {id}]:[user:{userId}]");
+                return new ObjectResult(arrayIdDishes);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/dishes/{menuid}]:[error:{ex.Property}, {ex.Message}]");
 
-                return Ok(id);
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/delete/{id}]:[error:{ex}]");
-
-                return BadRequest();
-            }
-        }
-
-        [HttpPut]
-        [Authorize(Roles = "admin")]
-        public IActionResult Put(MenuModel model)
-        {
-            try
-            {
-                _menuService.EditMenu(ConvertMenuModelToMenuDTO(model));
-
-                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
-                string userId = _userHelper.GetUserId(currentEmail);
-
-                if (userId == null)
-                {
-                    return NotFound("User not found");
-                }
-
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[menu/put]:[info:edit menu for {model.Date}]:[user:{userId}]");
-
-                return Ok(model);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/put]:[error:{ex}]");
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/dishes/{menuid}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -175,30 +165,15 @@ namespace WebAPI.Controllers
 
                 return Ok(model);
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/post]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/post]:[error:{ex}]");
-
-                return BadRequest();
-            }
-        }
-
-        [HttpGet("dishes/{menuid}")]
-        public IActionResult GetDishesInMenu(int menuid)
-        {
-            try
-            {
-                List<int> arrayIdDishes = new List<int>();
-
-                arrayIdDishes = _menuService.GetMenuIdDishes(menuid);
-
-                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[menu/dishes/{menuid}]:[info:get dishes by menu {menuid}]");
-
-                return new ObjectResult(arrayIdDishes);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/dishes/{menuid}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -224,9 +199,83 @@ namespace WebAPI.Controllers
 
                 return Ok();
             }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/makemenu]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/makemenu]:[error:{ex}]");
+
+                return BadRequest();
+            }
+        }
+
+        [HttpPut]
+        [Authorize(Roles = "admin")]
+        public IActionResult Put(MenuModel model)
+        {
+            try
+            {
+                _menuService.EditMenu(ConvertMenuModelToMenuDTO(model));
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[menu/put]:[info:edit menu for {model.Date}]:[user:{userId}]");
+
+                return Ok(model);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/put]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/put]:[error:{ex}]");
+
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                _menuService.DeleteMenu(id);
+
+                string currentEmail = this.User.FindFirst(ClaimTypes.Name).Value;
+                string userId = _userHelper.GetUserId(currentEmail);
+
+                if (userId == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                _logger.LogInformation($"[{DateTime.Now.ToString()}]:[menu/delete/{id}]:[info:delete menu {id}]:[user:{userId}]");
+
+                return Ok(id);
+            }
+            catch (ValidationException ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/delete/{id}]:[error:{ex.Property}, {ex.Message}]");
+
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"[{DateTime.Now.ToString()}]:[menu/delete/{id}]:[error:{ex}]");
 
                 return BadRequest();
             }
@@ -253,6 +302,7 @@ namespace WebAPI.Controllers
                 Date = dto.Date.ToShortDateString()
             };
         }
+
     }
 }
 

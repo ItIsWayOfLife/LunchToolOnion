@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import {CatalogService} from '../service/catalog.service';
 import {RolesService} from '../service/roles.service';
@@ -43,7 +44,11 @@ export class CatalogComponent implements OnInit {
      private catalogServ :CatalogService,
      private rolesServ:RolesService,
      private providerServ:ProviderService,
-     private _location: Location){
+     private _location: Location,
+     private titleService: Title){
+
+      this.titleService.setTitle('Каталог');
+
       this.providerId = activateRoute.snapshot.params['providerId'];
 
       this.catalogs = new Array<Catalog>();

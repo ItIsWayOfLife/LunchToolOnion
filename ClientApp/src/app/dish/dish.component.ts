@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import { DishService } from '../service/dish.service';
 import { RolesService } from '../service/roles.service';
@@ -54,7 +55,10 @@ export class DishComponent implements OnInit {
     private rolesServ: RolesService,
     private catalogServ: CatalogService,
     private _location: Location,
-    private menuCompilationServ: MenuCompilationService) {
+    private menuCompilationServ: MenuCompilationService,
+    private titleService: Title) {
+
+      this.titleService.setTitle('Блюда');
 
     this.fileName = "";
     this.catalogId = activateRoute.snapshot.params['catalogId'];

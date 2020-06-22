@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { AccountService } from '../../service/account.service';
 import { RolesService } from '../../service/roles.service';
@@ -35,8 +36,11 @@ export class ProfileComponent implements OnInit {
   isViewMyRole: boolean;
 
   constructor(private serv: AccountService,
-    private rolesServ: RolesService) {
+    private rolesServ: RolesService,
+    private titleService: Title) {
 
+
+      this.titleService.setTitle('Профиль');
     this.editProfileModel = new ProfileModel();
 
     this.isEditProfile = false;

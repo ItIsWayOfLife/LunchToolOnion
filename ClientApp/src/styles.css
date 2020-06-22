@@ -28,7 +28,10 @@ a.navbar-brand {
   -------------------------------------------------- */
   html {
     font-size: 14px;
+    overflow-x: hidden;
+    margin-right: calc(-1 * (100vw - 100%));
   }
+
   @media (min-width: 768px) {
     html {
       font-size: 16px;

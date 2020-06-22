@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import { MenuService } from '../service/menu.service';
 import { RolesService } from '../service/roles.service';
@@ -47,7 +48,10 @@ export class MenuComponent implements OnInit {
     private menuServ: MenuService,
     private rolesServ: RolesService,
     private providerServ: ProviderService,
-    private _location: Location) {
+    private _location: Location,
+    private titleService: Title) {
+
+      this.titleService.setTitle('Меню');
 
     this.providerId = activateRoute.snapshot.params['providerId'];
 

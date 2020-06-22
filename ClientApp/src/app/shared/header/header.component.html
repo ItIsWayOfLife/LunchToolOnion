@@ -18,6 +18,10 @@
                     <a routerLink="order" routerLinkActive="isColorHA"
                     [routerLinkActiveOptions]="{exact:true}">Заказы</a>
                 </li>
+                <li *ngIf="isAdminOrEmployeeMyRole" >
+                    <a routerLink="about" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">О нас</a>
+                </li>
                 <li  *ngIf="isAmdim">
                     <a  routerLink="users" routerLinkActive="isColorHA"
                     [routerLinkActiveOptions]="{exact:true}">Пользователи</a>

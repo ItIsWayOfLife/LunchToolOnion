@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { Title } from '@angular/platform-browser';
 
 import {RegisterModel} from './registerModel';
 import {AccountService} from '../../service/account.service';
@@ -23,7 +24,12 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(private router: Router, private serv: AccountService) {
+  constructor(private router: Router,
+     private serv: AccountService,
+    private titleService: Title) {
+
+      this.titleService.setTitle('Регистрация');
+
     this.registerModel= new RegisterModel();
     this.statusOk=false;
     this.statusNotOk = false;

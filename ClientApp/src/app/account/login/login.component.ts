@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
+import { Title } from '@angular/platform-browser';
 
 import {LoginModel} from './LoginModel';
 import {AccountService} from '../../service/account.service';
@@ -15,7 +16,11 @@ export class LoginComponent {
 
   loginModel:LoginModel;
   
-  constructor(private router: Router, private serv: AccountService) { 
+  constructor(private router: Router,
+     private serv: AccountService,
+    private titleService: Title) { 
+
+      this.titleService.setTitle('Вход');
     this.loginModel = new LoginModel();
   }
 

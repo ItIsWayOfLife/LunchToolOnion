@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { ProviderService } from '../service/provider.service';
 import { RolesService } from '../service/roles.service';
@@ -36,7 +37,10 @@ export class ProviderComponent implements OnInit {
   constructor(private router: Router,
     private activateRoute: ActivatedRoute,
     private providerServ: ProviderService,
-    private rolesServ: RolesService) {
+    private rolesServ: RolesService,
+    private titleService: Title) {
+
+      this.titleService.setTitle('Поставщики');
 
     this.fileName = "";
 

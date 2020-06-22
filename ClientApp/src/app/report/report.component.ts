@@ -1,4 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+
 
 import {ReportService} from '../service/report.service';
 
@@ -21,7 +23,11 @@ export class ReportComponent implements OnInit {
 
   reportFile:File;
 
-  constructor(private reportServ:ReportService) { 
+  constructor(private reportServ:ReportService,
+    private titleService: Title) {
+      
+      this.titleService.setTitle('Отчёты');
+
     this.isViewProviders = false;
     this.isViewUsers = false;
   }

@@ -741,3 +741,37 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 20.06.2020 20:11:25: Processing request Dish/Index
 20.06.2020 20:11:59: Make menu for 3
 20.06.2020 20:11:59: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+22.06.2020 19:49:28: Processing request Home/Index
+22.06.2020 19:49:28: Processing request Provider/ListFavoriteProvider
+22.06.2020 19:49:32: Processing request Home/Privacy
+22.06.2020 19:49:38: Processing request Account/Login
+22.06.2020 19:49:39: User fb90a1da-97ec-4fce-9419-a01876cceccf login
+22.06.2020 19:49:39: Processing request Home/Index
+22.06.2020 19:49:39: Processing request Provider/ListFavoriteProvider
+22.06.2020 19:49:43: Processing request Account/Profile
+22.06.2020 19:49:44: Processing request Home/Index
+22.06.2020 19:49:44: Processing request Provider/ListFavoriteProvider
+22.06.2020 19:49:47: Processing request Home/Privacy
+22.06.2020 19:49:48: Processing request Provider/ListFavoriteProvider
+22.06.2020 19:49:49: Processing request Users/Index
+22.06.2020 19:49:50: Processing request Report/Index
+22.06.2020 19:49:51: Processing request Users/Index
+22.06.2020 19:49:52: Processing request Cart/Index
+22.06.2020 19:49:52: Processing request Order/Index
+22.06.2020 19:49:53: Processing request Provider/Index
+22.06.2020 19:49:54: Processing request Cart/Index
+22.06.2020 19:49:56: Processing request Home/Index
+22.06.2020 19:49:56: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+22.06.2020 20:07:43: Processing request Home/Index
+22.06.2020 20:07:44: Processing request Provider/ListFavoriteProvider
+Application is shutting down...

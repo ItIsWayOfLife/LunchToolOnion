@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import {RolesService} from '../../service/roles.service';
 import {UserService} from '../../service/user.service';
@@ -38,7 +39,12 @@ export class UsersComponent implements OnInit {
     searchSelectionString:string;
     searchStr:string;
 
-  constructor(private rolesServ: RolesService, private usersServ: UserService) {
+  constructor(private rolesServ: RolesService,
+     private usersServ: UserService,
+     private titleService: Title) {
+
+      this.titleService.setTitle('Пользователи');
+
     this.users = new Array<User>();
     this.isAmdim = this.rolesServ.isAdminRole();
     this.isView = true;

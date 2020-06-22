@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import {ProviderService} from '../service/provider.service';
 
@@ -14,7 +15,12 @@ export class HomeComponent implements OnInit {
 
   providers: Array<Provider>;
 
-  constructor(private providerServ:ProviderService) {
+  constructor(private providerServ:ProviderService,
+    private titleService: Title) {
+
+    this.titleService.setTitle('Главная');
+
+
   this.providers = new  Array<Provider>();
   }
 

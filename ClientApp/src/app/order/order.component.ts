@@ -1,5 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import {Location} from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import {OrderService} from '../service/order.service';
 
@@ -27,7 +28,11 @@ export class OrderComponent implements OnInit{
   allPrice:number;
 
   constructor(private orderServ:OrderService,
-    private _location: Location) {
+    private _location: Location,
+    private titleService: Title) {
+
+      this.titleService.setTitle('Заказы');
+
     this.orders = new Array<Order>();
   
     this.isViewOrdersList = true;

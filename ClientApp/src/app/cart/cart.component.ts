@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from "@angular/router";
+import { Title } from '@angular/platform-browser';
 
 import { CartService } from '../service/cart.service';
 import { OrderService } from '../service/order.service';
@@ -27,7 +28,10 @@ export class CartComponent implements OnInit {
   constructor(private cartServ: CartService,
     private _location: Location,
     private orderServ: OrderService,
-    private router: Router) {
+    private router: Router,
+    private titleService: Title) {
+
+    this.titleService.setTitle('Корзина');
 
     this.cartDishes = new Array<CartDishes>();
     this.updateCart = new Array<CartDishesUpdate>();

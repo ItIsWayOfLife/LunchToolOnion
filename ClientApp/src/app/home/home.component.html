@@ -1,7 +1,7 @@
 <h1 class="text-center">Популярные поставщики</h1> 
 <br />
 <div class="row mt-5 mb-2">
-  <div class="divWithFor" *ngFor="let provider of providers"> 
+  <div class="col-lg-4" *ngFor="let provider of providers"> 
     <div class="providerView"> 
       <a> <img width="360" height="180" [src]="provider.path" [alt]="provider.name" /></a>
       <div *ngIf="provider.isFavorite;  then thenBlockFav else elseBlockFav"></div>
@@ -27,5 +27,6 @@
       <a  class="btn btn-primary" [routerLink]="['/catalog/', provider.id]" >Каталог блюд</a>
 <br/>
   </div>
+  <br/>
   </div>
 </div>

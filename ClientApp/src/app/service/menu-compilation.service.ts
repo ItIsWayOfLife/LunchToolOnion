@@ -36,7 +36,6 @@ export class MenuCompilationService {
         newMakeMenu.menuId = Number(this.menuId);
         newMakeMenu.allSelect = makeMenuModel.allSelect;
         newMakeMenu.newAddedDishes = makeMenuModel.newAddedDishes;
-        console.log(newMakeMenu);
         return this.http.post(this.url + "/makemenu", JSON.stringify(newMakeMenu), { headers: myHeaders, observe: 'response' });
     }
 

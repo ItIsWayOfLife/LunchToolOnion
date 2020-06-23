@@ -1,101 +1,100 @@
 <div class="text-center">
-<h1 >Каталог {{nameProvider}}</h1>
-<br />
-
-
-<div *ngIf="isShowStatusMessage" 	
-    [class.showInfo]="isMessInfo"
-    [class.showError]="!isMessInfo">
+    <h1>Каталог {{nameProvider}}</h1>
+    <br />
+    <div *ngIf="isShowStatusMessage" [class.showInfo]="isMessInfo" [class.showError]="!isMessInfo">
         <h3>{{statusMessage}}</h3>
         <button (click)="showStatusMess()">Ok</button>
-        <br/> <br/>
+        <br /> <br />
     </div>
 
+    <!-- view catalogs -->
+    <div *ngIf="isView">
+        <div class="form-inline form-group ">
+            <form autocomplete="off" class="text-center">
+                <input *ngIf="isAdminMyRole" type="button" value="Добавить" class="btn btn-success mr"
+                    (click)="addCatalog()" />
+                <select name="searchSelectionString" [(ngModel)]="searchSelectionString" class="form-control mr">
+                    <option>Поиск по</option>
+                    <option *ngIf="isAdminMyRole;">Id</option>
+                    <option>Названию</option>
+                    <option>Информации</option>
+                </select>
+                <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr"
+                    placeholder="Поиск" />
+                <input type="button" value="Обновить" (click)="refresh()" class="btn btn-success mr" />
+                <input type="button" value="Назад" class="btn btn-warning mr" (click)="backClicked()" />
+            </form>
+        </div>
+        <table class="table">
+            <tr>
+                <th *ngIf="isAdminMyRole;">Id</th>
+                <th>Каталог</th>
+                <th>Информация</th>
+                <th></th>
+                <th *ngIf="isAdminMyRole"></th>
 
-<!-- view catalogs -->
-<div *ngIf="isView">
-<div class="form-inline form-group ">
-    <form autocomplete="off" class="text-center" >
-        <input  *ngIf="isAdminMyRole" type="button" value="Добавить" class="btn btn-success mr" (click)="addCatalog()" />
-    <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
-        <option>Поиск по</option>
-        <option *ngIf="isAdminMyRole;">Id</option>
-        <option>Названию</option>
-        <option>Информации</option>
-    </select>
-    <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr" placeholder="Поиск"/>
-    <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
-    <input type="button" value="Назад" class="btn btn-warning mr" (click)="backClicked()" />
-    </form>
-</div>
-<table class="table">
-    <tr>
-        <th *ngIf="isAdminMyRole;">Id</th>
-        <th>Каталог</th>
-        <th>Информация</th>
-        <th></th>
-        <th *ngIf="isAdminMyRole"></th>
- 
-    </tr>
-        <tr *ngFor="let catalog of getCatalogs()">
-            <td *ngIf="isAdminMyRole;">{{catalog.id}}</td>
-            <td>{{catalog.name}}</td>
-            <td>{{catalog.info}}</td>
-            <!-- <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id" asp-route-menuId="@Model.MenuId">  @SharedLocalizer["Dishes"]</a></td> -->
-            <td><a class="btn btn-primary" [routerLink]="['/dish/', catalog.id]">Блюда</a></td>
-           
-                <td *ngIf="isAdminMyRole">               
-                        <button class="btn btn-danger admB" (click)="editCatalog(catalog)">Изменить</button>                   
-                        <button class="btn btn-danger admB" (click)="deleteCatalog(catalog.id)">Удалить</button>
+            </tr>
+            <tr *ngFor="let catalog of getCatalogs()">
+                <td *ngIf="isAdminMyRole;">{{catalog.id}}</td>
+                <td>{{catalog.name}}</td>
+                <td>{{catalog.info}}</td>
+                <!-- <td><a class="btn btn-sm btn-primary" asp-controller="Dish" asp-action="Index" asp-route-catalogId="@catalog.Id" asp-route-menuId="@Model.MenuId">  @SharedLocalizer["Dishes"]</a></td> -->
+                <td><a class="btn btn-primary" [routerLink]="['/dish/', catalog.id]">Блюда</a></td>
+
+                <td *ngIf="isAdminMyRole">
+                    <button class="btn btn-danger admB" (click)="editCatalog(catalog)">Изменить</button>
+                    <button class="btn btn-danger admB" (click)="deleteCatalog(catalog.id)">Удалить</button>
                 </td>
-        </tr>
-</table>
-</div>
+            </tr>
+        </table>
+    </div>
 
-<!-- add catalog -->
-<div *ngIf="isNewRecord" class="text-center">
-    <form autocomplete="off" >
-        <div>
-            <label for="name" class="control-label">Название</label><br />
-            <input name="name" id="name" class="form-control" [(ngModel)]="editedCatalog.name" placeholder="Название"/>
-            <span></span>
-        </div>   
-        <div>   
-            <label for="info" class="control-label">Информация</label><br />
-            <input  name="info" id="info" class="form-control"  [(ngModel)]="editedCatalog.info"  placeholder="Информация"/>
-        </div>
-        <br />
-        <div>
-            <input type="button" value="Сохранить" (click)="saveCatalog()" class="btn btn-success" />
-        </div><br/>
-        <div>
-            <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
-        </div>
-    </form>
-  </div>  
+    <!-- add catalog -->
+    <div *ngIf="isNewRecord" class="text-center">
+        <form autocomplete="off">
+            <div>
+                <label for="name" class="control-label">Название</label><br />
+                <input name="name" id="name" class="form-control" [(ngModel)]="editedCatalog.name"
+                    placeholder="Название" />
+                <span></span>
+            </div>
+            <div>
+                <label for="info" class="control-label">Информация</label><br />
+                <input name="info" id="info" class="form-control" [(ngModel)]="editedCatalog.info"
+                    placeholder="Информация" />
+            </div>
+            <br />
+            <div>
+                <input type="button" value="Сохранить" (click)="saveCatalog()" class="btn btn-success" />
+            </div><br />
+            <div>
+                <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
 
-
-  <!--edit vatalog -->
-<div *ngIf="isEdit">
-    <form autocomplete="off" >   
-        <input type="number" name="id" id="id" class="form-control" [(ngModel)]="editedCatalog.id" placeholder="id" hidden/>
-        <div>
-            <label for="name" class="control-label">Название</label><br />
-            <input name="name" id="name" class="form-control" [(ngModel)]="editedCatalog.name" placeholder="Название"/>
-            <span></span>
-        </div>    
-        <div>
-            <label for="info" class="control-label">Информация</label><br />
-            <input  name="info" id="info" class="form-control"  [(ngModel)]="editedCatalog.info"  placeholder="Информация"/>
-        </div><br/>      
-        <div>
-            <input type="button" value="Изменить" (click)="saveCatalog()" class="btn btn-success" />
-        </div><br/>
-        <div>
-            <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
-        </div>
-    </form>
-  </div>   
-
-
+    <!--edit vatalog -->
+    <div *ngIf="isEdit">
+        <form autocomplete="off">
+            <input type="number" name="id" id="id" class="form-control" [(ngModel)]="editedCatalog.id" placeholder="id"
+                hidden />
+            <div>
+                <label for="name" class="control-label">Название</label><br />
+                <input name="name" id="name" class="form-control" [(ngModel)]="editedCatalog.name"
+                    placeholder="Название" />
+                <span></span>
+            </div>
+            <div>
+                <label for="info" class="control-label">Информация</label><br />
+                <input name="info" id="info" class="form-control" [(ngModel)]="editedCatalog.info"
+                    placeholder="Информация" />
+            </div><br />
+            <div>
+                <input type="button" value="Изменить" (click)="saveCatalog()" class="btn btn-success" />
+            </div><br />
+            <div>
+                <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+            </div>
+        </form>
+    </div>
 </div>

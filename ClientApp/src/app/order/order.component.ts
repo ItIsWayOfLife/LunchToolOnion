@@ -1,101 +1,100 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 import { Title } from '@angular/platform-browser';
 
-import {OrderService} from '../service/order.service';
+import { OrderService } from '../service/order.service';
 
-import {Order} from './order';
-import {OrderDishes} from './OrderDishes';
+import { Order } from './order';
+import { OrderDishes } from './OrderDishes';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css'],
-  providers:[OrderService]
+  providers: [OrderService]
 })
-export class OrderComponent implements OnInit{
+export class OrderComponent implements OnInit {
 
-  orders:Array<Order>;
-  orderDishes:Array<OrderDishes>;
+  orders: Array<Order>;
+  orderDishes: Array<OrderDishes>;
 
-  isViewOrdersList:boolean;
+  isViewOrdersList: boolean;
 
-  idOrderViewDishes:number;
+  idOrderViewDishes: number;
 
-  searchSelectionString:string;
-  searchStr:string;
+  searchSelectionString: string;
+  searchStr: string;
 
-  allPrice:number;
+  allPrice: number;
 
-  constructor(private orderServ:OrderService,
+  constructor(private orderServ: OrderService,
     private _location: Location,
     private titleService: Title) {
 
-      this.titleService.setTitle('Заказы');
+    this.titleService.setTitle('Заказы');
 
     this.orders = new Array<Order>();
-  
+
     this.isViewOrdersList = true;
-    
+
     this.orderDishes = new Array<OrderDishes>();
 
-    this.searchSelectionString="Поиск по";
-    this.searchStr="";
-   }
-
-  ngOnInit(): void {
-   this.loadOrders();
+    this.searchSelectionString = "Поиск по";
+    this.searchStr = "";
   }
 
+  ngOnInit(): void {
+    this.loadOrders();
+  }
 
   backClicked() {
     this._location.back();
-}
-
-    // load menus
-    loadOrders() {
-      this.orderServ.getOrder().subscribe((data: Order[]) => {
-              this.orders = data; 
-          });
   }
 
-  getInfoDish(id:number, fullPrice:number){
+  // load menus
+  loadOrders() {
+    this.orderServ.getOrder().subscribe((data: Order[]) => {
+      this.orders = data;
+    });
+  }
+
+  getInfoDish(id: number, fullPrice: number) {
     this.allPrice = fullPrice;
     this.orderDishes = new Array<OrderDishes>();
-  this.orderServ.getOrderDishById(id).subscribe((data: OrderDishes[]) => {
-    this.orderDishes = data; 
-
-});
-    this.isViewOrdersList = false;
+    this.orderServ.getOrderDishById(id).subscribe((data: OrderDishes[]) => {
+      this.orderDishes = data;
+      this.isViewOrdersList = false;
+    });
   }
 
-  getTotalPrice(orderD:OrderDishes){
+  getTotalPrice(orderD: OrderDishes) {
     return (orderD.count * orderD.price).toFixed(2);
   }
 
-  back(){
+  back() {
     this.isViewOrdersList = true;
   }
 
-  getOrders():Array<Order>{
-    if (this.searchSelectionString=="Номеру заказа"){
-      return this.orders.filter(x=>x.id.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+  getOrders(): Array<Order> {
+    if (this.searchSelectionString == "Номеру заказа") {
+      return this.orders.filter(x => x.id.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
     }
-    else if (this.searchSelectionString=="Дате и времени"){
-      return this.orders.filter(x=>x.dateOrder.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    else if (this.searchSelectionString == "Дате и времени") {
+      return this.orders.filter(x => x.dateOrder.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
     }
-    else if (this.searchSelectionString=="Количеству блюд"){
-      return this.orders.filter(x=>x.countDish.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    else if (this.searchSelectionString == "Количеству блюд") {
+      return this.orders.filter(x => x.countDish.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
     }
-    else if (this.searchSelectionString=="Полной цене"){
-      return this.orders.filter(x=>x.fullPrice.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
+    else if (this.searchSelectionString == "Полной цене") {
+      return this.orders.filter(x => x.fullPrice.toString().toLowerCase().includes(this.searchStr.toLowerCase()));
     }
-  
-  return this.orders;
+
+    return this.orders;
   }
 
-  refresh(){
-    this.searchSelectionString="Поиск по";
-    this.searchStr ="";
+  refresh() {
+    this.searchSelectionString = "Поиск по";
+    this.searchStr = "";
   }
+  
 }

@@ -18,7 +18,7 @@
                     <a routerLink="order" routerLinkActive="isColorHA"
                     [routerLinkActiveOptions]="{exact:true}">Заказы</a>
                 </li>
-                <li *ngIf="isAdminOrEmployeeMyRole" >
+                <li>
                     <a routerLink="about" routerLinkActive="isColorHA"
                     [routerLinkActiveOptions]="{exact:true}">О нас</a>
                 </li>
@@ -34,7 +34,7 @@
                 <div class="navbar-collapse collapse justify-content-end">
                     <ul class="navbar-nav text-right">
                         <li *ngIf="!isUserAuthenticated()">
-                            <a routerLink="login" routerLinkActive="isColorHA"
+                            <a  routerLink="login" routerLinkActive="isColorHA"
                             [routerLinkActiveOptions]="{exact:true}">Войти</a>
                         </li>
                         <li *ngIf="isUserAuthenticated()">

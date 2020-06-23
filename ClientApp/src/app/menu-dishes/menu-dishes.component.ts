@@ -53,7 +53,7 @@ export class MenuDishesComponent implements OnInit {
     private menuCompilationServ: MenuCompilationService,
     private titleService: Title) {
 
-      this.titleService.setTitle('Меню блюд');
+    this.titleService.setTitle('Меню блюд');
 
     this.menuId = activateRoute.snapshot.params['menuId'];
 
@@ -71,7 +71,6 @@ export class MenuDishesComponent implements OnInit {
     this.loadMenuDishes();
     this.getDateMenu();
     this.isAdminMyRole = this.rolesServ.isAdminRole();
-    console.log("admin:" + this.rolesServ.isAdminRole());
     this.isAdminOrEmployeeMyRole = this.rolesServ.isAdminOrEmployeeRole();
     this.getProviderId();
   }
@@ -123,19 +122,15 @@ export class MenuDishesComponent implements OnInit {
 
   addToCart(idDish: number) {
     this.cartServ.addDishToCart(idDish).subscribe(response => {
-      console.log(response);
       this.router.navigate(["cart"]);
-    },
-     err => {
-        console.log(err);
-
+    }, err => {
         this.statusMessage = 'Ошибка при добавлении блюда в корзину';
-
         if (typeof err.error == 'string') {
           this.statusMessage += '. ' + err.error;
         }
         this.isMessInfo = false;
         this.isShowStatusMessage = true;
+        console.log(err);
       });
   }
 
@@ -152,16 +147,13 @@ export class MenuDishesComponent implements OnInit {
 
   menuCompilation() {
     this.getProviderId();
-    console.log(this.idProvider);
     this.menuCompilationServ.appointMenuId(this.menuId);
     this.isCompilation = this.menuCompilationServ.isComplition();
     this.router.navigate(["/catalog/" + this.idProvider]);
-
   }
 
-
-   // show info
-   showStatusMess() {
+  // show info
+  showStatusMess() {
     this.isShowStatusMessage = !this.isShowStatusMessage;
   }
 }

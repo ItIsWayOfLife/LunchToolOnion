@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit,   DoCheck } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import {RolesService} from '../../service/roles.service'
@@ -10,14 +9,13 @@ import {RolesService} from '../../service/roles.service'
   styleUrls: ['./header.component.css'],
   providers:[RolesService]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit,  DoCheck {
 
- 
   isAmdim:boolean;
   isAdminOrEmployeeMyRole:boolean;
 
-  constructor(private jwtHelper: JwtHelperService, private router: Router, private rolesServ: RolesService) {  
-  }
+  constructor(private jwtHelper: JwtHelperService, 
+    private rolesServ: RolesService) {  }
 
   logOut() {
     localStorage.removeItem("jwt");
@@ -35,6 +33,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   this.getRoles();
+  }
+
+  ngDoCheck() {
+    this.getRoles(); 
+  }
+
+  getRoles(){
     this.isAdminOrEmployeeMyRole = this.rolesServ.isAdminOrEmployeeRole();
     this.isAmdim = this.rolesServ.isAdminRole();
   }

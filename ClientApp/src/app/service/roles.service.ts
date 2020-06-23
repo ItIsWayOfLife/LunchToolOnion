@@ -1,90 +1,84 @@
-import {Injectable, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable} from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import {UserChangeRoles} from '../admin/users/userChangeRoles';
+import { UserChangeRoles } from '../admin/users/userChangeRoles';
 
 @Injectable()
-export class RolesService implements OnInit{
+export class RolesService{
    private url = "https://localhost:44342/api/roles";
 
- 
+   constructor(private http: HttpClient) {}
 
-    constructor(private http: HttpClient) {
-    }
+   isAdminRole(): boolean {
+      if (this.myGetRelos() != null) {
+         if (this.myGetRelos().includes("admin")) {
+            return true;
+         }
+         else {
+            return false;
+         }
+      }
+      else {
+         return false;
+      }
+   }
 
-    ngOnInit(): void {
-    
-    }
+   isEmployeeRole(): boolean {
+      if (this.myGetRelos() != null) {
+         if (this.myGetRelos().includes("employee")) {
+            return true;
+         }
+         else {
+            return false;
+         }
+      }
+      else {
+         return false;
+      }
+   }
 
-     isAdminRole():boolean{
-      if (this.myGetRelos()!=null){
-         if (this.myGetRelos().includes("admin")){
-          return true;
-               }
-               else{
-                  return false;
-               }
-             }
-               else{
-                  return false;
-               }
-     }
+   isAdminOrEmployeeRole(): boolean {
+      if (this.isAdminRole() || this.isEmployeeRole()) {
+         return true;
+      }
+      else {
+         return false;
+      }
+   }
 
-     isEmployeeRole():boolean{
-      if (this.myGetRelos()!=null){
-         if (this.myGetRelos().includes("employee")){
-          return true;
-               }
-               else{
-                  return false;
-               }
-             }
-               else{
-                  return false;
-               }
-     }
+   myGetRelos(): Array<string> {
+      let token: string = localStorage.getItem("jwt");
 
-     isAdminOrEmployeeRole():boolean{
-        if (this.isAdminRole() || this.isEmployeeRole()){
-           return true;
-        }
-        else{
-           return false;
-        }
-     }
-     
-     myGetRelos():Array<string>{
-        let token: string = localStorage.getItem("jwt");
+      if (token == null)
+         return null;
 
-        if (token==null)
-        return null;
+      let arrayRoles: Array<string> = new Array<string>();
 
-       let arrayRoles:Array<string> = new Array<string>();
-
-        let jwtData = token.split('.')[1];
-        let decodedJwtJsonData = window.atob(jwtData);
+      let jwtData = token.split('.')[1];
+      let decodedJwtJsonData = window.atob(jwtData);
 
 
-        if (decodedJwtJsonData.includes("admin")){
+      if (decodedJwtJsonData.includes("admin")) {
          arrayRoles.push("admin");
-        }
+      }
 
-        if (decodedJwtJsonData.includes("employee")){
+      if (decodedJwtJsonData.includes("employee")) {
          arrayRoles.push("employee");
-        }
-        return arrayRoles;
-     }
+      }
+      return arrayRoles;
+   }
 
-     getRoles(){
+   getRoles() {
       return this.http.get(this.url);
-     }
+   }
 
-     getUserRoles(id:string){
+   getUserRoles(id: string) {
       return this.http.get(this.url + '/' + id);
-     }
+   }
 
-     editRoles(userChangeRoles:UserChangeRoles){
+   editRoles(userChangeRoles: UserChangeRoles) {
       const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-      return this.http.put(this.url, JSON.stringify(userChangeRoles), {headers:myHeaders, observe: 'response'});
-     }
+      return this.http.put(this.url, JSON.stringify(userChangeRoles), { headers: myHeaders, observe: 'response' });
+   }
+   
 }

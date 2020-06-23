@@ -775,3 +775,11 @@ Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
 22.06.2020 20:07:43: Processing request Home/Index
 22.06.2020 20:07:44: Processing request Provider/ListFavoriteProvider
 Application is shutting down...
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+23.06.2020 0:23:35: Processing request Home/Index
+23.06.2020 0:23:35: Processing request Provider/ListFavoriteProvider
+23.06.2020 0:23:45: Processing request Provider/Index

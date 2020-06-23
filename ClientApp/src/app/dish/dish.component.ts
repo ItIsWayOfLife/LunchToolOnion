@@ -13,7 +13,6 @@ import { Dish } from './dish';
 import { Catalog } from '../catalog/catalog';
 import { MakeMenu } from '../menu/makeMenu';
 
-
 @Component({
   selector: 'app-dish',
   templateUrl: './dish.component.html',
@@ -58,7 +57,7 @@ export class DishComponent implements OnInit {
     private menuCompilationServ: MenuCompilationService,
     private titleService: Title) {
 
-      this.titleService.setTitle('Блюда');
+    this.titleService.setTitle('Блюда');
 
     this.fileName = "";
     this.catalogId = activateRoute.snapshot.params['catalogId'];
@@ -79,9 +78,6 @@ export class DishComponent implements OnInit {
     this.isCompilation = this.menuCompilationServ.isComplition();
 
     this.listDishesInMenu = new Array<number>();
-
-    console.log(this.menuCompilationServ.menuId);
-    console.log(this.isCompilation);
   }
 
   backClicked() {
@@ -94,12 +90,11 @@ export class DishComponent implements OnInit {
     this.isAdminMyRole = this.rolesServ.isAdminRole();
   }
 
-
-
   loadtDishesInMenu() {
     this.menuCompilationServ.getDishesInMenu().subscribe((data: number[]) => {
       this.listDishesInMenu = data;
 
+      // create models for add menu
       for (let d of this.dishes) {
         let bl: boolean;
 
@@ -139,24 +134,20 @@ export class DishComponent implements OnInit {
 
   // delete dish
   deleteDish(id: number) {
-    this.isShowStatusMessage = true;
     this.dishServ.deleteDish(id).subscribe(response => {
-
-   
-        this.statusMessage = 'Данные успешно удалены';
-        this.loadDishes();
-        this.isMessInfo = true;
+      this.loadDishes();
+      this.statusMessage = 'Данные успешно удалены';
+      this.isMessInfo = true;
+      this.isShowStatusMessage = true;
     }, err => {
-      console.log(err);
       this.statusMessage = 'Ошибка удаления';
-
       if (typeof err.error == 'string') {
         this.statusMessage += '. ' + err.error;
       }
-
       this.isMessInfo = false;
-    }
-    );
+      this.isShowStatusMessage = true;
+      console.log(err);
+    });
   }
 
   // show info
@@ -207,55 +198,46 @@ export class DishComponent implements OnInit {
   }
 
   saveDish() {
-    this.isShowStatusMessage = true;
+
     this.editedDish.catalogId = Number(this.catalogId);
 
     if (this.isNewRecord) {
+      // add dish
       this.editedDish.path = this.fileName;
       this.dishServ.createMenu(this.editedDish).subscribe(response => {
-
         this.loadDishes();
         this.statusMessage = 'Данные успешно добавлены';
         this.isMessInfo = true;
-        console.log(response.status);
-      }
-        , err => {
-          this.statusMessage = 'Ошибка при добавлении данных';
-
-          if (typeof err.error == 'string') {
-            this.statusMessage += '. ' + err.error;
-          }
-    
-          this.isMessInfo = false;
-
-          this.dishes.pop();
-          console.log(err);
+        this.isShowStatusMessage = true;
+      }, err => {
+        this.dishes.pop();
+        this.statusMessage = 'Ошибка при добавлении данных';
+        if (typeof err.error == 'string') {
+          this.statusMessage += '. ' + err.error;
         }
-      );
+        this.isMessInfo = false;
+        this.isShowStatusMessage = true;
+        console.log(err);
+      });
     } else {
-
       if (this.fileName != "") {
         this.editedDish.path = this.fileName;
       }
-
-      // edit catalog
+      // edit dish
       this.dishServ.updateMenu(this.editedDish).subscribe(response => {
-
         this.loadDishes();
         this.statusMessage = 'Данные успешно изменены';
-        console.log(response.status);
         this.isMessInfo = true;
-      },
-        err => {
-          this.statusMessage = 'Ошибка при изменении данных';
-
-          if (typeof err.error == 'string') {
-            this.statusMessage += '. ' + err.error;
-          }
-    
-          this.isMessInfo = false;
-          console.log(err);
-        });
+        this.isShowStatusMessage = true;
+      }, err => {
+        this.statusMessage = 'Ошибка при изменении данных';
+        if (typeof err.error == 'string') {
+          this.statusMessage += '. ' + err.error;
+        }
+        this.isMessInfo = false;
+        this.isShowStatusMessage = true;
+        console.log(err);
+      });
     }
   }
 
@@ -271,8 +253,6 @@ export class DishComponent implements OnInit {
   }
 
   onNotify(message: string): void {
-    console.log(message);
-
     this.fileName = message;
   }
 
@@ -293,22 +273,18 @@ export class DishComponent implements OnInit {
     makeMenu.newAddedDishes = newAddSelect;
 
     this.menuCompilationServ.createMenu(makeMenu).subscribe(response => {
-      console.log(response);
       this.statusMessage = "Меню успешно составлено";
-
       this.isMessInfo = true;
+      this.isShowStatusMessage = true;
     }, err => {
-      console.log(err);
       this.statusMessage = "Ошибка составления меню";
-
       if (typeof err.error == 'string') {
         this.statusMessage += '. ' + err.error;
       }
-
       this.isMessInfo = false;
-
+      this.isShowStatusMessage = true;
+      console.log(err);
     });
-    this.isShowStatusMessage = true;
   }
 
 }

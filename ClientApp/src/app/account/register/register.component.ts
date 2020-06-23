@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { Title } from '@angular/platform-browser';
 
-import {RegisterModel} from './registerModel';
-import {AccountService} from '../../service/account.service';
-import {LoginModel} from '../login/LoginModel';
+import { AccountService } from '../../service/account.service';
+
+import { RegisterModel } from './registerModel';
+import { LoginModel } from '../login/LoginModel';
 
 @Component({
   selector: 'app-register',
@@ -14,63 +15,78 @@ import {LoginModel} from '../login/LoginModel';
 })
 export class RegisterComponent implements OnInit {
 
-  statusCode:number;
-  statusOk:boolean ;
-  statusNotOk:boolean ;
+  statusCode: number;
+  statusOk: boolean;
+  statusNotOk: boolean;
+
+  isShowStatusMessage: boolean;
+  statusMessage: string;
 
   invalidLogin: boolean;
-  registerModel:RegisterModel;
+  registerModel: RegisterModel;
   newLogModel: LoginModel;
+
+  constructor(private router: Router,
+    private serv: AccountService,
+    private titleService: Title) {
+
+    this.titleService.setTitle('Регистрация');
+
+    this.registerModel = new RegisterModel();
+    this.statusOk = false;
+    this.statusNotOk = false;
+
+    this.isShowStatusMessage = false;
+  }
+
   ngOnInit(): void {
   }
 
-  constructor(private router: Router,
-     private serv: AccountService,
-    private titleService: Title) {
-
-      this.titleService.setTitle('Регистрация');
-
-    this.registerModel= new RegisterModel();
-    this.statusOk=false;
-    this.statusNotOk = false;
-   }
-
-  register() {   
-  this.serv.register(this.registerModel)
+  register() {
+    this.serv.register(this.registerModel)
       .subscribe(response => {
 
         this.statusCode = response.status;
 
-       if (response.status== 200){
-        this.statusOk = true;
+        if (response.status == 200) {
+          this.statusOk = true;
 
-        this.newLogModel = new LoginModel();
-        this.newLogModel.userName = this.registerModel.email;
-        this.newLogModel.password = this.registerModel.password;
-        this.serv.login(this.newLogModel).subscribe(response => {
-          let token = (<any>response).token;
-          localStorage.setItem("jwt", token);
-          this.invalidLogin = false;
-        }, err => {
-          this.invalidLogin = true;
-          console.log(err.message);
-        });;
-       }
-       else{
-        this.statusOk =  false;
-       }
-       
-        // Or any other header:
-        console.log("Code: "+response.status);
+          this.newLogModel = new LoginModel();
+          this.newLogModel.userName = this.registerModel.email;
+          this.newLogModel.password = this.registerModel.password;
+          this.serv.login(this.newLogModel).subscribe(response => {
+            let token = (<any>response).token;
+            localStorage.setItem("jwt", token);
+            this.invalidLogin = false;
+
+            this.statusMessage = "Регистрация прошла успешно";
+            this.isShowStatusMessage = true;
+          }, err => {
+            this.invalidLogin = true;
+            console.log(err.message);
+          });;
+        }
+        else {
+          this.statusOk = false;
+        }
+        console.log("Code: " + response.status);
       },
-      err => {
-        this.statusNotOk = true;
-        console.log("Code: "+err.status);
-        console.log(err.message);
-       } ); 
-    }
+        err => {
+          this.statusNotOk = true;
+          console.log("Code: " + err.status);
+          console.log(err.message);
 
-    Ok(){
-      this.router.navigate(["/"]);
-    }
+          this.statusMessage = "Ошибка регистрации";
+          this.isShowStatusMessage = true;
+        });
+  }
+
+  ok() {
+    this.router.navigate(["/"]);
+  }
+
+  // show info
+  showStatusMess() {
+    this.isShowStatusMessage = !this.isShowStatusMessage;
+  }
 }

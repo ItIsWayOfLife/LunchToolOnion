@@ -2,7 +2,6 @@
     margin-right: 15px;
 }
 
-
 .btn-primary {
     margin-right: 5px;
     margin-bottom: 5px;
@@ -16,4 +15,12 @@
 .imgProvider{
     width: 360px;
     height: 260px;
+}
+
+.mImg:hover{
+    border:2px solid black;
+}
+
+.providerView p{
+    margin-left: 5px;
 }

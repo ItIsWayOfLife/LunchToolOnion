@@ -1,20 +1,18 @@
-<div >
+<div>
     <h1 class="text-center">Меню блюд на {{dateMenu}}</h1>
     <br />
-               
-    <div class="text-center" *ngIf="isShowStatusMessage" 	
-    [class.showInfo]="isMessInfo"
-    [class.showError]="!isMessInfo">
+    <div class="text-center" *ngIf="isShowStatusMessage" [class.showInfo]="isMessInfo" [class.showError]="!isMessInfo">
         <h3>{{statusMessage}}</h3>
         <button (click)="showStatusMess()">Ok</button>
-        <br/> <br/>
+        <br /> <br />
     </div>
-
-        <div class="form-inline form-group ">
-            <form autocomplete="off" class="text-center" >
-                <input  *ngIf="isAdminMyRole" type="button" value="Составление меню" (click)="menuCompilation()"  class="btn btn-success mr" />
-                <input *ngIf="isCompilation && isAdminMyRole" type="button" value="Закончить составление" (click)="menuCompilationCancel()"  class="btn btn-danger mr" />
-            <select name="searchSelectionString"  [(ngModel)]="searchSelectionString" class="form-control mr">
+    <div class="form-inline form-group ">
+        <form autocomplete="off" class="text-center">
+            <input *ngIf="isAdminMyRole" type="button" value="Составление меню" (click)="menuCompilation()"
+                class="btn btn-success mr" />
+            <input *ngIf="isCompilation && isAdminMyRole" type="button" value="Закончить составление"
+                (click)="menuCompilationCancel()" class="btn btn-danger mr" />
+            <select name="searchSelectionString" [(ngModel)]="searchSelectionString" class="form-control mr">
                 <option>Поиск по</option>
                 <option *ngIf="isAdminMyRole;">Id блюда</option>
                 <option *ngIf="isAdminMyRole;">Id каталога</option>
@@ -23,14 +21,14 @@
                 <option>Весу</option>
                 <option>Цене</option>
             </select>
-            <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr" placeholder="Поиск"/>
-            <input type="button" value="Обновить" (click)="refresh()"  class="btn btn-success mr" />
+            <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr"
+                placeholder="Поиск" />
+            <input type="button" value="Обновить" (click)="refresh()" class="btn btn-success mr" />
             <input type="button" value="Назад" class="btn btn-warning mr" (click)="backClicked()" />
-            </form>
-        </div>
-
-        <div  class="row mt-5 mb-2">
-        <div  class="col-lg-4" *ngFor="let menuDish of getMenuDishes()">
+        </form>
+    </div>
+    <div class="row mt-5 mb-2">
+        <div class="col-lg-4" *ngFor="let menuDish of getMenuDishes()">
             <div>
                 <img width="360" height="180" class="img-thumbnail" [src]="menuDish.path" [alt]="menuDish.name" />
                 <p *ngIf="isAdminMyRole;">Id блюда: {{menuDish.dishId}}</p>
@@ -40,10 +38,11 @@
                 <p>Цена: {{menuDish.price}}</p>
                 <p>Информация: {{menuDish.info}}</p>
                 <div *ngIf="isAdminOrEmployeeMyRole;">
-                  <input type="button" class="btn btn-primary" (click)="addToCart(menuDish.dishId)" value="Добавить в корзину" />
+                    <input type="button" class="btn btn-primary" (click)="addToCart(menuDish.dishId)"
+                        value="Добавить в корзину" />
                 </div>
             </div>
-            <br/>
-        </div>      
+            <br />
+        </div>
     </div>
-    </div>
+</div>

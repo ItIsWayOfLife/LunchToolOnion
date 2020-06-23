@@ -40,7 +40,7 @@ export class ProviderComponent implements OnInit {
     private rolesServ: RolesService,
     private titleService: Title) {
 
-      this.titleService.setTitle('Поставщики');
+    this.titleService.setTitle('Поставщики');
 
     this.fileName = "";
 
@@ -50,14 +50,12 @@ export class ProviderComponent implements OnInit {
     this.editedProvider = new Provider();
 
     this.isView = true;
-
+    this.isEdit = false;
 
     this.searchSelectionString = "Поиск по";
     this.searchStr = "";
 
-    this.isShowStatusMessage = false;
-
-    this.isEdit = false;
+    this.isShowStatusMessage = false;    
   }
 
   ngOnInit(): void {
@@ -118,28 +116,23 @@ export class ProviderComponent implements OnInit {
     this.providers.push(this.editedProvider);
     this.isView = false;
     this.isNewRecord = true;
-
   }
 
   deleteProvider(id: number) {
-    this.isShowStatusMessage = true;
     this.providerServ.deleteProvider(id).subscribe(response => {
-
       this.statusMessage = 'Данные успешно удалены';
       this.loadProviders();
-
       this.isMessInfo = true;
-    },
-      err => {
-        console.log(err);
-        this.statusMessage = 'Ошибка удаления';
-
-        if (typeof err.error == 'string') {
-          this.statusMessage += '. ' + err.error;
-        }
-
-        this.isMessInfo = false;
-      });
+      this.isShowStatusMessage = true;
+    }, err => {
+      this.statusMessage = 'Ошибка удаления';
+      if (typeof err.error == 'string') {
+        this.statusMessage += '. ' + err.error;
+      }
+      this.isMessInfo = false;
+      this.isShowStatusMessage = true;
+      console.log(err);
+    });
   }
 
   // show info
@@ -158,38 +151,30 @@ export class ProviderComponent implements OnInit {
   }
 
   saveProvider() {
-   
-
+    // add provider
     if (this.isNewRecord) {
       this.editedProvider.path = this.fileName;
       this.providerServ.createProvider(this.editedProvider).subscribe(response => {
-
         this.loadProviders();
         this.statusMessage = 'Данные успешно добавлены';
-
-        console.log(response.status);
-
         this.isMessInfo = true;
-      },
-       err => {
-          this.statusMessage = 'Ошибка при добавлении данных';
-
-          if (typeof err.error == 'string'){
-            this.statusMessage +='. ' +err.error;
-          }
-
+        this.isShowStatusMessage = true;
+      }, err => {
           this.providers.pop();
-          console.log(err);
-
+          this.statusMessage = 'Ошибка при добавлении данных';
+          if (typeof err.error == 'string') {
+            this.statusMessage += '. ' + err.error;
+          }
           this.isMessInfo = false;
-        }
-      );
+          this.isShowStatusMessage = true;
+          console.log(err);
+        });
     }
     else {
       if (this.fileName != "") {
         this.editedProvider.path = this.fileName;
       }
-      // изменяем поставщика
+      // edit provider
       this.providerServ.updateProvider(this.editedProvider).subscribe(response => {
 
         this.loadProviders();
@@ -197,20 +182,17 @@ export class ProviderComponent implements OnInit {
         console.log(response.status);
 
         this.isMessInfo = true;
-      },
-        err => {
+      }, err => {
           this.statusMessage = 'Ошибка при изменении данных';
           console.log(err);
 
           this.isMessInfo = false;
         });
     }
-
-    this.isShowStatusMessage = true;
   }
 
   cancel() {
-    // если отмена при добавлении, удаляем последнюю запись
+    // if cancel for add, delete last provider
     if (this.isNewRecord) {
       this.providers.pop();
     }
@@ -222,8 +204,7 @@ export class ProviderComponent implements OnInit {
   }
 
   onNotify(message: string): void {
-    console.log(message);
-
     this.fileName = message;
   }
+
 }

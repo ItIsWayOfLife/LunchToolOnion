@@ -39,8 +39,7 @@ export class ProfileComponent implements OnInit {
     private rolesServ: RolesService,
     private titleService: Title) {
 
-
-      this.titleService.setTitle('Профиль');
+    this.titleService.setTitle('Профиль');
     this.editProfileModel = new ProfileModel();
 
     this.isEditProfile = false;

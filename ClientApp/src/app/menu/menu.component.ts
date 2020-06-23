@@ -9,7 +9,6 @@ import { ProviderService } from '../service/provider.service';
 
 import { Provider } from '../provider/provider';
 import { Menu } from './menu';
-import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-menu',
@@ -38,7 +37,7 @@ export class MenuComponent implements OnInit {
   searchStr: string;
 
   editedDate: string;
-  editOldDate:string;
+  editOldDate: string;
 
   isEdit: boolean;
   isView: boolean;
@@ -51,7 +50,7 @@ export class MenuComponent implements OnInit {
     private _location: Location,
     private titleService: Title) {
 
-      this.titleService.setTitle('Меню');
+    this.titleService.setTitle('Меню');
 
     this.providerId = activateRoute.snapshot.params['providerId'];
 
@@ -76,18 +75,10 @@ export class MenuComponent implements OnInit {
 
   getEditDate() {
     let eDateMenu: string = this.editedMenu.date;
-
     this.editOldDate = this.editedMenu.date;
-
     let eDateDay = eDateMenu.substr(0, 2);
     let eDateMonth = eDateMenu.substr(3, 2);
     let eDateYear = eDateMenu.substr(6, 4);
-
-    console.log("day: " + eDateDay);
-    console.log("month: " + eDateMonth);
-    console.log("year: " + eDateYear);
-
-    console.log(eDateYear + "-" + eDateMonth + "-" + eDateDay);
     this.editedMenu.date = eDateYear + "-" + eDateMonth + "-" + eDateDay;
   }
 
@@ -112,22 +103,19 @@ export class MenuComponent implements OnInit {
 
   // delete menu
   deleteMenu(id: number) {
-    this.isShowStatusMessage = true;
     this.menuServ.deleteMenu(id).subscribe(response => {
-
-      this.statusMessage = 'Данные успешно удалены';
       this.loadMenus();
-
+      this.statusMessage = 'Данные успешно удалены';
       this.isMessInfo = true;
+      this.isShowStatusMessage = true;
     }, err => {
-      console.log(err);
       this.statusMessage = 'Ошибка удаления';
-
       if (typeof err.error == 'string') {
         this.statusMessage += '. ' + err.error;
       }
-
       this.isMessInfo = false;
+      this.isShowStatusMessage = true;
+      console.log(err);
     });
   }
 
@@ -173,59 +161,50 @@ export class MenuComponent implements OnInit {
     return this.menus;
   }
 
-  saveMenu() {
-    this.isShowStatusMessage = true;
+  saveMenu() { 
     this.editedMenu.providerId = Number(this.providerId);
-
+    // add menu
     if (this.isNewRecord) {
       this.menuServ.createMenu(this.editedMenu).subscribe(response => {
-
         this.loadMenus();
         this.statusMessage = 'Данные успешно добавлены';
-
         this.isMessInfo = true;
-        console.log(response.status);
-      }
-        , err => {
+        this.isShowStatusMessage = true;
+      } , err => {
+        this.menus.pop();
           this.statusMessage = 'Ошибка при добавлении данных';
           if (typeof err.error == 'string') {
             this.statusMessage += '. ' + err.error;
           }
-
-          this.menus.pop();
-          console.log(err);
           this.isMessInfo = false;
-        }
-      );
+          this.isShowStatusMessage = true;
+          console.log(err);
+        });
     } else {
-
-      // edit catalog
+      // edit menu
       this.menuServ.updateMenu(this.editedMenu).subscribe(response => {
-
         this.loadMenus();
         this.statusMessage = 'Данные успешно изменены';
-        console.log(response.status);
-
         this.isMessInfo = true;
-      },
-        err => {
+        this.isShowStatusMessage = true;
+      }, err => {
           this.statusMessage = 'Ошибка при изменении данных';
           if (typeof err.error == 'string') {
             this.statusMessage += '. ' + err.error;
           }
-          console.log(err);
-        
           this.isMessInfo = false;
+          this.isShowStatusMessage = true;
+          console.log(err);
         });
     }
   }
 
   cancel() {
-    if (this.isEdit){
+    if (this.isEdit) {
       this.editedMenu.date = this.editOldDate;
     }
-   
-    // если отмена при добавлении, удаляем последнюю запись
+
+    // if cancel for add, delete last menu
     if (this.isNewRecord) {
       this.menus.pop();
     }
@@ -233,8 +212,6 @@ export class MenuComponent implements OnInit {
     this.isView = true;
     this.editedMenu = null;
     this.isEdit = false;
-
-  
   }
 
 }

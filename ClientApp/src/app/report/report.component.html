@@ -8,7 +8,7 @@
 
 <div *ngIf="isViewProviders">
     <label class="mr" for="providerId">Id поставщика</label>
-    <input class="mr" type="number" name="providerId" id="providerId" [(ngModel)]="providerId" />
+    <input autocomplete="off" class="mr" type="number" name="providerId" id="providerId" [(ngModel)]="providerId" />
     <label class="mr" for="dateWith">Дата с</label>
     <input class="mr" type="date" name="dateWith"  id="dateWith" [(ngModel)]="dateWith"/>
     <label class="mr" for="dateTo">Дата по</label>
@@ -29,7 +29,7 @@
 
 <div *ngIf="isViewUsers">
     <label class="mr" for="userId">Id пользователя</label>
-    <input class="mr userIdSize" type="text" name="userId" id="userId" [(ngModel)]="userId" />
+    <input autocomplete="off" class="mr userIdSize" type="text" name="userId" id="userId" [(ngModel)]="userId" />
     <label class="mr" for="dateWith">Дата с</label>
     <input class="mr" type="date" name="dateWith"  id="dateWith" [(ngModel)]="dateWith"/>
     <label class="mr" for="dateTo">Дата по</label>

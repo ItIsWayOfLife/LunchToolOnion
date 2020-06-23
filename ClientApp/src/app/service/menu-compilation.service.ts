@@ -1,46 +1,43 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import {Menu} from '../menu/menu';
-import {MakeMenu} from '../menu/makeMenu';
-import { MenuComponent } from '../menu/menu.component';
+import { MakeMenu } from '../menu/makeMenu';
 @Injectable()
-export class MenuCompilationService{
+export class MenuCompilationService {
 
     private url = "https://localhost:44342/api/menu";
 
-    menuId:number;
+    menuId: number;
 
-
-    constructor(private http: HttpClient){
+    constructor(private http: HttpClient) {
         this.menuId = 0;
     }
 
-    appointMenuId(id:number){
+    appointMenuId(id: number) {
         this.menuId = id;
     }
 
-    isComplition():boolean{
-        if (this.menuId<=0){
-           return false;
+    isComplition(): boolean {
+        if (this.menuId <= 0) {
+            return false;
         }
-        else{
+        else {
             return true;
         }
     }
 
-    getDishesInMenu(){
+    getDishesInMenu() {
         return this.http.get(this.url + '/dishes/' + this.menuId);
     }
 
-    createMenu(makeMenuModel:MakeMenu){    
+    createMenu(makeMenuModel: MakeMenu) {
         const myHeaders = new HttpHeaders().set("Content-Type", "application/json");
-        let newMakeMenu:MakeMenu = new MakeMenu();
+        let newMakeMenu: MakeMenu = new MakeMenu();
         newMakeMenu.menuId = Number(this.menuId);
         newMakeMenu.allSelect = makeMenuModel.allSelect;
         newMakeMenu.newAddedDishes = makeMenuModel.newAddedDishes;
         console.log(newMakeMenu);
-        return this.http.post(this.url +"/makemenu", JSON.stringify(newMakeMenu), {headers: myHeaders, observe: 'response'}); 
+        return this.http.post(this.url + "/makemenu", JSON.stringify(newMakeMenu), { headers: myHeaders, observe: 'response' });
     }
 
 }

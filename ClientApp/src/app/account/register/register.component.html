@@ -1,47 +1,56 @@
-
-    <h1 class="text-center">Регистрация</h1>
+<h1 class="text-center">Регистрация</h1>
 <br />
 <div class="text-center" *ngIf="!statusOk">
-    <form method="post" autocomplete="off" >
-        <div *ngIf="statusNotOk" class="text-danger">
-            <h3>Ошибка регистрации.</h3>
+    <form method="post" autocomplete="off">
+        <div *ngIf="isShowStatusMessage" [class.showInfo]="!statusNotOk" [class.showError]="statusNotOk">
+            <h3>{{statusMessage}}</h3>
+            <button (click)="showStatusMess()">Ok</button>
+            <br /> <br />
         </div>
         <div>
             <label for="firstname" class="control-label">Имя</label><br />
-            <input id="firstname" class="form-control" name="firstname"   placeholder="Имя" [(ngModel)]="registerModel.firstname"/>
+            <input id="firstname" class="form-control" name="firstname" placeholder="Имя"
+                [(ngModel)]="registerModel.firstname" />
             <span></span>
         </div>
         <div>
             <label for="lastname" class="control-label">Фамилия</label><br />
-            <input id="lastname" class="form-control" name="lastname" [(ngModel)]="registerModel.lastname"  placeholder="Фамилия" />
+            <input id="lastname" class="form-control" name="lastname" [(ngModel)]="registerModel.lastname"
+                placeholder="Фамилия" />
             <span></span>
         </div>
         <div>
             <label for="patronymic" class="control-label">Отчество</label><br />
-            <input id="patronymic" class="form-control" name="patronymic" [(ngModel)]="registerModel.patronymic" placeholder="Отчество"/>
+            <input id="patronymic" class="form-control" name="patronymic" [(ngModel)]="registerModel.patronymic"
+                placeholder="Отчество" />
         </div>
         <div>
             <label for="email" class="control-label">Email</label><br />
-            <input id="email" class="form-control" name="email" [(ngModel)]="registerModel.email" placeholder="Email"/>
+            <input id="email" class="form-control" name="email" [(ngModel)]="registerModel.email" placeholder="Email" />
         </div>
         <div>
             <label for="password" class="control-label">Пароль</label><br />
-            <input id="password" class="form-control" name="password" [(ngModel)]="registerModel.password"  placeholder="Пароль"/>
+            <input id="password" class="form-control" name="password" [(ngModel)]="registerModel.password"
+                placeholder="Пароль" />
         </div>
         <div>
             <label for="passwordConfirm" class="control-label">Подтверждение пароля</label><br />
-            <input id="passwordConfirm" class="form-control" name="passwordConfirm" [(ngModel)]="registerModel.passwordConfirm"  placeholder="Подтверждение пароля"/>
+            <input id="passwordConfirm" class="form-control" name="passwordConfirm"
+                [(ngModel)]="registerModel.passwordConfirm" placeholder="Подтверждение пароля" />
         </div>
         <br />
         <div>
-            <input type="submit" (click)="register()" value="Зарегистрироваться"  class="btn btn-success"  />
+            <input type="submit" (click)="register()" value="Зарегистрироваться" class="btn btn-success" />
         </div>
     </form>
-    </div>
-    <div class="text-center" *ngIf="statusOk">
-        <h2>
-            Поздравляем {{registerModel.firstname}}! Вы успешно зарегистрированы.
-        </h2>
-        <br/>
-        <button (click)="Ok()" >Ok</button>
-    </div>
+</div>
+<div class="text-center" *ngIf="statusOk">
+    <h2>
+        Поздравляем {{registerModel.firstname}}! Вы успешно зарегистрированы.
+    </h2>
+    <br />
+    <button (click)="ok()">Ok</button>
+</div>
+<div *ngIf="isShowStatusMessage">
+    <br/>
+</div>

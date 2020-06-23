@@ -54,7 +54,6 @@ export class CartComponent implements OnInit {
     });
   }
 
-
   updateData() {
     this.updateCart = new Array<CartDishesUpdate>();
     for (let c of this.cartDishes) {
@@ -63,28 +62,21 @@ export class CartComponent implements OnInit {
       cdu.count = c.count;
       this.updateCart.push(cdu);
     }
-
     this.cartServ.updateCart(this.updateCart).subscribe(response => {
-
       this.loadCart();
       this.statusMessage = 'Корзина успешно обновлена';
       this.isMessInfo = true;
-
-      console.log(response.status);
-    }
-      , err => {
-        console.log(err);
+      this.isShowStatusMessage = true;
+    }, err => {    
         this.statusMessage = 'Ошибка при обновлении корзины';
-
         if (typeof err.error == 'string') {
           this.statusMessage += '. ' + err.error;
         }
-
         this.isMessInfo = false;
-      }
-    );
-    this.isShowStatusMessage = true;
-
+        this.isShowStatusMessage = true;
+        console.log(err);
+      });
+   
     this.getFullPrice();
   }
 
@@ -109,62 +101,49 @@ export class CartComponent implements OnInit {
 
   deleteCartDish(id: number) {
     this.cartServ.deleteDishInCart(id).subscribe(response => {
-      this.statusMessage = 'Данные успешно удалены';
       this.loadCart();
-
+      this.statusMessage = 'Данные успешно удалены';
+      this.isShowStatusMessage = true;
       this.isMessInfo = true;
-    },
-      err => {
-        console.log(err);
+    }, err => {
         this.statusMessage = 'Ошибка удаления';
-
         if (typeof err.error == 'string') {
           this.statusMessage += '. ' + err.error;
         }
-
         this.isMessInfo = false;
-      }
-    );
-
-    this.isShowStatusMessage = true;
+        this.isShowStatusMessage = true;
+        console.log(err);
+      });
   }
 
   deleteAllDishesInCart() {
     this.cartServ.deleteAllDishesInCart().subscribe(response => {
-      this.statusMessage = 'Корзина успешно очищена';
       this.loadCart();
+      this.statusMessage = 'Корзина успешно очищена';
       this.isMessInfo = true;
-    },
-      err => {
-        console.log(err);
+      this.isShowStatusMessage = true;
+    }, err => {   
         this.statusMessage = 'Ошибка при очистке корзины';
-
         if (typeof err.error == 'string') {
           this.statusMessage += '. ' + err.error;
         }
         this.isMessInfo = false;
-      }
-    );
-
-    this.isShowStatusMessage = true;
+        this.isShowStatusMessage = true;
+        console.log(err);
+      });
   }
 
   createOrder() {
     this.orderServ.createOrder().subscribe(response => {
       this.router.navigate(["/order"]);
-    },
-      err => {
-        console.log(err);
-
+    }, err => {
         this.statusMessage = 'Ошибка при создании заказа';
-
         if (typeof err.error == 'string') {
           this.statusMessage += '. ' + err.error;
         }
-
         this.isMessInfo = false;
-
         this.isShowStatusMessage = true;
+        console.log(err);
       });
   }
 

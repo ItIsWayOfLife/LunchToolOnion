@@ -89,4 +89,13 @@ export class RegisterComponent implements OnInit {
   showStatusMess() {
     this.isShowStatusMessage = !this.isShowStatusMessage;
   }
+
+  comparePass(){
+    if (this.registerModel.password==this.registerModel.passwordConfirm){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 }

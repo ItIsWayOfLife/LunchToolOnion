@@ -42,7 +42,14 @@ namespace WebAPI
             services.AddDbContext<IdentityContext>(options =>
              options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(
+                opts => {
+                    opts.Password.RequiredLength = 6;   // минимальная длина
+                    opts.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
+                    opts.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
+                    opts.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
+                    opts.Password.RequireDigit = false; // требуются ли цифры
+                })
                 .AddEntityFrameworkStores<IdentityContext>();
 
             services.Configure<FormOptions>(o => {

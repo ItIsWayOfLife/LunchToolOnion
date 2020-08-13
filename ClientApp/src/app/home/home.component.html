@@ -1,0 +1,34 @@
+<h1 class="text-center">Популярные поставщики</h1>
+<br />
+<div class="row mt-5 mb-2">
+  <div class="col-lg-4" *ngFor="let provider of providers">
+    <div class="providerView">
+      <a [routerLink]="['/menu/', provider.id]"> <img class="mImg" width="360" height="180" [src]="provider.path"
+          [alt]="provider.name" /></a>
+      <br /><br />
+      <div *ngIf="provider.isFavorite;  then thenBlockFav else elseBlockFav"></div>
+      <ng-template #thenBlockFav>
+        <p>На главную: Да</p>
+      </ng-template>
+      <ng-template #elseBlockFav>
+        <p>На главную: Нет</p>
+      </ng-template>
+      <p>Название: {{provider.name}}</p>
+      <p>Email: {{provider.email}}</p>
+      <p>Рабочие дни: {{provider.workingDays}}</p>
+      <p>Рабочее время: {{provider.timeWorkWith}}:{{provider.timeWorkTo}}</p>
+      <div *ngIf="provider.isActive;  then thenBlock else elseBlock"></div>
+      <ng-template #thenBlock>
+        <p>Статус: Работает</p>
+      </ng-template>
+      <ng-template #elseBlock>
+        <p>Статус: Не работает</p>
+      </ng-template>
+      <p>Информация: {{provider.info}}</p>
+      <a class="btn btn-primary" [routerLink]="['/menu/', provider.id]">Меню</a>
+      <a class="btn btn-primary" [routerLink]="['/catalog/', provider.id]">Каталог блюд</a>
+      <br />
+    </div>
+    <br />
+  </div>
+</div>

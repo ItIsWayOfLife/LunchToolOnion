@@ -17,6 +17,15 @@ namespace ApplicationCore.Services
             Database = uow;
         }
 
+        public IEnumerable<DishDTO> GetAllDishes()
+        {
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Dish, DishDTO>()).CreateMapper();
+            var dishes = mapper.Map<IEnumerable<Dish>, List<DishDTO>>(Database.Dish.GetAll());
+
+            return dishes;
+        }
+
         public IEnumerable<DishDTO> GetDishesForMenu(int? catalogId, List<int> addedDishes)
         {
             if (catalogId == null)

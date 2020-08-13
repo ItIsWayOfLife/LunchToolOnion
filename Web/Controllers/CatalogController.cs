@@ -41,9 +41,9 @@ namespace Web.Controllers
 
             try
             {
-                IEnumerable<СatalogDTO> сatalogDTOs = _сatalogService.GetСatalogs(providerId);
-                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<СatalogDTO, CatalogViewModel>()).CreateMapper();
-                var catalogs = mapper.Map<IEnumerable<СatalogDTO>, List<CatalogViewModel>>(сatalogDTOs);
+                IEnumerable<CatalogDTO> сatalogDTOs = _сatalogService.GetСatalogs(providerId);
+                var mapper = new MapperConfiguration(cfg => cfg.CreateMap<CatalogDTO, CatalogViewModel>()).CreateMapper();
+                var catalogs = mapper.Map<IEnumerable<CatalogDTO>, List<CatalogViewModel>>(сatalogDTOs);
 
                 var provider = _providerService.GetProvider(providerId);
 
@@ -108,7 +108,7 @@ namespace Web.Controllers
             {
                 try
                 {
-                    СatalogDTO сatalogDTO = new СatalogDTO()
+                    CatalogDTO сatalogDTO = new CatalogDTO()
                     {
                         Info = model.Info,
                         Name = model.Name,
@@ -157,7 +157,7 @@ namespace Web.Controllers
 
             try
             {
-                СatalogDTO сatalogDTO = _сatalogService.GetСatalog(id);
+                CatalogDTO сatalogDTO = _сatalogService.GetСatalog(id);
                 if (сatalogDTO == null)
                 throw new ValidationException(_sharedLocalizer["CatalogNoFind"], ""); 
 
@@ -185,7 +185,7 @@ namespace Web.Controllers
             {
                 try
                 {
-                    СatalogDTO сatalogDTO = new СatalogDTO
+                    CatalogDTO сatalogDTO = new CatalogDTO
                     {
                         Id = model.Id,
                         Name = model.Name,

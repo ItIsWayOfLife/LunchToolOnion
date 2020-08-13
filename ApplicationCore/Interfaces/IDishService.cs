@@ -11,6 +11,8 @@ namespace ApplicationCore.Interfaces
         DishDTO GetDish(int? id);
         IEnumerable<DishDTO> GetDishesForMenu(int? catalogId, List<int> addedDishes);
         IEnumerable<DishDTO> GetDishes(int? catalogId);
+        IEnumerable<DishDTO> GetAllDishes();
+
         void Dispose();
     }
 }

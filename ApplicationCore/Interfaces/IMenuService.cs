@@ -10,6 +10,7 @@ namespace ApplicationCore.Interfaces
         void EditMenu(MenuDTO menuDTO);
         MenuDTO GetMenu(int? id);
         IEnumerable<MenuDTO> GetMenus(int? providerId);
+        IEnumerable<MenuDTO> GetAllMenus();
         IEnumerable<MenuDishesDTO> GetMenuDishes(int? menuId);
         List<int> GetMenuIdDishes(int? menuId);
         void MakeMenu(int? menuId, List<int> newAddedDishes, List<int> allSelect);

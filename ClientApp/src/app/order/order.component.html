@@ -1,0 +1,68 @@
+<h1 class="text-center">Заказы</h1>
+<br />
+<div *ngIf="isViewOrdersList">
+    <div class="form-inline form-group ">
+        <form autocomplete="off" class="text-center">
+            <select name="searchSelectionString" [(ngModel)]="searchSelectionString" class="form-control mr">
+                <option>Поиск по</option>
+                <option>Номеру заказа</option>
+                <option>Дате и времени</option>
+                <option>Количеству блюд</option>
+                <option>Полной цене</option>
+            </select>
+            <input type="text" name="name" class="inputSearch form-control mr " [(ngModel)]="searchStr"
+                placeholder="Поиск" />
+            <input type="button" value="Обновить" (click)="refresh()" class="btn btn-success mr" />
+            <input type="button" value="Назад" class="btn btn-warning mr" (click)="backClicked()" />
+        </form>
+    </div>
+    <table class="table">
+        <tr>
+            <th>Номер заказа</th>
+            <th>Дата и время заказа</th>
+            <th>Количество блюд</th>
+            <th>Цена</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let order of getOrders()">
+            <td>{{order.id}}</td>
+            <td>{{order.dateOrder}}</td>
+            <td>{{order.countDish}}</td>
+            <td>{{order.fullPrice}}</td>
+            <td><button class="btn btn-sm btn-success"
+                    (click)="getInfoDish(order.id, order.fullPrice)">Подробнее</button>
+        </tr>
+    </table>
+</div>
+<div *ngIf="!isViewOrdersList">
+
+    <table class="table">
+        <tr>
+            <th>Блюдо</th>
+            <th>Название</th>
+            <th>Информация</th>
+            <th>Вес</th>
+            <th>Цена</th>
+            <th>Количество</th>
+            <th>Общая цена</th>
+        </tr>
+        <tr *ngFor="let orderD of orderDishes">
+            <td> <img class="esh-basket-image" style="width: 300px; height: 200px;" [src]="orderD.path" [alt]="orderD.name" /></td>
+            <td>{{orderD.name}}</td>
+            <td>{{orderD.info}}</td>
+            <td>{{orderD.weight}}</td>
+            <td>{{orderD.price}} BYN</td>
+            <td>{{orderD.count}}</td>
+            <td>{{getTotalPrice(orderD)}}</td>
+        </tr>
+    </table>
+    <br />
+    <div>
+        <button class="btn btn-warning" (click)="back()">Назад</button>
+        <span class="float-right">
+            <h3> Общая цена: {{allPrice}} BYN</h3>
+        </span>
+    </div>
+    <br />
+</div>
+<br />

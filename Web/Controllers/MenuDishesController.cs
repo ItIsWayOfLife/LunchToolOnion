@@ -22,8 +22,6 @@ namespace Web.Controllers
         private readonly ICatalogService _catalogService;
         private readonly IStringLocalizer<SharedResource> _sharedLocalizer;
 
-        private readonly PathConstants _pathConstants;
-
         private readonly string _path;
 
         public MenuDishesController(IMenuService menuService, IProviderService providerService,
@@ -34,8 +32,7 @@ namespace Web.Controllers
             _menuService = menuService;
             _providerService = providerService;
             _logger = logger;
-            _pathConstants = new PathConstants();
-            _path = _pathConstants.pathDish;
+            _path = PathConstants.pathDish;
             _catalogService = catalogService;
             _sharedLocalizer = sharedLocalizer;
         }

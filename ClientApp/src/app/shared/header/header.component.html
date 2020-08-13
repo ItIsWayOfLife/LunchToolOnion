@@ -1,0 +1,55 @@
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <ul class="navbar-nav flex-grow-1">
+                <li>
+                    <a routerLink="" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Главная</a>
+                </li>
+                <li>
+                    <a routerLink="providers" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Поставщики</a>
+                </li>
+                <li  *ngIf="isAdminOrEmployeeMyRole">
+                    <a routerLink="cart" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Корзина</a>
+                </li>
+                <li *ngIf="isAdminOrEmployeeMyRole" >
+                    <a routerLink="order" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Заказы</a>
+                </li>
+                <li>
+                    <a routerLink="about" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">О нас</a>
+                </li>
+                <li  *ngIf="isAmdim">
+                    <a  routerLink="users" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Пользователи</a>
+                </li>
+                <li *ngIf="isAmdim">
+                    <a routerLink="report" routerLinkActive="isColorHA"
+                    [routerLinkActiveOptions]="{exact:true}">Отчёты</a>
+                </li>           
+            </ul>
+                <div class="navbar-collapse collapse justify-content-end">
+                    <ul class="navbar-nav text-right">
+                        <li *ngIf="!isUserAuthenticated()">
+                            <a  routerLink="login" routerLinkActive="isColorHA"
+                            [routerLinkActiveOptions]="{exact:true}">Войти</a>
+                        </li>
+                        <li *ngIf="isUserAuthenticated()">
+                            <a routerLink="" (click)="logOut()">Выход</a>
+                        </li>
+                        <li  *ngIf="!isUserAuthenticated()">
+                            <a routerLink="register" routerLinkActive="isColorHA"
+                            [routerLinkActiveOptions]="{exact:true}">Зарегистрироваться</a>
+                        </li>
+                        <li  *ngIf="isUserAuthenticated()">
+                            <a  routerLink="account" routerLinkActive="isColorHA"
+                            [routerLinkActiveOptions]="{exact:true}">Личный кабинет</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+</header>  

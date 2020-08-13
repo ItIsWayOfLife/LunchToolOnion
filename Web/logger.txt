@@ -1,0 +1,785 @@
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+16.06.2020 19:51:34: Processing request Home/Index
+16.06.2020 19:51:34: Processing request Provider/ListFavoriteProvider
+16.06.2020 19:51:39: Processing request Menu/Index
+16.06.2020 19:51:46: Processing request Menu/Index
+16.06.2020 19:51:52: Processing request Account/Login
+16.06.2020 19:51:53: User e3f7a118-d605-4839-9ff9-b708bf55da72 login
+16.06.2020 19:51:53: Processing request Home/Index
+16.06.2020 19:51:53: Processing request Provider/ListFavoriteProvider
+16.06.2020 19:51:55: Processing request Menu/Index
+16.06.2020 19:51:57: Processing request Menu/Add
+16.06.2020 19:52:00: , Меню нельзя составлять на прошедшую дату
+16.06.2020 19:52:09: User e3f7a118-d605-4839-9ff9-b708bf55da72 added new menu
+16.06.2020 19:52:09: Processing request Menu/Index
+16.06.2020 19:52:17: Processing request MenuDishes/Index
+16.06.2020 19:52:18: Processing request Menu/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+16.06.2020 19:55:58: Processing request Home/Index
+16.06.2020 19:55:58: Processing request Provider/ListFavoriteProvider
+16.06.2020 19:56:01: Processing request Provider/Index
+16.06.2020 19:56:09: Processing request Catalog/Index
+16.06.2020 19:56:12: Processing request Catalog/Index
+16.06.2020 19:56:15: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+16.06.2020 20:13:12: Processing request Home/Index
+16.06.2020 20:13:12: Processing request Provider/ListFavoriteProvider
+16.06.2020 20:13:17: Processing request Home/Index
+16.06.2020 20:13:17: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+16.06.2020 21:37:33: Processing request Home/Index
+16.06.2020 21:37:33: Processing request Provider/ListFavoriteProvider
+16.06.2020 21:37:36: Processing request Menu/Index
+16.06.2020 21:37:40: Processing request Menu/Index
+16.06.2020 21:38:04: Processing request Menu/Index
+16.06.2020 21:38:17: Processing request Menu/Index
+16.06.2020 21:38:17: Processing request Menu/Index
+16.06.2020 21:38:24: Processing request Menu/Index
+16.06.2020 21:38:26: Processing request Catalog/Index
+16.06.2020 21:38:37: Processing request Menu/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+16.06.2020 21:39:13: Processing request Home/Index
+16.06.2020 21:39:14: Processing request Provider/ListFavoriteProvider
+16.06.2020 21:39:16: Processing request Menu/Index
+16.06.2020 21:39:20: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+16.06.2020 21:40:15: Processing request Home/Index
+16.06.2020 21:40:15: Processing request Provider/ListFavoriteProvider
+16.06.2020 21:40:20: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+16.06.2020 21:44:51: Processing request Home/Index
+16.06.2020 21:44:51: Processing request Provider/ListFavoriteProvider
+16.06.2020 21:44:54: Processing request Catalog/Index
+16.06.2020 21:45:05: Processing request Dish/Index
+16.06.2020 21:45:20: Processing request Account/Login
+Invalid password for user baaabc97-c89c-47fd-876f-8cf0eb5705f3.
+User baaabc97-c89c-47fd-876f-8cf0eb5705f3 failed to provide the correct password.
+16.06.2020 21:45:46: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+16.06.2020 21:45:46: Processing request Home/Index
+16.06.2020 21:45:46: Processing request Provider/ListFavoriteProvider
+16.06.2020 21:45:48: Processing request Menu/Index
+16.06.2020 21:45:50: Processing request Provider/ListFavoriteProvider
+16.06.2020 21:45:51: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 0:56:32: Processing request Home/Index
+17.06.2020 0:56:33: Processing request Provider/ListFavoriteProvider
+17.06.2020 0:56:36: Processing request Catalog/Index
+17.06.2020 0:56:39: Processing request Catalog/Add
+17.06.2020 0:56:49: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 added new catalog
+17.06.2020 0:56:49: Processing request Catalog/Index
+17.06.2020 0:56:51: Processing request Catalog/Add
+17.06.2020 0:57:06: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 added new catalog
+17.06.2020 0:57:06: Processing request Catalog/Index
+17.06.2020 0:57:07: Processing request Catalog/Add
+17.06.2020 0:57:18: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 added new catalog
+17.06.2020 0:57:18: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 12:13:54: Processing request Home/Index
+17.06.2020 12:13:54: Processing request Provider/ListFavoriteProvider
+17.06.2020 12:14:01: Processing request Account/Login
+17.06.2020 12:14:02: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+17.06.2020 12:14:02: Processing request Home/Index
+17.06.2020 12:14:02: Processing request Provider/ListFavoriteProvider
+17.06.2020 12:14:03: Processing request Provider/Index
+17.06.2020 12:14:06: Processing request Menu/Index
+17.06.2020 12:14:31: Processing request MenuDishes/Index
+17.06.2020 12:14:40: Processing request Menu/Index
+17.06.2020 12:14:55: Processing request MenuDishes/Index
+17.06.2020 12:14:57: Processing request Menu/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 12:33:44: Processing request Home/Index
+17.06.2020 12:33:44: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 12:58:01: Processing request Home/Index
+17.06.2020 12:58:01: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 14:20:09: Processing request Home/Index
+17.06.2020 14:20:09: Processing request Provider/ListFavoriteProvider
+17.06.2020 14:20:17: Processing request Provider/Index
+17.06.2020 14:20:19: Processing request Cart/Index
+17.06.2020 14:20:20: Processing request Order/Index
+17.06.2020 14:20:21: Processing request Users/Index
+17.06.2020 14:20:21: Processing request Report/Index
+17.06.2020 14:20:22: Processing request Users/Index
+17.06.2020 14:20:23: Processing request Report/Index
+17.06.2020 14:20:24: Processing request Provider/Index
+17.06.2020 14:20:29: Processing request Provider/Index
+17.06.2020 14:20:31: Processing request Catalog/Index
+17.06.2020 14:20:34: Processing request Dish/Index
+17.06.2020 14:20:36: Processing request Catalog/Index
+17.06.2020 14:20:38: Processing request Dish/Index
+17.06.2020 14:20:49: Processing request Catalog/Index
+17.06.2020 14:20:51: Processing request Provider/Index
+17.06.2020 14:20:53: Processing request Menu/Index
+17.06.2020 14:20:55: Processing request MenuDishes/Index
+17.06.2020 14:21:12: Processing request Menu/Index
+17.06.2020 14:21:15: Processing request Provider/Index
+17.06.2020 14:21:17: Processing request Catalog/Index
+17.06.2020 14:21:21: Processing request Dish/Index
+17.06.2020 14:21:59: Processing request Provider/Index
+17.06.2020 14:22:02: Processing request Menu/Index
+17.06.2020 14:22:04: Processing request MenuDishes/Index
+17.06.2020 14:22:13: Processing request MenuDishes/Index
+17.06.2020 14:22:15: Processing request MenuDishes/Index
+17.06.2020 14:22:16: Processing request MenuDishes/Index
+17.06.2020 14:22:17: Processing request MenuDishes/Index
+17.06.2020 14:22:17: Processing request MenuDishes/Index
+17.06.2020 14:22:17: Processing request MenuDishes/Index
+17.06.2020 14:22:17: Processing request MenuDishes/Index
+17.06.2020 14:22:18: Processing request MenuDishes/Index
+17.06.2020 14:22:18: Processing request MenuDishes/Index
+17.06.2020 14:22:19: Processing request MenuDishes/Index
+17.06.2020 14:22:19: Processing request MenuDishes/Index
+17.06.2020 14:22:19: Processing request MenuDishes/Index
+17.06.2020 14:22:20: Processing request MenuDishes/Index
+17.06.2020 14:22:20: Processing request MenuDishes/Index
+17.06.2020 14:22:20: Processing request MenuDishes/Index
+17.06.2020 14:22:21: Processing request MenuDishes/Index
+17.06.2020 14:22:28: Processing request Catalog/Index
+17.06.2020 14:22:33: Processing request Catalog/Add
+17.06.2020 14:22:35: Processing request Catalog/Index
+17.06.2020 14:22:38: Processing request Dish/Index
+17.06.2020 14:22:40: Processing request Catalog/Index
+17.06.2020 14:22:40: Processing request MenuDishes/Index
+17.06.2020 14:22:44: Processing request Catalog/Index
+17.06.2020 14:22:47: Processing request Dish/Index
+17.06.2020 14:22:48: Processing request Catalog/Index
+17.06.2020 14:22:55: Processing request Dish/Index
+17.06.2020 14:23:05: Make menu for 3
+17.06.2020 14:23:05: Processing request MenuDishes/Index
+17.06.2020 14:23:21: Processing request Home/Index
+17.06.2020 14:23:21: Processing request Provider/ListFavoriteProvider
+17.06.2020 14:23:25: Processing request Catalog/Index
+17.06.2020 14:23:27: Processing request Dish/Index
+17.06.2020 14:23:33: Processing request Catalog/Index
+17.06.2020 14:23:34: Processing request Dish/Index
+17.06.2020 14:23:36: Processing request Catalog/Index
+17.06.2020 14:23:36: Processing request Provider/ListFavoriteProvider
+17.06.2020 15:07:06: Processing request Catalog/Index
+17.06.2020 15:07:08: Processing request Dish/Index
+17.06.2020 15:07:28: Processing request Dish/Index
+17.06.2020 15:07:35: Processing request Dish/Edit
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 17:35:52: Processing request Home/Index
+17.06.2020 17:35:53: Processing request Provider/ListFavoriteProvider
+17.06.2020 17:35:56: Processing request Catalog/Index
+17.06.2020 17:35:59: Processing request Dish/Index
+17.06.2020 17:36:01: Processing request Catalog/Index
+17.06.2020 17:36:02: Processing request Dish/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 17:37:44: Processing request Home/Index
+17.06.2020 17:37:44: Processing request Provider/ListFavoriteProvider
+17.06.2020 17:37:56: Processing request Catalog/Index
+17.06.2020 17:37:57: Processing request Dish/Index
+17.06.2020 17:37:59: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 20:04:06: Processing request Home/Index
+17.06.2020 20:04:06: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:04:09: Processing request Account/Login
+17.06.2020 20:04:10: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+17.06.2020 20:04:10: Processing request Home/Index
+17.06.2020 20:04:10: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:04:11: Processing request Provider/Index
+17.06.2020 20:04:16: Processing request Catalog/Index
+17.06.2020 20:04:20: Processing request Dish/Index
+17.06.2020 20:04:22: Processing request Catalog/Index
+17.06.2020 20:04:24: Processing request Dish/Index
+17.06.2020 20:04:34: Processing request Catalog/Index
+17.06.2020 20:04:36: Processing request Dish/Index
+17.06.2020 20:04:37: Processing request Catalog/Index
+17.06.2020 20:04:38: Processing request Provider/Index
+17.06.2020 20:04:39: Processing request Menu/Index
+17.06.2020 20:05:00: Processing request MenuDishes/Index
+17.06.2020 20:05:07: Processing request Home/Index
+17.06.2020 20:05:07: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:05:11: Processing request Menu/Index
+17.06.2020 20:05:12: Processing request MenuDishes/Index
+17.06.2020 20:05:16: Processing request Menu/Index
+17.06.2020 20:05:17: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:05:18: Processing request Catalog/Index
+17.06.2020 20:05:19: Processing request Dish/Index
+17.06.2020 20:05:21: Processing request Catalog/Index
+17.06.2020 20:05:22: Processing request Dish/Index
+17.06.2020 20:05:59: Processing request Home/Index
+17.06.2020 20:05:59: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:06:00: Processing request Menu/Index
+17.06.2020 20:06:02: Processing request MenuDishes/Index
+17.06.2020 20:06:12: Processing request Catalog/Index
+17.06.2020 20:06:13: Processing request Dish/Index
+17.06.2020 20:06:15: Processing request Catalog/Index
+17.06.2020 20:06:17: Processing request Dish/Index
+17.06.2020 20:06:30: Make menu for 3
+17.06.2020 20:06:30: Processing request MenuDishes/Index
+17.06.2020 20:06:51: Processing request Home/Index
+17.06.2020 20:06:51: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:06:53: Processing request Menu/Index
+17.06.2020 20:06:56: Processing request Menu/Index
+17.06.2020 20:06:57: Processing request Menu/Index
+17.06.2020 20:07:03: Processing request MenuDishes/Index
+17.06.2020 20:07:08: Processing request Catalog/Index
+17.06.2020 20:07:10: Processing request Dish/Index
+17.06.2020 20:07:14: Processing request Dish/Add
+17.06.2020 20:07:15: Processing request Dish/Index
+17.06.2020 20:07:18: Make menu for 3
+17.06.2020 20:07:18: Processing request MenuDishes/Index
+17.06.2020 20:07:21: Processing request Home/Index
+17.06.2020 20:07:21: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:07:22: Processing request Menu/Index
+17.06.2020 20:07:24: Processing request MenuDishes/Index
+17.06.2020 20:07:48: Processing request Menu/Index
+17.06.2020 20:07:51: Processing request MenuDishes/Index
+17.06.2020 20:07:52: Processing request Menu/Index
+17.06.2020 20:08:04: Processing request Cart/Index
+17.06.2020 20:08:06: Processing request Home/Index
+17.06.2020 20:08:06: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:08:09: Processing request Provider/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 20:16:19: Processing request Home/Index
+17.06.2020 20:16:19: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:16:25: Processing request Catalog/Index
+17.06.2020 20:16:27: Processing request Dish/Index
+17.06.2020 20:16:29: Processing request Catalog/Index
+17.06.2020 20:16:33: Processing request Home/Index
+17.06.2020 20:16:33: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:16:35: Processing request Menu/Index
+17.06.2020 20:16:36: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 20:25:55: Processing request Home/Index
+17.06.2020 20:25:55: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:25:58: Processing request Provider/Index
+17.06.2020 20:26:01: Processing request Home/Index
+17.06.2020 20:26:01: Processing request Provider/ListFavoriteProvider
+17.06.2020 20:26:03: Processing request Menu/Index
+17.06.2020 20:26:06: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+17.06.2020 23:38:44: Processing request Home/Index
+17.06.2020 23:38:44: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 11:27:30: Processing request Home/Index
+18.06.2020 11:27:30: Processing request Provider/ListFavoriteProvider
+18.06.2020 11:27:43: Processing request Provider/Index
+18.06.2020 11:27:48: Processing request Menu/Index
+18.06.2020 11:27:52: Processing request MenuDishes/Index
+18.06.2020 11:28:00: Processing request Account/Login
+18.06.2020 11:28:01: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+18.06.2020 11:28:01: Processing request Home/Index
+18.06.2020 11:28:01: Processing request Provider/ListFavoriteProvider
+18.06.2020 11:28:03: Processing request Menu/Index
+18.06.2020 11:28:04: Processing request MenuDishes/Index
+18.06.2020 11:28:23: Processing request Menu/Index
+18.06.2020 11:28:26: Processing request MenuDishes/Index
+18.06.2020 11:28:27: Processing request Catalog/Index
+18.06.2020 11:28:29: Processing request Dish/Index
+18.06.2020 11:28:31: Processing request Catalog/Index
+18.06.2020 11:28:37: Processing request Dish/Index
+18.06.2020 11:28:39: Processing request Catalog/Index
+18.06.2020 11:28:41: Processing request Dish/Index
+18.06.2020 11:28:43: Processing request Catalog/Index
+18.06.2020 11:28:44: Processing request Dish/Index
+18.06.2020 11:28:45: Processing request Catalog/Index
+18.06.2020 11:28:46: Processing request MenuDishes/Index
+18.06.2020 11:28:49: Processing request Home/Index
+18.06.2020 11:28:49: Processing request Provider/ListFavoriteProvider
+18.06.2020 11:28:51: Processing request Menu/Index
+18.06.2020 11:28:52: Processing request MenuDishes/Index
+18.06.2020 11:28:57: Processing request Catalog/Index
+18.06.2020 11:28:59: Processing request Dish/Index
+18.06.2020 11:29:02: Processing request Catalog/Index
+18.06.2020 11:29:02: Processing request MenuDishes/Index
+18.06.2020 11:29:03: Processing request Provider/Index
+18.06.2020 11:29:04: Processing request Menu/Index
+18.06.2020 11:29:06: Processing request Provider/Index
+18.06.2020 11:29:06: Processing request Menu/Index
+18.06.2020 11:29:09: Processing request MenuDishes/Index
+18.06.2020 11:29:10: Processing request Menu/Index
+18.06.2020 11:29:12: Processing request MenuDishes/Index
+18.06.2020 11:29:17: Processing request Catalog/Index
+18.06.2020 11:29:21: Processing request Dish/Index
+18.06.2020 11:29:23: Processing request Catalog/Index
+18.06.2020 11:29:28: Processing request Catalog/Edit
+18.06.2020 11:29:30: Processing request Catalog/Index
+18.06.2020 11:29:31: Processing request Dish/Index
+18.06.2020 11:29:33: Processing request Catalog/Index
+18.06.2020 11:29:34: Processing request Dish/Index
+18.06.2020 11:29:35: Processing request Catalog/Index
+18.06.2020 11:29:36: Processing request Catalog/Add
+18.06.2020 11:29:37: Processing request Catalog/Index
+18.06.2020 11:29:41: Processing request Home/Index
+18.06.2020 11:29:41: Processing request Provider/ListFavoriteProvider
+18.06.2020 11:29:43: Processing request Catalog/Index
+18.06.2020 11:29:44: Processing request Dish/Index
+18.06.2020 11:29:45: Processing request Catalog/Index
+18.06.2020 11:29:46: Processing request Dish/Index
+18.06.2020 11:29:48: Processing request Catalog/Index
+18.06.2020 11:29:49: Processing request Dish/Index
+18.06.2020 11:29:51: Processing request Catalog/Index
+18.06.2020 11:29:56: Processing request Home/Index
+18.06.2020 11:29:56: Processing request Provider/ListFavoriteProvider
+18.06.2020 11:29:57: Processing request Catalog/Index
+18.06.2020 11:29:59: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 11:31:01: Processing request Home/Index
+18.06.2020 11:31:01: Processing request Provider/ListFavoriteProvider
+18.06.2020 11:31:20: Processing request Catalog/Index
+18.06.2020 11:31:22: Processing request Provider/ListFavoriteProvider
+18.06.2020 11:31:23: Processing request Menu/Index
+18.06.2020 11:31:25: Processing request MenuDishes/Index
+18.06.2020 11:31:52: Processing request MenuDishes/Index
+18.06.2020 11:31:55: Processing request MenuDishes/Index
+18.06.2020 11:31:59: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 11:40:35: Processing request Home/Index
+18.06.2020 11:40:36: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 12:23:02: Processing request Home/Index
+18.06.2020 12:23:02: Processing request Provider/ListFavoriteProvider
+18.06.2020 12:23:13: Processing request Menu/Index
+18.06.2020 12:23:14: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 12:59:15: Processing request Home/Index
+18.06.2020 12:59:15: Processing request Provider/ListFavoriteProvider
+18.06.2020 12:59:19: Processing request Menu/Index
+18.06.2020 12:59:20: Processing request MenuDishes/Index
+18.06.2020 12:59:29: Processing request MenuDishes/Index
+18.06.2020 12:59:32: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 13:02:10: Processing request Home/Index
+18.06.2020 13:02:10: Processing request Provider/ListFavoriteProvider
+18.06.2020 13:02:12: Processing request Menu/Index
+18.06.2020 13:02:14: Processing request MenuDishes/Index
+18.06.2020 13:02:33: Processing request Menu/Index
+18.06.2020 13:02:36: Processing request MenuDishes/Index
+18.06.2020 13:02:44: Processing request Menu/Index
+18.06.2020 13:02:51: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 14:27:20: Processing request Home/Index
+18.06.2020 14:27:20: Processing request Provider/ListFavoriteProvider
+18.06.2020 14:27:43: Processing request Account/Login
+18.06.2020 14:27:44: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+18.06.2020 14:27:44: Processing request Home/Index
+18.06.2020 14:27:44: Processing request Provider/ListFavoriteProvider
+18.06.2020 14:27:46: Processing request Cart/Index
+18.06.2020 14:27:47: Processing request Order/Index
+18.06.2020 14:27:48: Processing request Cart/Index
+18.06.2020 14:27:48: Processing request Users/Index
+18.06.2020 14:27:51: Processing request Report/Index
+18.06.2020 14:27:56: Processing request Order/Index
+18.06.2020 14:27:57: Processing request Users/Index
+18.06.2020 14:27:58: Processing request Cart/Index
+18.06.2020 14:27:58: Processing request Order/Index
+18.06.2020 14:27:59: Processing request Provider/Index
+18.06.2020 14:28:04: Processing request Menu/Index
+18.06.2020 14:28:06: Processing request MenuDishes/Index
+18.06.2020 14:28:07: Processing request Cart/Add
+18.06.2020 14:28:07: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 14
+18.06.2020 14:28:07: Processing request Cart/Index
+18.06.2020 14:28:10: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 1
+18.06.2020 14:28:10: Processing request Cart/Index
+18.06.2020 14:28:15: Processing request Order/Create
+18.06.2020 14:28:15: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 created order 1
+18.06.2020 14:28:15: Processing request Order/Index
+18.06.2020 14:28:17: Processing request Cart/Index
+18.06.2020 14:28:18: Processing request Home/Index
+18.06.2020 14:28:18: Processing request Provider/ListFavoriteProvider
+18.06.2020 14:28:19: Processing request Catalog/Index
+18.06.2020 14:28:20: Processing request Dish/Index
+18.06.2020 14:28:26: Processing request Catalog/Index
+18.06.2020 14:28:26: Processing request Provider/ListFavoriteProvider
+18.06.2020 14:28:27: Processing request Menu/Index
+18.06.2020 14:28:28: Processing request MenuDishes/Index
+18.06.2020 14:28:30: Processing request Cart/Add
+18.06.2020 14:28:30: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 11
+18.06.2020 14:28:30: Processing request Cart/Index
+18.06.2020 14:28:33: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 2
+18.06.2020 14:28:33: Processing request Cart/Index
+18.06.2020 14:28:36: Processing request Cart/Index
+18.06.2020 14:28:37: Processing request Order/Index
+18.06.2020 14:28:38: Processing request Users/Index
+18.06.2020 14:28:39: Processing request Report/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 16:56:18: Processing request Home/Index
+18.06.2020 16:56:18: Processing request Provider/ListFavoriteProvider
+18.06.2020 16:56:21: Processing request Account/Login
+18.06.2020 16:56:22: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+18.06.2020 16:56:22: Processing request Home/Index
+18.06.2020 16:56:22: Processing request Provider/ListFavoriteProvider
+18.06.2020 16:56:24: Processing request Cart/Index
+18.06.2020 16:56:30: Processing request Home/Index
+18.06.2020 16:56:30: Processing request Provider/ListFavoriteProvider
+18.06.2020 16:56:32: Processing request Menu/Index
+18.06.2020 16:56:34: Processing request MenuDishes/Index
+18.06.2020 16:56:35: Processing request Cart/Add
+18.06.2020 16:56:36: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 11
+18.06.2020 16:56:36: Processing request Cart/Index
+18.06.2020 16:56:38: Processing request MenuDishes/Index
+18.06.2020 16:56:39: Processing request Cart/Add
+18.06.2020 16:56:40: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 12
+18.06.2020 16:56:40: Processing request Cart/Index
+18.06.2020 16:56:42: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 3
+18.06.2020 16:56:42: Processing request Cart/Index
+18.06.2020 16:56:42: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 2
+18.06.2020 16:56:42: Processing request Cart/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 17:00:39: Processing request Home/Index
+18.06.2020 17:00:39: Processing request Provider/ListFavoriteProvider
+18.06.2020 17:00:41: Processing request Cart/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 17:20:58: Processing request Home/Index
+18.06.2020 17:20:58: Processing request Provider/ListFavoriteProvider
+18.06.2020 17:21:05: Processing request Cart/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+18.06.2020 17:35:28: Processing request Home/Index
+18.06.2020 17:35:28: Processing request Provider/ListFavoriteProvider
+18.06.2020 17:35:30: Processing request Order/Index
+18.06.2020 17:35:31: Processing request Cart/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+19.06.2020 11:06:03: Processing request Home/Index
+19.06.2020 11:06:03: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:05: Processing request Provider/Index
+19.06.2020 11:06:06: Processing request Home/Index
+19.06.2020 11:06:06: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:06: Processing request Provider/Index
+19.06.2020 11:06:07: Processing request Home/Index
+19.06.2020 11:06:07: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:10: Processing request Provider/Index
+19.06.2020 11:06:11: Processing request Home/Index
+19.06.2020 11:06:11: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:11: Processing request Provider/Index
+19.06.2020 11:06:12: Processing request Home/Index
+19.06.2020 11:06:12: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:13: Processing request Provider/Index
+19.06.2020 11:06:15: Processing request Home/Index
+19.06.2020 11:06:15: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:16: Processing request Provider/Index
+19.06.2020 11:06:16: Processing request Home/Index
+19.06.2020 11:06:16: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:17: Processing request Provider/Index
+19.06.2020 11:06:18: Processing request Home/Index
+19.06.2020 11:06:18: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:18: Processing request Provider/Index
+19.06.2020 11:06:19: Processing request Home/Index
+19.06.2020 11:06:19: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:20: Processing request Provider/Index
+19.06.2020 11:06:21: Processing request Home/Index
+19.06.2020 11:06:21: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:22: Processing request Provider/Index
+19.06.2020 11:06:24: Processing request Home/Index
+19.06.2020 11:06:24: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:25: Processing request Provider/Index
+19.06.2020 11:06:25: Processing request Home/Index
+19.06.2020 11:06:26: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:26: Processing request Provider/Index
+19.06.2020 11:06:26: Processing request Home/Index
+19.06.2020 11:06:26: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:27: Processing request Provider/Index
+19.06.2020 11:06:27: Processing request Home/Index
+19.06.2020 11:06:27: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:28: Processing request Provider/Index
+19.06.2020 11:06:29: Processing request Home/Index
+19.06.2020 11:06:29: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:30: Processing request Provider/Index
+19.06.2020 11:06:30: Processing request Home/Index
+19.06.2020 11:06:30: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:32: Processing request Provider/Index
+19.06.2020 11:06:34: Processing request Home/Index
+19.06.2020 11:06:34: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:35: Processing request Provider/Index
+19.06.2020 11:06:37: Processing request Account/Login
+19.06.2020 11:06:38: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+19.06.2020 11:06:38: Processing request Home/Index
+19.06.2020 11:06:38: Processing request Provider/ListFavoriteProvider
+19.06.2020 11:06:40: Processing request Order/Index
+19.06.2020 11:06:42: Processing request Order/GetOrderDishes
+19.06.2020 11:06:42: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 get order dishes 1
+19.06.2020 11:06:45: Processing request Order/Index
+19.06.2020 11:06:52: Processing request Order/GetOrderDishes
+19.06.2020 11:06:52: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 get order dishes 1
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+19.06.2020 15:19:57: Processing request Home/Index
+19.06.2020 15:19:57: Processing request Provider/ListFavoriteProvider
+19.06.2020 15:19:59: Processing request Order/Index
+19.06.2020 15:20:01: Processing request Home/Index
+19.06.2020 15:20:01: Processing request Provider/ListFavoriteProvider
+19.06.2020 15:20:01: Processing request Provider/Index
+19.06.2020 15:20:02: Processing request Cart/Index
+19.06.2020 15:20:06: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 7
+19.06.2020 15:20:06: Processing request Cart/Index
+19.06.2020 15:20:08: Processing request Order/Create
+19.06.2020 15:20:08: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 created order 2
+19.06.2020 15:20:08: Processing request Order/Index
+19.06.2020 15:20:10: Processing request Provider/Index
+19.06.2020 15:20:11: Processing request Catalog/Index
+19.06.2020 15:20:13: Processing request Dish/Index
+19.06.2020 15:20:15: Processing request Home/Index
+19.06.2020 15:20:15: Processing request Provider/ListFavoriteProvider
+19.06.2020 15:20:16: Processing request Menu/Index
+19.06.2020 15:20:18: Processing request MenuDishes/Index
+19.06.2020 15:20:19: Processing request Cart/Add
+19.06.2020 15:20:19: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 add dish 11
+19.06.2020 15:20:20: Processing request Cart/Index
+19.06.2020 15:20:22: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 updated count dishCart 18
+19.06.2020 15:20:22: Processing request Cart/Index
+19.06.2020 15:20:24: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 logout
+19.06.2020 15:20:24: Processing request Home/Index
+19.06.2020 15:20:24: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+19.06.2020 23:32:45: Processing request Home/Index
+19.06.2020 23:32:45: Processing request Provider/ListFavoriteProvider
+19.06.2020 23:32:47: Processing request Account/Login
+19.06.2020 23:32:49: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+19.06.2020 23:32:49: Processing request Home/Index
+19.06.2020 23:32:49: Processing request Provider/ListFavoriteProvider
+19.06.2020 23:32:50: Processing request Report/Index
+19.06.2020 23:32:54: Processing request Report/GetReportProvider
+19.06.2020 23:32:54: Created report by provider 1
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+20.06.2020 18:48:00: Processing request Home/Index
+20.06.2020 18:48:00: Processing request Provider/ListFavoriteProvider
+20.06.2020 18:48:03: Processing request Account/Login
+20.06.2020 18:48:04: User baaabc97-c89c-47fd-876f-8cf0eb5705f3 login
+20.06.2020 18:48:04: Processing request Home/Index
+20.06.2020 18:48:04: Processing request Provider/ListFavoriteProvider
+20.06.2020 18:48:10: Processing request Menu/Index
+20.06.2020 18:48:14: Processing request MenuDishes/Index
+20.06.2020 18:48:18: Processing request Catalog/Index
+20.06.2020 18:48:49: Processing request Dish/Index
+20.06.2020 18:49:02: Processing request Dish/Add
+20.06.2020 18:49:04: Processing request Dish/Index
+20.06.2020 18:49:10: Make menu for 3
+20.06.2020 18:49:10: Processing request MenuDishes/Index
+20.06.2020 18:49:26: Processing request Catalog/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+20.06.2020 18:50:03: Processing request Home/Index
+20.06.2020 18:50:03: Processing request Provider/ListFavoriteProvider
+20.06.2020 18:50:06: Processing request Menu/Index
+20.06.2020 18:50:08: Processing request MenuDishes/Index
+20.06.2020 18:50:15: Processing request Catalog/Index
+20.06.2020 18:50:36: Processing request Home/Index
+20.06.2020 18:50:36: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+20.06.2020 19:01:19: Processing request Home/Index
+20.06.2020 19:01:19: Processing request Provider/ListFavoriteProvider
+20.06.2020 19:01:21: Processing request Order/Index
+20.06.2020 19:01:22: Processing request Users/Index
+20.06.2020 19:01:24: Processing request Cart/Index
+20.06.2020 19:01:25: Processing request Home/Index
+20.06.2020 19:01:25: Processing request Provider/ListFavoriteProvider
+20.06.2020 19:01:26: Processing request Menu/Index
+20.06.2020 19:01:27: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+20.06.2020 20:03:58: Processing request Home/Index
+20.06.2020 20:03:58: Processing request Provider/ListFavoriteProvider
+20.06.2020 20:04:01: Processing request Menu/Index
+20.06.2020 20:04:03: Processing request MenuDishes/Index
+20.06.2020 20:04:04: Processing request Catalog/Index
+20.06.2020 20:04:07: Processing request Dish/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+20.06.2020 20:11:07: Processing request Home/Index
+20.06.2020 20:11:07: Processing request Provider/ListFavoriteProvider
+20.06.2020 20:11:08: Processing request Users/Index
+20.06.2020 20:11:10: Processing request Order/Index
+20.06.2020 20:11:11: Processing request Cart/Index
+20.06.2020 20:11:12: Processing request Provider/Index
+20.06.2020 20:11:13: Processing request Report/Index
+20.06.2020 20:11:14: Processing request Home/Index
+20.06.2020 20:11:14: Processing request Provider/ListFavoriteProvider
+20.06.2020 20:11:15: Processing request Menu/Index
+20.06.2020 20:11:17: Processing request MenuDishes/Index
+20.06.2020 20:11:20: Processing request Home/Index
+20.06.2020 20:11:20: Processing request Provider/ListFavoriteProvider
+20.06.2020 20:11:21: Processing request Menu/Index
+20.06.2020 20:11:22: Processing request MenuDishes/Index
+20.06.2020 20:11:23: Processing request Catalog/Index
+20.06.2020 20:11:25: Processing request Dish/Index
+20.06.2020 20:11:59: Make menu for 3
+20.06.2020 20:11:59: Processing request MenuDishes/Index
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+22.06.2020 19:49:28: Processing request Home/Index
+22.06.2020 19:49:28: Processing request Provider/ListFavoriteProvider
+22.06.2020 19:49:32: Processing request Home/Privacy
+22.06.2020 19:49:38: Processing request Account/Login
+22.06.2020 19:49:39: User fb90a1da-97ec-4fce-9419-a01876cceccf login
+22.06.2020 19:49:39: Processing request Home/Index
+22.06.2020 19:49:39: Processing request Provider/ListFavoriteProvider
+22.06.2020 19:49:43: Processing request Account/Profile
+22.06.2020 19:49:44: Processing request Home/Index
+22.06.2020 19:49:44: Processing request Provider/ListFavoriteProvider
+22.06.2020 19:49:47: Processing request Home/Privacy
+22.06.2020 19:49:48: Processing request Provider/ListFavoriteProvider
+22.06.2020 19:49:49: Processing request Users/Index
+22.06.2020 19:49:50: Processing request Report/Index
+22.06.2020 19:49:51: Processing request Users/Index
+22.06.2020 19:49:52: Processing request Cart/Index
+22.06.2020 19:49:52: Processing request Order/Index
+22.06.2020 19:49:53: Processing request Provider/Index
+22.06.2020 19:49:54: Processing request Cart/Index
+22.06.2020 19:49:56: Processing request Home/Index
+22.06.2020 19:49:56: Processing request Provider/ListFavoriteProvider
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+22.06.2020 20:07:43: Processing request Home/Index
+22.06.2020 20:07:44: Processing request Provider/ListFavoriteProvider
+Application is shutting down...
+Now listening on: https://localhost:5001
+Now listening on: http://localhost:5000
+Application started. Press Ctrl+C to shut down.
+Hosting environment: Development
+Content root path: C:\Users\asus\Desktop\WWW\LunchToolOnion\Web
+23.06.2020 0:23:35: Processing request Home/Index
+23.06.2020 0:23:35: Processing request Provider/ListFavoriteProvider
+23.06.2020 0:23:45: Processing request Provider/Index

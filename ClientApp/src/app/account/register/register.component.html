@@ -1,0 +1,72 @@
+<h1 class="text-center">Регистрация</h1>
+<br />
+<div class="text-center" *ngIf="!statusOk">
+    <form method="post" autocomplete="off">
+        <div *ngIf="isShowStatusMessage" [class.showInfo]="!statusNotOk" [class.showError]="statusNotOk">
+            <h3>{{statusMessage}}</h3>
+            <button (click)="showStatusMess()">Ok</button>
+            <br /> <br />
+        </div>
+        <div>
+            <label for="firstname" class="control-label">Имя</label><br />
+            <input id="firstname" class="form-control clValid" name="firstname" placeholder="Имя"
+                [(ngModel)]="registerModel.firstname" #firstname="ngModel" required />
+            <div [hidden]="firstname.valid || firstname.untouched" class="alert alert-danger">
+                Не указано имя
+            </div>
+        </div>
+        <div>
+            <label for="lastname" class="control-label">Фамилия</label><br />
+            <input id="lastname" class="form-control clValid" name="lastname" [(ngModel)]="registerModel.lastname"
+                placeholder="Фамилия" #lastname="ngModel" required />
+            <div [hidden]="lastname.valid || lastname.untouched" class="alert alert-danger">
+                Не указана фамилия
+            </div>
+        </div>
+        <div>
+            <label for="patronymic" class="control-label">Отчество</label><br />
+            <input id="patronymic" class="form-control clValid" name="patronymic" [(ngModel)]="registerModel.patronymic"
+                placeholder="Отчество" />
+        </div>
+        <div>
+            <label for="email" class="control-label">Email</label><br />
+            <input id="email" class="form-control clValid" name="email" [(ngModel)]="registerModel.email"
+                placeholder="Email" #email="ngModel" required pattern="[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}" />
+            <div [hidden]="email.valid || email.untouched" class="alert alert-danger">
+                Некорректный email
+            </div>
+        </div>
+        <div>
+            <label for="password" class="control-label">Пароль</label><br />
+            <input id="password" class="form-control clValid" name="password" [(ngModel)]="registerModel.password"
+                placeholder="Пароль" #password="ngModel" required pattern="[0-9a-zA-Z!@#$%^&*]{6,}" />
+            <div [hidden]="password.valid || password.untouched" class="alert alert-danger">
+                Некорректный пароль (минимальная длина пароля - 6 символов)
+            </div>
+        </div>
+        <div>
+            <label for="passwordConfirm" class="control-label">Подтверждение пароля</label><br />
+            <input [class.invalidComparePass]="!comparePass()"
+                [class.validComparePass]="comparePass() && !passwordConfirm.untouched" id="passwordConfirm"
+                class="form-control" name="passwordConfirm" [(ngModel)]="registerModel.passwordConfirm"
+                placeholder="Подтверждение пароля" #passwordConfirm="ngModel" />
+            <div [hidden]="comparePass() || passwordConfirm.untouched" class="alert alert-danger">
+                Пароли не совпадают
+            </div>
+        </div>
+        <br />
+        <div>
+            <input type="submit" (click)="register()" value="Зарегистрироваться" class="btn btn-success" />
+        </div>
+    </form>
+</div>
+<div class="text-center" *ngIf="statusOk">
+    <h2>
+        Поздравляем {{registerModel.firstname}}! Вы успешно зарегистрированы.
+    </h2>
+    <br />
+    <button (click)="ok()">Ok</button>
+</div>
+<div *ngIf="isShowStatusMessage">
+    <br />
+</div>

@@ -18,6 +18,15 @@ namespace ApplicationCore.Services
             Database = uow;
         }
 
+       public  IEnumerable<MenuDTO> GetAllMenus()
+        {
+            // применяем автомаппер для проекции одной коллекции на другую
+            var mapper = new MapperConfiguration(cfg => cfg.CreateMap<Menu, MenuDTO>()).CreateMapper();
+            var menus = mapper.Map<IEnumerable<Menu>, List<MenuDTO>>(Database.Menu.GetAll());
+
+            return menus;
+        }
+
         public List<int> GetMenuIdDishes(int? menuId)
         {
             if (menuId == null)
@@ -156,13 +165,13 @@ namespace ApplicationCore.Services
             {
                 menuDishesDTOs.Add(new MenuDishesDTO()
                 {
-                     DishId = menuDish.DishId,
+                     DishId = menuDish.DishId.Value,
                      Info = menuDish.Dish.Info,
                      Name = menuDish.Dish.Name,
                      Path = menuDish.Dish.Path,
                      Price = menuDish.Dish.Price,
                      Weight = menuDish.Dish.Weight,
-                     MenuId = menuDish.MenuId,
+                     MenuId = menuDish.MenuId.Value,
                      CatalogId = menuDish.Dish.CatalogId
                 });
             }

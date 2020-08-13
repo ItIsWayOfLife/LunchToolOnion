@@ -1,0 +1,196 @@
+<div class="text-center">
+    <h1 class="text-center">Пользователи</h1>
+    <br />
+    <div *ngIf="isAmdim">
+        <div *ngIf="isShowStatusMessage" [class.showInfo]="isMessInfo" [class.showError]="!isMessInfo">
+            <h3>{{statusMessage}}</h3>
+            <button (click)="showStatusMess()">Ok</button>
+            <br /> <br />
+        </div>
+
+        <!-- view users -->
+        <div *ngIf="isView">
+            <div class="form-inline form-group ">
+                <form autocomplete="off" class="text-center">
+                    <input type="button" value="Добавить" class="btn btn-success mr" (click)="addUser()" />
+                    <select name="searchSelectionString" [(ngModel)]="searchSelectionString" class="form-control mr">
+                        <option>Поиск по</option>
+                        <option>Id</option>
+                        <option>Email</option>
+                        <option>ФИО</option>
+                    </select>
+                    <input type="text" name="name" class="form-control mr inputSearch" [(ngModel)]="searchStr"
+                        placeholder="Поиск" />
+                    <input type="button" value="Обновить" (click)="refresh()" class="btn btn-success mr" />
+                </form>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>Id</td>
+                        <td>Email</td>
+                        <td>ФИО</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of getViewUsers()">
+                        <td>{{user.id}}</td>
+                        <td>{{user.email}}</td>
+                        <td>{{user.lastname}} {{user.firstname}} {{user.patronymic}}</td>
+                        <td>
+                            <input type="button" value="Изменить" class="btn btn-danger" (click)="editUser(user)" />
+                        </td>
+                        <td>
+                            <!-- delete user -->
+                            <input type="button" value="Удалить" (click)="deleteUser(user)" class="btn btn-danger" />
+                        </td>
+                        <td>
+                            <input type="button" value="Сменить пароль" (click)="changePassUser(user.id)"
+                                class="btn btn-danger" />
+                        </td>
+                        <td>
+                            <input type="button" value="Права доступа" (click)="changeRolesUser(user.id)"
+                                class="btn btn-danger" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- add user -->
+        <div *ngIf="isNewRecord">
+            <form autocomplete="off">
+                <div>
+                    <label for="firstname" class="control-label">Имя</label><br />
+                    <input name="firstname" id="firstname" class="form-control" placeholder="Имя"
+                        [(ngModel)]="editedUser.firstname" />
+                    <span></span>
+                </div>
+                <div>
+                    <label for="lastname" class="control-label">Фамилия</label><br />
+                    <input name="lastname" id="lastname" class="form-control" [(ngModel)]="editedUser.lastname"
+                        placeholder="Фамилия" />
+                    <span></span>
+                </div>
+                <div>
+                    <label for="patronymic" class="control-label">Отчество</label><br />
+                    <input name="patronymic" id="patronymic" class="form-control" [(ngModel)]="editedUser.patronymic"
+                        placeholder="Отчество" />
+                </div>
+                <div>
+                    <label for="email" class="control-label">Email</label><br />
+                    <input name="email" id="email" class="form-control" [(ngModel)]="editedUser.email"
+                        placeholder="Email" />
+                </div>
+                <div>
+                    <label for="password" class="control-label">Пароль</label><br />
+                    <input name="password" id="password" class="form-control" [(ngModel)]="editedUser.password"
+                        placeholder="Пароль" />
+                </div>
+                <br />
+                <div>
+                    <input type="button" value="Сохранить" (click)="saveUser()" class="btn btn-success" />
+                </div><br />
+                <div>
+                    <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+                </div>
+            </form>
+        </div>
+
+        <!--edit user -->
+        <div *ngIf="isEdit">
+            <form autocomplete="off">
+                <div>
+                    <input type="text" name="id" id="id" class="form-control" [(ngModel)]="editedUser.id" hidden />
+                </div>
+                <div>
+                    <label for="firstname" class="control-label">Имя</label><br />
+                    <input name="firstname" id="firstname" class="form-control" placeholder="Имя"
+                        [(ngModel)]="editedUser.firstname" />
+                    <span></span>
+                </div>
+
+                <div>
+                    <label for="lastname" class="control-label">Фамилия</label><br />
+                    <input name="lastname" id="lastname" class="form-control" [(ngModel)]="editedUser.lastname"
+                        placeholder="Фамилия" />
+                    <span></span>
+                </div>
+                <div>
+                    <label for="patronymic" class="control-label">Отчество</label><br />
+                    <input name="patronymic" id="patronymic" class="form-control" [(ngModel)]="editedUser.patronymic"
+                        placeholder="Отчество" />
+                </div>
+                <div>
+                    <label for="email" class="control-label">Email</label><br />
+                    <input name="email" id="email" class="form-control" [(ngModel)]="editedUser.email"
+                        placeholder="Email" />
+                </div>
+                <br />
+                <div>
+                    <input type="button" value="Изменить" (click)="saveUser()" class="btn btn-success" />
+                </div><br />
+                <div>
+                    <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+                </div>
+            </form>
+        </div>
+
+        <!-- change password user -->
+        <div *ngIf="isChangePasword">
+            <form autocomplete="off">
+                <div>
+                    <input type="text" name="id" id="id" class="form-control" [(ngModel)]="userChangePassword.id"
+                        hidden />
+                </div>
+                <div class="form-group">
+                    <label for="oldPassword" class="control-label">Старый пароль</label>
+                    <input name="oldPassword" [(ngModel)]="userChangePassword.oldPassword" type="text" id="oldPassword"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="newPassword" class="control-label">Новый пароль</label>
+                    <input name="newPassword" [(ngModel)]="userChangePassword.newPassword" type="text" id="newPassword"
+                        class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" (click)="editPassUser()" value="Изменить" class="btn btn-sm btn-success" />
+                </div>
+                <div>
+                    <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+                </div>
+            </form>
+        </div>
+
+        <!-- give roles by users-->
+        <div *ngIf="isChangeRoles">
+            <form autocomplete="off">
+                <div *ngFor="let role of allRoles; let i = index">
+                    <span *ngIf="checkRole(role); then thenBlock else elseBlock"></span>
+                    <ng-template #thenBlock>
+                        <input id="id{{i}}" type="checkbox" name="role" checked (click)="pressRole(role)" />
+                    </ng-template>
+                    <ng-template #elseBlock>
+                        <input id="id{{i}}" type="checkbox" name="role" (click)="pressRole(role)" />
+                    </ng-template>
+                    <label for="id{{i}}"> {{role}}</label><br />
+                </div>
+                <div class="form-group">
+                    <input type="submit" (click)="editUserRoles()" value="Изменить" class="btn btn-sm btn-success" />
+                </div>
+                <div>
+                    <input type="button" value="Назад" (click)="cancel()" class="btn btn-warning" />
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div *ngIf="!isAmdim">
+        Войдите как Администратор.
+    </div>
+</div>
+<br />

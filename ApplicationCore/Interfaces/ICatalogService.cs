@@ -5,11 +5,12 @@ namespace ApplicationCore.Interfaces
 {
     public interface ICatalogService
     {
-        void AddСatalog(СatalogDTO сatalogDTO);
+        void AddСatalog(CatalogDTO сatalogDTO);
         void DeleteСatalog(int? id);
-        void EditСatalog(СatalogDTO сatalogDTO);
-        СatalogDTO GetСatalog(int? id);
-        IEnumerable<СatalogDTO> GetСatalogs(int? providerId);
+        void EditСatalog(CatalogDTO сatalogDTO);
+        CatalogDTO GetСatalog(int? id);
+         IEnumerable<CatalogDTO> GetСatalogs();
+        IEnumerable<CatalogDTO> GetСatalogs(int? providerId);
         void Dispose();
     }
 }

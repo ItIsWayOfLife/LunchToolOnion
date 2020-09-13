@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ApplicationCore.Entities.BaseEntity">
+    <Position X="12" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationCore.Entities.Cart">
+    <Position X="6.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Cart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationCore.Entities.CartDishes">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <AssociationLine Name="Dish" Type="ApplicationCore.Entities.Dish" ManuallyRouted="true">
+      <Path>
+        <Point X="14.25" Y="4.309" />
+        <Point X="12.833" Y="4.309" Type="JumpStart" />
+        <Point X="12.667" Y="4.309" Type="JumpEnd" />
+        <Point X="11.312" Y="4.309" />
+        <Point X="11.312" Y="5.396" />
+        <Point X="5.708" Y="5.396" Type="JumpStart" />
+        <Point X="5.542" Y="5.396" Type="JumpEnd" />
+        <Point X="5" Y="5.396" />
+        <Point X="5" Y="5.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="Cart" Type="ApplicationCore.Entities.Cart" ManuallyRouted="true">
+      <Path>
+        <Point X="15" Y="3.5" />
+        <Point X="15" Y="5.236" />
+        <Point X="11.396" Y="5.236" Type="JumpStart" />
+        <Point X="11.229" Y="5.236" Type="JumpEnd" />
+        <Point X="7.844" Y="5.236" />
+        <Point X="7.844" Y="1.366" />
+        <Point X="8.25" Y="1.366" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAACAACAA=</HashCode>
+      <FileName>Entities\CartDishes.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dish" />
+      <Property Name="Cart" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplicationCore.Entities.Catalog">
+    <Position X="18.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAABAQAAAQAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Entities\Catalog.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Provider" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Dishes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ApplicationCore.Entities.Dish">
+    <Position X="4.25" Y="5.5" Width="1.5" />
+    <AssociationLine Name="MenuDishes" Type="ApplicationCore.Entities.MenuDishes" ManuallyRouted="true">
+      <Path>
+        <Point X="5.625" Y="5.5" />
+        <Point X="5.625" Y="0.9" />
+        <Point X="8.448" Y="0.9" Type="JumpStart" />
+        <Point X="8.615" Y="0.9" Type="JumpEnd" />
+        <Point X="17.1" Y="0.9" />
+        <Point X="17.1" Y="0.625" />
+        <Point X="17.25" Y="0.625" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.149" Y="0.032" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAgAEAQAAAAIAAAAAAAQAACAAAAAAAAAAAEAAAAg=</HashCode>
+      <FileName>Entities\Dish.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Сatalog" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="MenuDishes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ApplicationCore.Entities.Menu">
+    <Position X="7.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAEAAAABAAAAAAAAAAAAAABAAAAAEAAAAA=</HashCode>
+      <FileName>Entities\Menu.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Provider" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="MenuDishes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="ApplicationCore.Entities.MenuDishes">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAIBAAAAAAAACAAAAA=</HashCode>
+      <FileName>Entities\MenuDishes.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dish" />
+      <Property Name="Menu" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplicationCore.Entities.Order">
+    <Position X="19.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationCore.Entities.OrderDishes">
+    <Position X="3.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAAAACAAAAA=</HashCode>
+      <FileName>Entities\OrderDishes.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Dish" />
+      <Property Name="Order" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ApplicationCore.Entities.Provider">
+    <Position X="10.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAACAAAAIgEAAAAIQIAAAAAIAAAAAAAEAAAAA=</HashCode>
+      <FileName>Entities\Provider.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Сatalogs" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
